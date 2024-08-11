@@ -1,0 +1,166 @@
+# median time per call
+
+# median time per call
+
+# median calls per second
+
+# median bytes per second copied to buffer (of size bytes)
+
+rand_buf:16B:arp_copy_to<0x12,1U<<31>  605.568Mi/s
+rand_buf:16B:arp_copy_to<0x0c,1U<<31>  593.441Mi/s
+rand_buf:16B:arp_copy_to<0x10,1U<<31>  592.361Mi/s
+rand_buf:16B:arp_copy_to<0x13,1U<<31>  581.917Mi/s
+rand_buf:16B:arp_copy_to<0x0f,1U<<31>  578.1Mi/s
+rand_buf:16B:arp_copy_to<0x0e,1U<<31>  572.957Mi/s
+rand_buf:16B:arp_copy_to<0x18,1U<<31>  572.002Mi/s
+rand_buf:16B:arp_copy_to<0x11,1U<<31>  568.23Mi/s
+rand_buf:16B:arp_copy_to<0x15,1U<<31>  561.757Mi/s
+rand_buf:16B:arp_copy_to<0x0d,1U<<31>  561.235Mi/s
+rand_buf:16B:arp_copy_to<0x0b,1U<<31>  559.527Mi/s
+rand_buf:16B:arp_copy_to<0x1d,1U<<31>  554.213Mi/s
+rand_buf:16B:arp_copy_to<0x16,1U<<31>  552.519Mi/s
+rand_buf:16B:arp_copy_to<0x07,1U<<31>  550.012Mi/s
+rand_buf:16B:arp_copy_to<0x1b,1U<<31>  546.462Mi/s
+rand_buf:16B:arp_copy_to<0x14,1U<<31>  545.877Mi/s
+rand_buf:16B:arp_copy_to<0x0a,1U<<31>  544.321Mi/s
+rand_buf:16B:arp_copy_to<0x08,1U<<31>  542.985Mi/s
+rand_buf:16B:arp_copy_to<0x1a,1U<<31>  536.494Mi/s
+rand_buf:16B:arp_copy_to<0x17,1U<<31>  528.406Mi/s
+rand_buf:16B:arp_copy_to<0x1f,1U<<31>  528.313Mi/s
+rand_buf:16B:arp_copy_to<0x1c,1U<<31>  527.722Mi/s
+rand_buf:16B:arp_copy_to<0x19,1U<<31>  523.743Mi/s
+rand_buf:16B:arp_copy_to<0x09,1U<<31>  523.671Mi/s
+rand_buf:16B:arp_copy_to<0x1e,1U<<31>  517.545Mi/s
+
+rand_buf:32B:arp_copy_to<0x10,1U<<31>  1.22407Gi/s
+rand_buf:32B:arp_copy_to<0x0e,1U<<31>  1.21164Gi/s
+rand_buf:32B:arp_copy_to<0x0c,1U<<31>  1.2086Gi/s
+rand_buf:32B:arp_copy_to<0x0a,1U<<31>  1.1933Gi/s
+rand_buf:32B:arp_copy_to<0x0f,1U<<31>  1.16609Gi/s
+rand_buf:32B:arp_copy_to<0x12,1U<<31>  1.15305Gi/s
+rand_buf:32B:arp_copy_to<0x08,1U<<31>  1.13437Gi/s
+rand_buf:32B:arp_copy_to<0x0b,1U<<31>  1.12108Gi/s
+rand_buf:32B:arp_copy_to<0x0d,1U<<31>  1.10402Gi/s
+rand_buf:32B:arp_copy_to<0x09,1U<<31>  1.04498Gi/s
+rand_buf:32B:arp_copy_to<0x11,1U<<31>  1.01087Gi/s
+rand_buf:32B:arp_copy_to<0x07,1U<<31>  1.00508Gi/s
+rand_buf:32B:arp_copy_to<0x13,1U<<31>  1001.47Mi/s
+rand_buf:32B:arp_copy_to<0x14,1U<<31>  994.856Mi/s
+rand_buf:32B:arp_copy_to<0x18,1U<<31>  988.488Mi/s
+rand_buf:32B:arp_copy_to<0x19,1U<<31>  986.037Mi/s
+rand_buf:32B:arp_copy_to<0x16,1U<<31>  985.605Mi/s
+rand_buf:32B:arp_copy_to<0x15,1U<<31>  984.875Mi/s
+rand_buf:32B:arp_copy_to<0x1a,1U<<31>  979.754Mi/s
+rand_buf:32B:arp_copy_to<0x17,1U<<31>  978.482Mi/s
+rand_buf:32B:arp_copy_to<0x1e,1U<<31>  974.818Mi/s
+rand_buf:32B:arp_copy_to<0x1b,1U<<31>  963.742Mi/s
+rand_buf:32B:arp_copy_to<0x1c,1U<<31>  949.707Mi/s
+rand_buf:32B:arp_copy_to<0x1f,1U<<31>  947.613Mi/s
+rand_buf:32B:arp_copy_to<0x1d,1U<<31>  917.657Mi/s
+
+rand_buf:64B:arp_copy_to<0x12,1U<<31>  2.24378Gi/s
+rand_buf:64B:arp_copy_to<0x10,1U<<31>  2.23841Gi/s
+rand_buf:64B:arp_copy_to<0x0c,1U<<31>  2.23073Gi/s
+rand_buf:64B:arp_copy_to<0x0e,1U<<31>  2.06393Gi/s
+rand_buf:64B:arp_copy_to<0x08,1U<<31>  2.04981Gi/s
+rand_buf:64B:arp_copy_to<0x0f,1U<<31>  2.03551Gi/s
+rand_buf:64B:arp_copy_to<0x0a,1U<<31>  1.97638Gi/s
+rand_buf:64B:arp_copy_to<0x0b,1U<<31>  1.93199Gi/s
+rand_buf:64B:arp_copy_to<0x0d,1U<<31>  1.91012Gi/s
+rand_buf:64B:arp_copy_to<0x11,1U<<31>  1.90964Gi/s
+rand_buf:64B:arp_copy_to<0x09,1U<<31>  1.7647Gi/s
+rand_buf:64B:arp_copy_to<0x07,1U<<31>  1.66076Gi/s
+rand_buf:64B:arp_copy_to<0x14,1U<<31>  1.5889Gi/s
+rand_buf:64B:arp_copy_to<0x13,1U<<31>  1.58597Gi/s
+rand_buf:64B:arp_copy_to<0x15,1U<<31>  1.55493Gi/s
+rand_buf:64B:arp_copy_to<0x18,1U<<31>  1.53119Gi/s
+rand_buf:64B:arp_copy_to<0x1c,1U<<31>  1.51735Gi/s
+rand_buf:64B:arp_copy_to<0x1d,1U<<31>  1.46719Gi/s
+rand_buf:64B:arp_copy_to<0x19,1U<<31>  1.46306Gi/s
+rand_buf:64B:arp_copy_to<0x16,1U<<31>  1.44821Gi/s
+rand_buf:64B:arp_copy_to<0x17,1U<<31>  1.44257Gi/s
+rand_buf:64B:arp_copy_to<0x1b,1U<<31>  1.43568Gi/s
+rand_buf:64B:arp_copy_to<0x1a,1U<<31>  1.4315Gi/s
+rand_buf:64B:arp_copy_to<0x1e,1U<<31>  1.42294Gi/s
+rand_buf:64B:arp_copy_to<0x1f,1U<<31>  1.33125Gi/s
+
+rand_buf:128B:arp_copy_to<0x10,1U<<31>  3.508Gi/s
+rand_buf:128B:arp_copy_to<0x08,1U<<31>  3.20492Gi/s
+rand_buf:128B:arp_copy_to<0x12,1U<<31>  3.17252Gi/s
+rand_buf:128B:arp_copy_to<0x11,1U<<31>  2.96348Gi/s
+rand_buf:128B:arp_copy_to<0x0c,1U<<31>  2.94131Gi/s
+rand_buf:128B:arp_copy_to<0x0e,1U<<31>  2.93233Gi/s
+rand_buf:128B:arp_copy_to<0x0f,1U<<31>  2.92573Gi/s
+rand_buf:128B:arp_copy_to<0x0b,1U<<31>  2.74789Gi/s
+rand_buf:128B:arp_copy_to<0x0d,1U<<31>  2.71856Gi/s
+rand_buf:128B:arp_copy_to<0x0a,1U<<31>  2.64797Gi/s
+rand_buf:128B:arp_copy_to<0x09,1U<<31>  2.44623Gi/s
+rand_buf:128B:arp_copy_to<0x07,1U<<31>  2.198Gi/s
+rand_buf:128B:arp_copy_to<0x14,1U<<31>  1.90568Gi/s
+rand_buf:128B:arp_copy_to<0x18,1U<<31>  1.84626Gi/s
+rand_buf:128B:arp_copy_to<0x16,1U<<31>  1.82644Gi/s
+rand_buf:128B:arp_copy_to<0x13,1U<<31>  1.8193Gi/s
+rand_buf:128B:arp_copy_to<0x19,1U<<31>  1.81589Gi/s
+rand_buf:128B:arp_copy_to<0x15,1U<<31>  1.81238Gi/s
+rand_buf:128B:arp_copy_to<0x1c,1U<<31>  1.79088Gi/s
+rand_buf:128B:arp_copy_to<0x1e,1U<<31>  1.7829Gi/s
+rand_buf:128B:arp_copy_to<0x1b,1U<<31>  1.77739Gi/s
+rand_buf:128B:arp_copy_to<0x1a,1U<<31>  1.76495Gi/s
+rand_buf:128B:arp_copy_to<0x17,1U<<31>  1.7547Gi/s
+rand_buf:128B:arp_copy_to<0x1d,1U<<31>  1.73824Gi/s
+rand_buf:128B:arp_copy_to<0x1f,1U<<31>  1.6931Gi/s
+
+rand_buf:256B:arp_copy_to<0x10,1U<<31>  5.24321Gi/s
+rand_buf:256B:arp_copy_to<0x12,1U<<31>  4.39169Gi/s
+rand_buf:256B:arp_copy_to<0x11,1U<<31>  4.17653Gi/s
+rand_buf:256B:arp_copy_to<0x0f,1U<<31>  3.99689Gi/s
+rand_buf:256B:arp_copy_to<0x0e,1U<<31>  3.89954Gi/s
+rand_buf:256B:arp_copy_to<0x08,1U<<31>  3.81119Gi/s
+rand_buf:256B:arp_copy_to<0x0c,1U<<31>  3.75421Gi/s
+rand_buf:256B:arp_copy_to<0x0d,1U<<31>  3.59915Gi/s
+rand_buf:256B:arp_copy_to<0x0b,1U<<31>  3.507Gi/s
+rand_buf:256B:arp_copy_to<0x0a,1U<<31>  3.41281Gi/s
+rand_buf:256B:arp_copy_to<0x09,1U<<31>  3.12661Gi/s
+rand_buf:256B:arp_copy_to<0x07,1U<<31>  2.92406Gi/s
+rand_buf:256B:arp_copy_to<0x14,1U<<31>  2.02278Gi/s
+rand_buf:256B:arp_copy_to<0x18,1U<<31>  2.00984Gi/s
+rand_buf:256B:arp_copy_to<0x1c,1U<<31>  1.99167Gi/s
+rand_buf:256B:arp_copy_to<0x1a,1U<<31>  1.9636Gi/s
+rand_buf:256B:arp_copy_to<0x15,1U<<31>  1.96182Gi/s
+rand_buf:256B:arp_copy_to<0x13,1U<<31>  1.96104Gi/s
+rand_buf:256B:arp_copy_to<0x19,1U<<31>  1.94096Gi/s
+rand_buf:256B:arp_copy_to<0x16,1U<<31>  1.93813Gi/s
+rand_buf:256B:arp_copy_to<0x1e,1U<<31>  1.93415Gi/s
+rand_buf:256B:arp_copy_to<0x1d,1U<<31>  1.92272Gi/s
+rand_buf:256B:arp_copy_to<0x1f,1U<<31>  1.91315Gi/s
+rand_buf:256B:arp_copy_to<0x17,1U<<31>  1.90842Gi/s
+rand_buf:256B:arp_copy_to<0x1b,1U<<31>  1.88513Gi/s
+
+# median bytes per second copied to buffer (of size pages)
+
+rand_buf:1pg:arp_copy_to<0x10,1U<<31>  6.7207Gi/s
+rand_buf:1pg:arp_copy_to<0x0f,1U<<31>  6.26976Gi/s
+rand_buf:1pg:arp_copy_to<0x0e,1U<<31>  6.08793Gi/s
+rand_buf:1pg:arp_copy_to<0x0d,1U<<31>  5.79645Gi/s
+rand_buf:1pg:arp_copy_to<0x11,1U<<31>  5.75321Gi/s
+rand_buf:1pg:arp_copy_to<0x12,1U<<31>  5.61268Gi/s
+rand_buf:1pg:arp_copy_to<0x0c,1U<<31>  5.57117Gi/s
+rand_buf:1pg:arp_copy_to<0x0b,1U<<31>  5.16257Gi/s
+rand_buf:1pg:arp_copy_to<0x0a,1U<<31>  4.97137Gi/s
+rand_buf:1pg:arp_copy_to<0x08,1U<<31>  4.792Gi/s
+rand_buf:1pg:arp_copy_to<0x09,1U<<31>  4.5803Gi/s
+rand_buf:1pg:arp_copy_to<0x07,1U<<31>  4.08686Gi/s
+rand_buf:1pg:arp_copy_to<0x17,1U<<31>  2.11208Gi/s
+rand_buf:1pg:arp_copy_to<0x1e,1U<<31>  2.09925Gi/s
+rand_buf:1pg:arp_copy_to<0x16,1U<<31>  2.091Gi/s
+rand_buf:1pg:arp_copy_to<0x18,1U<<31>  2.08554Gi/s
+rand_buf:1pg:arp_copy_to<0x1c,1U<<31>  2.08104Gi/s
+rand_buf:1pg:arp_copy_to<0x15,1U<<31>  2.07934Gi/s
+rand_buf:1pg:arp_copy_to<0x1f,1U<<31>  2.07531Gi/s
+rand_buf:1pg:arp_copy_to<0x19,1U<<31>  2.0741Gi/s
+rand_buf:1pg:arp_copy_to<0x14,1U<<31>  2.06602Gi/s
+rand_buf:1pg:arp_copy_to<0x1d,1U<<31>  2.06576Gi/s
+rand_buf:1pg:arp_copy_to<0x1a,1U<<31>  2.06039Gi/s
+rand_buf:1pg:arp_copy_to<0x1b,1U<<31>  2.05628Gi/s
+rand_buf:1pg:arp_copy_to<0x13,1U<<31>  2.04916Gi/s
+
