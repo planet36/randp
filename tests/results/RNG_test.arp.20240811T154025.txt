@@ -1,0 +1,52 @@
+RNG_test using PractRand version 0.95-planet36
+RNG = RNG_stdin, seed = unknown
+test set = expanded, folding = extra
+
+rng=RNG_stdin, seed=unknown
+length= 256 megabytes (2^28 bytes), time= 1.9 seconds
+  no anomalies in 1361 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 512 megabytes (2^29 bytes), time= 9.3 seconds
+  no anomalies in 1439 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 1 gigabyte (2^30 bytes), time= 18.5 seconds
+  no anomalies in 1522 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 2 gigabytes (2^31 bytes), time= 31.1 seconds
+  no anomalies in 1606 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 4 gigabytes (2^32 bytes), time= 49.6 seconds
+  no anomalies in 1699 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 8 gigabytes (2^33 bytes), time= 84.5 seconds
+  no anomalies in 1798 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 16 gigabytes (2^34 bytes), time= 145 seconds
+  no anomalies in 1904 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 32 gigabytes (2^35 bytes), time= 247 seconds
+  no anomalies in 1994 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 64 gigabytes (2^36 bytes), time= 479 seconds
+  no anomalies in 2098 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 128 gigabytes (2^37 bytes), time= 916 seconds
+  no anomalies in 2200 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 256 gigabytes (2^38 bytes), time= 1687 seconds
+  no anomalies in 2291 test result(s)
+
+rng=RNG_stdin, seed=unknown
+length= 512 gigabytes (2^39 bytes), time= 3487 seconds
+  no anomalies in 2375 test result(s)
+
