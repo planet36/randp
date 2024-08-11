@@ -1,0 +1,40 @@
+# median time per call
+
+# median time per call
+
+# median calls per second
+
+# median bytes per second copied to buffer (of size bytes)
+
+rand_buf:1B:arp_copy_to        159.514Mi/s
+rand_buf:1B:arp_copy_to_MUTEX  4.31683Mi/s
+
+rand_buf:2B:arp_copy_to        314.475Mi/s
+rand_buf:2B:arp_copy_to_MUTEX  11.2405Mi/s
+
+rand_buf:4B:arp_copy_to        618.887Mi/s
+rand_buf:4B:arp_copy_to_MUTEX  19.4402Mi/s
+
+rand_buf:8B:arp_copy_to        1.15846Gi/s
+rand_buf:8B:arp_copy_to_MUTEX  49.8295Mi/s
+
+rand_buf:16B:arp_copy_to        2.11506Gi/s
+rand_buf:16B:arp_copy_to_MUTEX  59.0318Mi/s
+
+rand_buf:32B:arp_copy_to        4.42839Gi/s
+rand_buf:32B:arp_copy_to_MUTEX  159.71Mi/s
+
+rand_buf:64B:arp_copy_to        7.28744Gi/s
+rand_buf:64B:arp_copy_to_MUTEX  322.573Mi/s
+
+rand_buf:128B:arp_copy_to        9.4943Gi/s
+rand_buf:128B:arp_copy_to_MUTEX  523.157Mi/s
+
+rand_buf:256B:arp_copy_to        9.30345Gi/s
+rand_buf:256B:arp_copy_to_MUTEX  715.815Mi/s
+
+# median bytes per second copied to buffer (of size pages)
+
+rand_buf:1pg:arp_copy_to        9.65486Gi/s
+rand_buf:1pg:arp_copy_to_MUTEX  2.92263Gi/s
+
