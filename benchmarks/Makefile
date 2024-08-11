@@ -22,7 +22,7 @@ CPPFLAGS += -D_DEFAULT_SOURCE
 
 CXXFLAGS = -std=c++23
 CXXFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CXXFLAGS += -O3 -flto=auto -maes
+CXXFLAGS += -O2 -flto=auto -maes
 CXXFLAGS += -mrdrnd -mrdseed
 
 #LDFLAGS += -L..

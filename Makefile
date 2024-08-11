@@ -27,7 +27,7 @@ CPPFLAGS += -D_DEFAULT_SOURCE
 
 CFLAGS = -std=c23
 CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CFLAGS += -O3 -flto=auto -maes
+CFLAGS += -O2 -flto=auto -maes
 CFLAGS += -fPIC -ffreestanding -g
 
 # default = rv
