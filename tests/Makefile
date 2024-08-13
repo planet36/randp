@@ -12,7 +12,7 @@ LIBNAME := arp
 C_SRCS := $(wildcard *.c)
 DEPS := $(C_SRCS:.c=.d)
 
-BINS = test-dump test-fork test-generate
+BINS = test-dump test-fork test-generate test-profile
 
 CPPFLAGS = -MMD -MP
 CPPFLAGS += -I..
@@ -52,6 +52,11 @@ generate: test-generate
 	@./$<
 	@./$< arc4random
 
+profile: test-profile | $(OUTPUT_DIR)
+	@valgrind --tool=callgrind \
+		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out.$(DATETIME) ./$<
+	@kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
+
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
 
@@ -59,6 +64,6 @@ clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all dump fork generate clean
+.PHONY: all dump fork generate profile clean
 
 -include $(DEPS)
