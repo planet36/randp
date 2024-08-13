@@ -10,10 +10,9 @@ export LC_ALL := C
 LIBNAME := arp
 ANAME := lib$(LIBNAME).a
 
-CXX_SRCS := $(wildcard *.cpp)
-DEPS := $(CXX_SRCS:.cpp=.d)
-
-BINS = benchmark-mutex benchmark-num-blocks benchmark-others benchmark-reseed-countdown
+SRCS := $(wildcard benchmark-*.cpp)
+DEPS := $(SRCS:.cpp=.d)
+BINS := $(SRCS:.cpp=)
 
 CPPFLAGS = -MMD -MP
 CPPFLAGS += -I..

@@ -8,11 +8,11 @@ export LC_ALL := C
 export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):..
 
 LIBNAME := arp
+#ANAME := lib$(LIBNAME).a
 
-C_SRCS := $(wildcard *.c)
-DEPS := $(C_SRCS:.c=.d)
-
-BINS = test-dump test-fork test-generate test-profile
+SRCS := $(wildcard test-*.c)
+DEPS := $(SRCS:.c=.d)
+BINS := $(SRCS:.c=)
 
 CPPFLAGS = -MMD -MP
 CPPFLAGS += -I..
