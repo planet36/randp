@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-/// AES Random Pool (ARP) (C++ version used only for benchmarking)
+/// AES Random Pool (ARP) (This C++ implementation is used only for benchmarking.)
 /**
 \file
 \author Steven Ward
