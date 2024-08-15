@@ -11,8 +11,9 @@ LIBNAME := arp
 ANAME := lib$(LIBNAME).a
 
 SRCS := $(wildcard benchmark-*.cpp)
-DEPS := $(SRCS:.cpp=.d)
-BINS := $(SRCS:.cpp=)
+DEPS = $(addsuffix .d,$(basename $(SRCS)))
+OBJS = $(addsuffix .o,$(basename $(SRCS)))
+BINS = $(basename $(SRCS))
 
 CPPFLAGS = -MMD -MP
 # _DEFAULT_SOURCE needed for getentropy, arc4random

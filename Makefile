@@ -16,9 +16,9 @@ SONAME_1 := $(SONAME_0).$(VERSION_MAJOR)
 SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
 
 SRCS := src/$(LIBNAME).c
-OBJS := $(SRCS:.c=.o)
-
-DEPS := $(SRCS:.c=.d)
+DEPS = $(addsuffix .d,$(basename $(SRCS)))
+OBJS = $(addsuffix .o,$(basename $(SRCS)))
+BINS = $(basename $(SRCS))
 
 CPPFLAGS = -MMD -MP
 # _DEFAULT_SOURCE needed for getentropy

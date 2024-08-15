@@ -11,8 +11,9 @@ LIBNAME := arp
 #ANAME := lib$(LIBNAME).a
 
 SRCS := $(wildcard test-*.c)
-DEPS := $(SRCS:.c=.d)
-BINS := $(SRCS:.c=)
+DEPS = $(addsuffix .d,$(basename $(SRCS)))
+OBJS = $(addsuffix .o,$(basename $(SRCS)))
+BINS = $(basename $(SRCS))
 
 CPPFLAGS = -MMD -MP
 # _DEFAULT_SOURCE needed for getentropy, arc4random
