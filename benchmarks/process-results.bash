@@ -23,7 +23,7 @@ Usage: bash $SCRIPT_NAME BENCH_RESULTS_FILE
 EOT
 }
 
-for PROGRAM in grep sed choose sort column
+for PROGRAM in grep sed awk sort column
 do
     if ! program_exists "$PROGRAM"
     then
@@ -56,7 +56,7 @@ do
     PATTERN="^rand_uint:${I}b:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
-        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | choose 0 3 4 | sort -n -k 2 | column --table --table-right 2 || exit
+        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $4, $5}' | sort -n -k 2 | column --table --table-right 2 || exit
         echo
     fi
 done
@@ -68,7 +68,7 @@ do
     PATTERN="^rand_lt-one:${I}b:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
-        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | choose 0 3 4 | sort -n -k 2 | column --table --table-right 2 || exit
+        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $4, $5}' | sort -n -k 2 | column --table --table-right 2 || exit
         echo
     fi
 done
@@ -80,7 +80,7 @@ do
     PATTERN="^rand_lt-many:${I}b:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
-        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | choose 0 6 | sed -E -e 's/items_per_second=//' | sort -h -k 2 -r | column --table || exit
+        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $7}' | sed -E -e 's/items_per_second=//' | sort -h -k 2 -r | column --table || exit
         echo
     fi
 done
@@ -92,7 +92,7 @@ do
     PATTERN="^rand_buf:${I}B:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
-        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | choose 0 6 | sed -E -e 's/bytes_per_second=//' | sort -h -k 2 -r | column --table || exit
+        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $7}' | sed -E -e 's/bytes_per_second=//' | sort -h -k 2 -r | column --table || exit
         echo
     fi
 done
@@ -105,7 +105,7 @@ do
     PATTERN="^rand_buf:${I}pg:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
-        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | choose 0 6 | sed -E -e 's/bytes_per_second=//' | sort -h -k 2 -r | column --table || exit
+        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $7}' | sed -E -e 's/bytes_per_second=//' | sort -h -k 2 -r | column --table || exit
         echo
     fi
 done
