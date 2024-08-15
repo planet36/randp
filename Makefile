@@ -16,7 +16,7 @@ SONAME_1 := $(SONAME_0).$(VERSION_MAJOR)
 SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
 
 SRCS := src/$(LIBNAME).c
-OBJ := $(SRCS:.c=.o)
+OBJS := $(SRCS:.c=.o)
 
 DEPS := $(SRCS:.c=.d)
 
@@ -38,13 +38,13 @@ ARFLAGS = rscv
 
 all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
-$(OBJ): $(SRCS)
+$(OBJS): $(SRCS)
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
 
-$(ANAME): $(OBJ)
+$(ANAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $<
 
-$(SONAME_2): $(OBJ)
+$(SONAME_2): $(OBJS)
 	$(CC) -o $@ -shared -nostdlib -Wl,-soname,$(SONAME_1) $(LDFLAGS) $<
 
 $(SONAME_1): $(SONAME_2)
@@ -54,7 +54,7 @@ $(SONAME_0): $(SONAME_2)
 	@ln -s -f --verbose -- $< $@
 
 clean:
-	@$(RM) --verbose -- $(DEPS) $(OBJ) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
 lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
