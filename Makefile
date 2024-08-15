@@ -15,10 +15,10 @@ SONAME_1 := $(SONAME_0).$(VERSION_MAJOR)
 # "realname"
 SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
 
-SRC := src/$(LIBNAME).c
-OBJ := $(SRC:.c=.o)
+SRCS := src/$(LIBNAME).c
+OBJ := $(SRCS:.c=.o)
 
-DEPS := $(SRC:.c=.d)
+DEPS := $(SRCS:.c=.d)
 
 CPPFLAGS = -MMD -MP
 # _DEFAULT_SOURCE needed for getentropy
@@ -38,7 +38,7 @@ ARFLAGS = rscv
 
 all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
-$(OBJ): $(SRC)
+$(OBJ): $(SRCS)
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 $(ANAME): $(OBJ)
@@ -57,7 +57,7 @@ clean:
 	@$(RM) --verbose -- $(DEPS) $(OBJ) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
 lint:
-	-clang-tidy --quiet $(SRC) -- $(CPPFLAGS) $(CFLAGS)
+	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
 .PHONY: all clean lint
