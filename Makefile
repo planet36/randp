@@ -38,9 +38,6 @@ ARFLAGS = rscv
 
 all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
-$(OBJS): $(SRCS)
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
-
 $(ANAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $<
 
