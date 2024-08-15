@@ -1,27 +1,13 @@
 # SPDX-FileCopyrightText: Steven Ward
 # SPDX-License-Identifier: OSL-3.0
 
-export LC_ALL := C
+include ../config.mk
 
 # libarp is dynamically linked with the executables in this folder.
 
 export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):..
 
-LIBNAME := arp
-#ANAME := lib$(LIBNAME).a
-
 SRCS := $(wildcard test-*.c)
-DEPS = $(addsuffix .d,$(basename $(SRCS)))
-OBJS = $(addsuffix .o,$(basename $(SRCS)))
-BINS = $(basename $(SRCS))
-
-CPPFLAGS = -MMD -MP
-# _DEFAULT_SOURCE needed for getentropy, arc4random
-CPPFLAGS += -D_DEFAULT_SOURCE
-
-CFLAGS = -std=c23
-CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CFLAGS += -O2 -flto=auto -maes
 
 LDFLAGS += -L..
 
