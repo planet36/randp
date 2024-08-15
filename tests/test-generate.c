@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-#include "arp.h"
+#include "../arp.h"
 
 #include <assert.h>
 #include <stdio.h>

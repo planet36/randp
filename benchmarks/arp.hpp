@@ -15,8 +15,8 @@ The raison d'etre for this class is to test different values for
 
 #pragma once
 
-#include "src/aes128_prng.h"
-#include "src/allocate.h"
+#include "../src/aes128_prng.h"
+#include "../src/allocate.h"
 
 #include <bit>
 #include <immintrin.h>

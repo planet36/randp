@@ -21,7 +21,6 @@ OBJ := $(SRC:.c=.o)
 DEPS := $(SRC:.c=.d)
 
 CPPFLAGS = -MMD -MP
-CPPFLAGS += -I.
 # _DEFAULT_SOURCE needed for getentropy
 CPPFLAGS += -D_DEFAULT_SOURCE
 

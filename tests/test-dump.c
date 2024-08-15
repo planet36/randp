@@ -6,7 +6,7 @@
 * refer to a terminal).  Those bytes could be analyzed by PractRand.
 */
 
-#include "arp.h"
+#include "../arp.h"
 
 #include <stdio.h>
 #include <stdlib.h>

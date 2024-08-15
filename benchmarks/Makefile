@@ -15,7 +15,6 @@ DEPS := $(SRCS:.cpp=.d)
 BINS := $(SRCS:.cpp=)
 
 CPPFLAGS = -MMD -MP
-CPPFLAGS += -I..
 # _DEFAULT_SOURCE needed for getentropy, arc4random
 CPPFLAGS += -D_DEFAULT_SOURCE
 

@@ -10,7 +10,7 @@ Inspired by \c arc4random.
 \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 */
 
-#include "arp.h"
+#include "../arp.h"
 
 #include "aes128_prng.h"
 #include "allocate.h"
