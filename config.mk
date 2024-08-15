@@ -15,6 +15,13 @@ SONAME_1 := $(SONAME_0).$(VERSION_MAJOR)
 # "realname"
 SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
 
+# paths
+PREFIX ?= /usr/local
+BINDIR ?= $(PREFIX)/bin
+INCDIR ?= $(PREFIX)/include
+LIBDIR ?= $(PREFIX)/lib
+MANDIR ?= $(PREFIX)/share/man
+
 DEPS = $(addsuffix .d,$(basename $(SRCS)))
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
 BINS = $(basename $(SRCS))

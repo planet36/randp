@@ -21,6 +21,26 @@ $(SONAME_1): $(SONAME_2)
 $(SONAME_0): $(SONAME_2)
 	@ln -s -f --verbose -- $< $@
 
+# TODO: test this
+install: all
+	@mkdir -p --verbose -- $(INCDIR)
+	@mkdir -p --verbose -- $(LIBDIR)
+	@cp -f --verbose -- $(LIBNAME).h $(INCDIR)
+	@cp -f --verbose -- $(ANAME) $(LIBDIR)
+	@cp -f --verbose -- $(SONAME_2) $(LIBDIR)
+	@cp -f --verbose -- $(SONAME_1) $(LIBDIR)
+	@cp -f --verbose -- $(SONAME_0) $(LIBDIR)
+	@ldconfig --verbose -- $(LIBDIR)
+
+# TODO: test this
+uninstall:
+	@$(RM) --verbose -- $(INCDIR)/$(LIBNAME).h
+	@$(RM) --verbose -- $(LIBDIR)/$(ANAME)
+	@$(RM) --verbose -- $(LIBDIR)/$(SONAME_2)
+	@$(RM) --verbose -- $(LIBDIR)/$(SONAME_1)
+	@$(RM) --verbose -- $(LIBDIR)/$(SONAME_0)
+	@ldconfig --verbose
+
 clean:
 	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
