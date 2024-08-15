@@ -37,7 +37,7 @@ ARFLAGS = rscv
 
 #LDLIBS +=
 
-all: $(ANAME) $(SONAME_2) $(BINS)
+all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
 $(OBJ): $(SRC)
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
@@ -47,11 +47,15 @@ $(ANAME): $(OBJ)
 
 $(SONAME_2): $(OBJ)
 	$(CC) -o $@ -shared -nostdlib -Wl,-soname,$(SONAME_1) $(LDFLAGS) $<
-	@ln -s -f --verbose -- $@ $(SONAME_1)
-	@ln -s -f --verbose -- $@ $(SONAME_0)
+
+$(SONAME_1): $(SONAME_2)
+	@ln -s -f --verbose -- $< $@
+
+$(SONAME_0): $(SONAME_2)
+	@ln -s -f --verbose -- $< $@
 
 clean:
-	@$(RM) --verbose -- $(DEPS) $(OBJ) $(ANAME) $(SONAME_0) $(SONAME_1) $(SONAME_2)
+	@$(RM) --verbose -- $(DEPS) $(OBJ) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 
 lint:
 	-clang-tidy --quiet $(SRC) -- $(CPPFLAGS) $(CFLAGS)
