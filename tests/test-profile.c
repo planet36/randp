@@ -11,14 +11,14 @@
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
-	constexpr size_t buf_size = 2048;
+	constexpr size_t buf_size = 256;
 
 	uint8_t* buf = (uint8_t*)calloc(buf_size, sizeof(uint8_t));
 	assert(buf != nullptr);
 
 	CALLGRIND_START_INSTRUMENTATION;
 
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 4096; ++i)
 	{
 		arp_copy_to(buf, buf_size);
 		//arc4random_buf(buf, buf_size);
