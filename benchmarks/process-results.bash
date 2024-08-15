@@ -49,6 +49,15 @@ then
     exit 1
 fi
 
+# {{{ System and library version info
+uname -srm
+grep '^model name' /proc/cpuinfo | sort -u | awk -F': ' '{print $2}'
+ldd --version | head -n 1
+gcc --version | head -n 1
+find .. -maxdepth 1 -type f -name 'libarp.so*' -printf '%P\n'
+echo
+# }}}
+
 echo "# median time per call"
 echo
 for I in 8 16 32 64
