@@ -36,10 +36,6 @@ BM_rand_buf(benchmark::State& state,
 #include <string>
 #include <thread>
 
-//#include <fmt/core.h>
-
-//#define nl (void)std::putchar('\n')
-
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
