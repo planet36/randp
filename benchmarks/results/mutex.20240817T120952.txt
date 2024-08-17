@@ -1,0 +1,92 @@
+2024-08-17T08:09:52-04:00
+Running ./benchmark-mutex
+Run on (8 X 2419.21 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x8)
+  L1 Instruction 32 KiB (x8)
+  L2 Unified 2048 KiB (x8)
+  L3 Unified 36864 KiB (x8)
+Load Average: 0.11, 0.11, 0.11
+---------------------------------------------------------------------------------------------------------
+Benchmark                                               Time             CPU   Iterations UserCounters...
+---------------------------------------------------------------------------------------------------------
+rand_buf:8B:arp_bytes/threads:7_mean                 1.12 ns         7.29 ns            5 bytes_per_second=1.02433Gi/s
+rand_buf:8B:arp_bytes/threads:7_median               1.11 ns         7.28 ns            5 bytes_per_second=1.02388Gi/s
+rand_buf:8B:arp_bytes/threads:7_stddev              0.062 ns        0.450 ns            5 bytes_per_second=61.8935Mi/s
+rand_buf:8B:arp_bytes/threads:7_cv                   5.52 %          6.17 %             5 bytes_per_second=5.90%
+rand_buf:4B:arp_bytes_MUTEX/threads:7_mean           55.1 ns          220 ns            5 bytes_per_second=17.8481Mi/s
+rand_buf:4B:arp_bytes_MUTEX/threads:7_median         58.9 ns          240 ns            5 bytes_per_second=15.8654Mi/s
+rand_buf:4B:arp_bytes_MUTEX/threads:7_stddev         9.65 ns         39.1 ns            5 bytes_per_second=3.85478Mi/s
+rand_buf:4B:arp_bytes_MUTEX/threads:7_cv            17.50 %         17.73 %             5 bytes_per_second=21.60%
+rand_buf:64B:arp_bytes_MUTEX/threads:7_mean          44.1 ns          149 ns            5 bytes_per_second=449.783Mi/s
+rand_buf:64B:arp_bytes_MUTEX/threads:7_median        37.9 ns          131 ns            5 bytes_per_second=467.134Mi/s
+rand_buf:64B:arp_bytes_MUTEX/threads:7_stddev        12.9 ns         55.3 ns            5 bytes_per_second=139.371Mi/s
+rand_buf:64B:arp_bytes_MUTEX/threads:7_cv           29.31 %         37.15 %             5 bytes_per_second=30.99%
+rand_buf:32B:arp_bytes_MUTEX/threads:7_mean          47.3 ns          176 ns            5 bytes_per_second=177.44Mi/s
+rand_buf:32B:arp_bytes_MUTEX/threads:7_median        44.8 ns          171 ns            5 bytes_per_second=178.977Mi/s
+rand_buf:32B:arp_bytes_MUTEX/threads:7_stddev        8.05 ns         31.5 ns            5 bytes_per_second=31.2667Mi/s
+rand_buf:32B:arp_bytes_MUTEX/threads:7_cv           17.04 %         17.86 %             5 bytes_per_second=17.62%
+rand_buf:16B:arp_bytes/threads:7_mean                1.16 ns         7.36 ns            5 bytes_per_second=2.02591Gi/s
+rand_buf:16B:arp_bytes/threads:7_median              1.13 ns         7.24 ns            5 bytes_per_second=2.05952Gi/s
+rand_buf:16B:arp_bytes/threads:7_stddev             0.085 ns        0.264 ns            5 bytes_per_second=73.8336Mi/s
+rand_buf:16B:arp_bytes/threads:7_cv                  7.34 %          3.59 %             5 bytes_per_second=3.56%
+rand_buf:1B:arp_bytes_MUTEX/threads:7_mean           48.8 ns          196 ns            5 bytes_per_second=5.09401Mi/s
+rand_buf:1B:arp_bytes_MUTEX/threads:7_median         47.2 ns          183 ns            5 bytes_per_second=5.21313Mi/s
+rand_buf:1B:arp_bytes_MUTEX/threads:7_stddev         11.1 ns         47.7 ns            5 bytes_per_second=1.15679Mi/s
+rand_buf:1B:arp_bytes_MUTEX/threads:7_cv            22.78 %         24.36 %             5 bytes_per_second=22.71%
+rand_buf:256B:arp_bytes_MUTEX/threads:7_mean         67.2 ns          243 ns            5 bytes_per_second=1.01971Gi/s
+rand_buf:256B:arp_bytes_MUTEX/threads:7_median       66.2 ns          247 ns            5 bytes_per_second=987.243Mi/s
+rand_buf:256B:arp_bytes_MUTEX/threads:7_stddev       9.16 ns         50.5 ns            5 bytes_per_second=235.6Mi/s
+rand_buf:256B:arp_bytes_MUTEX/threads:7_cv          13.65 %         20.82 %             5 bytes_per_second=22.56%
+rand_buf:1pg:arp_bytes_MUTEX/threads:7_mean           656 ns         1659 ns            5 bytes_per_second=2.34129Gi/s
+rand_buf:1pg:arp_bytes_MUTEX/threads:7_median         664 ns         1700 ns            5 bytes_per_second=2.24447Gi/s
+rand_buf:1pg:arp_bytes_MUTEX/threads:7_stddev        44.8 ns          229 ns            5 bytes_per_second=391.46Mi/s
+rand_buf:1pg:arp_bytes_MUTEX/threads:7_cv            6.82 %         13.83 %             5 bytes_per_second=16.33%
+rand_buf:8B:arp_bytes_MUTEX/threads:7_mean           39.1 ns          144 ns            5 bytes_per_second=57.1981Mi/s
+rand_buf:8B:arp_bytes_MUTEX/threads:7_median         39.5 ns          156 ns            5 bytes_per_second=48.8654Mi/s
+rand_buf:8B:arp_bytes_MUTEX/threads:7_stddev         9.48 ns         40.3 ns            5 bytes_per_second=20.1448Mi/s
+rand_buf:8B:arp_bytes_MUTEX/threads:7_cv            24.23 %         27.90 %             5 bytes_per_second=35.22%
+rand_buf:256B:arp_bytes/threads:7_mean               4.31 ns         29.3 ns            5 bytes_per_second=8.13331Gi/s
+rand_buf:256B:arp_bytes/threads:7_median             4.28 ns         29.6 ns            5 bytes_per_second=8.06235Gi/s
+rand_buf:256B:arp_bytes/threads:7_stddev            0.081 ns         1.05 ns            5 bytes_per_second=308.581Mi/s
+rand_buf:256B:arp_bytes/threads:7_cv                 1.88 %          3.59 %             5 bytes_per_second=3.71%
+rand_buf:2B:arp_bytes/threads:7_mean                 1.01 ns         6.76 ns            5 bytes_per_second=282.7Mi/s
+rand_buf:2B:arp_bytes/threads:7_median              0.987 ns         6.69 ns            5 bytes_per_second=285.023Mi/s
+rand_buf:2B:arp_bytes/threads:7_stddev              0.046 ns        0.280 ns            5 bytes_per_second=11.3275Mi/s
+rand_buf:2B:arp_bytes/threads:7_cv                   4.55 %          4.14 %             5 bytes_per_second=4.01%
+rand_buf:16B:arp_bytes_MUTEX/threads:7_mean          42.0 ns          152 ns            5 bytes_per_second=101.748Mi/s
+rand_buf:16B:arp_bytes_MUTEX/threads:7_median        42.2 ns          155 ns            5 bytes_per_second=98.5367Mi/s
+rand_buf:16B:arp_bytes_MUTEX/threads:7_stddev        4.16 ns         17.9 ns            5 bytes_per_second=12.5413Mi/s
+rand_buf:16B:arp_bytes_MUTEX/threads:7_cv            9.88 %         11.81 %             5 bytes_per_second=12.33%
+rand_buf:32B:arp_bytes/threads:7_mean                1.20 ns         7.59 ns            5 bytes_per_second=3.94627Gi/s
+rand_buf:32B:arp_bytes/threads:7_median              1.24 ns         7.61 ns            5 bytes_per_second=3.91523Gi/s
+rand_buf:32B:arp_bytes/threads:7_stddev             0.081 ns        0.640 ns            5 bytes_per_second=333.641Mi/s
+rand_buf:32B:arp_bytes/threads:7_cv                  6.72 %          8.42 %             5 bytes_per_second=8.26%
+rand_buf:2B:arp_bytes_MUTEX/threads:7_mean           52.7 ns          210 ns            5 bytes_per_second=9.29964Mi/s
+rand_buf:2B:arp_bytes_MUTEX/threads:7_median         50.7 ns          199 ns            5 bytes_per_second=9.58395Mi/s
+rand_buf:2B:arp_bytes_MUTEX/threads:7_stddev         7.84 ns         37.0 ns            5 bytes_per_second=1.47183Mi/s
+rand_buf:2B:arp_bytes_MUTEX/threads:7_cv            14.88 %         17.62 %             5 bytes_per_second=15.83%
+rand_buf:128B:arp_bytes/threads:7_mean               2.16 ns         14.4 ns            5 bytes_per_second=8.30275Gi/s
+rand_buf:128B:arp_bytes/threads:7_median             2.14 ns         14.0 ns            5 bytes_per_second=8.51464Gi/s
+rand_buf:128B:arp_bytes/threads:7_stddev            0.129 ns         1.12 ns            5 bytes_per_second=634.388Mi/s
+rand_buf:128B:arp_bytes/threads:7_cv                 6.00 %          7.74 %             5 bytes_per_second=7.46%
+rand_buf:4B:arp_bytes/threads:7_mean                 1.07 ns         7.00 ns            5 bytes_per_second=546.479Mi/s
+rand_buf:4B:arp_bytes/threads:7_median               1.06 ns         6.93 ns            5 bytes_per_second=550.829Mi/s
+rand_buf:4B:arp_bytes/threads:7_stddev              0.062 ns        0.454 ns            5 bytes_per_second=34.6866Mi/s
+rand_buf:4B:arp_bytes/threads:7_cv                   5.79 %          6.48 %             5 bytes_per_second=6.35%
+rand_buf:128B:arp_bytes_MUTEX/threads:7_mean         57.4 ns          175 ns            5 bytes_per_second=778.778Mi/s
+rand_buf:128B:arp_bytes_MUTEX/threads:7_median       67.9 ns          149 ns            5 bytes_per_second=819.28Mi/s
+rand_buf:128B:arp_bytes_MUTEX/threads:7_stddev       17.9 ns         67.6 ns            5 bytes_per_second=270.074Mi/s
+rand_buf:128B:arp_bytes_MUTEX/threads:7_cv          31.25 %         38.59 %             5 bytes_per_second=34.68%
+rand_buf:1B:arp_bytes/threads:7_mean                0.990 ns         6.72 ns            5 bytes_per_second=142.249Mi/s
+rand_buf:1B:arp_bytes/threads:7_median              0.977 ns         6.74 ns            5 bytes_per_second=141.487Mi/s
+rand_buf:1B:arp_bytes/threads:7_stddev              0.036 ns        0.371 ns            5 bytes_per_second=8.01102Mi/s
+rand_buf:1B:arp_bytes/threads:7_cv                   3.61 %          5.52 %             5 bytes_per_second=5.63%
+rand_buf:1pg:arp_bytes/threads:7_mean                64.6 ns          442 ns            5 bytes_per_second=8.65449Gi/s
+rand_buf:1pg:arp_bytes/threads:7_median              64.2 ns          429 ns            5 bytes_per_second=8.89926Gi/s
+rand_buf:1pg:arp_bytes/threads:7_stddev              3.39 ns         27.7 ns            5 bytes_per_second=523.632Mi/s
+rand_buf:1pg:arp_bytes/threads:7_cv                  5.25 %          6.28 %             5 bytes_per_second=5.91%
+rand_buf:64B:arp_bytes/threads:7_mean                1.31 ns         8.63 ns            5 bytes_per_second=6.92243Gi/s
+rand_buf:64B:arp_bytes/threads:7_median              1.33 ns         8.51 ns            5 bytes_per_second=7.00779Gi/s
+rand_buf:64B:arp_bytes/threads:7_stddev             0.035 ns        0.441 ns            5 bytes_per_second=354.584Mi/s
+rand_buf:64B:arp_bytes/threads:7_cv                  2.63 %          5.11 %             5 bytes_per_second=5.00%

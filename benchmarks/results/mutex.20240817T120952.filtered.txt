@@ -1,0 +1,46 @@
+Linux 6.10.5-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.40
+gcc (GCC) 14.2.1 20240805
+libarp.so.3.0
+
+# median time per call
+
+# median time per call
+
+# median calls per second
+
+# median bytes per second copied to buffer (of size bytes)
+
+rand_buf:1B:arp_bytes        141.487Mi/s
+rand_buf:1B:arp_bytes_MUTEX  5.21313Mi/s
+
+rand_buf:2B:arp_bytes        285.023Mi/s
+rand_buf:2B:arp_bytes_MUTEX  9.58395Mi/s
+
+rand_buf:4B:arp_bytes        550.829Mi/s
+rand_buf:4B:arp_bytes_MUTEX  15.8654Mi/s
+
+rand_buf:8B:arp_bytes        1.02388Gi/s
+rand_buf:8B:arp_bytes_MUTEX  48.8654Mi/s
+
+rand_buf:16B:arp_bytes        2.05952Gi/s
+rand_buf:16B:arp_bytes_MUTEX  98.5367Mi/s
+
+rand_buf:32B:arp_bytes        3.91523Gi/s
+rand_buf:32B:arp_bytes_MUTEX  178.977Mi/s
+
+rand_buf:64B:arp_bytes        7.00779Gi/s
+rand_buf:64B:arp_bytes_MUTEX  467.134Mi/s
+
+rand_buf:128B:arp_bytes        8.51464Gi/s
+rand_buf:128B:arp_bytes_MUTEX  819.28Mi/s
+
+rand_buf:256B:arp_bytes        8.06235Gi/s
+rand_buf:256B:arp_bytes_MUTEX  987.243Mi/s
+
+# median bytes per second copied to buffer (of size pages)
+
+rand_buf:1pg:arp_bytes        8.89926Gi/s
+rand_buf:1pg:arp_bytes_MUTEX  2.24447Gi/s
+
