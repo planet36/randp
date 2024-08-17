@@ -86,7 +86,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
 	if (num_threads == 1)
 	{
-		for (size_t i = 16; i <= 256; i *= 2)
+		for (size_t i = 64; i <= 256; i *= 2)
 		//for (size_t i = 1; i <= 256; i *= 2)
 		{
 			buf_size = i;
@@ -604,7 +604,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 	}
 	else
 	{
-		for (size_t i = 16; i <= 256; i *= 2)
+		for (size_t i = 64; i <= 256; i *= 2)
 		//for (size_t i = 1; i <= 256; i *= 2)
 		{
 			buf_size = i;
