@@ -126,21 +126,6 @@ arp_copy_to(void* buf, size_t n)
 	}
 }
 
-void
-arp_reseed()
-{
-	if (this_ == nullptr)
-#ifdef __cplusplus
-		this_ = (decltype(this_))allocate(sizeof(*this_));
-#else
-		this_ = (typeof(this_))allocate(sizeof(*this_));
-#endif
-	else
-		this_->reseed_countdown = 0;
-
-	arp_regen();
-}
-
 uint8_t
 arp_u8()
 {

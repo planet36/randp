@@ -41,9 +41,6 @@ uint64_t arp_u64();
 */
 uint32_t arp_lt_u32(uint32_t upper_bound);
 
-/// Reseed the PRNG
-void arp_reseed();
-
 #ifdef __cplusplus
 }
 #endif
