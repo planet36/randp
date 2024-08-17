@@ -3,8 +3,13 @@
 
 export LC_ALL := C
 
-VERSION_MAJOR := 1
-VERSION_MINOR := 0
+VERSION := $(shell git describe --tags --abbrev=0 2> /dev/null)
+ifeq ($(VERSION),)
+VERSION := X.Y
+endif
+VERSION_SPLIT := $(subst ., , $(VERSION))
+VERSION_MAJOR := $(word 1, $(VERSION_SPLIT))
+VERSION_MINOR := $(word 2, $(VERSION_SPLIT))
 
 LIBNAME := arp
 ANAME := lib$(LIBNAME).a
