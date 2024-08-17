@@ -91,12 +91,12 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = i;
 			prefix = "rand_buf:" + std::to_string(i) + "B:";
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x07,1U<<31>", BM_rand_buf, arp_copy_to<0x07,1U << 31>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x08,1U<<31>", BM_rand_buf, arp_copy_to<0x08,1U << 31>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x09,1U<<31>", BM_rand_buf, arp_copy_to<0x09,1U << 31>, buf_size);
@@ -349,12 +349,12 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = 4096 * i;
 			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x07,1U<<31>", BM_rand_buf, arp_copy_to<0x07,1U << 31>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x08,1U<<31>", BM_rand_buf, arp_copy_to<0x08,1U << 31>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x09,1U<<31>", BM_rand_buf, arp_copy_to<0x09,1U << 31>, buf_size);
@@ -609,12 +609,12 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = i;
 			prefix = "rand_buf:" + std::to_string(i) + "B:";
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x07,1U<<31>", BM_rand_buf, arp_copy_to<0x07,1U << 31>, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x08,1U<<31>", BM_rand_buf, arp_copy_to<0x08,1U << 31>, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x09,1U<<31>", BM_rand_buf, arp_copy_to<0x09,1U << 31>, buf_size)->Threads(num_threads);
@@ -867,12 +867,12 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = 4096 * i;
 			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size)->Threads(num_threads);
-			//benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x01,1U<<31>", BM_rand_buf, arp_copy_to<0x01,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x02,1U<<31>", BM_rand_buf, arp_copy_to<0x02,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x03,1U<<31>", BM_rand_buf, arp_copy_to<0x03,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x04,1U<<31>", BM_rand_buf, arp_copy_to<0x04,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x05,1U<<31>", BM_rand_buf, arp_copy_to<0x05,1U << 31>, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x06,1U<<31>", BM_rand_buf, arp_copy_to<0x06,1U << 31>, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x07,1U<<31>", BM_rand_buf, arp_copy_to<0x07,1U << 31>, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x08,1U<<31>", BM_rand_buf, arp_copy_to<0x08,1U << 31>, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_copy_to<0x09,1U<<31>", BM_rand_buf, arp_copy_to<0x09,1U << 31>, buf_size)->Threads(num_threads);
