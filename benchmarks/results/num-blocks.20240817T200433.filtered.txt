@@ -1,0 +1,144 @@
+Linux 6.10.5-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13950HX
+ldd (GNU libc) 2.40
+gcc (GCC) 14.2.1 20240805
+libarp.so.3.0
+
+# median time per call
+
+# median time per call
+
+# median calls per second
+
+# median bytes per second copied to buffer (of size bytes)
+
+rand_buf:64B:arp_bytes<0x08,1U<<31>  8.77494Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<31>  8.64559Gi/s
+rand_buf:64B:arp_bytes<0x0c,1U<<31>  8.55334Gi/s
+rand_buf:64B:arp_bytes<0x0e,1U<<31>  8.43456Gi/s
+rand_buf:64B:arp_bytes<0x0a,1U<<31>  8.22345Gi/s
+rand_buf:64B:arp_bytes<0x12,1U<<31>  7.95208Gi/s
+rand_buf:64B:arp_bytes<0x11,1U<<31>  7.94322Gi/s
+rand_buf:64B:arp_bytes<0x14,1U<<31>  7.76495Gi/s
+rand_buf:64B:arp_bytes<0x0f,1U<<31>  7.64308Gi/s
+rand_buf:64B:arp_bytes<0x13,1U<<31>  7.55026Gi/s
+rand_buf:64B:arp_bytes<0x0b,1U<<31>  7.5276Gi/s
+rand_buf:64B:arp_bytes<0x16,1U<<31>  7.43035Gi/s
+rand_buf:64B:arp_bytes<0x15,1U<<31>  7.36779Gi/s
+rand_buf:64B:arp_bytes<0x18,1U<<31>  7.33223Gi/s
+rand_buf:64B:arp_bytes<0x1a,1U<<31>  7.19502Gi/s
+rand_buf:64B:arp_bytes<0x1c,1U<<31>  7.16859Gi/s
+rand_buf:64B:arp_bytes<0x09,1U<<31>  7.1569Gi/s
+rand_buf:64B:arp_bytes<0x04,1U<<31>  7.13553Gi/s
+rand_buf:64B:arp_bytes<0x19,1U<<31>  7.1323Gi/s
+rand_buf:64B:arp_bytes<0x06,1U<<31>  7.12775Gi/s
+rand_buf:64B:arp_bytes<0x0d,1U<<31>  6.79306Gi/s
+rand_buf:64B:arp_bytes<0x17,1U<<31>  6.78949Gi/s
+rand_buf:64B:arp_bytes<0x07,1U<<31>  6.65975Gi/s
+rand_buf:64B:arp_bytes<0x1d,1U<<31>  6.33266Gi/s
+rand_buf:64B:arp_bytes<0x03,1U<<31>  5.91683Gi/s
+rand_buf:64B:arp_bytes<0x05,1U<<31>  5.82611Gi/s
+rand_buf:64B:arp_bytes<0x1f,1U<<31>  5.5139Gi/s
+rand_buf:64B:arp_bytes<0x1b,1U<<31>  5.38712Gi/s
+rand_buf:64B:arp_bytes<0x1e,1U<<31>  5.23798Gi/s
+rand_buf:64B:arp_bytes<0x02,1U<<31>  4.45311Gi/s
+rand_buf:64B:arp_bytes<0x01,1U<<31>  3.37769Gi/s
+
+rand_buf:128B:arp_bytes<0x10,1U<<31>  10.2374Gi/s
+rand_buf:128B:arp_bytes<0x0c,1U<<31>  10.0364Gi/s
+rand_buf:128B:arp_bytes<0x08,1U<<31>  9.9946Gi/s
+rand_buf:128B:arp_bytes<0x14,1U<<31>  9.98544Gi/s
+rand_buf:128B:arp_bytes<0x0a,1U<<31>  9.91254Gi/s
+rand_buf:128B:arp_bytes<0x12,1U<<31>  9.89698Gi/s
+rand_buf:128B:arp_bytes<0x13,1U<<31>  9.81942Gi/s
+rand_buf:128B:arp_bytes<0x0f,1U<<31>  9.7927Gi/s
+rand_buf:128B:arp_bytes<0x18,1U<<31>  9.73296Gi/s
+rand_buf:128B:arp_bytes<0x0d,1U<<31>  9.66603Gi/s
+rand_buf:128B:arp_bytes<0x19,1U<<31>  9.60329Gi/s
+rand_buf:128B:arp_bytes<0x1c,1U<<31>  9.48223Gi/s
+rand_buf:128B:arp_bytes<0x16,1U<<31>  9.45971Gi/s
+rand_buf:128B:arp_bytes<0x11,1U<<31>  9.43908Gi/s
+rand_buf:128B:arp_bytes<0x09,1U<<31>  9.42208Gi/s
+rand_buf:128B:arp_bytes<0x17,1U<<31>  9.24207Gi/s
+rand_buf:128B:arp_bytes<0x1f,1U<<31>  9.19611Gi/s
+rand_buf:128B:arp_bytes<0x1d,1U<<31>  9.16617Gi/s
+rand_buf:128B:arp_bytes<0x1a,1U<<31>  9.16252Gi/s
+rand_buf:128B:arp_bytes<0x1e,1U<<31>  9.11531Gi/s
+rand_buf:128B:arp_bytes<0x0b,1U<<31>  8.98623Gi/s
+rand_buf:128B:arp_bytes<0x15,1U<<31>  8.94731Gi/s
+rand_buf:128B:arp_bytes<0x0e,1U<<31>  8.92045Gi/s
+rand_buf:128B:arp_bytes<0x07,1U<<31>  8.82125Gi/s
+rand_buf:128B:arp_bytes<0x1b,1U<<31>  8.70419Gi/s
+rand_buf:128B:arp_bytes<0x06,1U<<31>  8.28209Gi/s
+rand_buf:128B:arp_bytes<0x04,1U<<31>  7.48969Gi/s
+rand_buf:128B:arp_bytes<0x05,1U<<31>  7.48368Gi/s
+rand_buf:128B:arp_bytes<0x03,1U<<31>  7.14142Gi/s
+rand_buf:128B:arp_bytes<0x02,1U<<31>  4.74073Gi/s
+rand_buf:128B:arp_bytes<0x01,1U<<31>  2.78831Gi/s
+
+rand_buf:256B:arp_bytes<0x0f,1U<<31>  10.32Gi/s
+rand_buf:256B:arp_bytes<0x0d,1U<<31>  10.3122Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<31>  10.2821Gi/s
+rand_buf:256B:arp_bytes<0x0e,1U<<31>  10.2484Gi/s
+rand_buf:256B:arp_bytes<0x08,1U<<31>  10.2186Gi/s
+rand_buf:256B:arp_bytes<0x0b,1U<<31>  10.1623Gi/s
+rand_buf:256B:arp_bytes<0x13,1U<<31>  10.115Gi/s
+rand_buf:256B:arp_bytes<0x11,1U<<31>  10.1015Gi/s
+rand_buf:256B:arp_bytes<0x1c,1U<<31>  10.0964Gi/s
+rand_buf:256B:arp_bytes<0x16,1U<<31>  10.0901Gi/s
+rand_buf:256B:arp_bytes<0x1e,1U<<31>  10.064Gi/s
+rand_buf:256B:arp_bytes<0x07,1U<<31>  10.0608Gi/s
+rand_buf:256B:arp_bytes<0x18,1U<<31>  10.0287Gi/s
+rand_buf:256B:arp_bytes<0x09,1U<<31>  10.021Gi/s
+rand_buf:256B:arp_bytes<0x1f,1U<<31>  9.92245Gi/s
+rand_buf:256B:arp_bytes<0x14,1U<<31>  9.9192Gi/s
+rand_buf:256B:arp_bytes<0x1b,1U<<31>  9.90285Gi/s
+rand_buf:256B:arp_bytes<0x15,1U<<31>  9.82879Gi/s
+rand_buf:256B:arp_bytes<0x0a,1U<<31>  9.77426Gi/s
+rand_buf:256B:arp_bytes<0x1d,1U<<31>  9.77148Gi/s
+rand_buf:256B:arp_bytes<0x19,1U<<31>  9.69489Gi/s
+rand_buf:256B:arp_bytes<0x12,1U<<31>  9.66909Gi/s
+rand_buf:256B:arp_bytes<0x1a,1U<<31>  9.53769Gi/s
+rand_buf:256B:arp_bytes<0x0c,1U<<31>  9.3493Gi/s
+rand_buf:256B:arp_bytes<0x06,1U<<31>  9.28385Gi/s
+rand_buf:256B:arp_bytes<0x17,1U<<31>  9.25539Gi/s
+rand_buf:256B:arp_bytes<0x05,1U<<31>  8.62711Gi/s
+rand_buf:256B:arp_bytes<0x04,1U<<31>  8.05962Gi/s
+rand_buf:256B:arp_bytes<0x03,1U<<31>  7.57547Gi/s
+rand_buf:256B:arp_bytes<0x02,1U<<31>  4.61714Gi/s
+rand_buf:256B:arp_bytes<0x01,1U<<31>  4.11104Gi/s
+
+# median bytes per second copied to buffer (of size pages)
+
+rand_buf:1pg:arp_bytes<0x08,1U<<31>  10.6979Gi/s
+rand_buf:1pg:arp_bytes<0x0e,1U<<31>  10.4774Gi/s
+rand_buf:1pg:arp_bytes<0x1c,1U<<31>  10.4221Gi/s
+rand_buf:1pg:arp_bytes<0x1d,1U<<31>  10.3358Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<31>  10.3194Gi/s
+rand_buf:1pg:arp_bytes<0x11,1U<<31>  10.3136Gi/s
+rand_buf:1pg:arp_bytes<0x0f,1U<<31>  10.266Gi/s
+rand_buf:1pg:arp_bytes<0x07,1U<<31>  10.2634Gi/s
+rand_buf:1pg:arp_bytes<0x12,1U<<31>  10.2442Gi/s
+rand_buf:1pg:arp_bytes<0x15,1U<<31>  10.2124Gi/s
+rand_buf:1pg:arp_bytes<0x1e,1U<<31>  10.2067Gi/s
+rand_buf:1pg:arp_bytes<0x17,1U<<31>  10.2013Gi/s
+rand_buf:1pg:arp_bytes<0x0d,1U<<31>  10.1676Gi/s
+rand_buf:1pg:arp_bytes<0x16,1U<<31>  10.1348Gi/s
+rand_buf:1pg:arp_bytes<0x13,1U<<31>  10.112Gi/s
+rand_buf:1pg:arp_bytes<0x19,1U<<31>  10.1117Gi/s
+rand_buf:1pg:arp_bytes<0x0a,1U<<31>  10.1039Gi/s
+rand_buf:1pg:arp_bytes<0x14,1U<<31>  10.1032Gi/s
+rand_buf:1pg:arp_bytes<0x1b,1U<<31>  10.0853Gi/s
+rand_buf:1pg:arp_bytes<0x0b,1U<<31>  10.073Gi/s
+rand_buf:1pg:arp_bytes<0x1f,1U<<31>  10.069Gi/s
+rand_buf:1pg:arp_bytes<0x0c,1U<<31>  9.98353Gi/s
+rand_buf:1pg:arp_bytes<0x1a,1U<<31>  9.93872Gi/s
+rand_buf:1pg:arp_bytes<0x18,1U<<31>  9.51359Gi/s
+rand_buf:1pg:arp_bytes<0x09,1U<<31>  9.24326Gi/s
+rand_buf:1pg:arp_bytes<0x06,1U<<31>  9.23547Gi/s
+rand_buf:1pg:arp_bytes<0x05,1U<<31>  8.67699Gi/s
+rand_buf:1pg:arp_bytes<0x04,1U<<31>  8.65913Gi/s
+rand_buf:1pg:arp_bytes<0x03,1U<<31>  7.69473Gi/s
+rand_buf:1pg:arp_bytes<0x01,1U<<31>  5.56607Gi/s
+rand_buf:1pg:arp_bytes<0x02,1U<<31>  5.20892Gi/s
+

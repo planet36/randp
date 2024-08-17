@@ -1,0 +1,76 @@
+Linux 6.10.5-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13950HX
+ldd (GNU libc) 2.40
+gcc (GCC) 14.2.1 20240805
+libarp.so.3.0
+
+# median time per call
+
+rand_uint:8b:arp_u8  6.59  ns
+
+rand_uint:16b:arp_u16    6.09  ns
+rand_uint:16b:rdrand16    293  ns
+rand_uint:16b:rdseed16  11991  ns
+
+rand_uint:32b:arp_u32      7.12  ns
+rand_uint:32b:arc4random    211  ns
+rand_uint:32b:rdrand32      320  ns
+rand_uint:32b:rdseed32    12340  ns
+
+rand_uint:64b:arp_u64    6.91  ns
+rand_uint:64b:rdrand64    332  ns
+rand_uint:64b:rdseed64  10855  ns
+
+# median time per call
+
+rand_lt-one:32b:arp_lt_u32          6.56  ns
+rand_lt-one:32b:arc4random_uniform   200  ns
+
+# median calls per second
+
+rand_lt-many:32b:arp_lt_u32          148.779M/s
+rand_lt-many:32b:arc4random_uniform  3.49405M/s
+
+# median bytes per second copied to buffer (of size bytes)
+
+rand_buf:1B:arp_bytes       158.431Mi/s
+rand_buf:1B:getentropy      5.0739Mi/s
+rand_buf:1B:arc4random_buf  4.76761Mi/s
+
+rand_buf:2B:arp_bytes       315.407Mi/s
+rand_buf:2B:arc4random_buf  9.96808Mi/s
+rand_buf:2B:getentropy      9.91603Mi/s
+
+rand_buf:4B:arp_bytes       552.979Mi/s
+rand_buf:4B:getentropy      20.005Mi/s
+rand_buf:4B:arc4random_buf  19.4793Mi/s
+
+rand_buf:8B:arp_bytes       1.1195Gi/s
+rand_buf:8B:arc4random_buf  39.8474Mi/s
+rand_buf:8B:getentropy      39.7407Mi/s
+
+rand_buf:16B:arp_bytes       2.10213Gi/s
+rand_buf:16B:getentropy      80.0477Mi/s
+rand_buf:16B:arc4random_buf  74.8665Mi/s
+
+rand_buf:32B:arp_bytes       4.46673Gi/s
+rand_buf:32B:getentropy      160.273Mi/s
+rand_buf:32B:arc4random_buf  152.049Mi/s
+
+rand_buf:64B:arp_bytes       8.29542Gi/s
+rand_buf:64B:getentropy      219.141Mi/s
+rand_buf:64B:arc4random_buf  213.294Mi/s
+
+rand_buf:128B:arp_bytes       8.94939Gi/s
+rand_buf:128B:getentropy      328.668Mi/s
+rand_buf:128B:arc4random_buf  315.371Mi/s
+
+rand_buf:256B:arp_bytes       9.21001Gi/s
+rand_buf:256B:getentropy      443.369Mi/s
+rand_buf:256B:arc4random_buf  418.626Mi/s
+
+# median bytes per second copied to buffer (of size pages)
+
+rand_buf:1pg:arp_bytes       8.85102Gi/s
+rand_buf:1pg:arc4random_buf  690.641Mi/s
+
