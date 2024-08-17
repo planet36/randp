@@ -71,7 +71,7 @@ template <unsigned int ARP_NUM_BLOCKS = 16,
 requires ((ARP_NUM_BLOCKS >= 1) &&
           std::has_single_bit(ARP_RESEED_COUNTDOWN_MIN))
 void
-arp_copy_to(void* buf, size_t n)
+arp_bytes(void* buf, size_t n)
 {
 	static thread_local arp<ARP_NUM_BLOCKS, ARP_RESEED_COUNTDOWN_MIN>* this_ =
 	    nullptr;
@@ -128,7 +128,7 @@ template <unsigned int ARP_NUM_BLOCKS = 16,
 requires ((ARP_NUM_BLOCKS >= 1) &&
           std::has_single_bit(ARP_RESEED_COUNTDOWN_MIN))
 void
-arp_copy_to_MUTEX(void* buf, size_t n)
+arp_bytes_MUTEX(void* buf, size_t n)
 {
 	// Not thread_local
 	static arp<ARP_NUM_BLOCKS, ARP_RESEED_COUNTDOWN_MIN>* this_ = nullptr;

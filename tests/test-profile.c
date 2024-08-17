@@ -20,7 +20,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
 	for (int i = 0; i < 4096; ++i)
 	{
-		arp_copy_to(buf, buf_size);
+		arp_bytes(buf, buf_size);
 		//arc4random_buf(buf, buf_size);
 	}
 

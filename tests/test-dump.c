@@ -22,8 +22,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		return 0;
 	}
 
-	const char* func_name = "arp_copy_to";
-	void (*func_ptr)(void* buf, size_t n) = arp_copy_to;
+	const char* func_name = "arp_bytes";
+	void (*func_ptr)(void* buf, size_t n) = arp_bytes;
 
 	for (int i = 1; i < argc; ++i)
 	{

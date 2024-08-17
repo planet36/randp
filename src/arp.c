@@ -90,7 +90,7 @@ arp_regen()
 }
 
 void
-arp_copy_to(void* buf, size_t n)
+arp_bytes(void* buf, size_t n)
 {
 	if (this_ == nullptr)
 #ifdef __cplusplus
@@ -130,7 +130,7 @@ uint8_t
 arp_u8()
 {
 	uint8_t result = 0;
-	arp_copy_to(&result, sizeof(result));
+	arp_bytes(&result, sizeof(result));
 	return result;
 }
 
@@ -138,7 +138,7 @@ uint16_t
 arp_u16()
 {
 	uint16_t result = 0;
-	arp_copy_to(&result, sizeof(result));
+	arp_bytes(&result, sizeof(result));
 	return result;
 }
 
@@ -146,7 +146,7 @@ uint32_t
 arp_u32()
 {
 	uint32_t result = 0;
-	arp_copy_to(&result, sizeof(result));
+	arp_bytes(&result, sizeof(result));
 	return result;
 }
 
@@ -154,7 +154,7 @@ uint64_t
 arp_u64()
 {
 	uint64_t result = 0;
-	arp_copy_to(&result, sizeof(result));
+	arp_bytes(&result, sizeof(result));
 	return result;
 }
 

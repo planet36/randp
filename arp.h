@@ -23,7 +23,7 @@ extern "C" {
 /**
 * This is similar to \c arc4random_buf.
 */
-void arp_copy_to(void* buf, size_t n);
+void arp_bytes(void* buf, size_t n);
 
 /// Return a uniform random unsigned integer
 /**
