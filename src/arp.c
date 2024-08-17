@@ -45,7 +45,7 @@ static_assert(ARP_NUM_BLOCKS >= 1, "arp must have at least 1 block");
 * This value is also used as the modulus to calculate a jitter.
 */
 #if !defined(ARP_RESEED_COUNTDOWN_MIN)
-#define ARP_RESEED_COUNTDOWN_MIN 2048
+#define ARP_RESEED_COUNTDOWN_MIN (1 << 11)
 #endif
 
 static_assert(
