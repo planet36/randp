@@ -3,7 +3,7 @@
 
 /**
 * This program will dump random bytes to stdout (as long as stdout does not
-* refer to a terminal).  Those bytes could be analyzed by PractRand.
+* refer to a terminal), which could be analyzed by PractRand.
 */
 
 #include "../arp.h"
@@ -33,7 +33,6 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			func_name = "arc4random_buf";
 			func_ptr = arc4random_buf;
-
 			break;
 		}
 	}

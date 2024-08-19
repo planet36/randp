@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: OSL-3.0
 
 /**
-* This program will initialize a pool of random data, then it will fork
-* itself. Then the parent and child each will print a random number. The two
-* numbers will be different, proving that the AES Random Pool (ARP) is
-* fork-safe.
+* This program will initialize a pool of random data, then fork itself.
+* After the fork, the parent and child processes will print a random number.
+* The two numbers will be different, proving that the random number generator
+* is fork-safe.
 * \sa https://wiki.openssl.org/index.php/Random_fork-safety
 */
 
@@ -35,7 +35,6 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			func_name = "arc4random";
 			func_ptr = arc4random;
-
 			break;
 		}
 	}
