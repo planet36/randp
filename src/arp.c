@@ -14,6 +14,7 @@ Inspired by \c arc4random.
 
 #include "aes128_prng.h"
 #include "allocate.h"
+#include "arp-defaults.h"
 #include "nearlydivisionless.h"
 
 #include <immintrin.h>
@@ -33,7 +34,7 @@ extern "C" {
 * The size of each block is \c sizeof(__m128i) (i.e. \c 16).
 */
 #if !defined(ARP_NUM_BLOCKS)
-#define ARP_NUM_BLOCKS 16
+#define ARP_NUM_BLOCKS DEFAULT_ARP_NUM_BLOCKS
 #endif
 
 static_assert(ARP_NUM_BLOCKS >= 1, "arp must have at least 1 block");
@@ -45,7 +46,7 @@ static_assert(ARP_NUM_BLOCKS >= 1, "arp must have at least 1 block");
 * This value is also used as the modulus to calculate a jitter.
 */
 #if !defined(ARP_RESEED_COUNTDOWN_MIN)
-#define ARP_RESEED_COUNTDOWN_MIN (1 << 11)
+#define ARP_RESEED_COUNTDOWN_MIN DEFAULT_ARP_RESEED_COUNTDOWN_MIN
 #endif
 
 static_assert(
