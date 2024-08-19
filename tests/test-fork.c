@@ -59,8 +59,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		pid_category_label = "[parent]";
 	}
 
-	printf("%-*s %s %08x\n", max_len_func_name, func_name,
-	       pid_category_label, func_ptr());
+	printf("%-*s %s %08x\n", max_len_func_name, func_name, pid_category_label,
+	       func_ptr());
 
 	if (!is_child)
 	{
