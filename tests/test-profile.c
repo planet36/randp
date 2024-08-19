@@ -1,6 +1,11 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
+/**
+* This program calls \c arp_bytes repeatedly for the purpose of being profiled
+* by valgrind.
+*/
+
 #include "../arp.h"
 #include "valgrind/callgrind.h"
 

@@ -1,6 +1,11 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
+/**
+* This program will fill a buffer with random bytes and print it (in
+* hexadecimal) to stdout.
+*/
+
 #include "../arp.h"
 
 #include <assert.h>
