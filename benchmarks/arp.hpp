@@ -9,8 +9,9 @@ Inspired by \c arc4random.
 \sa https://github.com/openbsd/src/blob/master/lib/libc/crypt/arc4random.c
 \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 
-The raison d'etre for this class is to test different values for
-\c ARP_NUM_BLOCKS and \c ARP_RESEED_COUNTDOWN_MIN.
+The raisons d'etre of this class are to test
+1. different values of \c ARP_NUM_BLOCKS and \c ARP_RESEED_COUNTDOWN_MIN
+2. using a mutex for the static ARP data instead of a \c thread_local instance
 */
 
 #pragma once
