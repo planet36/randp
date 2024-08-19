@@ -104,6 +104,8 @@ arp_bytes(void* buf, size_t n)
 #if defined(memset_explicit)
 		// https://open-std.org/jtc1/sc22/wg14/www/docs/n2897.htm
 		(void)memset_explicit(src, 0, m);
+#elif defined(explicit_bzero)
+		explicit_bzero(src, m);
 #else
 		(void)memset(src, 0, m);
 #endif
