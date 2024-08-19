@@ -41,7 +41,7 @@ generate: test-generate
 profile: test-profile | $(OUTPUT_DIR)
 	@valgrind --tool=callgrind \
 		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out.$(DATETIME) ./$<
-	@kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
+	@if [[ -n "$$DISPLAY" ]]; then kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME); fi
 
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
