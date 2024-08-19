@@ -18,7 +18,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
 	CALLGRIND_START_INSTRUMENTATION;
 
-	for (int i = 0; i < 4096; ++i)
+	for (int i = 0; i < (1 << 16); ++i)
 	{
 		arp_bytes(buf, buf_size);
 		//arc4random_buf(buf, buf_size);
