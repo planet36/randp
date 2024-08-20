@@ -74,9 +74,9 @@ arp_regen()
 	if (this_->reseed_countdown == 0)
 	{
 		aes128_prng_reseed(&this_->prng);
-		const size_t jitter =
+		this_->reseed_countdown = ARP_RESEED_COUNTDOWN_MIN;
+		this_->reseed_countdown +=
 		    (__builtin_ia32_rdtsc() % ARP_RESEED_COUNTDOWN_MIN) / 2;
-		this_->reseed_countdown = ARP_RESEED_COUNTDOWN_MIN + jitter;
 	}
 
 	__m128i* blocks = (__m128i*)(&this_->pool[0]);

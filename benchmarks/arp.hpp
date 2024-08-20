@@ -48,13 +48,12 @@ struct arp
 		if (this->reseed_countdown == 0)
 		{
 			aes128_prng_reseed(&this->prng);
-#if 0
-			const size_t jitter = (__builtin_ia32_rdtsc() % ARP_RESEED_COUNTDOWN_MIN) / 2;
-#else
+			this->reseed_countdown = ARP_RESEED_COUNTDOWN_MIN;
 			// eliminate variations
-			const size_t jitter = 0;
+#if 0
+			this->reseed_countdown +=
+			    (__builtin_ia32_rdtsc() % ARP_RESEED_COUNTDOWN_MIN) / 2;
 #endif
-			this->reseed_countdown = ARP_RESEED_COUNTDOWN_MIN + jitter;
 		}
 
 		__m128i* blocks = (__m128i*)(&this->pool[0]);
