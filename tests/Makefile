@@ -19,6 +19,8 @@ OUTPUT_DIR := results
 
 all: $(BINS)
 
+$(BINS): ../$(SONAME_0)
+
 # The built-in recipe for the implicit rule uses $^ instead of $<
 %: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)

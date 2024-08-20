@@ -31,6 +31,8 @@ OUTPUT_DIR := results
 
 all: $(BINS)
 
+$(BINS): ../$(ANAME)
+
 # The built-in recipe for the implicit rule uses $^ instead of $<
 %: %.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
