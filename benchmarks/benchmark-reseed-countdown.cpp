@@ -129,7 +129,6 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = 4096 * i;
 			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			benchmark::RegisterBenchmark(prefix + "arp_bytes<16>", BM_rand_buf, arp_bytes<16>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_bytes<0x10,1U<<_1>", BM_rand_buf, arp_bytes<0x10,1U <<  1>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_bytes<0x10,1U<<_2>", BM_rand_buf, arp_bytes<0x10,1U <<  2>, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_bytes<0x10,1U<<_3>", BM_rand_buf, arp_bytes<0x10,1U <<  3>, buf_size);
