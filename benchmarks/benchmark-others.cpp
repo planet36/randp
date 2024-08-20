@@ -161,6 +161,26 @@ BM_rand_buf(benchmark::State& state,
 	state.SetBytesProcessed(state.iterations() * buf_size);
 }
 
+void
+BM_rand_buf_1GiB(benchmark::State& state,
+                 const std::function<void(uint8_t*, size_t)>& fn)
+{
+	// Perform setup here
+
+	uint8_t buf[1U << 8];
+
+	for (auto _ : state)
+	{
+		// This code gets timed
+
+		// (2**30) / (2**8) == 2**22
+		for (size_t i = 0; i < (1U << 22); ++i)
+		{
+			fn(buf, sizeof(buf));
+		}
+	}
+}
+
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
@@ -274,6 +294,11 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf, arc4random_buf, buf_size);
 			benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf, arp_bytes, buf_size);
 		}
+
+		prefix = "rand_buf_1GiB:";
+		benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_buf_1GiB, getentropy)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf_1GiB, arc4random_buf)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf_1GiB, arp_bytes)->Unit(benchmark::kMillisecond);
 	}
 	else
 	{
@@ -334,6 +359,11 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf, arc4random_buf, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf, arp_bytes, buf_size)->Threads(num_threads);
 		}
+
+		prefix = "rand_buf_1GiB:";
+		benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_buf_1GiB, getentropy)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf_1GiB, arc4random_buf)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf_1GiB, arp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 	}
 
 	benchmark::RunSpecifiedBenchmarks();
