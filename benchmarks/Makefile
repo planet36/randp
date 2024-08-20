@@ -17,8 +17,10 @@ LDLIBS += `pkg-config --libs benchmark`
 #LDLIBS += -l$(LIBNAME)
 LDLIBS += ../$(ANAME)
 
-# Use N-1 threads in the benchmark
-export NUM_THREADS := $(shell nproc --ignore 1)
+# Use N-1 threads in the benchmarks
+#export NUM_THREADS := $(shell nproc --ignore 1)
+# Use 1 thread in the benchmarks
+export NUM_THREADS := 1
 
 # Should be an odd number for simpler median
 BENCHMARK_REPS := 5
