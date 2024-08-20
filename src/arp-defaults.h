@@ -10,4 +10,5 @@
 #pragma once
 
 #define DEFAULT_ARP_NUM_BLOCKS 16
+
 #define DEFAULT_ARP_RESEED_COUNTDOWN_MIN (1 << 11)

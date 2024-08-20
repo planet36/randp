@@ -10,6 +10,7 @@
 #pragma once
 
 #include "aes128-utils.h"
+#include "aes128_prng-defaults.h"
 
 #include <err.h>
 #include <immintrin.h>
@@ -21,15 +22,17 @@ extern "C" {
 #endif
 
 #if !defined(AES128_PRNG_NUM_KEYS)
-#define AES128_PRNG_NUM_KEYS 2
-#endif
-
-#if !defined(AES128_PRNG_NUM_ROUNDS_PER_KEY)
-#define AES128_PRNG_NUM_ROUNDS_PER_KEY 1
+#define AES128_PRNG_NUM_KEYS DEFAULT_AES128_PRNG_NUM_KEYS
 #endif
 
 static_assert(AES128_PRNG_NUM_KEYS >= 1);
+
+#if !defined(AES128_PRNG_NUM_ROUNDS_PER_KEY)
+#define AES128_PRNG_NUM_ROUNDS_PER_KEY DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
+#endif
+
 static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
+
 static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
               "must do at least 2 rounds of AES enc/dec");
 
