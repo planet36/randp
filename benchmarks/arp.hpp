@@ -135,7 +135,7 @@ requires ((ARP_NUM_BLOCKS >= 1) &&
 void
 arp_bytes_MUTEX(void* buf, size_t n)
 {
-	// Not thread_local
+	// Intentionally not thread_local
 	static arp<ARP_NUM_BLOCKS, ARP_RESEED_COUNTDOWN_MIN>* this_ = nullptr;
 
 	// The whole struct must fit in one page.
