@@ -161,9 +161,7 @@ arp_bytes_MUTEX(void* buf, size_t n)
 		const size_t m = MIN(n, this_->rand_bytes_remaining);
 
 		(void)memcpy(dst, src, m);
-		// https://en.cppreference.com/w/c/string/byte/memset
 #if defined(memset_explicit)
-		// https://open-std.org/jtc1/sc22/wg14/www/docs/n2897.htm
 		(void)memset_explicit(src, 0, m);
 #elif defined(explicit_bzero)
 		explicit_bzero(src, m);
