@@ -34,6 +34,7 @@ fork: test-fork
 generate: test-generate
 	./$<
 	./$< arc4random
+	openssl rand -hex 60 | tr '[:lower:]' '[:upper:]'
 
 profile: test-profile | $(OUTPUT_DIR)
 	valgrind --tool=callgrind --enable-debuginfod=no \
@@ -49,10 +50,12 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: Each test takes about 60 minutes on my fast (in AD 2024) computer"
 	./$<            | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arp.$(DATETIME).txt
 	./$< arc4random | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
+	openssl rand max | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
 
 run-rngtest: test-dump | $(OUTPUT_DIR)
 	./$<            | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arp.$(DATETIME).txt
 	./$< arc4random | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
+	openssl rand max | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.openssl-rand.$(DATETIME).txt
 
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
