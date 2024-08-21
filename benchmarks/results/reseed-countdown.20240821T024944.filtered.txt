@@ -1,0 +1,82 @@
+Linux 6.10.6-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13950HX
+ldd (GNU libc) 2.40
+gcc (GCC) 14.2.1 20240805
+libarp.so.3.0
+
+# median time per call
+
+# median time per call
+
+# median calls per second
+
+# median bytes per second copied to buffer (of size bytes)
+
+rand_buf:64B:arp_bytes<0x10,1U<<14>  8.33465Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<12>  8.30642Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<13>  8.28153Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<15>  8.22821Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<11>  8.13897Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<10>  7.94212Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_9>  7.50001Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_8>  7.36144Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_6>  7.19397Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_7>  6.88081Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_5>  6.20638Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_4>  4.68692Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_3>  3.421Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_2>  2.0503Gi/s
+rand_buf:64B:arp_bytes<0x10,1U<<_1>  1.35962Gi/s
+
+rand_buf:128B:arp_bytes<0x10,1U<<15>  9.96544Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<13>  9.79496Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<12>  9.79339Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_9>  9.54027Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<11>  9.29616Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<10>  9.07777Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_8>  8.89626Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<14>  8.65838Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_7>  8.01634Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_6>  7.39377Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_5>  6.97472Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_4>  5.57014Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_3>  3.43474Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_2>  2.22558Gi/s
+rand_buf:128B:arp_bytes<0x10,1U<<_1>  1.35989Gi/s
+
+rand_buf:256B:arp_bytes<0x10,1U<<14>  9.92953Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<15>  9.64236Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<10>  9.55158Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_9>  9.45994Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<13>  9.25345Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_8>  9.23806Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<11>  8.90399Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<12>  8.70137Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_7>  8.08872Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_6>  7.94352Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_5>  6.84907Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_4>  4.96747Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_3>  3.47955Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_2>  2.4689Gi/s
+rand_buf:256B:arp_bytes<0x10,1U<<_1>  1.32295Gi/s
+
+# median bytes per second copied to buffer (of size pages)
+
+rand_buf:1pg:arp_bytes<0x10,1U<<13>  10.1868Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<12>  10.0445Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<11>  9.8475Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<14>  9.81735Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<15>  9.7522Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_9>  9.41386Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_8>  9.16353Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<10>  9.10217Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_7>  9.05169Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_6>  8.54473Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_5>  6.53435Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_4>  5.60983Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_3>  3.491Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_2>  2.3061Gi/s
+rand_buf:1pg:arp_bytes<0x10,1U<<_1>  1.23377Gi/s
+
+# median time to generate 1 GiB
+
