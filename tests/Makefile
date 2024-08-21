@@ -28,12 +28,15 @@ $(BINS): ../$(SONAME_0)
 fork: test-fork
 	./$<
 	./$< arc4random
+	./$< mrand48
 	@test $(shell ./$<            | awk '{print $$3}' | sort | uniq | wc --lines) -eq 2
 	@test $(shell ./$< arc4random | awk '{print $$3}' | sort | uniq | wc --lines) -eq 2
+	-@test $(shell ./$< mrand48    | awk '{print $$3}' | sort | uniq | wc --lines) -eq 2
 
 generate: test-generate
 	./$<
 	./$< arc4random
+	./$< mrand48
 	openssl rand -hex 60 | tr '[:lower:]' '[:upper:]'
 
 profile: test-profile | $(OUTPUT_DIR)
@@ -50,11 +53,13 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: Each test takes about 60 minutes on my fast (in AD 2024) computer"
 	./$<             | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arp.$(DATETIME).txt
 	./$< arc4random  | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
+	./$< mrand48     | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
 	openssl rand max | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
 
 run-rngtest: test-dump | $(OUTPUT_DIR)
 	./$<             | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arp.$(DATETIME).txt
 	./$< arc4random  | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
+	./$< mrand48     | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.mrand48.$(DATETIME).txt
 	openssl rand max | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.openssl-rand.$(DATETIME).txt
 
 $(OUTPUT_DIR):

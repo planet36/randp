@@ -8,9 +8,22 @@
 
 #include "../arp.h"
 
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+// XXX: n must be a multiple of sizeof(uint32_t)
+void
+mrand48_wrapper(void* buf, size_t n)
+{
+	const size_t num_elems = n / sizeof(uint32_t);
+	uint32_t* dst = buf;
+	for (size_t i = 0; i < num_elems; ++i)
+	{
+		dst[i] = (uint32_t)mrand48();
+	}
+}
 
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
@@ -32,9 +45,18 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			func_ptr = arc4random_buf;
 			break;
 		}
+		if (strcmp(arg, "mrand48") == 0)
+		{
+			unsigned short seed16v[3];
+			assert(getentropy(seed16v, sizeof(seed16v)) == 0);
+			(void)seed48(seed16v);
+			func_ptr = mrand48_wrapper;
+			break;
+		}
 	}
 
 	uint8_t buf[4096] = {0};
+	static_assert(sizeof(buf) % sizeof(uint32_t) == 0);
 
 	do
 	{
