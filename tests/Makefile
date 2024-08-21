@@ -28,8 +28,8 @@ $(BINS): ../$(SONAME_0)
 fork: test-fork
 	./$<
 	./$< arc4random
-	@test $(shell ./$<            | awk '{print $3}' | sort | uniq | wc --lines) -eq 2
-	@test $(shell ./$< arc4random | awk '{print $3}' | sort | uniq | wc --lines) -eq 2
+	@test $(shell ./$<            | awk '{print $$3}' | sort | uniq | wc --lines) -eq 2
+	@test $(shell ./$< arc4random | awk '{print $$3}' | sort | uniq | wc --lines) -eq 2
 
 generate: test-generate
 	./$<
