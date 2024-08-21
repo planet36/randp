@@ -8,7 +8,6 @@
 
 #include "../arp.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -22,7 +21,6 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		return 0;
 	}
 
-	const char* func_name = "arp_bytes";
 	void (*func_ptr)(void* buf, size_t n) = arp_bytes;
 
 	for (int i = 1; i < argc; ++i)
@@ -31,14 +29,10 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
 		if (strcmp(arg, "arc4random") == 0)
 		{
-			func_name = "arc4random_buf";
 			func_ptr = arc4random_buf;
 			break;
 		}
 	}
-
-	(void)fputs(func_name, stderr);
-	(void)fputc('\n', stderr);
 
 	uint8_t buf[4096] = {0};
 
