@@ -26,24 +26,24 @@ $(BINS): ../$(SONAME_0)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
 fork: test-fork
-	@./$<
-	@./$< arc4random
+	./$<
+	./$< arc4random
 	@test $(shell ./$<            | awk '{print $3}' | sort | uniq | wc --lines) -eq 2
 	@test $(shell ./$< arc4random | awk '{print $3}' | sort | uniq | wc --lines) -eq 2
 
 generate: test-generate
-	@./$<
-	@./$< arc4random
+	./$<
+	./$< arc4random
 
 profile: test-profile | $(OUTPUT_DIR)
-	@valgrind --tool=callgrind \
+	valgrind --tool=callgrind \
 		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out.$(DATETIME) ./$<
 	@if [[ -n "$$DISPLAY" ]]; then kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME); fi
 
 run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: Each test takes about 60 minutes on my fast (in AD 2024) computer"
-	@./$<            | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arp.$(DATETIME).txt
-	@./$< arc4random | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
+	./$<            | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arp.$(DATETIME).txt
+	./$< arc4random | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
 
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
