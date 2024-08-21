@@ -38,7 +38,12 @@ generate: test-generate
 profile: test-profile | $(OUTPUT_DIR)
 	valgrind --tool=callgrind --enable-debuginfod=no \
 		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out.$(DATETIME) ./$<
-	@if [[ -n "$$DISPLAY" ]]; then kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME); fi
+
+profile-kgui: profile
+	kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
+
+profile-qgui: profile
+	qcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
 
 run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: Each test takes about 60 minutes on my fast (in AD 2024) computer"
@@ -56,6 +61,6 @@ clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all fork generate profile run-PractRand run-rngtest clean
+.PHONY: all fork generate profile profile-kgui profile-qgui run-PractRand run-rngtest clean
 
 -include $(DEPS)
