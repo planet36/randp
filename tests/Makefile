@@ -45,6 +45,10 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 	./$<            | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arp.$(DATETIME).txt
 	./$< arc4random | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
 
+run-rngtest: test-dump | $(OUTPUT_DIR)
+	./$<            | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arp.$(DATETIME).txt
+	./$< arc4random | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
+
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
 
@@ -52,6 +56,6 @@ clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all fork generate profile run-PractRand clean
+.PHONY: all fork generate profile run-PractRand run-rngtest clean
 
 -include $(DEPS)
