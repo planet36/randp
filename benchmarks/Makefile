@@ -23,7 +23,7 @@ LDLIBS += ../$(ANAME)
 export NUM_THREADS := 1
 
 # Should be an odd number for simpler median
-BENCHMARK_REPS := 5
+BENCHMARK_REPS := 3
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')
 
