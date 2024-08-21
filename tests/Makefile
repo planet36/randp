@@ -36,7 +36,7 @@ generate: test-generate
 	./$< arc4random
 
 profile: test-profile | $(OUTPUT_DIR)
-	valgrind --tool=callgrind \
+	valgrind --tool=callgrind --enable-debuginfod=no \
 		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out.$(DATETIME) ./$<
 	@if [[ -n "$$DISPLAY" ]]; then kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME); fi
 
