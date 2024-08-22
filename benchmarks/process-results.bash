@@ -58,7 +58,7 @@ find .. -maxdepth 1 -type f -name 'librandp.so*' -printf '%P\n'
 echo
 # }}}
 
-echo "# median time per call"
+echo "# Median time per call"
 echo
 for I in 8 16 32 64
 do
@@ -70,7 +70,7 @@ do
     fi
 done
 
-echo "# median time per call"
+echo "# Median time per call"
 echo
 for I in 32
 do
@@ -82,7 +82,7 @@ do
     fi
 done
 
-echo "# median calls per second"
+echo "# Median calls per second"
 echo
 for I in 32
 do
@@ -94,7 +94,7 @@ do
     fi
 done
 
-echo "# median bytes per second copied to buffer (of size bytes)"
+echo "# Median bytes per second copied to buffer (of size bytes)"
 echo
 for I in 1 2 4 8 16 32 64 128 256
 do
@@ -106,10 +106,9 @@ do
     fi
 done
 
-echo "# median bytes per second copied to buffer (of size pages)"
+echo "# Median bytes per second copied to buffer (of size pages)"
 echo
-#for I in 1 2 3 4 5 6 7 8
-for I in 1
+for I in 1 2 3 4 5 6 7 8
 do
     PATTERN="^rand_buf:${I}pg:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
@@ -119,7 +118,7 @@ do
     fi
 done
 
-echo "# median time to generate 1 GiB"
+echo "# Median time to generate 1 GiB"
 echo
 PATTERN="^rand_buf_1GiB:"
 if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
