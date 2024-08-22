@@ -52,6 +52,9 @@ num-blocks: benchmark-num-blocks | $(OUTPUT_DIR)
 others: benchmark-others | $(OUTPUT_DIR)
 	NUM_THREADS=1 $(benchmark-recipe)
 
+prng-params: benchmark-prng-params | $(OUTPUT_DIR)
+	NUM_THREADS=$(shell nproc --ignore 1) $(benchmark-recipe)
+
 reseed-countdown: benchmark-reseed-countdown | $(OUTPUT_DIR)
 	NUM_THREADS=$(shell nproc --ignore 1) $(benchmark-recipe)
 
@@ -62,6 +65,6 @@ clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all mutex num-blocks others reseed-countdown clean
+.PHONY: all mutex num-blocks others prng-params reseed-countdown clean
 
 -include $(DEPS)
