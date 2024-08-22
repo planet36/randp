@@ -40,10 +40,10 @@ template <
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
-requires ((RANDP_NUM_BLOCKS >= 1) &&
-          std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN))
 struct randp
 {
+	static_assert(RANDP_NUM_BLOCKS >= 1);
+	static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN));
 	static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 	aes128_prng<enc, Nk, Nr> prng;
 	size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
@@ -84,8 +84,6 @@ template <
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
-requires ((RANDP_NUM_BLOCKS >= 1) &&
-          std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN))
 void
 randp_bytes(void* buf, size_t n)
 {
@@ -148,8 +146,6 @@ template <
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
-requires ((RANDP_NUM_BLOCKS >= 1) &&
-          std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN))
 void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
