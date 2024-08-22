@@ -14,8 +14,8 @@ Inspired by \c arc4random.
 
 #include "aes128_prng.h"
 #include "allocate.h"
-#include "randp-defaults.h"
 #include "nearlydivisionless.h"
+#include "randp-defaults.h"
 
 #include <immintrin.h>
 #include <stddef.h>
