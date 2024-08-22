@@ -6,7 +6,7 @@
 * refer to a terminal), which could be analyzed by PractRand.
 */
 
-#include "../arp.h"
+#include "../randp.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -34,7 +34,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		return 0;
 	}
 
-	void (*func_ptr)(void* buf, size_t n) = arp_bytes;
+	void (*func_ptr)(void* buf, size_t n) = randp_bytes;
 
 	for (int i = 1; i < argc; ++i)
 	{

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-#include "arp.hpp"
+#include "randp.hpp"
 
 // https://github.com/google/benchmark
 
@@ -90,8 +90,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = i;
 			prefix = "rand_buf:" + std::to_string(i) + "B:";
-			benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf, arp_bytes, buf_size);
-			benchmark::RegisterBenchmark(prefix + "arp_bytes_MUTEX", BM_rand_buf, arp_bytes_MUTEX, buf_size);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf, randp_bytes_MUTEX, buf_size);
 		}
 
 		//for (size_t i = 1; i <= 8; ++i)
@@ -99,8 +99,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = 4096 * i;
 			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf, arp_bytes, buf_size);
-			benchmark::RegisterBenchmark(prefix + "arp_bytes_MUTEX", BM_rand_buf, arp_bytes_MUTEX, buf_size);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf, randp_bytes_MUTEX, buf_size);
 		}
 	}
 	else
@@ -109,8 +109,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = i;
 			prefix = "rand_buf:" + std::to_string(i) + "B:";
-			benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf, arp_bytes, buf_size)->Threads(num_threads);
-			benchmark::RegisterBenchmark(prefix + "arp_bytes_MUTEX", BM_rand_buf, arp_bytes_MUTEX, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf, randp_bytes_MUTEX, buf_size)->Threads(num_threads);
 		}
 
 		//for (size_t i = 1; i <= 8; ++i)
@@ -118,8 +118,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		{
 			buf_size = 4096 * i;
 			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			benchmark::RegisterBenchmark(prefix + "arp_bytes", BM_rand_buf, arp_bytes, buf_size)->Threads(num_threads);
-			benchmark::RegisterBenchmark(prefix + "arp_bytes_MUTEX", BM_rand_buf, arp_bytes_MUTEX, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf, randp_bytes_MUTEX, buf_size)->Threads(num_threads);
 		}
 	}
 

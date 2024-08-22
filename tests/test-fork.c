@@ -9,7 +9,7 @@
 * \sa https://wiki.openssl.org/index.php/Random_fork-safety
 */
 
-#include "../arp.h"
+#include "../randp.h"
 
 #include <assert.h>
 #include <stdint.h>
@@ -30,8 +30,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
 	constexpr int max_len_func_name = 10;
 
-	const char* func_name = "arp_u32";
-	uint32_t (*func_ptr)(void) = arp_u32;
+	const char* func_name = "randp_u32";
+	uint32_t (*func_ptr)(void) = randp_u32;
 
 	for (int i = 1; i < argc; ++i)
 	{

@@ -6,7 +6,7 @@
 * hexadecimal) to stdout.
 */
 
-#include "../arp.h"
+#include "../randp.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -29,7 +29,7 @@ mrand48_wrapper(void* buf, size_t n)
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
-	void (*func_ptr)(void* buf, size_t n) = arp_bytes;
+	void (*func_ptr)(void* buf, size_t n) = randp_bytes;
 
 	for (int i = 1; i < argc; ++i)
 	{

@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: OSL-3.0
 
 /**
-* This program calls \c arp_bytes repeatedly for the purpose of being profiled
+* This program calls \c randp_bytes repeatedly for the purpose of being profiled
 * by valgrind.
 */
 
-#include "../arp.h"
+#include "../randp.h"
 #include "valgrind/callgrind.h"
 
 #include <assert.h>
@@ -25,7 +25,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
 	for (int i = 0; i < (1 << 16); ++i)
 	{
-		arp_bytes(buf, buf_size);
+		randp_bytes(buf, buf_size);
 		//arc4random_buf(buf, buf_size);
 	}
 

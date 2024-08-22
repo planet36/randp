@@ -11,7 +11,7 @@ VERSION_SPLIT := $(subst ., , $(VERSION))
 VERSION_MAJOR := $(word 1, $(VERSION_SPLIT))
 VERSION_MINOR := $(word 2, $(VERSION_SPLIT))
 
-LIBNAME := arp
+LIBNAME := randp
 ANAME := lib$(LIBNAME).a
 # "versionless" soname
 SONAME_0 := lib$(LIBNAME).so
