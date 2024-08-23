@@ -6,6 +6,7 @@
 // https://github.com/google/benchmark
 
 #include <benchmark/benchmark.h>
+#include <bit>
 #include <concepts>
 #include <functional>
 
@@ -16,6 +17,10 @@ BM_rand_buf_4GiB(benchmark::State& state,
 	// Perform setup here
 
 	uint8_t buf[1U << 8];
+	static_assert(sizeof(buf) <= 256,
+	              "getentropy will fail if more than 256 bytes are requested");
+	static_assert(
+	    std::has_single_bit(sizeof(buf)), "buffer size must be a power of 2");
 
 	for (auto _ : state)
 	{
