@@ -30,6 +30,25 @@ BM_rand_buf(benchmark::State& state,
 	state.SetBytesProcessed(state.iterations() * buf_size);
 }
 
+void
+BM_rand_buf_4GiB(benchmark::State& state,
+                 const std::function<void(uint8_t*, size_t)>& fn)
+{
+	// Perform setup here
+
+	uint8_t buf[1U << 8];
+
+	for (auto _ : state)
+	{
+		// This code gets timed
+
+		for (size_t i = 0; i < (1UL << 32) / sizeof(buf); ++i)
+		{
+			fn(buf, sizeof(buf));
+		}
+	}
+}
+
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
@@ -102,6 +121,10 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size);
 			benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf, randp_bytes_MUTEX, buf_size);
 		}
+
+		prefix = "rand_buf_4GiB:";
+		benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf_4GiB, randp_bytes)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf_4GiB, randp_bytes_MUTEX)->Unit(benchmark::kMillisecond);
 	}
 	else
 	{
@@ -121,6 +144,10 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size)->Threads(num_threads);
 			benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf, randp_bytes_MUTEX, buf_size)->Threads(num_threads);
 		}
+
+		prefix = "rand_buf_4GiB:";
+		benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_buf_4GiB, randp_bytes_MUTEX)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 	}
 
 	benchmark::RunSpecifiedBenchmarks();
