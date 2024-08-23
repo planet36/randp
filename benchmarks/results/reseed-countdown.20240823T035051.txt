@@ -1,0 +1,60 @@
+2024-08-22T23:54:58-04:00
+Running ./benchmark-reseed-countdown
+Run on (8 X 2419.2 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x8)
+  L1 Instruction 32 KiB (x8)
+  L2 Unified 2048 KiB (x8)
+  L3 Unified 36864 KiB (x8)
+Load Average: 4.11, 2.35, 1.94
+--------------------------------------------------------------------------------------------------
+Benchmark                                                        Time             CPU   Iterations
+--------------------------------------------------------------------------------------------------
+rand_buf_4GiB:randp_bytes<0x10,1U<<12>/threads:7_mean         62.1 ms          417 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<12>/threads:7_median       60.3 ms          401 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<12>/threads:7_stddev       4.07 ms         35.7 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<12>/threads:7_cv           6.55 %          8.55 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<10>/threads:7_mean         59.6 ms          397 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<10>/threads:7_median       59.7 ms          396 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<10>/threads:7_stddev      0.253 ms         2.98 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<10>/threads:7_cv           0.42 %          0.75 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_7>/threads:7_mean         63.5 ms          434 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_7>/threads:7_median       63.2 ms          434 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_7>/threads:7_stddev       1.31 ms         1.26 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_7>/threads:7_cv           2.07 %          0.29 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_9>/threads:7_mean         60.1 ms          407 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_9>/threads:7_median       60.0 ms          405 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_9>/threads:7_stddev      0.623 ms         4.99 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_9>/threads:7_cv           1.04 %          1.23 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<11>/threads:7_mean         58.8 ms          397 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<11>/threads:7_median       58.2 ms          395 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<11>/threads:7_stddev       1.12 ms         4.46 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<11>/threads:7_cv           1.91 %          1.12 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_6>/threads:7_mean         69.9 ms          475 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_6>/threads:7_median       70.2 ms          478 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_6>/threads:7_stddev       1.00 ms         5.60 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_6>/threads:7_cv           1.43 %          1.18 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_4>/threads:7_mean          102 ms          709 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_4>/threads:7_median        102 ms          710 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_4>/threads:7_stddev      0.499 ms         3.63 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_4>/threads:7_cv           0.49 %          0.51 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<13>/threads:7_mean         58.4 ms          398 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<13>/threads:7_median       58.4 ms          398 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<13>/threads:7_stddev       1.57 ms         2.11 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<13>/threads:7_cv           2.69 %          0.53 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<15>/threads:7_mean         57.6 ms          397 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<15>/threads:7_median       57.8 ms          396 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<15>/threads:7_stddev      0.775 ms         5.98 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<15>/threads:7_cv           1.35 %          1.51 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_5>/threads:7_mean         80.4 ms          554 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_5>/threads:7_median       80.9 ms          552 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_5>/threads:7_stddev       1.16 ms         6.69 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_5>/threads:7_cv           1.45 %          1.21 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_8>/threads:7_mean         61.5 ms          416 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_8>/threads:7_median       62.1 ms          414 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_8>/threads:7_stddev       1.09 ms         3.81 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<_8>/threads:7_cv           1.78 %          0.92 %             3
+rand_buf_4GiB:randp_bytes<0x10,1U<<14>/threads:7_mean         59.1 ms          405 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<14>/threads:7_median       58.4 ms          396 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<14>/threads:7_stddev       2.78 ms         18.1 ms            3
+rand_buf_4GiB:randp_bytes<0x10,1U<<14>/threads:7_cv           4.70 %          4.46 %             3
