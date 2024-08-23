@@ -63,7 +63,7 @@ aes128_prng_reseed(aes128_prng* this_)
 }
 
 /// Get the next PRNG output via AES encryption.
-static __m128i
+static inline __m128i
 aes128_prng_enc_next(aes128_prng* this_)
 {
 	const __m128i dst = aes128_enc(this_->x, this_->keys, AES128_PRNG_NUM_KEYS,
@@ -73,7 +73,7 @@ aes128_prng_enc_next(aes128_prng* this_)
 }
 
 /// Get the next PRNG output via AES decryption.
-static __m128i
+static inline __m128i
 aes128_prng_dec_next(aes128_prng* this_)
 {
 	const __m128i dst = aes128_dec(this_->x, this_->keys, AES128_PRNG_NUM_KEYS,
