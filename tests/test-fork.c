@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: OSL-3.0
 
 /**
-* This program will initialize a pool of random data, then fork itself.
+* This program will initialize a pool of random bytes, then fork itself.
 * After the fork, the parent and child processes will print a random number.
 * The two numbers will be different, proving that the random number generator
 * is fork-safe.
@@ -54,7 +54,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		}
 	}
 
-	// allocate/initialize pools of random data before fork
+	// allocate/initialize before fork
 	(void)func_ptr();
 
 	const pid_t child_pid = fork();
