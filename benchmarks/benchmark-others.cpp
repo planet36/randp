@@ -107,8 +107,8 @@ BM_rand_lt_one(benchmark::State& state, const std::function<T(const T)>& fn)
 {
 	// Perform setup here
 
-	// a reasonable upper bound
-	constexpr unsigned int upper_bound = 0x100000;
+	// a perfectly cromulent upper bound
+	constexpr unsigned int upper_bound = 0xa5a5; // should not be power of 2
 
 	for (auto _ : state)
 	{
@@ -124,21 +124,21 @@ BM_rand_lt_many(benchmark::State& state, const std::function<T(const T)>& fn)
 {
 	// Perform setup here
 
-	// a reasonable maximum bound
-	constexpr unsigned int max_bound = 0x100000;
+	// a perfectly cromulent maximum upper bound
+	constexpr unsigned int max_upper_bound = 0x100000;
 
 	for (auto _ : state)
 	{
 		// This code gets timed
 
-		// Do not test s = 0
-		for (T s = 1; s <= max_bound; ++s)
+		// Do not test upper_bound = 0
+		for (T upper_bound = 1; upper_bound <= max_upper_bound; ++upper_bound)
 		{
-			benchmark::DoNotOptimize(fn(s));
+			benchmark::DoNotOptimize(fn(upper_bound));
 		}
 	}
 
-	state.SetItemsProcessed(state.iterations() * max_bound);
+	state.SetItemsProcessed(state.iterations() * max_upper_bound);
 }
 
 void
