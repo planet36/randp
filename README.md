@@ -102,6 +102,49 @@ randp passes PractRand tests through 512 GiB with these exhaustive options: <q>-
 
 It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) and [diehard](https://en.wikipedia.org/wiki/Diehard_tests).
 
+## Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
+
+No claims are made that it is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).
+
+<blockquote>
+To prove that a random number generator (RNG) is cryptographically secure, it must meet several stringent criteria and undergo rigorous testing. Here's an overview of the key aspects involved in proving cryptographic security for an RNG:
+
+1. **Unpredictability**
+   - **Next-bit unpredictability:** Given the first _k_ bits of a random sequence, it should be computationally infeasible to predict the _k_+1-th bit with any significant advantage over random guessing (which would be 50% for a single bit).
+   - **Forward and backward security:** Even if part of the state or some outputs are compromised, the RNG should still be secure. This means that past outputs can't be reconstructed (backward security) and future outputs can't be predicted (forward security).
+
+2. **Statistical Randomness Tests**
+   - The output of the RNG must pass a battery of statistical tests that measure the randomness of the sequence. Common tests include the NIST Statistical Test Suite, Diehard tests, and TestU01.
+   - While these tests don't prove cryptographic security, they help ensure the output appears random, which is a necessary condition.
+
+3. **Entropy Source**
+   - A cryptographically secure RNG must be based on a source of true entropy. This could be physical processes (like thermal noise or radioactive decay) or carefully designed algorithms that maintain high entropy.
+   - The entropy must be unpredictable and cannot be influenced or predicted by an attacker.
+
+4. **Resilience to Attacks**
+   - **Mathematical Proofs:** The design of the RNG should ideally be accompanied by mathematical proofs demonstrating that it is resistant to known cryptographic attacks, such as linear or differential cryptanalysis.
+   - **Seed Security:** The seed used to initialize the RNG must be secure. If the seed is predictable, the entire RNG is compromised.
+
+5. **Cryptographic Algorithms**
+   - The RNG should utilize cryptographic primitives like block ciphers (e.g., AES), cryptographic hash functions (e.g., SHA-2), or stream ciphers that are proven secure under standard assumptions (e.g., security of AES against known attacks).
+   - The design should avoid known weaknesses such as bias in output or correlations between bits.
+
+6. **Security Proofs**
+   - A formal security proof can provide strong evidence of cryptographic security. This proof would typically show that breaking the RNG's security is as hard as solving a known difficult problem (e.g., factoring large integers or solving discrete logarithms), which is assumed to be infeasible within polynomial time for large instances.
+
+7. **Independent Verification**
+   - The RNG should undergo independent security analysis and audits by third parties. This is to ensure that there are no hidden flaws or vulnerabilities that were overlooked by the original designers.
+
+8. **Compliance with Standards**
+   - The RNG should comply with established cryptographic standards like those provided by NIST (e.g., NIST SP 800-90A/B/C) or other recognized bodies. These standards provide guidelines for the design, testing, and validation of cryptographically secure RNGs.
+
+**Summary**
+
+Proving that an RNG is cryptographically secure involves demonstrating that it is unpredictable, passes statistical tests, has a high-entropy source, is resilient to attacks, and follows cryptographic principles backed by security proofs. It should also undergo independent verification and comply with relevant standards.
+</blockquote>
+
+&mdash; <cite>ChatGPT (GPT-4o)</cite>. <q>How Can a Random Number Generator Be Proven to Be Cryptographically Secure?</q> *OpenAI*, 2024-08-28.
+
 ## License
 
 [The Open Software License 3.0](https://opensource.org/license/osl-3-0-php) (OSL-3.0)
