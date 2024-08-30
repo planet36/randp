@@ -57,10 +57,10 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 	openssl rand max | RNG_test stdin -tf 2 -te 1 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
 
 run-rngtest: test-dump | $(OUTPUT_DIR)
-	./$<             | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.randp.$(DATETIME).txt
-	./$< arc4random  | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
-	./$< mrand48     | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.mrand48.$(DATETIME).txt
-	openssl rand max | rngtest -c 500000 |& tee $(OUTPUT_DIR)/rngtest.openssl-rand.$(DATETIME).txt
+	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.randp.$(DATETIME).txt
+	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
+	./$< mrand48     | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.mrand48.$(DATETIME).txt
+	openssl rand max | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.openssl-rand.$(DATETIME).txt
 
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
