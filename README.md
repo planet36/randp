@@ -87,11 +87,11 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 ### To run the tests
 
 * Glibc 2.36
-* RNG_test from [PractRand](https://github.com/planet36/PractRand)
+* `RNG_test` from [PractRand](https://github.com/planet36/PractRand)
   * This is a _very_ lengthy test, taking about 1 hour for each test run!  To make it quicker (yet less thorough), reduce the values of the `-tf`, `-te`, and `-tlmax` options to `RNG_test`.
 * [Valgrind](https://valgrind.org/)
   * [KCachegrind](https://apps.kde.org/kcachegrind/) or QCachegrind to view the output
-* rngtest from [rng-tools](https://github.com/nhorman/rng-tools)
+* `rngtest` from [rng-tools](https://github.com/nhorman/rng-tools)
 * [openssl-rand](https://docs.openssl.org/master/man1/openssl-rand/)
 
 ## Tests
@@ -100,11 +100,11 @@ randp is fork-safe, just like arc4random.
 
 randp passes PractRand tests through 512 GiB with these exhaustive options: <q>-tf 2</q>, <q>-te 1</q>.  And it scores a similar number of FIPS 140-2 successes and failures as arc4random and openssl-rand.
 
-It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) and [diehard](https://en.wikipedia.org/wiki/Diehard_tests).
+It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or [diehard](https://en.wikipedia.org/wiki/Diehard_tests).
 
 ## Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
 
-No claims are made that it is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).
+No claims are made that it is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).  It meets several of the following criteria of a CSPRNG.
 
 <blockquote>
 To prove that a random number generator (RNG) is cryptographically secure, it must meet several stringent criteria and undergo rigorous testing. Here's an overview of the key aspects involved in proving cryptographic security for an RNG:
