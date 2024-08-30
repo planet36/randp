@@ -87,8 +87,8 @@ template <
 void
 randp_bytes(void* buf, size_t n)
 {
-	static thread_local randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>* this_ =
-	    nullptr;
+	static thread_local randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN,
+	                          enc, Nk, Nr>* this_ = nullptr;
 
 	// The whole struct must fit in one page.
 	static_assert(sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
@@ -150,7 +150,8 @@ void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
 	// Intentionally not thread_local
-	static randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>* this_ = nullptr;
+	static randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN,
+	             enc, Nk, Nr>* this_ = nullptr;
 
 	// The whole struct must fit in one page.
 	static_assert(sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
