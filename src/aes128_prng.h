@@ -39,8 +39,8 @@ static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
 /// A PRNG that uses AES instructions
 struct aes128_prng
 {
-	__m128i x;
-	__m128i c; // must be odd
+	__m128i x; ///< The state/counter
+	__m128i c; ///< The increment (must be odd)
 	__m128i keys[AES128_PRNG_NUM_KEYS];
 };
 
