@@ -44,7 +44,8 @@ struct randp
 {
 	static_assert(RANDP_NUM_BLOCKS >= 1);
 	static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN));
-	static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
+	static constexpr size_t RANDP_NUM_BYTES =
+	    RANDP_NUM_BLOCKS * sizeof(__m128i);
 	aes128_prng<enc, Nk, Nr> prng;
 	size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
 	size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
@@ -91,8 +92,9 @@ randp_bytes(void* buf, size_t n)
 	                          enc, Nk, Nr>* this_ = nullptr;
 
 	// The whole struct must fit in one page.
-	static_assert(sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
-	              PAGE_SIZE);
+	static_assert(
+	    sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
+	    PAGE_SIZE);
 
 	if (this_ == nullptr)
 #ifdef __cplusplus
@@ -150,12 +152,13 @@ void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
 	// Intentionally not thread_local
-	static randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN,
-	             enc, Nk, Nr>* this_ = nullptr;
+	static randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>*
+	    this_ = nullptr;
 
 	// The whole struct must fit in one page.
-	static_assert(sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
-	              PAGE_SIZE);
+	static_assert(
+	    sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
+	    PAGE_SIZE);
 
 	(void)pthread_mutex_lock(&randp_mtx);
 
