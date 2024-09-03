@@ -88,13 +88,11 @@ template <
 void
 randp_bytes(void* buf, size_t n)
 {
-	static thread_local randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN,
-	                          enc, Nk, Nr>* this_ = nullptr;
+	using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
 
-	// The whole struct must fit in one page.
-	static_assert(
-	    sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
-	    PAGE_SIZE);
+	static thread_local randp_t* this_ = nullptr;
+
+	static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
 	if (this_ == nullptr)
 #ifdef __cplusplus
@@ -151,14 +149,12 @@ template <
 void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
-	// Intentionally not thread_local
-	static randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>*
-	    this_ = nullptr;
+	using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
 
-	// The whole struct must fit in one page.
-	static_assert(
-	    sizeof(randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>) <=
-	    PAGE_SIZE);
+	// Intentionally not thread_local
+	static randp_t* this_ = nullptr;
+
+	static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
 	(void)pthread_mutex_lock(&randp_mtx);
 
