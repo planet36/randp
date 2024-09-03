@@ -39,29 +39,29 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 #### Fill a buffer with random bytes
 
-| Function | Median time to generate 4 GiB |
-|---|---:|
-| `randp_bytes`    |  359  ms |
-| `getentropy`     | 7569  ms |
-| `arc4random_buf` | 7606  ms |
+| Function | Median time to generate 4 GiB | |
+|---|---:|---|
+| `randp_bytes`    |  359  ms | 21&times; faster |
+| `getentropy`     | 7569  ms | |
+| `arc4random_buf` | 7606  ms | |
 
 #### Get a uniform random `uint32_t`
 
-| Function | Median time per call |
-|---|---:|
-| `randp_u32`  | 5.54  ns |
-| `arc4random` |  167  ns |
-| `rdrand32`   |  287  ns |
-| `rdseed32`   | 1804  ns |
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_u32`  | 5.54  ns | 30&times; faster |
+| `arc4random` |  167  ns | |
+| `rdrand32`   |  287  ns | |
+| `rdseed32`   | 1804  ns | |
 
 Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32_step`, respectively.
 
 #### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
 
-| Function | Median calls per second |
-|---|---:|
-| `randp_lt_u32`       | 183.058M/s |
-| `arc4random_uniform` | 4.38161M/s |
+| Function | Median calls per second | |
+|---|---:|---|
+| `randp_lt_u32`       | 183.058M/s | 41&times; more |
+| `arc4random_uniform` | 4.38161M/s | |
 
 ## Dependencies
 
