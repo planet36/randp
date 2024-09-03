@@ -88,7 +88,8 @@ template <
 void
 randp_bytes(void* buf, size_t n)
 {
-	using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
+	using randp_t =
+	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
 
 	static thread_local randp_t* this_ = nullptr;
 
@@ -155,7 +156,8 @@ template <
 void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
-	using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
+	using randp_t =
+	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
 
 	// Intentionally not thread_local
 	static randp_t* this_ = nullptr;
