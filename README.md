@@ -22,12 +22,14 @@ Upon first use, the pseudorandom number generator (PRNG) is initialized/seeded b
 
 As bytes are retrieved from the pool, they are zeroized.  After a certain number of bytes has been read, the PRNG is reseeded, and the pool is filled again with random bytes.  See [src/randp.c](src/randp.c) for details.
 
-## Benchmark results (2024-08-27)
+## Benchmark Results
 
 > [!NOTE]
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
 
-### System Info
+### 2024-08-27
+
+#### System Info
 
 - Linux 6.10.6-arch1-1 x86_64
 - 13th Gen Intel(R) Core(TM) i9-13950HX
@@ -35,7 +37,7 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 - gcc (GCC) 14.2.1 20240805
 - librandp.so.4.0
 
-### Fill a buffer with random bytes
+#### Fill a buffer with random bytes
 
 | Function | Median time to generate 4 GiB |
 |---|---:|
@@ -43,7 +45,7 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 | `getentropy`     | 7569  ms |
 | `arc4random_buf` | 7606  ms |
 
-### Get a uniform random `uint32_t`
+#### Get a uniform random `uint32_t`
 
 | Function | Median time per call |
 |---|---:|
@@ -54,7 +56,7 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32_step`, respectively.
 
-### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
+#### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
 
 | Function | Median calls per second |
 |---|---:|
