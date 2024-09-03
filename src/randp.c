@@ -64,6 +64,12 @@ struct randp
 
 typedef struct randp randp;
 
+static_assert(alignof(randp) == sizeof(__m128i),
+              "randp must have alignment of __m128i");
+
+static_assert(offsetof(randp, pool) % sizeof(__m128i) == 0,
+              "randp pool must start on 16-byte boundary");
+
 static_assert(sizeof(randp) <= PAGE_SIZE, "randp must fit in one page");
 
 static thread_local randp* this_ = nullptr;

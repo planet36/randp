@@ -92,6 +92,12 @@ randp_bytes(void* buf, size_t n)
 
 	static thread_local randp_t* this_ = nullptr;
 
+	static_assert(alignof(randp_t) == sizeof(__m128i),
+	              "randp must have alignment of __m128i");
+
+	static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
+	              "randp pool must start on 16-byte boundary");
+
 	static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
 	if (this_ == nullptr)
@@ -153,6 +159,12 @@ randp_bytes_MUTEX(void* buf, size_t n)
 
 	// Intentionally not thread_local
 	static randp_t* this_ = nullptr;
+
+	static_assert(alignof(randp_t) == sizeof(__m128i),
+	              "randp must have alignment of __m128i");
+
+	static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
+	              "randp pool must start on 16-byte boundary");
 
 	static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
