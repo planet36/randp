@@ -24,6 +24,9 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 ## Benchmark results (2024-08-27)
 
+> [!NOTE]
+> The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
+
 ### System Info
 
 - Linux 6.10.6-arch1-1 x86_64
@@ -57,9 +60,6 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 |---|---:|
 | `randp_lt_u32`       | 183.058M/s |
 | `arc4random_uniform` | 4.38161M/s |
-
-> [!NOTE]
-> The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
 
 ## Dependencies
 
