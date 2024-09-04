@@ -167,7 +167,7 @@ It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or 
 
 ## Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
 
-No claims are made that it is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).  It meets several of the following criteria of a CSPRNG.
+No claims are made that randp is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).  Of the following critera of a CSPRNG, it hasn't satisfied numbers 6, 7, or 8.
 
 <blockquote>
 To prove that a random number generator (RNG) is cryptographically secure, it must meet several stringent criteria and undergo rigorous testing. Here's an overview of the key aspects involved in proving cryptographic security for an RNG:
