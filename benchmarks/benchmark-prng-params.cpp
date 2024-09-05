@@ -118,6 +118,16 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,3,7>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 3, 7>)->Unit(benchmark::kMillisecond);
 		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,3,8>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 3, 8>)->Unit(benchmark::kMillisecond);
 		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,3,9>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 3, 9>)->Unit(benchmark::kMillisecond);
+
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,1>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 1>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,2>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 2>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,3>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 3>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,4>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 4>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,5>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 5>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,6>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 6>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,7>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 7>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,8>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 8>)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,9>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 9>)->Unit(benchmark::kMillisecond);
 	}
 	else
 	{
@@ -151,6 +161,16 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,3,7>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 3, 7>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,3,8>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 3, 8>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,3,9>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 3, 9>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,1>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 1>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,2>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 2>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,3>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 3>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,4>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 4>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,5>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 5>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,6>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 6>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,7>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 7>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,8>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 8>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes<def,def,enc,4,9>", BM_rand_buf_4GiB, randp_bytes<DEFAULT_RANDP_NUM_BLOCKS, DEFAULT_RANDP_RESEED_COUNTDOWN_MIN, true, 4, 9>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 	}
 
 	benchmark::RunSpecifiedBenchmarks();
