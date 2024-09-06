@@ -68,31 +68,27 @@ aes128_dec(__m128i a,
 /// Davies-Meyer single-block-length compression function that uses AES as the block cipher
 /**
 \sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
-\pre \a Nr must be at least \c 1.
 \param H the previous hash value
 \param m the block of the message
-\param Nr the number of rounds of encryption to perform
 \return the next hash value
 */
 static inline __m128i
-aes128_enc_davies_meyer(const __m128i H, const __m128i m, const unsigned int Nr)
+aes128_enc_davies_meyer(const __m128i H, const __m128i m)
 {
-	return _mm_xor_si128(H, aes128_enc(H, &m, 1, Nr));
+	return _mm_xor_si128(H, _mm_aesenc_si128(H, m));
 }
 
 /// Davies-Meyer single-block-length compression function that uses AES as the block cipher
 /**
 \sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
-\pre \a Nr must be at least \c 1.
 \param H the previous hash value
 \param m the block of the message
-\param Nr the number of rounds of decryption to perform
 \return the next hash value
 */
 static inline __m128i
-aes128_dec_davies_meyer(const __m128i H, const __m128i m, const unsigned int Nr)
+aes128_dec_davies_meyer(const __m128i H, const __m128i m)
 {
-	return _mm_xor_si128(H, aes128_dec(H, &m, 1, Nr));
+	return _mm_xor_si128(H, _mm_aesdec_si128(H, m));
 }
 
 /// Make the packed unsigned 8-bit integers odd.
