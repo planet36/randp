@@ -31,8 +31,8 @@ struct aes128_prng
 	              "must do at least 2 rounds of AES enc/dec");
 
 private:
-	__m128i x;
-	__m128i c; // must be odd
+	__m128i ctr;
+	__m128i inc; // must be odd
 	__m128i keys[AES128_PRNG_NUM_KEYS];
 
 public:
@@ -46,13 +46,13 @@ public:
 	/// Assign random bytes to the data members via \c getentropy.
 	/**
 	* Every odd integer is coprime with every power of 2.
-	* Therefore, \c c shall be made odd.
+	* Therefore, \c inc shall be made odd.
 	*/
 	void reseed()
 	{
 		if (getentropy(this, sizeof(*this)) < 0)
 			err(EXIT_FAILURE, "getentropy");
-		this->c = mm_make_odd_epu64(this->c);
+		this->inc = mm_make_odd_epu64(this->inc);
 	}
 
 	/// Get the next PRNG output via AES encryption.
@@ -60,12 +60,12 @@ public:
 	{
 		__m128i dst;
 		if constexpr (enc)
-			dst = aes128_enc(this->x, this->keys, AES128_PRNG_NUM_KEYS,
+			dst = aes128_enc(this->ctr, this->keys, AES128_PRNG_NUM_KEYS,
 			                 AES128_PRNG_NUM_ROUNDS_PER_KEY);
 		else
-			dst = aes128_dec(this->x, this->keys, AES128_PRNG_NUM_KEYS,
+			dst = aes128_dec(this->ctr, this->keys, AES128_PRNG_NUM_KEYS,
 			                 AES128_PRNG_NUM_ROUNDS_PER_KEY);
-		this->x = _mm_add_epi64(this->x, this->c);
+		this->ctr = _mm_add_epi64(this->ctr, this->inc);
 		return dst;
 	}
 };

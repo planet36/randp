@@ -39,8 +39,8 @@ static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
 /// A PRNG that uses AES instructions
 struct aes128_prng
 {
-	__m128i x; ///< The state/counter
-	__m128i c; ///< The increment (must be odd)
+	__m128i ctr; ///< The state/counter
+	__m128i inc; ///< The increment (must be odd)
 	__m128i keys[AES128_PRNG_NUM_KEYS];
 };
 
@@ -52,23 +52,23 @@ static_assert(sizeof(aes128_prng) <= 256,
 /// Assign random bytes to the data members via \c getentropy.
 /**
 * Every odd integer is coprime with every power of 2.
-* Therefore, \c c shall be made odd.
+* Therefore, \c inc shall be made odd.
 */
 static void
 aes128_prng_reseed(aes128_prng* this_)
 {
 	if (getentropy(this_, sizeof(*this_)) < 0)
 		err(EXIT_FAILURE, "getentropy");
-	this_->c = mm_make_odd_epu64(this_->c);
+	this_->inc = mm_make_odd_epu64(this_->inc);
 }
 
 /// Get the next PRNG output via AES encryption.
 static inline __m128i
 aes128_prng_enc_next(aes128_prng* this_)
 {
-	const __m128i dst = aes128_enc(this_->x, this_->keys, AES128_PRNG_NUM_KEYS,
+	const __m128i dst = aes128_enc(this_->ctr, this_->keys, AES128_PRNG_NUM_KEYS,
 	                               AES128_PRNG_NUM_ROUNDS_PER_KEY);
-	this_->x = _mm_add_epi64(this_->x, this_->c);
+	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
 	return dst;
 }
 
@@ -76,9 +76,9 @@ aes128_prng_enc_next(aes128_prng* this_)
 static inline __m128i
 aes128_prng_dec_next(aes128_prng* this_)
 {
-	const __m128i dst = aes128_dec(this_->x, this_->keys, AES128_PRNG_NUM_KEYS,
+	const __m128i dst = aes128_dec(this_->ctr, this_->keys, AES128_PRNG_NUM_KEYS,
 	                               AES128_PRNG_NUM_ROUNDS_PER_KEY);
-	this_->x = _mm_add_epi64(this_->x, this_->c);
+	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
 	return dst;
 }
 
