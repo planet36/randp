@@ -24,7 +24,7 @@ extern "C" {
 \param Nk the number of \a keys
 \param Nr the number of rounds of encryption to perform for each key
 */
-static __m128i
+static inline __m128i
 aes128_enc(__m128i a,
            const __m128i* keys,
            const unsigned int Nk,
@@ -49,7 +49,7 @@ aes128_enc(__m128i a,
 \param Nk the number of \a keys
 \param Nr the number of rounds of decryption to perform for each key
 */
-static __m128i
+static inline __m128i
 aes128_dec(__m128i a,
            const __m128i* keys,
            const unsigned int Nk,
