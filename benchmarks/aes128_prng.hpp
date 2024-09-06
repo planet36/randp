@@ -31,9 +31,9 @@ struct aes128_prng
 	              "must do at least 2 rounds of AES enc/dec");
 
 private:
+	__m128i keys[AES128_PRNG_NUM_KEYS];
 	__m128i ctr;
 	__m128i inc; // must be odd
-	__m128i keys[AES128_PRNG_NUM_KEYS];
 
 public:
 	aes128_prng()
