@@ -85,6 +85,9 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 > [!NOTE]
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
 
+> [!NOTE]
+> librandp.a is statically linked with the executables in the benchmarks folder.
+
 ### 2024-08-27
 
 #### System Info
@@ -158,6 +161,9 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 * [openssl-rand](https://docs.openssl.org/master/man1/openssl-rand/)
 
 ## Tests
+
+> [!NOTE]
+> librandp.so is dynamically linked with the executables in the tests folder.
 
 randp is fork-safe, just like arc4random.
 
