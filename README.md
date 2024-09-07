@@ -1,6 +1,6 @@
-# LibRandomPool (randp)
+# AES-CTR Random Pool (randp)
 
-LibRandomPool (also known as <q>randp</q>) is a C library, designed for modern Linux systems, with functions that give pseudorandom numbers.  It was inspired by [arc4random](https://en.wikipedia.org/wiki/RC4#RC4-based_random_number_generators), and it mimics its functionality.
+AES-CTR Random Pool (also known as <q>randp</q>) is a C library, designed for modern Linux systems, with functions that give pseudorandom numbers.  It was inspired by [arc4random](https://en.wikipedia.org/wiki/RC4#RC4-based_random_number_generators), and it mimics its functionality.
 
 ## API
 

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-/// Default values for LibRandomPool (randp)
+/// Default values for AES-CTR Random Pool (randp)
 /**
 \file
 \author Steven Ward

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-/// LibRandomPool (randp) (This C++ implementation is used only for benchmarking.)
+/// AES-CTR Random Pool (randp) (This C++ implementation is used only for benchmarking.)
 /**
 \file
 \author Steven Ward
