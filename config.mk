@@ -41,11 +41,11 @@ CPPFLAGS += -D_DEFAULT_SOURCE
 
 CFLAGS = -std=c23
 CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CFLAGS += -O2 -flto=auto -maes
+CFLAGS += -O3 -flto=auto -maes
 
 CXXFLAGS = -std=c++23
 CXXFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CXXFLAGS += -O2 -flto=auto -maes
+CXXFLAGS += -O3 -flto=auto -maes
 
 #LDFLAGS +=
 
