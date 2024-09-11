@@ -31,6 +31,10 @@ DEPS = $(addsuffix .d,$(basename $(SRCS)))
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
 BINS = $(basename $(SRCS))
 
+# clang, clang++ not supported
+CC = gcc
+CXX = g++
+
 CPPFLAGS = -MMD -MP
 # _DEFAULT_SOURCE needed for getentropy, arc4random
 CPPFLAGS += -D_DEFAULT_SOURCE
