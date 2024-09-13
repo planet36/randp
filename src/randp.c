@@ -89,7 +89,7 @@ randp_regen()
 
 	for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
 	{
-		blocks[i] = aes128_prng_enc_next(&this_->prng);
+		blocks[i] = aes128_prng_enc_davies_meyer_next(&this_->prng);
 	}
 
 	this_->rand_bytes_remaining = RANDP_NUM_BYTES;
