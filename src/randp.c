@@ -29,6 +29,14 @@ extern "C" {
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
+#if !defined(RANDP_USE_ENC)
+#define RANDP_USE_ENC DEFAULT_RANDP_USE_ENC
+#endif
+
+#if !defined(RANDP_USE_DAVIES_MEYER)
+#define RANDP_USE_DAVIES_MEYER DEFAULT_RANDP_USE_DAVIES_MEYER
+#endif
+
 /// How many blocks compose the pool of random bytes
 /**
 * The size of each block is \c sizeof(__m128i) (i.e. \c 16).
@@ -89,7 +97,20 @@ randp_regen()
 
 	for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
 	{
-		blocks[i] = aes128_prng_enc_davies_meyer_next(&this_->prng);
+		if (RANDP_USE_ENC)
+		{
+			if (RANDP_USE_DAVIES_MEYER)
+				blocks[i] = aes128_prng_enc_davies_meyer_next(&this_->prng);
+			else
+				blocks[i] = aes128_prng_enc_next(&this_->prng);
+		}
+		else
+		{
+			if (RANDP_USE_DAVIES_MEYER)
+				blocks[i] = aes128_prng_dec_davies_meyer_next(&this_->prng);
+			else
+				blocks[i] = aes128_prng_dec_next(&this_->prng);
+		}
 	}
 
 	this_->rand_bytes_remaining = RANDP_NUM_BYTES;

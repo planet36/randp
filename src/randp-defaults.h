@@ -9,6 +9,10 @@
 
 #pragma once
 
+#define DEFAULT_RANDP_USE_ENC true
+
+#define DEFAULT_RANDP_USE_DAVIES_MEYER true
+
 #define DEFAULT_RANDP_NUM_BLOCKS 0x10
 
 #define DEFAULT_RANDP_RESEED_COUNTDOWN_MIN (1 << 8)
