@@ -36,6 +36,7 @@ template <
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ aes128_prng params
     bool enc = true,
+    bool dm = true,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
@@ -46,7 +47,7 @@ struct randp
 	static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN));
 	static constexpr size_t RANDP_NUM_BYTES =
 	    RANDP_NUM_BLOCKS * sizeof(__m128i);
-	aes128_prng<enc, Nk, Nr> prng;
+	aes128_prng<enc, dm, Nk, Nr> prng;
 	size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
 	size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
 	uint8_t pool[RANDP_NUM_BYTES];
@@ -81,6 +82,7 @@ template <
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ aes128_prng params
     bool enc = true,
+    bool dm = true,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
@@ -89,7 +91,7 @@ void
 randp_bytes(void* buf, size_t n)
 {
 	using randp_t =
-	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
+	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
 	static thread_local randp_t* this_ = nullptr;
 
@@ -149,6 +151,7 @@ template <
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ aes128_prng params
     bool enc = true,
+    bool dm = true,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
@@ -157,7 +160,7 @@ void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
 	using randp_t =
-	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, Nk, Nr>;
+	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
 	// Intentionally not thread_local
 	static randp_t* this_ = nullptr;

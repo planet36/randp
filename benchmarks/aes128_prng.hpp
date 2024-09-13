@@ -20,7 +20,7 @@ The raison d'etre of this class is to test
 #include <unistd.h>
 
 /// A PRNG that uses AES instructions
-template <bool enc,
+template <bool enc, bool dm,
           size_t AES128_PRNG_NUM_KEYS,
           size_t AES128_PRNG_NUM_ROUNDS_PER_KEY>
 struct aes128_prng
@@ -61,15 +61,25 @@ public:
 		__m128i dst;
 		if constexpr (enc)
 		{
-			dst = aes128_enc_davies_meyer(this->ctr, this->keys,
-			                              AES128_PRNG_NUM_KEYS,
-			                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
+			if constexpr (dm)
+				dst = aes128_enc_davies_meyer(this->ctr, this->keys,
+				                              AES128_PRNG_NUM_KEYS,
+				                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
+			else
+				dst = aes128_enc(this->ctr, this->keys,
+				                 AES128_PRNG_NUM_KEYS,
+				                 AES128_PRNG_NUM_ROUNDS_PER_KEY);
 		}
 		else
 		{
-			dst = aes128_dec_davies_meyer(this->ctr, this->keys,
-			                              AES128_PRNG_NUM_KEYS,
-			                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
+			if constexpr (dm)
+				dst = aes128_dec_davies_meyer(this->ctr, this->keys,
+				                              AES128_PRNG_NUM_KEYS,
+				                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
+			else
+				dst = aes128_dec(this->ctr, this->keys,
+				                 AES128_PRNG_NUM_KEYS,
+				                 AES128_PRNG_NUM_ROUNDS_PER_KEY);
 		}
 		this->ctr = _mm_add_epi64(this->ctr, this->inc);
 		return dst;
