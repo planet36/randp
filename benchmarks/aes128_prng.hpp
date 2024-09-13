@@ -58,26 +58,18 @@ public:
 	/// Get the next PRNG output via AES encryption.
 	__m128i next()
 	{
-		__m128i dst = this->ctr;
+		__m128i dst;
 		if constexpr (enc)
 		{
-			for (unsigned int k = 0; k < AES128_PRNG_NUM_KEYS; ++k)
-			{
-				for (unsigned int r = 0; r < AES128_PRNG_NUM_ROUNDS_PER_KEY; ++r)
-				{
-					dst = aes128_enc_davies_meyer(dst, this->keys[k]);
-				}
-			}
+			dst = aes128_enc_davies_meyer(this->ctr, this->keys,
+			                              AES128_PRNG_NUM_KEYS,
+			                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
 		}
 		else
 		{
-			for (unsigned int k = 0; k < AES128_PRNG_NUM_KEYS; ++k)
-			{
-				for (unsigned int r = 0; r < AES128_PRNG_NUM_ROUNDS_PER_KEY; ++r)
-				{
-					dst = aes128_dec_davies_meyer(dst, this->keys[k]);
-				}
-			}
+			dst = aes128_dec_davies_meyer(this->ctr, this->keys,
+			                              AES128_PRNG_NUM_KEYS,
+			                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
 		}
 		this->ctr = _mm_add_epi64(this->ctr, this->inc);
 		return dst;

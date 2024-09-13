@@ -66,14 +66,9 @@ aes128_prng_reseed(aes128_prng* this_)
 static inline __m128i
 aes128_prng_enc_next(aes128_prng* this_)
 {
-	__m128i dst = this_->ctr;
-	for (unsigned int k = 0; k < AES128_PRNG_NUM_KEYS; ++k)
-	{
-		for (unsigned int r = 0; r < AES128_PRNG_NUM_ROUNDS_PER_KEY; ++r)
-		{
-			dst = aes128_enc_davies_meyer(dst, this_->keys[k]);
-		}
-	}
+	const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
+	                                            AES128_PRNG_NUM_KEYS,
+	                                            AES128_PRNG_NUM_ROUNDS_PER_KEY);
 	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
 	return dst;
 }
@@ -82,14 +77,9 @@ aes128_prng_enc_next(aes128_prng* this_)
 static inline __m128i
 aes128_prng_dec_next(aes128_prng* this_)
 {
-	__m128i dst = this_->ctr;
-	for (unsigned int k = 0; k < AES128_PRNG_NUM_KEYS; ++k)
-	{
-		for (unsigned int r = 0; r < AES128_PRNG_NUM_ROUNDS_PER_KEY; ++r)
-		{
-			dst = aes128_dec_davies_meyer(dst, this_->keys[k]);
-		}
-	}
+	const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
+	                                            AES128_PRNG_NUM_KEYS,
+	                                            AES128_PRNG_NUM_ROUNDS_PER_KEY);
 	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
 	return dst;
 }
