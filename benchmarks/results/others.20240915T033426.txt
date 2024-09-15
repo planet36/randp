@@ -1,0 +1,200 @@
+2024-09-14T23:35:51-04:00
+Running ./benchmark-others
+Run on (8 X 2419.2 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x8)
+  L1 Instruction 32 KiB (x8)
+  L2 Unified 2048 KiB (x8)
+  L3 Unified 36864 KiB (x8)
+Load Average: 4.10, 1.25, 0.44
+-----------------------------------------------------------------------------------------------------
+Benchmark                                           Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------------------
+rand_buf:1B:getentropy_mean                       170 ns          169 ns            3 bytes_per_second=5.63743Mi/s
+rand_buf:1B:getentropy_median                     166 ns          165 ns            3 bytes_per_second=5.77446Mi/s
+rand_buf:1B:getentropy_stddev                    7.95 ns         7.93 ns            3 bytes_per_second=263.293Ki/s
+rand_buf:1B:getentropy_cv                        4.68 %          4.68 %             3 bytes_per_second=4.56%
+rand_buf:4B:arc4random_buf_mean                   170 ns          170 ns            3 bytes_per_second=22.4519Mi/s
+rand_buf:4B:arc4random_buf_median                 170 ns          170 ns            3 bytes_per_second=22.48Mi/s
+rand_buf:4B:arc4random_buf_stddev                1.83 ns         1.75 ns            3 bytes_per_second=236.48Ki/s
+rand_buf:4B:arc4random_buf_cv                    1.07 %          1.03 %             3 bytes_per_second=1.03%
+rand_buf:8B:arc4random_buf_mean                   169 ns          169 ns            3 bytes_per_second=45.2331Mi/s
+rand_buf:8B:arc4random_buf_median                 169 ns          168 ns            3 bytes_per_second=45.3571Mi/s
+rand_buf:8B:arc4random_buf_stddev               0.948 ns        0.961 ns            3 bytes_per_second=263.088Ki/s
+rand_buf:8B:arc4random_buf_cv                    0.56 %          0.57 %             3 bytes_per_second=0.57%
+rand_buf:32B:arc4random_buf_mean                  170 ns          170 ns            3 bytes_per_second=179.846Mi/s
+rand_buf:32B:arc4random_buf_median                170 ns          170 ns            3 bytes_per_second=179.889Mi/s
+rand_buf:32B:arc4random_buf_stddev              0.231 ns        0.207 ns            3 bytes_per_second=224.906Ki/s
+rand_buf:32B:arc4random_buf_cv                   0.14 %          0.12 %             3 bytes_per_second=0.12%
+rand_buf:256B:getentropy_mean                     459 ns          458 ns            3 bytes_per_second=533.366Mi/s
+rand_buf:256B:getentropy_median                   457 ns          456 ns            3 bytes_per_second=535.861Mi/s
+rand_buf:256B:getentropy_stddev                  4.41 ns         4.27 ns            3 bytes_per_second=4.95071Mi/s
+rand_buf:256B:getentropy_cv                      0.96 %          0.93 %             3 bytes_per_second=0.93%
+rand_buf:1pg:arc4random_buf_mean                 4921 ns         4910 ns            3 bytes_per_second=795.731Mi/s
+rand_buf:1pg:arc4random_buf_median               4879 ns         4869 ns            3 bytes_per_second=802.352Mi/s
+rand_buf:1pg:arc4random_buf_stddev               80.5 ns         80.6 ns            3 bytes_per_second=12.9389Mi/s
+rand_buf:1pg:arc4random_buf_cv                   1.64 %          1.64 %             3 bytes_per_second=1.63%
+rand_buf_4GiB:getentropy_mean                    7656 ms         7640 ms            3
+rand_buf_4GiB:getentropy_median                  7657 ms         7640 ms            3
+rand_buf_4GiB:getentropy_stddev                  6.01 ms         5.75 ms            3
+rand_buf_4GiB:getentropy_cv                      0.08 %          0.08 %             3
+rand_lt-one:32b:arc4random_uniform_mean           204 ns          203 ns            3
+rand_lt-one:32b:arc4random_uniform_median         199 ns          199 ns            3
+rand_lt-one:32b:arc4random_uniform_stddev        8.20 ns         8.03 ns            3
+rand_lt-one:32b:arc4random_uniform_cv            4.03 %          3.95 %             3
+rand_buf_4GiB:arc4random_buf_mean                7706 ms         7690 ms            3
+rand_buf_4GiB:arc4random_buf_median              7705 ms         7689 ms            3
+rand_buf_4GiB:arc4random_buf_stddev              19.6 ms         19.8 ms            3
+rand_buf_4GiB:arc4random_buf_cv                  0.25 %          0.26 %             3
+rand_buf_4GiB:randp_bytes_mean                    315 ms          314 ms            3
+rand_buf_4GiB:randp_bytes_median                  315 ms          314 ms            3
+rand_buf_4GiB:randp_bytes_stddev                 1.20 ms         1.21 ms            3
+rand_buf_4GiB:randp_bytes_cv                     0.38 %          0.39 %             3
+rand_buf:256B:arc4random_buf_mean                 457 ns          456 ns            3 bytes_per_second=534.911Mi/s
+rand_buf:256B:arc4random_buf_median               458 ns          457 ns            3 bytes_per_second=534.183Mi/s
+rand_buf:256B:arc4random_buf_stddev              1.98 ns         1.96 ns            3 bytes_per_second=2.29896Mi/s
+rand_buf:256B:arc4random_buf_cv                  0.43 %          0.43 %             3 bytes_per_second=0.43%
+rand_buf:16B:arc4random_buf_mean                  173 ns          172 ns            3 bytes_per_second=88.6168Mi/s
+rand_buf:16B:arc4random_buf_median                172 ns          172 ns            3 bytes_per_second=88.8227Mi/s
+rand_buf:16B:arc4random_buf_stddev               2.05 ns         1.91 ns            3 bytes_per_second=1000.5Ki/s
+rand_buf:16B:arc4random_buf_cv                   1.19 %          1.11 %             3 bytes_per_second=1.10%
+rand_buf:4B:getentropy_mean                       168 ns          167 ns            3 bytes_per_second=22.8286Mi/s
+rand_buf:4B:getentropy_median                     167 ns          167 ns            3 bytes_per_second=22.9082Mi/s
+rand_buf:4B:getentropy_stddev                    1.60 ns         1.62 ns            3 bytes_per_second=225.144Ki/s
+rand_buf:4B:getentropy_cv                        0.96 %          0.97 %             3 bytes_per_second=0.96%
+rand_buf:8B:getentropy_mean                       166 ns          165 ns            3 bytes_per_second=46.1039Mi/s
+rand_buf:8B:getentropy_median                     166 ns          165 ns            3 bytes_per_second=46.113Mi/s
+rand_buf:8B:getentropy_stddev                   0.285 ns        0.327 ns            3 bytes_per_second=93.3008Ki/s
+rand_buf:8B:getentropy_cv                        0.17 %          0.20 %             3 bytes_per_second=0.20%
+rand_uint:16b:rdseed16_mean                      1811 ns         1807 ns            3
+rand_uint:16b:rdseed16_median                    1812 ns         1808 ns            3
+rand_uint:16b:rdseed16_stddev                    1.39 ns         1.44 ns            3
+rand_uint:16b:rdseed16_cv                        0.08 %          0.08 %             3
+rand_buf:4B:randp_bytes_mean                     5.91 ns         5.89 ns            3 bytes_per_second=647.615Mi/s
+rand_buf:4B:randp_bytes_median                   5.91 ns         5.90 ns            3 bytes_per_second=646.645Mi/s
+rand_buf:4B:randp_bytes_stddev                  0.083 ns        0.083 ns            3 bytes_per_second=9.15985Mi/s
+rand_buf:4B:randp_bytes_cv                       1.40 %          1.41 %             3 bytes_per_second=1.41%
+rand_uint:32b:randp_u32_mean                     6.23 ns         6.20 ns            3
+rand_uint:32b:randp_u32_median                   6.17 ns         6.15 ns            3
+rand_uint:32b:randp_u32_stddev                  0.166 ns        0.152 ns            3
+rand_uint:32b:randp_u32_cv                       2.67 %          2.46 %             3
+rand_buf:64B:getentropy_mean                      244 ns          243 ns            3 bytes_per_second=250.86Mi/s
+rand_buf:64B:getentropy_median                    243 ns          243 ns            3 bytes_per_second=251.626Mi/s
+rand_buf:64B:getentropy_stddev                   1.93 ns         1.91 ns            3 bytes_per_second=1.95741Mi/s
+rand_buf:64B:getentropy_cv                       0.79 %          0.78 %             3 bytes_per_second=0.78%
+rand_uint:16b:randp_u16_mean                     6.22 ns         6.20 ns            3
+rand_uint:16b:randp_u16_median                   6.22 ns         6.20 ns            3
+rand_uint:16b:randp_u16_stddev                  0.088 ns        0.074 ns            3
+rand_uint:16b:randp_u16_cv                       1.41 %          1.19 %             3
+rand_buf:2B:getentropy_mean                       168 ns          168 ns            3 bytes_per_second=11.3775Mi/s
+rand_buf:2B:getentropy_median                     168 ns          167 ns            3 bytes_per_second=11.4039Mi/s
+rand_buf:2B:getentropy_stddev                   0.911 ns        0.841 ns            3 bytes_per_second=58.3184Ki/s
+rand_buf:2B:getentropy_cv                        0.54 %          0.50 %             3 bytes_per_second=0.50%
+rand_buf:1B:arc4random_buf_mean                   171 ns          171 ns            3 bytes_per_second=5.58437Mi/s
+rand_buf:1B:arc4random_buf_median                 171 ns          171 ns            3 bytes_per_second=5.5917Mi/s
+rand_buf:1B:arc4random_buf_stddev                1.50 ns         1.48 ns            3 bytes_per_second=49.4707Ki/s
+rand_buf:1B:arc4random_buf_cv                    0.88 %          0.87 %             3 bytes_per_second=0.87%
+rand_buf:64B:randp_bytes_mean                    6.36 ns         6.35 ns            3 bytes_per_second=9.38735Gi/s
+rand_buf:64B:randp_bytes_median                  6.36 ns         6.35 ns            3 bytes_per_second=9.38985Gi/s
+rand_buf:64B:randp_bytes_stddev                 0.070 ns        0.069 ns            3 bytes_per_second=104.815Mi/s
+rand_buf:64B:randp_bytes_cv                      1.10 %          1.09 %             3 bytes_per_second=1.09%
+rand_buf:64B:arc4random_buf_mean                  250 ns          249 ns            3 bytes_per_second=244.818Mi/s
+rand_buf:64B:arc4random_buf_median                251 ns          249 ns            3 bytes_per_second=244.752Mi/s
+rand_buf:64B:arc4random_buf_stddev               4.69 ns         4.54 ns            3 bytes_per_second=4.45648Mi/s
+rand_buf:64B:arc4random_buf_cv                   1.87 %          1.82 %             3 bytes_per_second=1.82%
+rand_uint:64b:rdrand64_mean                       292 ns          292 ns            3
+rand_uint:64b:rdrand64_median                     295 ns          294 ns            3
+rand_uint:64b:rdrand64_stddev                    5.36 ns         5.33 ns            3
+rand_uint:64b:rdrand64_cv                        1.83 %          1.83 %             3
+rand_buf:2B:arc4random_buf_mean                   170 ns          170 ns            3 bytes_per_second=11.252Mi/s
+rand_buf:2B:arc4random_buf_median                 169 ns          168 ns            3 bytes_per_second=11.3212Mi/s
+rand_buf:2B:arc4random_buf_stddev                2.43 ns         2.39 ns            3 bytes_per_second=161.026Ki/s
+rand_buf:2B:arc4random_buf_cv                    1.43 %          1.41 %             3 bytes_per_second=1.40%
+rand_buf:128B:arc4random_buf_mean                 315 ns          314 ns            3 bytes_per_second=388.185Mi/s
+rand_buf:128B:arc4random_buf_median               315 ns          314 ns            3 bytes_per_second=388.272Mi/s
+rand_buf:128B:arc4random_buf_stddev             0.785 ns        0.647 ns            3 bytes_per_second=817.888Ki/s
+rand_buf:128B:arc4random_buf_cv                  0.25 %          0.21 %             3 bytes_per_second=0.21%
+rand_buf:1pg:randp_bytes_mean                     149 ns          149 ns            3 bytes_per_second=25.6902Gi/s
+rand_buf:1pg:randp_bytes_median                   149 ns          148 ns            3 bytes_per_second=25.7272Gi/s
+rand_buf:1pg:randp_bytes_stddev                  3.80 ns         3.82 ns            3 bytes_per_second=674.557Mi/s
+rand_buf:1pg:randp_bytes_cv                      2.55 %          2.57 %             3 bytes_per_second=2.56%
+rand_buf:16B:getentropy_mean                      168 ns          167 ns            3 bytes_per_second=91.1603Mi/s
+rand_buf:16B:getentropy_median                    167 ns          166 ns            3 bytes_per_second=91.8087Mi/s
+rand_buf:16B:getentropy_stddev                   2.63 ns         2.42 ns            3 bytes_per_second=1.30815Mi/s
+rand_buf:16B:getentropy_cv                       1.57 %          1.45 %             3 bytes_per_second=1.44%
+rand_buf:32B:randp_bytes_mean                    6.10 ns         6.09 ns            3 bytes_per_second=4.89997Gi/s
+rand_buf:32B:randp_bytes_median                  6.11 ns         6.09 ns            3 bytes_per_second=4.89072Gi/s
+rand_buf:32B:randp_bytes_stddev                 0.175 ns        0.174 ns            3 bytes_per_second=144.202Mi/s
+rand_buf:32B:randp_bytes_cv                      2.87 %          2.87 %             3 bytes_per_second=2.87%
+rand_uint:32b:arc4random_mean                     176 ns          176 ns            3
+rand_uint:32b:arc4random_median                   172 ns          171 ns            3
+rand_uint:32b:arc4random_stddev                  9.36 ns         9.41 ns            3
+rand_uint:32b:arc4random_cv                      5.31 %          5.35 %             3
+rand_buf:128B:randp_bytes_mean                   8.41 ns         8.39 ns            3 bytes_per_second=14.2121Gi/s
+rand_buf:128B:randp_bytes_median                 8.43 ns         8.41 ns            3 bytes_per_second=14.173Gi/s
+rand_buf:128B:randp_bytes_stddev                0.093 ns        0.091 ns            3 bytes_per_second=157.786Mi/s
+rand_buf:128B:randp_bytes_cv                     1.11 %          1.08 %             3 bytes_per_second=1.08%
+rand_buf:16B:randp_bytes_mean                    6.48 ns         6.47 ns            3 bytes_per_second=2.31199Gi/s
+rand_buf:16B:randp_bytes_median                  6.70 ns         6.69 ns            3 bytes_per_second=2.22866Gi/s
+rand_buf:16B:randp_bytes_stddev                 0.446 ns        0.443 ns            3 bytes_per_second=168.692Mi/s
+rand_buf:16B:randp_bytes_cv                      6.87 %          6.85 %             3 bytes_per_second=7.13%
+rand_buf:128B:getentropy_mean                     316 ns          315 ns            3 bytes_per_second=387.747Mi/s
+rand_buf:128B:getentropy_median                   317 ns          316 ns            3 bytes_per_second=386.042Mi/s
+rand_buf:128B:getentropy_stddev                  2.87 ns         2.57 ns            3 bytes_per_second=3.18275Mi/s
+rand_buf:128B:getentropy_cv                      0.91 %          0.82 %             3 bytes_per_second=0.82%
+rand_uint:8b:randp_u8_mean                       6.24 ns         6.22 ns            3
+rand_uint:8b:randp_u8_median                     6.22 ns         6.19 ns            3
+rand_uint:8b:randp_u8_stddev                    0.083 ns        0.088 ns            3
+rand_uint:8b:randp_u8_cv                         1.34 %          1.41 %             3
+rand_buf:2B:randp_bytes_mean                     5.68 ns         5.66 ns            3 bytes_per_second=336.886Mi/s
+rand_buf:2B:randp_bytes_median                   5.63 ns         5.62 ns            3 bytes_per_second=339.511Mi/s
+rand_buf:2B:randp_bytes_stddev                  0.127 ns        0.127 ns            3 bytes_per_second=7.46605Mi/s
+rand_buf:2B:randp_bytes_cv                       2.24 %          2.24 %             3 bytes_per_second=2.22%
+rand_buf:1B:randp_bytes_mean                     5.86 ns         5.85 ns            3 bytes_per_second=163.272Mi/s
+rand_buf:1B:randp_bytes_median                   5.90 ns         5.88 ns            3 bytes_per_second=162.095Mi/s
+rand_buf:1B:randp_bytes_stddev                  0.247 ns        0.246 ns            3 bytes_per_second=6.93295Mi/s
+rand_buf:1B:randp_bytes_cv                       4.21 %          4.21 %             3 bytes_per_second=4.25%
+rand_buf:256B:randp_bytes_mean                   12.0 ns         12.0 ns            3 bytes_per_second=19.8541Gi/s
+rand_buf:256B:randp_bytes_median                 12.0 ns         12.0 ns            3 bytes_per_second=19.8939Gi/s
+rand_buf:256B:randp_bytes_stddev                0.113 ns        0.110 ns            3 bytes_per_second=186.505Mi/s
+rand_buf:256B:randp_bytes_cv                     0.94 %          0.92 %             3 bytes_per_second=0.92%
+rand_uint:64b:rdseed64_mean                      1820 ns         1815 ns            3
+rand_uint:64b:rdseed64_median                    1819 ns         1815 ns            3
+rand_uint:64b:rdseed64_stddev                    8.72 ns         7.88 ns            3
+rand_uint:64b:rdseed64_cv                        0.48 %          0.43 %             3
+rand_uint:32b:rdseed32_mean                      1828 ns         1824 ns            3
+rand_uint:32b:rdseed32_median                    1815 ns         1811 ns            3
+rand_uint:32b:rdseed32_stddev                    25.3 ns         24.6 ns            3
+rand_uint:32b:rdseed32_cv                        1.38 %          1.35 %             3
+rand_lt-many:32b:arc4random_uniform_mean    252897337 ns    252247807 ns            3 items_per_second=4.15805M/s
+rand_lt-many:32b:arc4random_uniform_median  252342832 ns    251653667 ns            3 items_per_second=4.16674M/s
+rand_lt-many:32b:arc4random_uniform_stddev    5195571 ns      5073850 ns            3 items_per_second=83.3622k/s
+rand_lt-many:32b:arc4random_uniform_cv           2.05 %          2.01 %             3 items_per_second=2.00%
+rand_lt-one:32b:randp_lt_u32_mean                6.35 ns         6.34 ns            3
+rand_lt-one:32b:randp_lt_u32_median              6.30 ns         6.29 ns            3
+rand_lt-one:32b:randp_lt_u32_stddev             0.122 ns        0.121 ns            3
+rand_lt-one:32b:randp_lt_u32_cv                  1.93 %          1.90 %             3
+rand_lt-many:32b:randp_lt_u32_mean            6604756 ns      6590100 ns            3 items_per_second=159.136M/s
+rand_lt-many:32b:randp_lt_u32_median          6549076 ns      6536044 ns            3 items_per_second=160.43M/s
+rand_lt-many:32b:randp_lt_u32_stddev            99095 ns        96211 ns            3 items_per_second=2.30387M/s
+rand_lt-many:32b:randp_lt_u32_cv                 1.50 %          1.46 %             3 items_per_second=1.45%
+rand_uint:32b:rdrand32_mean                       287 ns          287 ns            3
+rand_uint:32b:rdrand32_median                     287 ns          287 ns            3
+rand_uint:32b:rdrand32_stddev                    1.63 ns         1.53 ns            3
+rand_uint:32b:rdrand32_cv                        0.57 %          0.53 %             3
+rand_buf:32B:getentropy_mean                      172 ns          171 ns            3 bytes_per_second=178.49Mi/s
+rand_buf:32B:getentropy_median                    169 ns          169 ns            3 bytes_per_second=180.638Mi/s
+rand_buf:32B:getentropy_stddev                   4.84 ns         4.78 ns            3 bytes_per_second=4.91717Mi/s
+rand_buf:32B:getentropy_cv                       2.82 %          2.80 %             3 bytes_per_second=2.75%
+rand_uint:64b:randp_u64_mean                     6.60 ns         6.56 ns            3
+rand_uint:64b:randp_u64_median                   6.71 ns         6.64 ns            3
+rand_uint:64b:randp_u64_stddev                  0.192 ns        0.176 ns            3
+rand_uint:64b:randp_u64_cv                       2.91 %          2.69 %             3
+rand_uint:16b:rdrand16_mean                       289 ns          289 ns            3
+rand_uint:16b:rdrand16_median                     286 ns          286 ns            3
+rand_uint:16b:rdrand16_stddev                    5.40 ns         5.24 ns            3
+rand_uint:16b:rdrand16_cv                        1.87 %          1.82 %             3
+rand_buf:8B:randp_bytes_mean                     6.16 ns         6.15 ns            3 bytes_per_second=1.21399Gi/s
+rand_buf:8B:randp_bytes_median                   6.31 ns         6.30 ns            3 bytes_per_second=1.18299Gi/s
+rand_buf:8B:randp_bytes_stddev                  0.324 ns        0.322 ns            3 bytes_per_second=67.0942Mi/s
+rand_buf:8B:randp_bytes_cv                       5.26 %          5.24 %             3 bytes_per_second=5.40%
