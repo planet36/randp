@@ -24,8 +24,10 @@ extern "C" {
 static void*
 allocate(const size_t len)
 {
-	void* addr = mmap(nullptr, len, PROT_READ | PROT_WRITE,
-	                  MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	constexpr int prot = PROT_READ | PROT_WRITE;
+	constexpr int flags = MAP_PRIVATE | MAP_ANONYMOUS;
+
+	void* addr = mmap(nullptr, len, prot, flags, -1, 0);
 
 	if (addr == MAP_FAILED)
 		err(EXIT_FAILURE, "mmap");
