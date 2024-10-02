@@ -30,11 +30,7 @@ random_bounded_nearlydivisionless32(const uint32_t s, uint32_t (*prng)())
 	typedef uint32_t T;
 	typedef uint64_t T2; // twice as wide
 	static_assert(sizeof(T2) == 2 * sizeof(T));
-#if defined(constexpr)
 	constexpr unsigned int bit_width = UINT32_WIDTH;
-#else
-	const unsigned int bit_width = UINT32_WIDTH;
-#endif
 
 	T2 product;
 
@@ -58,11 +54,7 @@ random_bounded_nearlydivisionless64(const uint64_t s, uint64_t (*prng)())
 	typedef uint64_t T;
 	typedef __uint128_t T2; // twice as wide
 	static_assert(sizeof(T2) == 2 * sizeof(T));
-#if defined(constexpr)
 	constexpr unsigned int bit_width = UINT64_WIDTH;
-#else
-	const unsigned int bit_width = UINT64_WIDTH;
-#endif
 
 	T2 product;
 
