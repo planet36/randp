@@ -33,8 +33,8 @@ extern "C" {
 #define RANDP_PRNG_USE_ENC DEFAULT_RANDP_PRNG_USE_ENC
 #endif
 
-#if !defined(RANDP_USE_DAVIES_MEYER)
-#define RANDP_USE_DAVIES_MEYER DEFAULT_RANDP_USE_DAVIES_MEYER
+#if !defined(RANDP_PRNG_USE_DAVIES_MEYER)
+#define RANDP_PRNG_USE_DAVIES_MEYER DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER
 #endif
 
 /// How many blocks compose the pool of random bytes
@@ -99,14 +99,14 @@ randp_regen()
 	{
 		if (RANDP_PRNG_USE_ENC)
 		{
-			if (RANDP_USE_DAVIES_MEYER)
+			if (RANDP_PRNG_USE_DAVIES_MEYER)
 				blocks[i] = aes128_prng_enc_davies_meyer_next(&this_->prng);
 			else
 				blocks[i] = aes128_prng_enc_next(&this_->prng);
 		}
 		else
 		{
-			if (RANDP_USE_DAVIES_MEYER)
+			if (RANDP_PRNG_USE_DAVIES_MEYER)
 				blocks[i] = aes128_prng_dec_davies_meyer_next(&this_->prng);
 			else
 				blocks[i] = aes128_prng_dec_next(&this_->prng);
