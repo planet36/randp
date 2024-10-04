@@ -35,8 +35,8 @@ template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ aes128_prng params
-    bool enc = true,
-    bool dm = true,
+    bool enc = DEFAULT_RANDP_USE_ENC,
+    bool dm = DEFAULT_RANDP_USE_DAVIES_MEYER,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
@@ -81,8 +81,8 @@ template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ aes128_prng params
-    bool enc = true,
-    bool dm = true,
+    bool enc = DEFAULT_RANDP_USE_ENC,
+    bool dm = DEFAULT_RANDP_USE_DAVIES_MEYER,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
@@ -150,8 +150,8 @@ template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ aes128_prng params
-    bool enc = true,
-    bool dm = true,
+    bool enc = DEFAULT_RANDP_USE_ENC,
+    bool dm = DEFAULT_RANDP_USE_DAVIES_MEYER,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
     size_t Nr = DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
