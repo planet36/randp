@@ -9,7 +9,7 @@
 
 #pragma once
 
-#define DEFAULT_RANDP_USE_ENC true
+#define DEFAULT_RANDP_PRNG_USE_ENC true
 
 #define DEFAULT_RANDP_USE_DAVIES_MEYER false
 

@@ -29,8 +29,8 @@ extern "C" {
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-#if !defined(RANDP_USE_ENC)
-#define RANDP_USE_ENC DEFAULT_RANDP_USE_ENC
+#if !defined(RANDP_PRNG_USE_ENC)
+#define RANDP_PRNG_USE_ENC DEFAULT_RANDP_PRNG_USE_ENC
 #endif
 
 #if !defined(RANDP_USE_DAVIES_MEYER)
@@ -97,7 +97,7 @@ randp_regen()
 
 	for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
 	{
-		if (RANDP_USE_ENC)
+		if (RANDP_PRNG_USE_ENC)
 		{
 			if (RANDP_USE_DAVIES_MEYER)
 				blocks[i] = aes128_prng_enc_davies_meyer_next(&this_->prng);
