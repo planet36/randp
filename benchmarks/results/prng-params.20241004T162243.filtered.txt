@@ -1,0 +1,50 @@
+Linux 6.11.1-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13950HX
+ldd (GNU libc) 2.40
+gcc (GCC) 14.2.1 20240910
+libbenchmark.so.1.9.0
+librandp.so.4.3
+
+# Median time per call
+
+# Median time per call
+
+# Median calls per second
+
+# Median bytes per second copied to buffer (of size bytes)
+
+# Median bytes per second copied to buffer (of size pages)
+
+# Median time to generate 4 GiB
+
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,3,1>   201  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,1,4>   206  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,1,3>   208  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,1,2>   210  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,1,2>      221  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,3,2>   229  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,4,1>   234  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,2,2>   235  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,2,1>      243  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,2,1>   243  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,2,3>   249  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,3,1>      260  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,1,3>      267  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,2,2>      284  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,2,4>   294  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,1,4>      297  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,4,1>      297  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,4,2>   330  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,3,3>   378  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,2,3>      407  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,3,4>   508  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,4,3>   576  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,3,2>      623  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,2,4>      662  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,4,2>      667  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,no-dm,4,4>   672  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,3,3>      736  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,3,4>      949  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,4,3>     1125  ms
+rand_buf_4GiB:randp_bytes<def,def,enc,dm,4,4>     1390  ms
+
