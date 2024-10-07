@@ -55,7 +55,7 @@ public:
 		this->inc = mm_make_odd_epu64(this->inc);
 	}
 
-	/// Get the next PRNG output via AES encryption.
+	/// Get the next PRNG output via AES encryption or decryption.
 	__m128i next()
 	{
 		__m128i dst;
