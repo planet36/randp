@@ -88,11 +88,11 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 > [!NOTE]
 > librandp.a is statically linked with the executables in the benchmarks folder.
 
-### 2024-09-15
+### 2024-10-04
 
 #### System Info
 
-- Linux 6.10.10-arch1-1 x86_64
+- Linux 6.11.1-arch1-1 x86_64
 - 13th Gen Intel(R) Core(TM) i9-13950HX
 - ldd (GNU libc) 2.40
 - gcc (GCC) 14.2.1 20240910
@@ -103,18 +103,18 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 | Function | Median time to generate 4 GiB | |
 |---|---:|---|
-| `randp_bytes`    |  314  ms | 24&times; faster |
-| `getentropy`     | 7640  ms | |
-| `arc4random_buf` | 7689  ms | |
+| `randp_bytes`    |  217  ms | 43&times; faster |
+| `getentropy`     | 8993  ms | |
+| `arc4random_buf` | 9410  ms | |
 
 #### Get a uniform random `uint32_t`
 
 | Function | Median time per call | |
 |---|---:|---|
-| `randp_u32`  | 6.15  ns | 27&times; faster |
-| `arc4random` |  171  ns | |
-| `rdrand32`   |  287  ns | |
-| `rdseed32`   | 1811  ns | |
+| `randp_u32`  | 6.69  ns | 27&times; faster |
+| `arc4random` |  181  ns | |
+| `rdrand32`   |  304  ns | |
+| `rdseed32`   | 1825  ns | |
 
 Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32_step`, respectively.
 
@@ -122,8 +122,8 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 
 | Function | Median calls per second | |
 |---|---:|---|
-| `randp_lt_u32`       | 160.43M/s  | 38&times; more |
-| `arc4random_uniform` | 4.16674M/s | |
+| `randp_lt_u32`       | 149.148M/s | 39&times; more |
+| `arc4random_uniform` | 3.7692M/s  | |
 
 ## Dependencies
 
