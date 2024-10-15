@@ -25,20 +25,18 @@ extern "C" {
 #define AES128_PRNG_NUM_KEYS DEFAULT_AES128_PRNG_NUM_KEYS
 #endif
 
-static_assert(AES128_PRNG_NUM_KEYS >= 1);
-
 #if !defined(AES128_PRNG_NUM_ROUNDS_PER_KEY)
 #define AES128_PRNG_NUM_ROUNDS_PER_KEY DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
 #endif
 
-static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-
-static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
-              "must do at least 2 rounds of AES enc/dec");
-
 /// A PRNG that uses AES instructions
 struct aes128_prng
 {
+	static_assert(AES128_PRNG_NUM_KEYS >= 1);
+	static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
+	static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
+	              "must do at least 2 rounds of AES enc/dec");
+
 	__m128i keys[AES128_PRNG_NUM_KEYS];
 	__m128i ctr; ///< The state/counter
 	__m128i inc; ///< The increment (must be odd)
