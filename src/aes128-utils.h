@@ -146,5 +146,5 @@ mm_make_odd_epu64(const __m128i a)
 }
 
 #ifdef __cplusplus
-}
+} // extern "C"
 #endif
