@@ -32,8 +32,8 @@ struct aes128_prng
 
 private:
 	__m128i keys[AES128_PRNG_NUM_KEYS];
-	__m128i ctr;
-	__m128i inc; // must be odd
+	__m128i ctr; ///< The state/counter
+	__m128i inc; ///< The increment (must be odd)
 
 public:
 	aes128_prng()
