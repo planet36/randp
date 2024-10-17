@@ -3,7 +3,7 @@
 
 include ../config.mk
 
-# librandp is statically linked with the executables in this folder.
+# librandp is statically linked with one of the executables in this folder.
 
 #export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):..
 
