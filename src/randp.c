@@ -116,6 +116,9 @@ randp_regen()
 	--this_->reseed_countdown;
 }
 
+#if defined(RANDP_SINGLE_HEADER)
+static
+#endif
 void
 randp_bytes(void* buf, size_t n)
 {
@@ -153,6 +156,9 @@ randp_bytes(void* buf, size_t n)
 	}
 }
 
+#if defined(RANDP_SINGLE_HEADER)
+static
+#endif
 uint8_t
 randp_u8()
 {
@@ -161,6 +167,9 @@ randp_u8()
 	return result;
 }
 
+#if defined(RANDP_SINGLE_HEADER)
+static
+#endif
 uint16_t
 randp_u16()
 {
@@ -169,6 +178,9 @@ randp_u16()
 	return result;
 }
 
+#if defined(RANDP_SINGLE_HEADER)
+static
+#endif
 uint32_t
 randp_u32()
 {
@@ -177,6 +189,9 @@ randp_u32()
 	return result;
 }
 
+#if defined(RANDP_SINGLE_HEADER)
+static
+#endif
 uint64_t
 randp_u64()
 {
@@ -185,6 +200,9 @@ randp_u64()
 	return result;
 }
 
+#if defined(RANDP_SINGLE_HEADER)
+static
+#endif
 uint32_t
 randp_lt_u32(uint32_t upper_bound)
 {
