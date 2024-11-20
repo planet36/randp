@@ -163,7 +163,7 @@ BM_rand_buf(benchmark::State& state,
 }
 
 void
-BM_rand_buf_4GiB(benchmark::State& state,
+BM_rand_bytes_4GiB(benchmark::State& state,
                  const std::function<void(uint8_t*, size_t)>& fn)
 {
 	// Perform setup here
@@ -299,10 +299,10 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size);
 		}
 
-		prefix = "rand_buf_4GiB:";
-		benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_buf_4GiB, getentropy)->Unit(benchmark::kMillisecond);
-		benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf_4GiB, arc4random_buf)->Unit(benchmark::kMillisecond);
-		benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf_4GiB, randp_bytes)->Unit(benchmark::kMillisecond);
+		prefix = "rand_bytes_4GiB:";
+		benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Unit(benchmark::kMillisecond);
 	}
 	else
 	{
@@ -364,10 +364,10 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size)->Threads(num_threads);
 		}
 
-		prefix = "rand_buf_4GiB:";
-		benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_buf_4GiB, getentropy)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-		benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf_4GiB, arc4random_buf)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-		benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		prefix = "rand_bytes_4GiB:";
+		benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+		benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 	}
 
 	benchmark::RunSpecifiedBenchmarks();
