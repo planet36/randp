@@ -99,7 +99,7 @@ echo "# Median bytes per second copied to buffer (of size bytes)"
 echo
 for I in 1 2 4 8 16 32 64 128 256
 do
-    PATTERN="^rand_buf:${I}B:"
+    PATTERN="^rand_bytes:${I}B:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
         grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $7}' | sed -E -e 's/bytes_per_second=//' | sort -h -k 2 -r | column --table || exit
@@ -111,7 +111,7 @@ echo "# Median bytes per second copied to buffer (of size pages)"
 echo
 for I in 1 2 3 4 5 6 7 8
 do
-    PATTERN="^rand_buf:${I}pg:"
+    PATTERN="^rand_bytes:${I}pg:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
         grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $7}' | sed -E -e 's/bytes_per_second=//' | sort -h -k 2 -r | column --table || exit

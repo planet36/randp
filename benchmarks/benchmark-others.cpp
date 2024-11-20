@@ -142,7 +142,7 @@ BM_rand_lt_many(benchmark::State& state, const std::function<T(const T)>& fn)
 }
 
 void
-BM_rand_buf(benchmark::State& state,
+BM_rand_bytes(benchmark::State& state,
             const std::function<void(uint8_t*, size_t)>& fn,
             const size_t buf_size)
 {
@@ -284,19 +284,19 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		for (size_t i = 1; i <= 256; i *= 2)
 		{
 			buf_size = i;
-			prefix = "rand_buf:" + std::to_string(i) + "B:";
-			benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_buf, getentropy, buf_size);
-			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf, arc4random_buf, buf_size);
-			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size);
+			prefix = "rand_bytes:" + std::to_string(i) + "B:";
+			benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy, buf_size);
+			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size);
 		}
 
 		//for (size_t i = 1; i <= 8; ++i)
 		for (size_t i = 1; i <= 1; ++i)
 		{
 			buf_size = 4096 * i;
-			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf, arc4random_buf, buf_size);
-			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size);
+			prefix = "rand_bytes:" + std::to_string(i) + "pg:";
+			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size);
 		}
 
 		prefix = "rand_bytes_4GiB:";
@@ -349,19 +349,19 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 		for (size_t i = 1; i <= 256; i *= 2)
 		{
 			buf_size = i;
-			prefix = "rand_buf:" + std::to_string(i) + "B:";
-			benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_buf, getentropy, buf_size)->Threads(num_threads);
-			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf, arc4random_buf, buf_size)->Threads(num_threads);
-			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size)->Threads(num_threads);
+			prefix = "rand_bytes:" + std::to_string(i) + "B:";
+			benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
 		}
 
 		//for (size_t i = 1; i <= 8; ++i)
 		for (size_t i = 1; i <= 1; ++i)
 		{
 			buf_size = 4096 * i;
-			prefix = "rand_buf:" + std::to_string(i) + "pg:";
-			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_buf, arc4random_buf, buf_size)->Threads(num_threads);
-			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_buf, randp_bytes, buf_size)->Threads(num_threads);
+			prefix = "rand_bytes:" + std::to_string(i) + "pg:";
+			benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
+			benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
 		}
 
 		prefix = "rand_bytes_4GiB:";
