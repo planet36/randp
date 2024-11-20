@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-// {{{ copied from rdrand.h
+// {{{ Copied from rdrand.h
 // https://github.com/planet36/dotfiles/blob/main/link/.local/include/rdrand.h
 
 #include <immintrin.h>
@@ -194,7 +194,7 @@ BM_rand_buf_4GiB(benchmark::State& state,
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
-	// copied from benchmark.h
+	// Copied from benchmark.h
 	benchmark::Initialize(&argc, argv);
 
 	if (benchmark::ReportUnrecognizedArguments(argc, argv))

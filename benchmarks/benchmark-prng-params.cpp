@@ -42,7 +42,7 @@ BM_rand_buf_4GiB(benchmark::State& state,
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
-	// copied from benchmark.h
+	// Copied from benchmark.h
 	benchmark::Initialize(&argc, argv);
 
 	if (benchmark::ReportUnrecognizedArguments(argc, argv))
