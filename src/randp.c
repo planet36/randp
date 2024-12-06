@@ -60,6 +60,10 @@ static_assert(
     __builtin_popcount(RANDP_RESEED_COUNTDOWN_MIN) == 1,
     "randp reseed countdown must be a power of 2 to prevent modulo bias");
 
+#if !defined(RANDP_RESEED_COUNTDOWN_ADD_JITTER)
+#define RANDP_RESEED_COUNTDOWN_ADD_JITTER DEFAULT_RANDP_RESEED_COUNTDOWN_ADD_JITTER
+#endif
+
 /// A pool of random bytes
 struct randp
 {
@@ -88,8 +92,12 @@ randp_regen()
 	{
 		aes128_prng_reseed(&this_->prng);
 		this_->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
-		this_->reseed_countdown +=
-		    (__builtin_ia32_rdtsc() % RANDP_RESEED_COUNTDOWN_MIN) / 2;
+
+		if (RANDP_RESEED_COUNTDOWN_ADD_JITTER)
+		{
+			this_->reseed_countdown +=
+			    (__builtin_ia32_rdtsc() % RANDP_RESEED_COUNTDOWN_MIN) / 2;
+		}
 	}
 
 	__m128i* blocks = (__m128i*)(&this_->pool[0]);
