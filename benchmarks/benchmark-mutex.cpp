@@ -11,7 +11,7 @@
 #include <functional>
 
 void
-BM_rand_bytes(benchmark::State& state,
+BM_rand_bytes(benchmark::State& BM_state,
             const std::function<void(uint8_t*, size_t)>& fn,
             const size_t buf_size)
 {
@@ -19,7 +19,7 @@ BM_rand_bytes(benchmark::State& state,
 
 	uint8_t* buf = new uint8_t[buf_size];
 
-	for (auto _ : state)
+	for (auto _ : BM_state)
 	{
 		// This code gets timed
 
@@ -28,11 +28,11 @@ BM_rand_bytes(benchmark::State& state,
 
 	delete[] buf;
 
-	state.SetBytesProcessed(state.iterations() * buf_size);
+	BM_state.SetBytesProcessed(BM_state.iterations() * buf_size);
 }
 
 void
-BM_rand_bytes_4GiB(benchmark::State& state,
+BM_rand_bytes_4GiB(benchmark::State& BM_state,
                  const std::function<void(uint8_t*, size_t)>& fn)
 {
 	// Perform setup here
@@ -43,7 +43,7 @@ BM_rand_bytes_4GiB(benchmark::State& state,
 	static_assert(std::has_single_bit(sizeof(buf)),
 	              "buffer size must be a power of 2");
 
-	for (auto _ : state)
+	for (auto _ : BM_state)
 	{
 		// This code gets timed
 

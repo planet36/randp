@@ -11,7 +11,7 @@
 #include <functional>
 
 void
-BM_rand_bytes_4GiB(benchmark::State& state,
+BM_rand_bytes_4GiB(benchmark::State& BM_state,
                  const std::function<void(uint8_t*, size_t)>& fn)
 {
 	// Perform setup here
@@ -22,7 +22,7 @@ BM_rand_bytes_4GiB(benchmark::State& state,
 	static_assert(std::has_single_bit(sizeof(buf)),
 	              "buffer size must be a power of 2");
 
-	for (auto _ : state)
+	for (auto _ : BM_state)
 	{
 		// This code gets timed
 
