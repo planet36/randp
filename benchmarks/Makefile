@@ -18,7 +18,7 @@ LDLIBS += `pkg-config --libs benchmark`
 LDLIBS += ../$(ANAME)
 
 # Should be an odd number for simpler median
-BENCHMARK_REPS := 3
+BENCHMARK_REPS := 7
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')
 
