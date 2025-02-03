@@ -83,10 +83,8 @@ static_assert(offsetof(randp, pool) % sizeof(__m128i) == 0,
 
 static_assert(sizeof(randp) <= PAGE_SIZE, "randp must fit in one page");
 
-static thread_local randp* this_ = nullptr;
-
 static void
-randp_regen()
+randp_regen(randp* this_)
 {
 	if (this_->reseed_countdown == 0)
 	{
@@ -130,6 +128,8 @@ static
 void
 randp_bytes(void* buf, size_t n)
 {
+	static thread_local randp* this_ = nullptr;
+
 	if (this_ == nullptr)
 #ifdef __cplusplus
 		this_ = (decltype(this_))allocate(sizeof(*this_));
@@ -142,7 +142,7 @@ randp_bytes(void* buf, size_t n)
 	while (n > 0)
 	{
 		if (this_->rand_bytes_remaining == 0)
-			randp_regen();
+			randp_regen(this_);
 
 		uint8_t* src =
 		    &this_->pool[RANDP_NUM_BYTES - this_->rand_bytes_remaining];
