@@ -85,6 +85,46 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 > [!NOTE]
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
 
+
+
+
+### 2025-02-03
+
+#### System Info
+
+- Linux 6.13.1-arch1-1 x86_64
+- 13th Gen Intel(R) Core(TM) i9-13980HX
+- ldd (GNU libc) 2.41
+- gcc (GCC) 14.2.1 20250128
+- libbenchmark.so.1.9.1
+- librandp.so.4.4
+
+#### Fill a buffer with random bytes
+
+| Function | Median time to generate 4 GiB | |
+|---|---:|---|
+| `randp_bytes`    |  189  ms | 26.7&times; faster |
+| `arc4random_buf` | 5053  ms | |
+| `getentropy`     | 7782  ms | |
+
+#### Get a uniform random `uint32_t`
+
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_u32`  | 6.22  ns | 2.1&times; faster |
+| `arc4random` | 13.1  ns | |
+| `rdrand32`   |  287  ns | |
+| `rdseed32`   | 1809  ns | |
+
+Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32_step`, respectively.
+
+#### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
+
+| Function | Median calls per second | |
+|---|---:|---|
+| `randp_lt_u32`       | 153.104M/s | 3.28&times; more |
+| `arc4random_uniform` | 46.6285M/s | |
+
 ### 2024-10-04
 
 #### System Info
