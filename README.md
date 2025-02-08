@@ -87,75 +87,11 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 > [!NOTE]
 > Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-See also:
-[GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-[What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-See also:
-- [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-- [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-See also:
-* [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-* [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-> See also:
-> [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-> [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-> See also:
-> - [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-> - [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-> See also:
-> * [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-> * [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
 > <details>
-> <summary>See these for more info</summary>
-> * [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
-> * [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-> </details>
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-> <details>
-> <summary>See these for more info</summary>
-> [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged),
-> [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
-> </details>
-
-
-
-> [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux.
-> <details>
-> <summary>See these for more info</summary>
+> <summary>Visit these links for more info.</summary>
 > https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged
 > https://lwn.net/Articles/983186/
 > </details>
-
-
 
 ### 2025-02-03
 
