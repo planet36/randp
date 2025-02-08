@@ -176,21 +176,21 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
   * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
 * [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
-  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^1] [^2]
+  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
 
-[^1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
+[^getentropy_1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
 
-[^2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
+[^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
 
 ### To run the benchmarks
 
 * [Google Benchmark](https://github.com/google/benchmark)
 * [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
-  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^3] [^4]
+  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
 
-[^3]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
+[^arc4random_1]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
 
-[^4]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
+[^arc4random_2]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
 
 ### To run the tests
 
