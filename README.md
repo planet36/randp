@@ -85,8 +85,12 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 > [!NOTE]
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
 
+> [!NOTE]
+> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux. [^getrandom_vdso_1] [^getrandom_vdso_2]
 
+[^getrandom_vdso_1]: https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged
 
+[^getrandom_vdso_2]: https://lwn.net/Articles/983186/
 
 ### 2025-02-03
 
