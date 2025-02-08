@@ -128,6 +128,14 @@ See also:
 
 
 
+<details>
+
+<summary>See these for more info</summary>
+
+* [GNU C Library Merges Support for getrandom vDSO](https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged)
+* [What became of getrandom() in the vDSO](https://lwn.net/Articles/983186/)
+
+</details>
 
 
 
