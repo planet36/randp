@@ -86,11 +86,11 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
 
 > [!NOTE]
-> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux. [^1] [^2]
+> Glibc version 2.41 [added support for getrandom vDSO](https://sourceware.org/bugzilla/show_bug.cgi?id=29437#c17).  This dramatically sped up `getentropy` and `arc4random` on Linux. [^getrandom_vdso_1] [^getrandom_vdso_2]
 
-[^1]: https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged
+[^getrandom_vdso_1]: https://www.phoronix.com/news/glibc-getrandom-vDSO-Merged
 
-[^2]: https://lwn.net/Articles/983186/
+[^getrandom_vdso_2]: https://lwn.net/Articles/983186/
 
 ### 2025-02-03
 
@@ -176,21 +176,21 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
   * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
 * [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
-  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^3] [^4]
+  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
 
-[^3]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
+[^getentropy_1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
 
-[^4]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
+[^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
 
 ### To run the benchmarks
 
 * [Google Benchmark](https://github.com/google/benchmark)
 * [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
-  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^5] [^6]
+  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
 
-[^5]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
+[^arc4random_1]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
 
-[^6]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
+[^arc4random_2]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
 
 ### To run the tests
 
