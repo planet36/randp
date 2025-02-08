@@ -176,7 +176,7 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
   * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
 * [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
-  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^2] [^4]
+  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^3] [^4]
 
 [^3]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
 
