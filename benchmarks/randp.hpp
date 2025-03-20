@@ -34,7 +34,7 @@ The raisons d'etre of this class are to test
 template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
-    // {{{ aes128_prng params
+    // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
@@ -80,7 +80,7 @@ struct randp
 template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
-    // {{{ aes128_prng params
+    // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
@@ -149,7 +149,7 @@ static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
-    // {{{ aes128_prng params
+    // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
     size_t Nk = DEFAULT_AES128_PRNG_NUM_KEYS,
