@@ -13,7 +13,7 @@
 
 #define DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER false
 
-#define DEFAULT_RANDP_NUM_BLOCKS 0x10
+#define DEFAULT_RANDP_NUM_BLOCKS 16
 
 /**
 # [NIST Special Publication 800-90A Revision 1](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final)
