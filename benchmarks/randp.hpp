@@ -19,7 +19,7 @@ The raisons d'etre of this class are to test
 #include "../src/aes128_prng-defaults.h"
 #include "../src/allocate.h"
 #include "../src/randp-defaults.h"
-#include "aes128_prng.hpp"
+#include "aes_ctr_128_prng.hpp"
 
 #include <bit>
 #include <immintrin.h>
