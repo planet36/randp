@@ -11,7 +11,7 @@ Inspired by \c arc4random.
 */
 
 #include "../randp.h"
-#include "aes128_prng.h"
+#include "aes_ctr_128_prng.h"
 #include "allocate.h"
 #include "nearlydivisionless.h"
 #include "randp-defaults.h"
