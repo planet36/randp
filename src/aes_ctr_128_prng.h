@@ -10,7 +10,7 @@
 #pragma once
 
 #include "aes128-utils.h"
-#include "aes128_prng-defaults.h"
+#include "aes_ctr_128_prng-defaults.h"
 
 #include <err.h>
 #include <immintrin.h>
