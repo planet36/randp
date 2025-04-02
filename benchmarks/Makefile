@@ -17,6 +17,9 @@ LDLIBS += `pkg-config --libs benchmark`
 #LDLIBS += -l$(LIBNAME)
 LDLIBS += ../$(ANAME)
 
+# Use N-1 threads in most of the tests
+export NUM_THREADS := $(shell nproc --ignore 1)
+
 # Should be an odd number for simpler median
 BENCHMARK_REPS := 7
 
@@ -44,19 +47,19 @@ bash process-results.bash $(OUTPUT_DIR)/$@.$(DATETIME).txt | tee $(OUTPUT_DIR)/$
 endef
 
 mutex: benchmark-mutex | $(OUTPUT_DIR)
-	NUM_THREADS=$(shell nproc --ignore 1) $(benchmark-recipe)
+	$(benchmark-recipe)
 
 num-blocks: benchmark-num-blocks | $(OUTPUT_DIR)
-	NUM_THREADS=$(shell nproc --ignore 1) $(benchmark-recipe)
+	$(benchmark-recipe)
 
 others: benchmark-others | $(OUTPUT_DIR)
 	NUM_THREADS=1 $(benchmark-recipe)
 
 prng-params: benchmark-prng-params | $(OUTPUT_DIR)
-	NUM_THREADS=$(shell nproc --ignore 1) $(benchmark-recipe)
+	$(benchmark-recipe)
 
 reseed-countdown: benchmark-reseed-countdown | $(OUTPUT_DIR)
-	NUM_THREADS=$(shell nproc --ignore 1) $(benchmark-recipe)
+	$(benchmark-recipe)
 
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
