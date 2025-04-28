@@ -43,41 +43,41 @@ template <
 >
 struct randp
 {
-	static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
-	static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN),
-	              "randp reseed countdown must be a power of 2 to prevent modulo bias");
+    static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
+    static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN),
+                  "randp reseed countdown must be a power of 2 to prevent modulo bias");
 
-	static constexpr size_t RANDP_NUM_BYTES =
-	    RANDP_NUM_BLOCKS * sizeof(__m128i);
+    static constexpr size_t RANDP_NUM_BYTES =
+        RANDP_NUM_BLOCKS * sizeof(__m128i);
 
-	uint8_t pool[RANDP_NUM_BYTES];
-	aes128_prng<enc, dm, Nk, Nr> prng;
-	size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
-	size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
+    uint8_t pool[RANDP_NUM_BYTES];
+    aes128_prng<enc, dm, Nk, Nr> prng;
+    size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
+    size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
 
-	void regen()
-	{
-		if (this->reseed_countdown == 0)
-		{
-			prng.reseed();
-			this->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
-			// eliminate variations
+    void regen()
+    {
+        if (this->reseed_countdown == 0)
+        {
+            prng.reseed();
+            this->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
+            // eliminate variations
 #if 0
-			this->reseed_countdown +=
-			    (__builtin_ia32_rdtsc() % RANDP_RESEED_COUNTDOWN_MIN) / 2;
+            this->reseed_countdown +=
+                (__builtin_ia32_rdtsc() % RANDP_RESEED_COUNTDOWN_MIN) / 2;
 #endif
-		}
+        }
 
-		__m128i* blocks = (__m128i*)(&this->pool[0]);
+        __m128i* blocks = (__m128i*)(&this->pool[0]);
 
-		for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
-		{
-			blocks[i] = prng.next();
-		}
+        for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
+        {
+            blocks[i] = prng.next();
+        }
 
-		this->rand_bytes_remaining = RANDP_NUM_BYTES;
-		--this->reseed_countdown;
-	}
+        this->rand_bytes_remaining = RANDP_NUM_BYTES;
+        --this->reseed_countdown;
+    }
 };
 
 template <
@@ -93,51 +93,51 @@ template <
 void
 randp_bytes(void* buf, size_t n)
 {
-	using randp_t =
-	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
+    using randp_t =
+        randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
-	static thread_local randp_t* this_ = nullptr;
+    static thread_local randp_t* this_ = nullptr;
 
-	static_assert(alignof(randp_t) == alignof(__m128i),
-	              "randp must have alignment of __m128i");
+    static_assert(alignof(randp_t) == alignof(__m128i),
+                  "randp must have alignment of __m128i");
 
-	static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
-	              "randp pool must start on 16-byte boundary");
+    static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
+                  "randp pool must start on 16-byte boundary");
 
-	static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
+    static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
-	if (this_ == nullptr)
+    if (this_ == nullptr)
 #ifdef __cplusplus
-		this_ = (decltype(this_))allocate(sizeof(*this_));
+        this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
-		this_ = (typeof(this_))allocate(sizeof(*this_));
+        this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
 
-	uint8_t* dst = (uint8_t*)buf;
+    uint8_t* dst = (uint8_t*)buf;
 
-	while (n > 0)
-	{
-		if (this_->rand_bytes_remaining == 0)
-			this_->regen();
+    while (n > 0)
+    {
+        if (this_->rand_bytes_remaining == 0)
+            this_->regen();
 
-		uint8_t* src =
-		    &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src =
+            &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-		const size_t m = MIN(n, this_->rand_bytes_remaining);
+        const size_t m = MIN(n, this_->rand_bytes_remaining);
 
-		(void)memcpy(dst, src, m);
+        (void)memcpy(dst, src, m);
 #if defined(memset_explicit)
-		(void)memset_explicit(src, 0, m);
+        (void)memset_explicit(src, 0, m);
 #elif defined(explicit_bzero)
-		explicit_bzero(src, m);
+        explicit_bzero(src, m);
 #else
-		(void)memset(src, 0, m);
+        (void)memset(src, 0, m);
 #endif
 
-		dst += m;
-		this_->rand_bytes_remaining -= m;
-		n -= m;
-	}
+        dst += m;
+        this_->rand_bytes_remaining -= m;
+        n -= m;
+    }
 }
 
 // {{{ This uses a global mutex instead of thread_local keyword for the randp*.
@@ -162,56 +162,56 @@ template <
 void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
-	using randp_t =
-	    randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
+    using randp_t =
+        randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
-	// Intentionally not thread_local
-	static randp_t* this_ = nullptr;
+    // Intentionally not thread_local
+    static randp_t* this_ = nullptr;
 
-	static_assert(alignof(randp_t) == alignof(__m128i),
-	              "randp must have alignment of __m128i");
+    static_assert(alignof(randp_t) == alignof(__m128i),
+                  "randp must have alignment of __m128i");
 
-	static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
-	              "randp pool must start on 16-byte boundary");
+    static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
+                  "randp pool must start on 16-byte boundary");
 
-	static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
+    static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
-	(void)pthread_mutex_lock(&randp_mtx);
+    (void)pthread_mutex_lock(&randp_mtx);
 
-	if (this_ == nullptr)
+    if (this_ == nullptr)
 #ifdef __cplusplus
-		this_ = (decltype(this_))allocate(sizeof(*this_));
+        this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
-		this_ = (typeof(this_))allocate(sizeof(*this_));
+        this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
 
-	uint8_t* dst = (uint8_t*)buf;
+    uint8_t* dst = (uint8_t*)buf;
 
-	while (n > 0)
-	{
-		if (this_->rand_bytes_remaining == 0)
-			this_->regen();
+    while (n > 0)
+    {
+        if (this_->rand_bytes_remaining == 0)
+            this_->regen();
 
-		uint8_t* src =
-		    &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src =
+            &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-		const size_t m = MIN(n, this_->rand_bytes_remaining);
+        const size_t m = MIN(n, this_->rand_bytes_remaining);
 
-		(void)memcpy(dst, src, m);
+        (void)memcpy(dst, src, m);
 #if defined(memset_explicit)
-		(void)memset_explicit(src, 0, m);
+        (void)memset_explicit(src, 0, m);
 #elif defined(explicit_bzero)
-		explicit_bzero(src, m);
+        explicit_bzero(src, m);
 #else
-		(void)memset(src, 0, m);
+        (void)memset(src, 0, m);
 #endif
 
-		dst += m;
-		this_->rand_bytes_remaining -= m;
-		n -= m;
-	}
+        dst += m;
+        this_->rand_bytes_remaining -= m;
+        n -= m;
+    }
 
-	(void)pthread_mutex_unlock(&randp_mtx);
+    (void)pthread_mutex_unlock(&randp_mtx);
 }
 
 // }}}

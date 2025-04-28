@@ -32,14 +32,14 @@ extern "C" {
 /// A PRNG that uses AES instructions
 struct aes128_prng
 {
-	static_assert(AES128_PRNG_NUM_KEYS >= 1);
-	static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-	static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
-	              "must do at least 2 rounds of AES enc/dec");
+    static_assert(AES128_PRNG_NUM_KEYS >= 1);
+    static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
+    static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
+                  "must do at least 2 rounds of AES enc/dec");
 
-	__m128i keys[AES128_PRNG_NUM_KEYS];
-	__m128i ctr; ///< The state/counter
-	__m128i inc; ///< The increment (must be odd)
+    __m128i keys[AES128_PRNG_NUM_KEYS];
+    __m128i ctr; ///< The state/counter
+    __m128i inc; ///< The increment (must be odd)
 };
 
 typedef struct aes128_prng aes128_prng;
@@ -55,53 +55,53 @@ static_assert(sizeof(aes128_prng) <= 256,
 static void
 aes128_prng_reseed(aes128_prng* this_)
 {
-	if (getentropy(this_, sizeof(*this_)) < 0)
-		err(EXIT_FAILURE, "getentropy");
-	this_->inc = mm_make_odd_epu64(this_->inc);
+    if (getentropy(this_, sizeof(*this_)) < 0)
+        err(EXIT_FAILURE, "getentropy");
+    this_->inc = mm_make_odd_epu64(this_->inc);
 }
 
 /// Get the next PRNG output via AES encryption.
 static inline __m128i
 aes128_prng_enc_next(aes128_prng* this_)
 {
-	const __m128i dst = aes128_enc(this_->ctr, this_->keys,
-	                               AES128_PRNG_NUM_KEYS,
-	                               AES128_PRNG_NUM_ROUNDS_PER_KEY);
-	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
-	return dst;
+    const __m128i dst = aes128_enc(this_->ctr, this_->keys,
+                                   AES128_PRNG_NUM_KEYS,
+                                   AES128_PRNG_NUM_ROUNDS_PER_KEY);
+    this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
+    return dst;
 }
 
 /// Get the next PRNG output via AES decryption.
 static inline __m128i
 aes128_prng_dec_next(aes128_prng* this_)
 {
-	const __m128i dst = aes128_dec(this_->ctr, this_->keys,
-	                               AES128_PRNG_NUM_KEYS,
-	                               AES128_PRNG_NUM_ROUNDS_PER_KEY);
-	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
-	return dst;
+    const __m128i dst = aes128_dec(this_->ctr, this_->keys,
+                                   AES128_PRNG_NUM_KEYS,
+                                   AES128_PRNG_NUM_ROUNDS_PER_KEY);
+    this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
+    return dst;
 }
 
 /// Get the next PRNG output via AES encryption and Davies-Meyer single-block-length compression function.
 static inline __m128i
 aes128_prng_enc_davies_meyer_next(aes128_prng* this_)
 {
-	const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
-	                                            AES128_PRNG_NUM_KEYS,
-	                                            AES128_PRNG_NUM_ROUNDS_PER_KEY);
-	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
-	return dst;
+    const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
+                                                AES128_PRNG_NUM_KEYS,
+                                                AES128_PRNG_NUM_ROUNDS_PER_KEY);
+    this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
+    return dst;
 }
 
 /// Get the next PRNG output via AES decryption and Davies-Meyer single-block-length compression function.
 static inline __m128i
 aes128_prng_dec_davies_meyer_next(aes128_prng* this_)
 {
-	const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
-	                                            AES128_PRNG_NUM_KEYS,
-	                                            AES128_PRNG_NUM_ROUNDS_PER_KEY);
-	this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
-	return dst;
+    const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
+                                                AES128_PRNG_NUM_KEYS,
+                                                AES128_PRNG_NUM_ROUNDS_PER_KEY);
+    this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
+    return dst;
 }
 
 #ifdef __cplusplus

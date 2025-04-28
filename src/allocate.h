@@ -24,21 +24,21 @@ extern "C" {
 static void*
 allocate(const size_t len)
 {
-	constexpr int prot = PROT_READ | PROT_WRITE;
-	constexpr int flags = MAP_PRIVATE | MAP_ANONYMOUS;
+    constexpr int prot = PROT_READ | PROT_WRITE;
+    constexpr int flags = MAP_PRIVATE | MAP_ANONYMOUS;
 
-	void* addr = mmap(nullptr, len, prot, flags, -1, 0);
+    void* addr = mmap(nullptr, len, prot, flags, -1, 0);
 
-	if (addr == MAP_FAILED)
-		err(EXIT_FAILURE, "mmap");
+    if (addr == MAP_FAILED)
+        err(EXIT_FAILURE, "mmap");
 
-	if (madvise(addr, len, MADV_DONTDUMP) < 0)
-		err(EXIT_FAILURE, "madvise");
+    if (madvise(addr, len, MADV_DONTDUMP) < 0)
+        err(EXIT_FAILURE, "madvise");
 
-	if (madvise(addr, len, MADV_WIPEONFORK) < 0)
-		err(EXIT_FAILURE, "madvise");
+    if (madvise(addr, len, MADV_WIPEONFORK) < 0)
+        err(EXIT_FAILURE, "madvise");
 
-	return addr;
+    return addr;
 }
 
 #ifdef __cplusplus

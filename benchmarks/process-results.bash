@@ -124,6 +124,6 @@ echo
 PATTERN="^rand_bytes_4GiB:"
 if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
 then
-	grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $4, $5}' | sort -n -k 2 | column --table --table-right 2 || exit
-	echo
+    grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $4, $5}' | sort -n -k 2 | column --table --table-right 2 || exit
+    echo
 fi
