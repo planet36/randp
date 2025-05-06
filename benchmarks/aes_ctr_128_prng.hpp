@@ -13,6 +13,7 @@ The raison d'etre of this class is to test
 #pragma once
 
 #include "../src/aes128-utils.h"
+#include "../src/make_odd.h"
 
 #include <err.h>
 #include <immintrin.h>

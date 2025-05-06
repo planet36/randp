@@ -11,6 +11,7 @@
 
 #include "aes128-utils.h"
 #include "aes_ctr_128_prng-defaults.h"
+#include "make_odd.h"
 
 #include <err.h>
 #include <immintrin.h>
