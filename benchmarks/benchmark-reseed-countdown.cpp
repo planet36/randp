@@ -43,6 +43,7 @@ int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
     // Copied from benchmark.h
+    benchmark::MaybeReenterWithoutASLR(argc, argv);
     benchmark::Initialize(&argc, argv);
 
     if (benchmark::ReportUnrecognizedArguments(argc, argv))
