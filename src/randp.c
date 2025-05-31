@@ -121,6 +121,25 @@ randp_regen(randp* this_)
     --this_->reseed_countdown;
 }
 
+/// Public API
+/**
+* <code>void randp_bytes(void* buf, size_t n)</code>
+* Fill a buffer with \a n random bytes
+* This is similar to \c arc4random_buf.
+*
+* <code>uint8_t randp_u8();</code>
+* <code>uint16_t randp_u16();</code>
+* <code>uint32_t randp_u32();</code>
+* <code>uint64_t randp_u64();</code>
+* Return a uniform random unsigned integer
+* This is similar to \c arc4random.
+*
+* <code>uint32_t randp_lt_u32(uint32_t upper_bound);</code>
+* Return a uniform random unsigned integer less than \a upper_bound
+* This is similar to \c arc4random_uniform.
+* If \a upper_bound is \c 0, it's treated as unbounded.
+*/
+
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
