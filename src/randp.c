@@ -218,6 +218,8 @@ randp_lt_u32(uint32_t upper_bound)
     return random_bounded_nearlydivisionless32(upper_bound, randp_u32);
 }
 
+#undef MIN
+
 #ifdef __cplusplus
 }
 #endif
