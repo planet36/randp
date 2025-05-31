@@ -7,7 +7,7 @@ SRCS := src/$(LIBNAME).c
 
 CFLAGS += -fPIC -ffreestanding -g
 
-all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
 
 $(ANAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $<
@@ -20,6 +20,10 @@ $(SONAME_1): $(SONAME_2)
 
 $(SONAME_0): $(SONAME_2)
 	@ln -s -f --verbose -- $< $@
+
+$(SINGLE_HEADER): $(OBJS)
+	@printf "#define RANDP_SINGLE_HEADER\n" > $@
+	python3 amalgamate.py $(SRCS) >> $@
 
 # TODO: test this
 install: all
@@ -42,7 +46,7 @@ uninstall:
 	@ldconfig --verbose
 
 clean:
-	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
 
 lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)

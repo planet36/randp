@@ -19,6 +19,7 @@ SONAME_0 := lib$(LIBNAME).so
 SONAME_1 := $(SONAME_0).$(VERSION_MAJOR)
 # "realname"
 SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
+SINGLE_HEADER := $(LIBNAME)-single.h
 
 # paths
 PREFIX ?= /usr/local
