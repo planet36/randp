@@ -3,7 +3,8 @@
 
 include ../config.mk
 
-# librandp is dynamically linked with the executables in this folder.
+# librandp is dynamically linked with the executables (except test-single) in
+# this folder.
 
 export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):..
 
@@ -24,6 +25,10 @@ $(BINS): ../$(SONAME_0)
 # The built-in recipe for the implicit rule uses $^ instead of $<
 %: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
+
+# This executable does not link with librandp.
+test-single: test-single.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 fork: test-fork
 	./$<
@@ -64,6 +69,9 @@ run-rngtest: test-dump | $(OUTPUT_DIR)
 	./$< mrand48     | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.mrand48.$(DATETIME).txt
 	openssl rand max | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.openssl-rand.$(DATETIME).txt
 
+single: test-single
+	./$<
+
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
 
@@ -71,6 +79,6 @@ clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all fork generate profile profile-kgui profile-qgui run-PractRand run-rngtest clean
+.PHONY: all fork generate profile profile-kgui profile-qgui run-PractRand run-rngtest single clean
 
 -include $(DEPS)
