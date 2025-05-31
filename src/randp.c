@@ -10,7 +10,6 @@ Inspired by \c arc4random.
 \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 */
 
-#include "../randp.h"
 #include "aes_ctr_128_prng.h"
 #include "allocate.h"
 #include "nearlydivisionless.h"
