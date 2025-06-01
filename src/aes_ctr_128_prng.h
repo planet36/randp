@@ -22,23 +22,23 @@
 extern "C" {
 #endif
 
-#if !defined(AES128_PRNG_NUM_KEYS)
-#define AES128_PRNG_NUM_KEYS DEFAULT_AES128_PRNG_NUM_KEYS
+#if !defined(AESCTR128_PRNG_NUM_KEYS)
+#define AESCTR128_PRNG_NUM_KEYS DEFAULT_AESCTR128_PRNG_NUM_KEYS
 #endif
 
-#if !defined(AES128_PRNG_NUM_ROUNDS_PER_KEY)
-#define AES128_PRNG_NUM_ROUNDS_PER_KEY DEFAULT_AES128_PRNG_NUM_ROUNDS_PER_KEY
+#if !defined(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY)
+#define AESCTR128_PRNG_NUM_ROUNDS_PER_KEY DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
 #endif
 
 /// A PRNG that uses AES instructions
 struct aes128_prng
 {
-    static_assert(AES128_PRNG_NUM_KEYS >= 1);
-    static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-    static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
+    static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);
+    static_assert(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
+    static_assert(AESCTR128_PRNG_NUM_KEYS * AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
                   "must do at least 2 rounds of AES enc/dec");
 
-    __m128i keys[AES128_PRNG_NUM_KEYS];
+    __m128i keys[AESCTR128_PRNG_NUM_KEYS];
     __m128i ctr; ///< The state/counter
     __m128i inc; ///< The increment (must be odd)
 };
@@ -66,8 +66,8 @@ static inline __m128i
 aes128_prng_enc_next(aes128_prng* this_)
 {
     const __m128i dst = aes128_enc(this_->ctr, this_->keys,
-                                   AES128_PRNG_NUM_KEYS,
-                                   AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                   AESCTR128_PRNG_NUM_KEYS,
+                                   AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
     this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
     return dst;
 }
@@ -77,8 +77,8 @@ static inline __m128i
 aes128_prng_dec_next(aes128_prng* this_)
 {
     const __m128i dst = aes128_dec(this_->ctr, this_->keys,
-                                   AES128_PRNG_NUM_KEYS,
-                                   AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                   AESCTR128_PRNG_NUM_KEYS,
+                                   AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
     this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
     return dst;
 }
@@ -88,8 +88,8 @@ static inline __m128i
 aes128_prng_enc_davies_meyer_next(aes128_prng* this_)
 {
     const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
-                                                AES128_PRNG_NUM_KEYS,
-                                                AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                                AESCTR128_PRNG_NUM_KEYS,
+                                                AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
     this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
     return dst;
 }
@@ -99,8 +99,8 @@ static inline __m128i
 aes128_prng_dec_davies_meyer_next(aes128_prng* this_)
 {
     const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
-                                                AES128_PRNG_NUM_KEYS,
-                                                AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                                AESCTR128_PRNG_NUM_KEYS,
+                                                AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
     this_->ctr = _mm_add_epi64(this_->ctr, this_->inc);
     return dst;
 }

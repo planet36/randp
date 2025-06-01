@@ -7,7 +7,7 @@
 \author Steven Ward
 
 The raison d'etre of this class is to test
-1. different values of \c AES128_PRNG_NUM_KEYS and \c AES128_PRNG_NUM_ROUNDS_PER_KEY
+1. different values of \c AESCTR128_PRNG_NUM_KEYS and \c AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
 */
 
 #pragma once
@@ -22,17 +22,17 @@ The raison d'etre of this class is to test
 
 /// A PRNG that uses AES instructions
 template <bool enc, bool dm,
-          size_t AES128_PRNG_NUM_KEYS,
-          size_t AES128_PRNG_NUM_ROUNDS_PER_KEY>
+          size_t AESCTR128_PRNG_NUM_KEYS,
+          size_t AESCTR128_PRNG_NUM_ROUNDS_PER_KEY>
 struct aes128_prng
 {
-    static_assert(AES128_PRNG_NUM_KEYS >= 1);
-    static_assert(AES128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-    static_assert(AES128_PRNG_NUM_KEYS * AES128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
+    static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);
+    static_assert(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
+    static_assert(AESCTR128_PRNG_NUM_KEYS * AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
                   "must do at least 2 rounds of AES enc/dec");
 
 private:
-    __m128i keys[AES128_PRNG_NUM_KEYS];
+    __m128i keys[AESCTR128_PRNG_NUM_KEYS];
     __m128i ctr; ///< The state/counter
     __m128i inc; ///< The increment (must be odd)
 
@@ -64,23 +64,23 @@ public:
         {
             if constexpr (dm)
                 dst = aes128_enc_davies_meyer(this->ctr, this->keys,
-                                              AES128_PRNG_NUM_KEYS,
-                                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                              AESCTR128_PRNG_NUM_KEYS,
+                                              AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
             else
                 dst = aes128_enc(this->ctr, this->keys,
-                                 AES128_PRNG_NUM_KEYS,
-                                 AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                 AESCTR128_PRNG_NUM_KEYS,
+                                 AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
         }
         else
         {
             if constexpr (dm)
                 dst = aes128_dec_davies_meyer(this->ctr, this->keys,
-                                              AES128_PRNG_NUM_KEYS,
-                                              AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                              AESCTR128_PRNG_NUM_KEYS,
+                                              AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
             else
                 dst = aes128_dec(this->ctr, this->keys,
-                                 AES128_PRNG_NUM_KEYS,
-                                 AES128_PRNG_NUM_ROUNDS_PER_KEY);
+                                 AESCTR128_PRNG_NUM_KEYS,
+                                 AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
         }
         this->ctr = _mm_add_epi64(this->ctr, this->inc);
         return dst;
