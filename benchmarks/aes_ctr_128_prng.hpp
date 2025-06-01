@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-/// AES-128 PRNG (This C++ implementation is used only for benchmarking.)
+/// AES-CTR-128 PRNG (This C++ implementation is used only for benchmarking.)
 /**
 \file
 \author Steven Ward

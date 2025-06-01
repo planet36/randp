@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: OSL-3.0
 
-/// Default values for AES-128 PRNG
+/// Default values for AES-CTR-128 PRNG
 /**
 \file
 \author Steven Ward
