@@ -21,7 +21,8 @@ The raison d'etre of this class is to test
 #include <unistd.h>
 
 /// A PRNG that uses AES instructions
-template <bool enc, bool dm,
+template <bool enc,
+          bool dm,
           size_t AESCTR128_PRNG_NUM_KEYS,
           size_t AESCTR128_PRNG_NUM_ROUNDS_PER_KEY>
 struct aes_ctr_128_prng
@@ -40,7 +41,7 @@ public:
     aes_ctr_128_prng()
     {
         static_assert(sizeof(*this) <= 256,
-            "getentropy will fail if more than 256 bytes are requested");
+                      "getentropy will fail if more than 256 bytes are requested");
         reseed();
     }
 
@@ -63,23 +64,19 @@ public:
         if constexpr (enc)
         {
             if constexpr (dm)
-                dst = aes128_enc_davies_meyer(this->ctr, this->keys,
-                                              AESCTR128_PRNG_NUM_KEYS,
+                dst = aes128_enc_davies_meyer(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
                                               AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
             else
-                dst = aes128_enc(this->ctr, this->keys,
-                                 AESCTR128_PRNG_NUM_KEYS,
+                dst = aes128_enc(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
                                  AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
         }
         else
         {
             if constexpr (dm)
-                dst = aes128_dec_davies_meyer(this->ctr, this->keys,
-                                              AESCTR128_PRNG_NUM_KEYS,
+                dst = aes128_dec_davies_meyer(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
                                               AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
             else
-                dst = aes128_dec(this->ctr, this->keys,
-                                 AESCTR128_PRNG_NUM_KEYS,
+                dst = aes128_dec(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
                                  AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
         }
         this->ctr = _mm_add_epi64(this->ctr, this->inc);

@@ -55,9 +55,8 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 #define RANDP_RESEED_COUNTDOWN_MIN DEFAULT_RANDP_RESEED_COUNTDOWN_MIN
 #endif
 
-static_assert(
-    __builtin_popcount(RANDP_RESEED_COUNTDOWN_MIN) == 1,
-    "randp reseed countdown must be a power of 2 to prevent modulo bias");
+static_assert(__builtin_popcount(RANDP_RESEED_COUNTDOWN_MIN) == 1,
+              "randp reseed countdown must be a power of 2 to prevent modulo bias");
 
 #if !defined(RANDP_RESEED_COUNTDOWN_ADD_JITTER)
 #define RANDP_RESEED_COUNTDOWN_ADD_JITTER DEFAULT_RANDP_RESEED_COUNTDOWN_ADD_JITTER
@@ -74,8 +73,7 @@ struct randp
 
 typedef struct randp randp;
 
-static_assert(alignof(randp) == sizeof(__m128i),
-              "randp must have alignment of __m128i");
+static_assert(alignof(randp) == sizeof(__m128i), "randp must have alignment of __m128i");
 
 static_assert(offsetof(randp, pool) % sizeof(__m128i) == 0,
               "randp pool must start on 16-byte boundary");
@@ -162,8 +160,7 @@ randp_bytes(void* buf, size_t n)
         if (this_->rand_bytes_remaining == 0)
             randp_regen(this_);
 
-        uint8_t* src =
-            &this_->pool[RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src = &this_->pool[RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
         const size_t m = MIN(n, this_->rand_bytes_remaining);
 

@@ -47,8 +47,7 @@ struct randp
     static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN),
                   "randp reseed countdown must be a power of 2 to prevent modulo bias");
 
-    static constexpr size_t RANDP_NUM_BYTES =
-        RANDP_NUM_BLOCKS * sizeof(__m128i);
+    static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 
     uint8_t pool[RANDP_NUM_BYTES];
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
@@ -93,8 +92,7 @@ template <
 void
 randp_bytes(void* buf, size_t n)
 {
-    using randp_t =
-        randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
     static thread_local randp_t* this_ = nullptr;
 
@@ -120,8 +118,7 @@ randp_bytes(void* buf, size_t n)
         if (this_->rand_bytes_remaining == 0)
             this_->regen();
 
-        uint8_t* src =
-            &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
         const size_t m = MIN(n, this_->rand_bytes_remaining);
 
@@ -162,8 +159,7 @@ template <
 void
 randp_bytes_MUTEX(void* buf, size_t n)
 {
-    using randp_t =
-        randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
     // Intentionally not thread_local
     static randp_t* this_ = nullptr;
@@ -192,8 +188,7 @@ randp_bytes_MUTEX(void* buf, size_t n)
         if (this_->rand_bytes_remaining == 0)
             this_->regen();
 
-        uint8_t* src =
-            &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
         const size_t m = MIN(n, this_->rand_bytes_remaining);
 

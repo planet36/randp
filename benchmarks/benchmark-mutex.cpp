@@ -12,8 +12,8 @@
 
 void
 BM_rand_bytes(benchmark::State& BM_state,
-            const std::function<void(uint8_t*, size_t)>& fn,
-            const size_t buf_size)
+              const std::function<void(uint8_t*, size_t)>& fn,
+              const size_t buf_size)
 {
     // Perform setup here
 
@@ -33,15 +33,14 @@ BM_rand_bytes(benchmark::State& BM_state,
 
 void
 BM_rand_bytes_4GiB(benchmark::State& BM_state,
-                 const std::function<void(uint8_t*, size_t)>& fn)
+                   const std::function<void(uint8_t*, size_t)>& fn)
 {
     // Perform setup here
 
     uint8_t buf[1U << 8];
     static_assert(sizeof(buf) <= 256,
                   "getentropy will fail if more than 256 bytes are requested");
-    static_assert(std::has_single_bit(sizeof(buf)),
-                  "buffer size must be a power of 2");
+    static_assert(std::has_single_bit(sizeof(buf)), "buffer size must be a power of 2");
 
     for (auto _ : BM_state)
     {
