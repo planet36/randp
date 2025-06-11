@@ -51,7 +51,7 @@ struct randp
         RANDP_NUM_BLOCKS * sizeof(__m128i);
 
     uint8_t pool[RANDP_NUM_BYTES];
-    aes128_prng<enc, dm, Nk, Nr> prng;
+    aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
     size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
     size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
 

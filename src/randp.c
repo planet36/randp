@@ -67,7 +67,7 @@ static_assert(
 struct randp
 {
     uint8_t pool[RANDP_NUM_BYTES];
-    aes128_prng prng;
+    aes_ctr_128_prng prng;
     size_t reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     size_t rand_bytes_remaining; ///< The pool is regenerated when this is 0.
 };
@@ -87,7 +87,7 @@ randp_regen(randp* this_)
 {
     if (this_->reseed_countdown == 0)
     {
-        aes128_prng_reseed(&this_->prng);
+        aes_ctr_128_prng_reseed(&this_->prng);
         this_->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
 
         if (RANDP_RESEED_COUNTDOWN_ADD_JITTER)
@@ -104,16 +104,16 @@ randp_regen(randp* this_)
         if (RANDP_PRNG_USE_ENC)
         {
             if (RANDP_PRNG_USE_DAVIES_MEYER)
-                blocks[i] = aes128_prng_enc_davies_meyer_next(&this_->prng);
+                blocks[i] = aes_ctr_128_prng_enc_davies_meyer_next(&this_->prng);
             else
-                blocks[i] = aes128_prng_enc_next(&this_->prng);
+                blocks[i] = aes_ctr_128_prng_enc_next(&this_->prng);
         }
         else
         {
             if (RANDP_PRNG_USE_DAVIES_MEYER)
-                blocks[i] = aes128_prng_dec_davies_meyer_next(&this_->prng);
+                blocks[i] = aes_ctr_128_prng_dec_davies_meyer_next(&this_->prng);
             else
-                blocks[i] = aes128_prng_dec_next(&this_->prng);
+                blocks[i] = aes_ctr_128_prng_dec_next(&this_->prng);
         }
     }
 

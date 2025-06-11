@@ -31,7 +31,7 @@ extern "C" {
 #endif
 
 /// A PRNG that uses AES instructions
-struct aes128_prng
+struct aes_ctr_128_prng
 {
     static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);
     static_assert(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
@@ -43,9 +43,9 @@ struct aes128_prng
     __m128i inc; ///< The increment (must be odd)
 };
 
-typedef struct aes128_prng aes128_prng;
+typedef struct aes_ctr_128_prng aes_ctr_128_prng;
 
-static_assert(sizeof(aes128_prng) <= 256,
+static_assert(sizeof(aes_ctr_128_prng) <= 256,
               "getentropy will fail if more than 256 bytes are requested");
 
 /// Assign random bytes to the data members via \c getentropy.
@@ -54,7 +54,7 @@ static_assert(sizeof(aes128_prng) <= 256,
 * Therefore, \c inc shall be made odd.
 */
 static void
-aes128_prng_reseed(aes128_prng* this_)
+aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
 {
     if (getentropy(this_, sizeof(*this_)) < 0)
         err(EXIT_FAILURE, "getentropy");
@@ -63,7 +63,7 @@ aes128_prng_reseed(aes128_prng* this_)
 
 /// Get the next PRNG output via AES encryption.
 static inline __m128i
-aes128_prng_enc_next(aes128_prng* this_)
+aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
 {
     const __m128i dst = aes128_enc(this_->ctr, this_->keys,
                                    AESCTR128_PRNG_NUM_KEYS,
@@ -74,7 +74,7 @@ aes128_prng_enc_next(aes128_prng* this_)
 
 /// Get the next PRNG output via AES decryption.
 static inline __m128i
-aes128_prng_dec_next(aes128_prng* this_)
+aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
 {
     const __m128i dst = aes128_dec(this_->ctr, this_->keys,
                                    AESCTR128_PRNG_NUM_KEYS,
@@ -85,7 +85,7 @@ aes128_prng_dec_next(aes128_prng* this_)
 
 /// Get the next PRNG output via AES encryption and Davies-Meyer single-block-length compression function.
 static inline __m128i
-aes128_prng_enc_davies_meyer_next(aes128_prng* this_)
+aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
 {
     const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
                                                 AESCTR128_PRNG_NUM_KEYS,
@@ -96,7 +96,7 @@ aes128_prng_enc_davies_meyer_next(aes128_prng* this_)
 
 /// Get the next PRNG output via AES decryption and Davies-Meyer single-block-length compression function.
 static inline __m128i
-aes128_prng_dec_davies_meyer_next(aes128_prng* this_)
+aes_ctr_128_prng_dec_davies_meyer_next(aes_ctr_128_prng* this_)
 {
     const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
                                                 AESCTR128_PRNG_NUM_KEYS,

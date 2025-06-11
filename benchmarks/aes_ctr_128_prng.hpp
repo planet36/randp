@@ -24,7 +24,7 @@ The raison d'etre of this class is to test
 template <bool enc, bool dm,
           size_t AESCTR128_PRNG_NUM_KEYS,
           size_t AESCTR128_PRNG_NUM_ROUNDS_PER_KEY>
-struct aes128_prng
+struct aes_ctr_128_prng
 {
     static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);
     static_assert(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
@@ -37,7 +37,7 @@ private:
     __m128i inc; ///< The increment (must be odd)
 
 public:
-    aes128_prng()
+    aes_ctr_128_prng()
     {
         static_assert(sizeof(*this) <= 256,
             "getentropy will fail if more than 256 bytes are requested");
