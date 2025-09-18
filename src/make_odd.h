@@ -9,11 +9,15 @@
 
 #pragma once
 
+#if defined(__x86_64__)
+
 #include <immintrin.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#if defined(__SSE2__)
 
 /// Make the packed unsigned 8-bit integers odd
 static inline __m128i
@@ -42,6 +46,8 @@ mm_make_odd_epu64(const __m128i a)
 {
     return _mm_or_si128(a, _mm_set1_epi64x(1));
 }
+
+#endif
 
 #if defined(__AVX2__)
 
@@ -109,4 +115,6 @@ mm512_make_odd_epu64(const __m512i a)
 
 #ifdef __cplusplus
 } // extern "C"
+#endif
+
 #endif
