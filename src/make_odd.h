@@ -75,6 +75,38 @@ mm256_make_odd_epu64(const __m256i a)
 
 #endif
 
+#if defined(__AVX512F__)
+
+/// Make the packed unsigned 8-bit integers odd
+static inline __m512i
+mm512_make_odd_epu8(const __m512i a)
+{
+    return _mm512_or_si512(a, _mm512_set1_epi8(1));
+}
+
+/// Make the packed unsigned 16-bit integers odd
+static inline __m512i
+mm512_make_odd_epu16(const __m512i a)
+{
+    return _mm512_or_si512(a, _mm512_set1_epi16(1));
+}
+
+/// Make the packed unsigned 32-bit integers odd
+static inline __m512i
+mm512_make_odd_epu32(const __m512i a)
+{
+    return _mm512_or_si512(a, _mm512_set1_epi32(1));
+}
+
+/// Make the packed unsigned 64-bit integers odd
+static inline __m512i
+mm512_make_odd_epu64(const __m512i a)
+{
+    return _mm512_or_si512(a, _mm512_set1_epi64(1));
+}
+
+#endif
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
