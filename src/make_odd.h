@@ -3,8 +3,8 @@
 
 /// Make packed unsigned integers odd
 /**
-\file
-\author Steven Ward
+* \file
+* \author Steven Ward
 */
 
 #pragma once
