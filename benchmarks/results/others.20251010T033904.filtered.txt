@@ -1,0 +1,83 @@
+Linux 6.17.1-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.42
+gcc (GCC) 15.2.1 20250813
+libbenchmark.so.1.9.4
+librandp.so.4.4
+
+# Median time per call
+
+rand_uint:8b:randp_u8  6.28  ns
+
+rand_uint:16b:randp_u16  6.41  ns
+rand_uint:16b:rdrand16    287  ns
+rand_uint:16b:rdseed16   1814  ns
+
+rand_uint:32b:randp_u32   6.65  ns
+rand_uint:32b:arc4random  15.3  ns
+rand_uint:32b:rdrand32     286  ns
+rand_uint:32b:rdseed32    1813  ns
+
+rand_uint:64b:randp_u64  6.35  ns
+rand_uint:64b:rdrand64    290  ns
+rand_uint:64b:rdseed64   1812  ns
+
+# Median time per call
+
+rand_lt-one:32b:randp_lt_u32        6.50  ns
+rand_lt-one:32b:arc4random_uniform  21.1  ns
+
+# Median calls per second
+
+rand_lt-many:32b:randp_lt_u32        158.683M/s
+rand_lt-many:32b:arc4random_uniform  43.9428M/s
+
+# Median bytes per second copied to buffer (of size bytes)
+
+rand_bytes:1B:randp_bytes     172.927Mi/s
+rand_bytes:1B:arc4random_buf  92.1091Mi/s
+rand_bytes:1B:getentropy      5.47433Mi/s
+
+rand_bytes:2B:randp_bytes     352.754Mi/s
+rand_bytes:2B:arc4random_buf  153.552Mi/s
+rand_bytes:2B:getentropy      11.0115Mi/s
+
+rand_bytes:4B:randp_bytes     678.412Mi/s
+rand_bytes:4B:arc4random_buf  262.228Mi/s
+rand_bytes:4B:getentropy      21.9575Mi/s
+
+rand_bytes:8B:randp_bytes     1.27641Gi/s
+rand_bytes:8B:arc4random_buf  383.487Mi/s
+rand_bytes:8B:getentropy      44.0224Mi/s
+
+rand_bytes:16B:randp_bytes     2.25673Gi/s
+rand_bytes:16B:arc4random_buf  492.464Mi/s
+rand_bytes:16B:getentropy      87.6264Mi/s
+
+rand_bytes:32B:randp_bytes     5.38704Gi/s
+rand_bytes:32B:arc4random_buf  582.973Mi/s
+rand_bytes:32B:getentropy      174.438Mi/s
+
+rand_bytes:64B:randp_bytes     9.17423Gi/s
+rand_bytes:64B:arc4random_buf  642.864Mi/s
+rand_bytes:64B:getentropy      251.144Mi/s
+
+rand_bytes:128B:randp_bytes     14.7014Gi/s
+rand_bytes:128B:arc4random_buf  696.879Mi/s
+rand_bytes:128B:getentropy      383.541Mi/s
+
+rand_bytes:256B:randp_bytes     21.5476Gi/s
+rand_bytes:256B:arc4random_buf  801.624Mi/s
+rand_bytes:256B:getentropy      518.672Mi/s
+
+# Median bytes per second copied to buffer (of size pages)
+
+rand_bytes:1pg:randp_bytes     25.989Gi/s
+rand_bytes:1pg:arc4random_buf  922.5Mi/s
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes      202  ms
+rand_bytes_4GiB:arc4random_buf  5139  ms
+rand_bytes_4GiB:getentropy      7974  ms
+

@@ -1,0 +1,52 @@
+Linux 6.17.1-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.42
+gcc (GCC) 15.2.1 20250813
+libbenchmark.so.1.9.4
+librandp.so.4.4
+
+# Median time per call
+
+# Median time per call
+
+# Median calls per second
+
+# Median bytes per second copied to buffer (of size bytes)
+
+rand_bytes:1B:randp_bytes        133.436Mi/s
+rand_bytes:1B:randp_bytes_MUTEX  4.26347Mi/s
+
+rand_bytes:2B:randp_bytes        267.18Mi/s
+rand_bytes:2B:randp_bytes_MUTEX  6.88655Mi/s
+
+rand_bytes:4B:randp_bytes        524.38Mi/s
+rand_bytes:4B:randp_bytes_MUTEX  23.853Mi/s
+
+rand_bytes:8B:randp_bytes        1018.47Mi/s
+rand_bytes:8B:randp_bytes_MUTEX  33.0399Mi/s
+
+rand_bytes:16B:randp_bytes        1.8685Gi/s
+rand_bytes:16B:randp_bytes_MUTEX  56.2647Mi/s
+
+rand_bytes:32B:randp_bytes        4.33223Gi/s
+rand_bytes:32B:randp_bytes_MUTEX  133.681Mi/s
+
+rand_bytes:64B:randp_bytes        8.48267Gi/s
+rand_bytes:64B:randp_bytes_MUTEX  216.672Mi/s
+
+rand_bytes:128B:randp_bytes        13.4464Gi/s
+rand_bytes:128B:randp_bytes_MUTEX  611.081Mi/s
+
+rand_bytes:256B:randp_bytes        18.1844Gi/s
+rand_bytes:256B:randp_bytes_MUTEX  713.066Mi/s
+
+# Median bytes per second copied to buffer (of size pages)
+
+rand_bytes:1pg:randp_bytes        20.7071Gi/s
+rand_bytes:1pg:randp_bytes_MUTEX  3.73567Gi/s
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes         216  ms
+rand_bytes_4GiB:randp_bytes_MUTEX  7208  ms
+
