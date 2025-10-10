@@ -1,0 +1,16 @@
+rngtest 6.17
+Copyright (c) 2004 by Henrique de Moraes Holschuh
+This is free software; see the source for copying conditions.  There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+rngtest: starting FIPS tests...
+rngtest: bits received from input: 20000000032
+rngtest: FIPS 140-2 successes: 999208
+rngtest: FIPS 140-2 failures: 792
+rngtest: FIPS 140-2(2001-10-10) Monobit: 108
+rngtest: FIPS 140-2(2001-10-10) Poker: 101
+rngtest: FIPS 140-2(2001-10-10) Runs: 313
+rngtest: FIPS 140-2(2001-10-10) Long run: 276
+rngtest: FIPS 140-2(2001-10-10) Continuous run: 0
+rngtest: input channel speed: (min=802.698; avg=5373234.312; max=19531250.000)Kibits/s
+rngtest: FIPS tests speed: (min=152.800; avg=290005.120; max=315020.161)Kibits/s
+rngtest: Program run time: 71037183 microseconds
