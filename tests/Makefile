@@ -54,7 +54,6 @@ profile-kgui: profile
 profile-qgui: profile
 	qcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
 
-# Takes about 3 hours
 run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: Each test takes about 60 minutes on my fast (in AD 2024) computer"
 	./$<             | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.$(DATETIME).txt
@@ -62,7 +61,6 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 	./$< mrand48     | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
 	openssl rand max | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
 
-# Takes about 5 minutes
 run-rngtest: test-dump | $(OUTPUT_DIR)
 	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.randp.$(DATETIME).txt
 	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
