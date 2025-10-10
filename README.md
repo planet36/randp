@@ -92,6 +92,43 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 [^getrandom_vdso_2]: https://lwn.net/Articles/983186/
 
+### 2025-10-09
+
+#### System Info
+
+- Linux 6.17.1-arch1-1 x86_64
+- 13th Gen Intel(R) Core(TM) i9-13980HX
+- ldd (GNU libc) 2.42
+- gcc (GCC) 15.2.1 20250813
+- libbenchmark.so.1.9.4
+- librandp.so.4.4
+
+#### Fill a buffer with random bytes
+
+| Function | Median time to generate 4 GiB | |
+|---|---:|---|
+| `randp_bytes`    |  202  ms | 25.4&times; faster |
+| `arc4random_buf` | 5139  ms | |
+| `getentropy`     | 7974  ms | |
+
+#### Get a uniform random `uint32_t`
+
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_u32`  | 6.65  ns | 2.3&times; faster |
+| `arc4random` | 15.3  ns | |
+| `rdrand32`   |  286  ns | |
+| `rdseed32`   | 1813  ns | |
+
+Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32_step`, respectively.
+
+#### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
+
+| Function | Median calls per second | |
+|---|---:|---|
+| `randp_lt_u32`       | 158.683M/s | 3.6&times; more |
+| `arc4random_uniform` | 43.9428M/s | |
+
 ### 2025-02-03
 
 #### System Info
