@@ -117,6 +117,7 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
     - `RDSEED`
     - `getentropy`
     - `arc4random`
+  - The `num-blocks`, `prng-params`, and `reseed-countdown` benchmarks compare varying parameters of randp and its internal PRNG.
   - All the benchmarks take about 10 minutes.
 
 ### Refine the randp parameters
@@ -285,7 +286,9 @@ It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or 
     * Change `-te` from `0` to `1`
     * Increase `-tlmax`
 
-## Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
+## FAQ
+
+### Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
 
 No claims are made that randp is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).  Of the following critera of a CSPRNG, it hasn't satisfied numbers 6, 7, or 8.
 
