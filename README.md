@@ -219,7 +219,9 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 
 [^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
 
-### To run the benchmarks
+## Benchmarks
+
+### Dependencies
 
 * [Google Benchmark](https://github.com/google/benchmark)
 * [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
@@ -228,6 +230,26 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 [^arc4random_1]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
 
 [^arc4random_2]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
+
+### Example commands
+
+`make mutex num-blocks others prng-params reseed-countdown`
+  - The `mutex` benchmark compares the use of `pthread_mutex_t` and `thread_local`.
+  - The `others` benchmark compares randp to these PRNGs:
+    - `RDRAND`
+    - `RDSEED`
+    - `getentropy`
+    - `arc4random`
+  - All the benchmarks take about 10 minutes.
+
+### Refine the randp parameters
+
+Run these targets in the following order to refine the parameters of randp.
+
+1. `make num-blocks`: find optimal `DEFAULT_RANDP_NUM_BLOCKS`
+2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_COUNTDOWN_MIN`
+3. `make prng-params`: find optimal `DEFAULT_AESCTR128_PRNG_NUM_KEYS` and `DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY`
+4. _repeat_
 
 ### To run the tests
 
