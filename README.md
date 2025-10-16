@@ -80,7 +80,55 @@ Upon first use, the pseudorandom number generator (PRNG) is initialized/seeded b
 
 As bytes are retrieved from the pool, they are zeroized.  After a certain number of bytes has been read, the PRNG is reseeded, and the pool is filled again with random bytes.  See [src/randp.c](src/randp.c) for details.
 
-## Benchmark Results
+## Dependencies
+
+### To build and use randp
+
+* A processor with [AES instructions](https://en.wikipedia.org/wiki/AES_instruction_set)
+* [Linux 4.14](https://kernelnewbies.org/Linux_4.14) or newer
+  * [`MADV_WIPEONFORK`](https://man7.org/linux/man-pages/man2/madvise.2.html#:~:text=of%20memory%20pressure.-,MADV_WIPEONFORK) was added in Linux 4.14
+* [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
+  * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
+* [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
+  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
+
+[^getentropy_1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
+
+[^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
+
+## Benchmarks
+
+### Dependencies
+
+* [Google Benchmark](https://github.com/google/benchmark)
+* [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
+  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
+
+[^arc4random_1]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
+
+[^arc4random_2]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
+
+### Example commands
+
+`make mutex num-blocks others prng-params reseed-countdown`
+  - The `mutex` benchmark compares the use of `pthread_mutex_t` and `thread_local`.
+  - The `others` benchmark compares randp to these PRNGs:
+    - `RDRAND`
+    - `RDSEED`
+    - `getentropy`
+    - `arc4random`
+  - All the benchmarks take about 10 minutes.
+
+### Refine the randp parameters
+
+Run these targets in the following order to refine the parameters of randp.
+
+1. `make num-blocks`: find optimal `DEFAULT_RANDP_NUM_BLOCKS`
+2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_COUNTDOWN_MIN`
+3. `make prng-params`: find optimal `DEFAULT_AESCTR128_PRNG_NUM_KEYS` and `DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY`
+4. _repeat_
+
+### Benchmark Results
 
 > [!NOTE]
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different that the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).
@@ -202,54 +250,6 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 |---|---:|---|
 | `randp_lt_u32`       | 149.148M/s | 39&times; more |
 | `arc4random_uniform` | 3.7692M/s  | |
-
-## Dependencies
-
-### To build and use randp
-
-* A processor with [AES instructions](https://en.wikipedia.org/wiki/AES_instruction_set)
-* [Linux 4.14](https://kernelnewbies.org/Linux_4.14) or newer
-  * [`MADV_WIPEONFORK`](https://man7.org/linux/man-pages/man2/madvise.2.html#:~:text=of%20memory%20pressure.-,MADV_WIPEONFORK) was added in Linux 4.14
-* [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
-  * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
-* [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
-  * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
-
-[^getentropy_1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
-
-[^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
-
-## Benchmarks
-
-### Dependencies
-
-* [Google Benchmark](https://github.com/google/benchmark)
-* [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
-  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
-
-[^arc4random_1]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
-
-[^arc4random_2]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
-
-### Example commands
-
-`make mutex num-blocks others prng-params reseed-countdown`
-  - The `mutex` benchmark compares the use of `pthread_mutex_t` and `thread_local`.
-  - The `others` benchmark compares randp to these PRNGs:
-    - `RDRAND`
-    - `RDSEED`
-    - `getentropy`
-    - `arc4random`
-  - All the benchmarks take about 10 minutes.
-
-### Refine the randp parameters
-
-Run these targets in the following order to refine the parameters of randp.
-
-1. `make num-blocks`: find optimal `DEFAULT_RANDP_NUM_BLOCKS`
-2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_COUNTDOWN_MIN`
-3. `make prng-params`: find optimal `DEFAULT_AESCTR128_PRNG_NUM_KEYS` and `DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY`
-4. _repeat_
 
 ## Tests
 
