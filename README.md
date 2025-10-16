@@ -251,16 +251,6 @@ Run these targets in the following order to refine the parameters of randp.
 3. `make prng-params`: find optimal `DEFAULT_AESCTR128_PRNG_NUM_KEYS` and `DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY`
 4. _repeat_
 
-### To run the tests
-
-* Glibc 2.36
-* `RNG_test` from [PractRand](https://github.com/planet36/PractRand)
-  * This is a _very_ lengthy test, taking about 1 hour for each test run!  To make it quicker (yet less thorough), reduce the values of the `-tf`, `-te`, and `-tlmax` options to `RNG_test`.
-* [Valgrind](https://valgrind.org/)
-  * [KCachegrind](https://apps.kde.org/kcachegrind/) or QCachegrind to view the output
-* `rngtest` from [rng-tools](https://github.com/nhorman/rng-tools)
-* [openssl-rand](https://docs.openssl.org/master/man1/openssl-rand/)
-
 ## Tests
 
 randp is fork-safe, just like arc4random.
@@ -268,6 +258,32 @@ randp is fork-safe, just like arc4random.
 randp passes PractRand tests through 512 GiB with these exhaustive options: <q>-tf 2</q>, <q>-te 1</q>.  And it scores a similar number of FIPS 140-2 successes and failures as arc4random and openssl-rand.
 
 It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or [diehard](https://en.wikipedia.org/wiki/Diehard_tests).
+
+### Dependencies
+
+* [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
+  * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
+* `RNG_test` from [PractRand](https://github.com/planet36/PractRand)
+* [Valgrind](https://valgrind.org/)
+  * [KCachegrind](https://apps.kde.org/kcachegrind/) or QCachegrind to view the output
+* `rngtest` from [rng-tools](https://github.com/nhorman/rng-tools)
+* [openssl-rand](https://docs.openssl.org/master/man1/openssl-rand/)
+
+[^arc4random_1]: https://lists.gnu.org/archive/html/info-gnu/2022-08/msg00000.html
+
+[^arc4random_2]: https://lore.kernel.org/all/20220726195822.1223048-1-Jason@zx2c4.com/
+
+## Example commands
+
+* `make fork generate single`
+* `make profile-kgui` or `make profile-qgui`
+* `make run-rngtest`
+  * Takes about 5 minutes
+* `make run-PractRand`
+  * Takes about 70 minutes!
+  * To make this test more thorough (yet longer), change these options to `RNG_test`:
+    * Change `-te` from `0` to `1`
+    * Increase `-tlmax`
 
 ## Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
 
