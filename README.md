@@ -276,13 +276,21 @@ It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or 
 
 ## Example commands
 
-* `make fork generate single`
+* `make fork`
+  * Verify randp is fork-safe.
+* `make generate`
+  * Generate some random bytes.
+* `make single`
+  * Verify the header-only version of randp compiles.
 * `make profile-kgui` or `make profile-qgui`
+  * Use a profiler on randp, and then run a visualizer.
 * `make run-rngtest`
+  * Test randomness using `rng-test`.
   * Takes about 5 minutes
 * `make run-PractRand`
+  * Test randomness using `RNG_test` (from PractRand).
   * Takes about 70 minutes!
-  * To make this test more thorough (yet longer), change these options to `RNG_test`:
+  * To make this test more thorough (yet longer), change these options of `RNG_test`:
     * Change `-te` from `0` to `1`
     * Increase `-tlmax`
 
