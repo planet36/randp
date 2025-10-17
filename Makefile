@@ -22,7 +22,7 @@ $(SONAME_0): $(SONAME_2)
 	@ln -s -f --verbose -- $< $@
 
 $(SINGLE_HEADER): $(OBJS)
-	@printf "#define RANDP_SINGLE_HEADER\n" > $@
+	@printf '#define RANDP_SINGLE_HEADER\n\n' > $@
 	python3 amalgamate.py $(SRCS) >> $@
 
 # TODO: test this
