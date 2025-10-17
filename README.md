@@ -96,6 +96,10 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
 
 [^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
 
+## Header-Only
+
+Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/wiki/Header-only) file of randp.
+
 ## [Benchmarks](benchmarks/README.md)
 
 ## [Tests](tests/README.md)
