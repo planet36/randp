@@ -3,14 +3,16 @@
 # SPDX-FileCopyrightText: Steven Ward
 # SPDX-License-Identifier: OSL-3.0
 
+'''
+Usage: amalgamate.py <root-source-file> [search-paths...]
+If no search-paths are given, defaults to the root file's directory
+then the current working directory.
+e.g. python3 amalgamate.py libfoo.c .
+'''
+
 import re
 import sys
 from pathlib import Path
-
-# Usage: amalgamate.py <root-source-file> [search-paths...]
-# If no search-paths are given, defaults to the root file's directory
-# then the current working directory.
-# e.g. python3 amalgamate.py libfoo.c .
 
 # Note: using re.match anchors at the start of the string,
 #       so an explicit '^' anchor is not required.
