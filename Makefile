@@ -4,6 +4,7 @@
 include config.mk
 
 SRCS := src/$(LIBNAME).c
+HDRS := $(wildcard src/*.h) # Used for dependencies of the header-only target
 
 CFLAGS += -fPIC -ffreestanding -g
 
@@ -21,7 +22,10 @@ $(SONAME_1): $(SONAME_2)
 $(SONAME_0): $(SONAME_2)
 	@ln -s -f --verbose -- $< $@
 
-$(SINGLE_HEADER): $(OBJS)
+# $(OBJS) has all the required dependencies for $(SINGLE_HEADER), but we
+# needn't compile anything.
+# This assumes all $(HDRS) are used by $(SRCS).
+$(SINGLE_HEADER): $(HDRS) $(SRCS)
 	@printf '#define RANDP_SINGLE_HEADER\n\n' > $@
 	python3 amalgamate.py $(SRCS) >> $@
 
