@@ -86,6 +86,7 @@ def emit(path):
             sys.stdout.write(line)
 
 
+# pylint: disable=missing-function-docstring
 def main():
     script_name = Path(__file__).name
 
