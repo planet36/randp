@@ -89,6 +89,7 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
   * [`MADV_WIPEONFORK`](https://man7.org/linux/man-pages/man2/madvise.2.html#:~:text=of%20memory%20pressure.-,MADV_WIPEONFORK) was added in Linux 4.14
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
   * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
+  * clang and clang++ are not supported
 * [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
   * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
 

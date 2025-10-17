@@ -32,7 +32,7 @@ DEPS = $(addsuffix .d,$(basename $(SRCS)))
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
 BINS = $(basename $(SRCS))
 
-# clang, clang++ not supported
+# clang and clang++ not supported
 CC = gcc
 CXX = g++
 
