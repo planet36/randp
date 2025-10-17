@@ -49,10 +49,10 @@ struct randp
 
     static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 
-    uint8_t pool[RANDP_NUM_BYTES];
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
     size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
     size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
+    uint8_t pool[RANDP_NUM_BYTES];
 
     void regen()
     {

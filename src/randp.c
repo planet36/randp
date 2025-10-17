@@ -65,10 +65,10 @@ static_assert(__builtin_popcount(RANDP_RESEED_COUNTDOWN_MIN) == 1,
 /// A pool of random bytes
 struct randp
 {
-    uint8_t pool[RANDP_NUM_BYTES];
     aes_ctr_128_prng prng;
     size_t reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     size_t rand_bytes_remaining; ///< The pool is regenerated when this is 0.
+    uint8_t pool[RANDP_NUM_BYTES];
 };
 
 typedef struct randp randp;
