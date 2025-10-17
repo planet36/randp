@@ -2,6 +2,9 @@
 
 ## Dependencies
 
+* [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
+  * [C++20](https://en.cppreference.com/w/cpp/20.html)
+  * clang and clang++ are not supported
 * [Google Benchmark](https://github.com/google/benchmark)
 * [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
   * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
