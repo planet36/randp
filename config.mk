@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Steven Ward
 # SPDX-License-Identifier: OSL-3.0
 
-export LC_ALL := C
+export LC_ALL = C
 
 VERSION := $(shell git describe --tags --abbrev=0 2> /dev/null)
 ifeq ($(VERSION),)

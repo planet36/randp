@@ -8,7 +8,7 @@ include ../config.mk
 
 export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):..
 
-SRCS := $(wildcard test-*.c)
+SRCS = $(wildcard test-*.c)
 
 LDFLAGS += -L..
 
@@ -16,7 +16,7 @@ LDLIBS += -l$(LIBNAME)
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')
 
-OUTPUT_DIR := results
+OUTPUT_DIR = results
 
 all: $(BINS)
 

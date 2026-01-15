@@ -3,8 +3,8 @@
 
 include config.mk
 
-SRCS := src/$(LIBNAME).c
-HDRS := $(wildcard src/*.h) # Used for dependencies of the header-only target
+SRCS = src/$(LIBNAME).c
+HDRS = $(wildcard src/*.h) # Used for dependencies of the header-only target
 
 CFLAGS += -fPIC -ffreestanding -g
 
