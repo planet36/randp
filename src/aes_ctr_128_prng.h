@@ -35,8 +35,8 @@ struct aes_ctr_128_prng
 {
     static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);
     static_assert(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-    static_assert(AESCTR128_PRNG_NUM_KEYS * AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 2,
-                  "must do at least 2 rounds of AES enc/dec");
+    static_assert(AESCTR128_PRNG_NUM_KEYS * AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 3,
+                  "must do at least 3 rounds of AES enc/dec");
 
     __m128i keys[AESCTR128_PRNG_NUM_KEYS];
     __m128i ctr; ///< The state/counter
