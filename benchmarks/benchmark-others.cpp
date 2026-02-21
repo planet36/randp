@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: Steven Ward
-// SPDX-License-Identifier: OSL-3.0
+// SPDX-License-Identifier: MPL-2.0
 
 // {{{ Copied from rdrand.h
 // https://github.com/planet36/dotfiles/blob/main/link/.local/include/rdrand.h
