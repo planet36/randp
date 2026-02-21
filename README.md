@@ -149,7 +149,3 @@ Proving that an RNG is cryptographically secure involves demonstrating that it i
 </blockquote>
 
 &mdash; <cite>ChatGPT (GPT-4o)</cite>. <q>How Can a Random Number Generator Be Proven to Be Cryptographically Secure?</q> *OpenAI*, 2024-08-28.
-
-## License
-
-[The Open Software License 3.0](https://opensource.org/license/osl-3-0-php) (OSL-3.0)
