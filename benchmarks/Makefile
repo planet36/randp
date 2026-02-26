@@ -21,7 +21,7 @@ LDLIBS += ../$(ANAME)
 export NUM_THREADS := $(shell nproc --ignore 1)
 
 # Should be an odd number for simpler median
-BENCHMARK_REPS = 7
+BENCHMARK_REPS = 5
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')
 
