@@ -8,11 +8,12 @@
 #include <benchmark/benchmark.h>
 #include <bit>
 #include <concepts>
-#include <functional>
+
+using func_t = void (&)(void*, size_t);
 
 void
 BM_rand_bytes(benchmark::State& BM_state,
-              const std::function<void(uint8_t*, size_t)>& fn,
+              const func_t& fn,
               const size_t buf_size)
 {
     // Perform setup here
@@ -33,7 +34,7 @@ BM_rand_bytes(benchmark::State& BM_state,
 
 void
 BM_rand_bytes_4GiB(benchmark::State& BM_state,
-                   const std::function<void(uint8_t*, size_t)>& fn)
+                   const func_t& fn)
 {
     // Perform setup here
 

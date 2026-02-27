@@ -86,11 +86,13 @@ rdseed64()
 #include <benchmark/benchmark.h>
 #include <bit>
 #include <concepts>
-#include <functional>
+
+template <std::unsigned_integral T>
+using func_T_void_t = T (&)();
 
 template <std::unsigned_integral T>
 void
-BM_rand_uint(benchmark::State& BM_state, const std::function<T()>& fn)
+BM_rand_uint(benchmark::State& BM_state, const func_T_void_t<T>& fn)
 {
     // Perform setup here
 
@@ -103,8 +105,11 @@ BM_rand_uint(benchmark::State& BM_state, const std::function<T()>& fn)
 }
 
 template <std::unsigned_integral T>
+using func_T_T_t = T (&)(const T);
+
+template <std::unsigned_integral T>
 void
-BM_rand_lt_one(benchmark::State& BM_state, const std::function<T(const T)>& fn)
+BM_rand_lt_one(benchmark::State& BM_state, const func_T_T_t<T>& fn)
 {
     // Perform setup here
 
@@ -121,7 +126,7 @@ BM_rand_lt_one(benchmark::State& BM_state, const std::function<T(const T)>& fn)
 
 template <std::unsigned_integral T>
 void
-BM_rand_lt_many(benchmark::State& BM_state, const std::function<T(const T)>& fn)
+BM_rand_lt_many(benchmark::State& BM_state, const func_T_T_t<T>& fn)
 {
     // Perform setup here
 
@@ -145,9 +150,11 @@ BM_rand_lt_many(benchmark::State& BM_state, const std::function<T(const T)>& fn)
     }
 }
 
+using func_t = void (&)(void*, size_t);
+
 void
 BM_rand_bytes(benchmark::State& BM_state,
-              const std::function<void(uint8_t*, size_t)>& fn,
+              const func_t& fn,
               const size_t buf_size)
 {
     // Perform setup here
@@ -166,9 +173,16 @@ BM_rand_bytes(benchmark::State& BM_state,
     BM_state.SetBytesProcessed(BM_state.iterations() * buf_size / static_cast<double>(BM_state.threads()));
 }
 
+// This is needed because getentropy returns int, but our interface returns nothing.
+inline void
+getentropy_wrapper(void* buf, size_t len)
+{
+    (void)::getentropy(buf, len);
+}
+
 void
 BM_rand_bytes_4GiB(benchmark::State& BM_state,
-                   const std::function<void(uint8_t*, size_t)>& fn)
+                   const func_t& fn)
 {
     // Perform setup here
 
@@ -287,7 +301,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         {
             buf_size = i;
             prefix = "rand_bytes:" + std::to_string(i) + "B:";
-            benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy, buf_size);
+            benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy_wrapper, buf_size);
             benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size);
             benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size);
         }
@@ -302,7 +316,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         }
 
         prefix = "rand_bytes_4GiB:";
-        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy)->Unit(benchmark::kMillisecond);
+        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy_wrapper)->Unit(benchmark::kMillisecond);
         benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Unit(benchmark::kMillisecond);
         benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Unit(benchmark::kMillisecond);
     }
@@ -352,7 +366,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         {
             buf_size = i;
             prefix = "rand_bytes:" + std::to_string(i) + "B:";
-            benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy, buf_size)->Threads(num_threads);
+            benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy_wrapper, buf_size)->Threads(num_threads);
             benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
             benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
         }
@@ -367,7 +381,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         }
 
         prefix = "rand_bytes_4GiB:";
-        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy_wrapper)->Threads(num_threads)->Unit(benchmark::kMillisecond);
         benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Threads(num_threads)->Unit(benchmark::kMillisecond);
         benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
     }
