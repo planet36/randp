@@ -1,0 +1,32 @@
+Linux 6.18.13-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.43
+gcc (GCC) 15.2.1 20260209
+libbenchmark.so.1.9.5
+librandp.so.4.5
+
+# Median time per call
+
+# Median time per call
+
+# Median time per call
+
+# Median bytes per second copied to buffer (of size bytes)
+
+# Median bytes per second copied to buffer (of size pages)
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes<def,1U<<15>  178  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<13>  180  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<14>  180  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<12>  183  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<11>  185  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<10>  187  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<_9>  191  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<_8>  204  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<_7>  234  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<_6>  286  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<_5>  388  ms
+rand_bytes_4GiB:randp_bytes<def,1U<<_4>  592  ms
+

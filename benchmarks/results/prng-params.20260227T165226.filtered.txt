@@ -1,0 +1,38 @@
+Linux 6.18.13-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.43
+gcc (GCC) 15.2.1 20260209
+libbenchmark.so.1.9.5
+librandp.so.4.5
+
+# Median time per call
+
+# Median time per call
+
+# Median time per call
+
+# Median bytes per second copied to buffer (of size bytes)
+
+# Median bytes per second copied to buffer (of size pages)
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,1,3>  181  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,3,1>  181  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,1,4>  195  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,1,3>     197  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,3,1>     200  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,1,4>     206  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,2,2>  210  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,2,2>     218  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,2,3>  221  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,3,2>  224  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,3,2>     239  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,2,3>     244  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,2,4>  277  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,2,4>     285  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,3,3>  310  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,3,3>     318  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,no-dm,3,4>  486  ms
+rand_bytes_4GiB:randp_bytes<def,def,enc,dm,3,4>     531  ms
+
