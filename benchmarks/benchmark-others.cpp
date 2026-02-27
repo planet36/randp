@@ -5,11 +5,12 @@
 // https://github.com/planet36/dotfiles/blob/main/link/.local/include/rdrand.h
 
 #include <immintrin.h>
+#include <stdint.h>
 
 // _rd{rand,seed}{16,32,64}_step returns 0 if a random value was NOT generated
 
 #if defined(__RDRND__)
-static unsigned short
+static uint16_t
 rdrand16()
 {
     unsigned short ret = 0;
@@ -19,7 +20,7 @@ rdrand16()
     return ret;
 }
 
-static unsigned int
+static uint32_t
 rdrand32()
 {
     unsigned int ret = 0;
@@ -29,7 +30,7 @@ rdrand32()
     return ret;
 }
 
-static unsigned long long
+static uint64_t
 rdrand64()
 {
     unsigned long long ret = 0;
@@ -43,7 +44,7 @@ rdrand64()
 #endif
 
 #if defined(__RDSEED__)
-static unsigned short
+static uint16_t
 rdseed16()
 {
     unsigned short ret = 0;
@@ -53,7 +54,7 @@ rdseed16()
     return ret;
 }
 
-static unsigned int
+static uint32_t
 rdseed32()
 {
     unsigned int ret = 0;
@@ -63,7 +64,7 @@ rdseed32()
     return ret;
 }
 
-static unsigned long long
+static uint64_t
 rdseed64()
 {
     unsigned long long ret = 0;
