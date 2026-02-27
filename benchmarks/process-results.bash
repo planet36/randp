@@ -83,14 +83,14 @@ do
     fi
 done
 
-echo "# Median calls per second"
+echo "# Median time per call"
 echo
 for I in 32
 do
     PATTERN="^rand_lt-many:${I}b:"
     if grep -q "$PATTERN" "$BENCH_RESULTS_FILE"
     then
-        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $7}' | sed -E -e 's/items_per_second=//' | sort -h -k 2 -r | column --table || exit
+        grep "$PATTERN" "$BENCH_RESULTS_FILE" | grep median | sed -r -e 's|(/threads:[0-9]+)?_median||' | awk '{print $1, $4, $5}' | sort -n -k 2 | column --table --table-right 2 || exit
         echo
     fi
 done
