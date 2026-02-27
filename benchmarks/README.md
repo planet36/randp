@@ -46,6 +46,43 @@ Run these targets in the following order to refine the parameters of randp.
 
 [^getrandom_vdso_2]: https://lwn.net/Articles/983186/
 
+### 2026-02-27
+
+#### System Info
+
+- Linux 6.18.13-arch1-1 x86_64
+- 13th Gen Intel(R) Core(TM) i9-13980HX
+- ldd (GNU libc) 2.43
+- gcc (GCC) 15.2.1 20260209
+- libbenchmark.so.1.9.5
+- librandp.so.4.5
+
+#### Fill a buffer with random bytes
+
+| Function | Median time to generate 4 GiB | |
+|---|---:|---|
+| `randp_bytes`    |  199  ms | 25.9&times; faster |
+| `arc4random_buf` | 5154  ms | |
+| `getentropy`     | 7905  ms | |
+
+#### Get a uniform random `uint32_t`
+
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_u32`  | 6.33  ns | 2.3&times; faster |
+| `arc4random` | 14.5  ns | |
+| `rdrand32`   |  288  ns | |
+| `rdseed32`   | 1816  ns | |
+
+Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32_step`, respectively.
+
+#### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
+
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_lt_u32`       | 6.32  ns | 3.2&times; more |
+| `arc4random_uniform` | 20.3  ns | |
+
 ### 2025-10-09
 
 #### System Info
