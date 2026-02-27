@@ -28,7 +28,7 @@ BM_rand_bytes(benchmark::State& BM_state,
 
     delete[] buf;
 
-    BM_state.SetBytesProcessed(BM_state.iterations() * buf_size);
+    BM_state.SetBytesProcessed(BM_state.iterations() * buf_size / static_cast<double>(BM_state.threads()));
 }
 
 void
