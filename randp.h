@@ -33,6 +33,7 @@ extern "C" {
 * This is similar to \c arc4random.
 *
 * <code>uint32_t randp_lt_u32(uint32_t upper_bound);</code>
+* <code>uint64_t randp_lt_u64(uint64_t upper_bound);</code>
 * Return a uniform random unsigned integer less than \a upper_bound
 * This is similar to \c arc4random_uniform.
 * If \a upper_bound is ≤ 1, \c 0 is returned.
@@ -49,6 +50,8 @@ uint32_t randp_u32();
 uint64_t randp_u64();
 
 uint32_t randp_lt_u32(uint32_t upper_bound);
+
+uint64_t randp_lt_u64(uint64_t upper_bound);
 
 #ifdef __cplusplus
 }
