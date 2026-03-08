@@ -143,7 +143,7 @@ randp_regen(randp* this_)
 static
 #endif
 void
-randp_bytes(void* buf, size_t n)
+randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 {
     static thread_local randp* this_ = nullptr;
 
