@@ -21,6 +21,9 @@
 extern "C" {
 #endif
 
+/**
+* \note This function terminates the calling process upon catastrophic error.
+*/
 static void*
 allocate(const size_t len)
 {

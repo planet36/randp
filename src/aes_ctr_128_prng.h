@@ -52,6 +52,8 @@ static_assert(sizeof(aes_ctr_128_prng) <= 256,
 /**
 * Every odd integer is coprime with every power of 2.
 * Therefore, \c inc shall be made odd.
+*
+* \note This function terminates the calling process upon catastrophic error.
 */
 static void
 aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
