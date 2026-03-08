@@ -135,7 +135,7 @@ randp_regen(randp* this_)
 * <code>uint32_t randp_lt_u32(uint32_t upper_bound);</code>
 * Return a uniform random unsigned integer less than \a upper_bound
 * This is similar to \c arc4random_uniform.
-* If \a upper_bound is \c 0, it's treated as unbounded.
+* If \a upper_bound is ≤ 1, \c 0 is returned.
 */
 
 #if defined(RANDP_SINGLE_HEADER)
@@ -223,14 +223,18 @@ randp_u64()
     return result;
 }
 
+/**
+* \retval 0 If \a upper_bound ≤ 1.  This is similar to the behavior of
+* \c arc4random_uniform.
+*/
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
 uint32_t
 randp_lt_u32(uint32_t upper_bound)
 {
-    if (upper_bound == 0)
-        return randp_u32();
+    if (upper_bound <= 1)
+        return 0;
     return random_bounded_nearlydivisionless32(upper_bound, randp_u32);
 }
 
