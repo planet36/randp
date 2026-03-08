@@ -48,15 +48,9 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 #define RANDP_NUM_BYTES (RANDP_NUM_BLOCKS * sizeof(__m128i))
 
 /// How many times the pool is regenerated before the PRNG is reseeded
-/**
-* This value is also used as the modulus to calculate a jitter.
-*/
 #if !defined(RANDP_RESEED_COUNTDOWN_MIN)
 #define RANDP_RESEED_COUNTDOWN_MIN DEFAULT_RANDP_RESEED_COUNTDOWN_MIN
 #endif
-
-static_assert(__builtin_popcount(RANDP_RESEED_COUNTDOWN_MIN) == 1,
-              "randp reseed countdown must be a power of 2 to prevent modulo bias");
 
 #if !defined(RANDP_RESEED_COUNTDOWN_ADD_JITTER)
 #define RANDP_RESEED_COUNTDOWN_ADD_JITTER DEFAULT_RANDP_RESEED_COUNTDOWN_ADD_JITTER
@@ -90,8 +84,8 @@ randp_regen(randp* this_)
 
         if (RANDP_RESEED_COUNTDOWN_ADD_JITTER)
         {
-            this_->reseed_countdown +=
-                (__builtin_ia32_rdtsc() % RANDP_RESEED_COUNTDOWN_MIN) / 2;
+            const size_t jitter = __builtin_ia32_rdtsc() % 4096U;
+            this_->reseed_countdown += jitter;
         }
     }
 
