@@ -142,11 +142,14 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
     static thread_local randp* this_ = nullptr;
 
     if (this_ == nullptr)
+    {
 #ifdef __cplusplus
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
+        // TODO: deallocate this_ when thread exits
+    }
 
     uint8_t* dst = (uint8_t*)buf;
 
