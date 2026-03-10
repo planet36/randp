@@ -3,11 +3,13 @@
 
 /// AES-128 utilities
 /**
-\file
-\author Steven Ward
+* \file
+* \author Steven Ward
 */
 
 #pragma once
+
+#if defined(__x86_64__) && defined(__AES__)
 
 #include <immintrin.h>
 
@@ -17,12 +19,12 @@ extern "C" {
 
 /// Do \c _mm_aesenc_si128 on data \a a with \a Nk keys \a keys \a Nr times for each key
 /**
-\pre \a Nk must be at least \c 1.
-\pre \a Nr must be at least \c 1.
-\param a the data
-\param keys the keys
-\param Nk the number of \a keys
-\param Nr the number of rounds of encryption to perform for each key
+* \pre \a Nk must be at least \c 1.
+* \pre \a Nr must be at least \c 1.
+* \param a the data
+* \param keys the keys
+* \param Nk the number of \a keys
+* \param Nr the number of rounds of encryption to perform for each key
 */
 static inline __m128i
 aes128_enc(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned int Nr)
@@ -39,12 +41,12 @@ aes128_enc(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned
 
 /// Do \c _mm_aesdec_si128 on data \a a with \a Nk keys \a keys \a Nr times for each key
 /**
-\pre \a Nk must be at least \c 1.
-\pre \a Nr must be at least \c 1.
-\param a the data
-\param keys the keys
-\param Nk the number of \a keys
-\param Nr the number of rounds of decryption to perform for each key
+* \pre \a Nk must be at least \c 1.
+* \pre \a Nr must be at least \c 1.
+* \param a the data
+* \param keys the keys
+* \param Nk the number of \a keys
+* \param Nr the number of rounds of decryption to perform for each key
 */
 static inline __m128i
 aes128_dec(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned int Nr)
@@ -61,13 +63,13 @@ aes128_dec(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned
 
 /// Davies-Meyer single-block-length compression function that uses AES as the block cipher
 /**
-\sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
-\pre \a Nk must be at least \c 1.
-\pre \a Nr must be at least \c 1.
-\param H the previous hash value
-\param keys the keys
-\param Nk the number of \a keys
-\param Nr the number of rounds of encryption to perform for each key
+* \sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
+* \pre \a Nk must be at least \c 1.
+* \pre \a Nr must be at least \c 1.
+* \param H the previous hash value
+* \param keys the keys
+* \param Nk the number of \a keys
+* \param Nr the number of rounds of encryption to perform for each key
 */
 static inline __m128i
 aes128_enc_davies_meyer(const __m128i H,
@@ -80,13 +82,13 @@ aes128_enc_davies_meyer(const __m128i H,
 
 /// Davies-Meyer single-block-length compression function that uses AES as the block cipher
 /**
-\sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
-\pre \a Nk must be at least \c 1.
-\pre \a Nr must be at least \c 1.
-\param H the previous hash value
-\param keys the keys
-\param Nk the number of \a keys
-\param Nr the number of rounds of decryption to perform for each key
+* \sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
+* \pre \a Nk must be at least \c 1.
+* \pre \a Nr must be at least \c 1.
+* \param H the previous hash value
+* \param keys the keys
+* \param Nk the number of \a keys
+* \param Nr the number of rounds of decryption to perform for each key
 */
 static inline __m128i
 aes128_dec_davies_meyer(const __m128i H,
@@ -99,4 +101,6 @@ aes128_dec_davies_meyer(const __m128i H,
 
 #ifdef __cplusplus
 } // extern "C"
+#endif
+
 #endif
