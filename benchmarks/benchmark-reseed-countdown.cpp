@@ -3,9 +3,7 @@
 
 #include "randp.hpp"
 
-// https://github.com/google/benchmark
-
-#include <benchmark/benchmark.h>
+#include <benchmark/benchmark.h> // https://github.com/google/benchmark
 #include <bit>
 #include <concepts>
 
