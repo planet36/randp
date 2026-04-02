@@ -44,11 +44,13 @@ CFLAGS = -std=c23
 CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
 CFLAGS += -O3 -flto=auto
 CFLAGS += -maes
+CFLAGS += -Wno-unused-function
 
 CXXFLAGS = -std=c++20
 CXXFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
 CXXFLAGS += -O3 -flto=auto
 CXXFLAGS += -maes
+CXXFLAGS += -Wno-unused-function
 
 #LDFLAGS +=
 
