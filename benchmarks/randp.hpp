@@ -109,6 +109,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 #ifdef __cplusplus
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
+        // Unreachable in C++.  Retained only to match randp.c.
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
         // TODO: deallocate this_ when thread exits
@@ -182,6 +183,7 @@ randp_bytes_MUTEX(void* buf, size_t n) [[gnu::nonnull]]
 #ifdef __cplusplus
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
+        // Unreachable in C++.  Retained only to match randp.c.
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
         // TODO: deallocate this_ when thread exits
