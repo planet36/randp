@@ -13,7 +13,7 @@ CXXFLAGS += -mrdrnd -mrdseed
 
 #LDFLAGS += -L..
 
-LDLIBS += `pkg-config --libs benchmark`
+LDLIBS += $(shell pkg-config --libs benchmark)
 #LDLIBS += -l$(LIBNAME)
 LDLIBS += ../$(ANAME)
 
