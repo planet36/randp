@@ -3,11 +3,11 @@
 
 /// AES-CTR Random Pool (randp)
 /**
-\file
-\author Steven Ward
-Inspired by \c arc4random.
-\sa https://github.com/openbsd/src/blob/master/lib/libc/crypt/arc4random.c
-\sa https://man7.org/linux/man-pages/man3/arc4random.3.html
+* \file
+* \author Steven Ward
+* Inspired by \c arc4random.
+* \sa https://github.com/openbsd/src/blob/master/lib/libc/crypt/arc4random.c
+* \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 */
 
 #include "aes_ctr_128_prng.h"

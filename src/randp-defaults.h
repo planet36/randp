@@ -3,8 +3,8 @@
 
 /// Default values for AES-CTR Random Pool (randp)
 /**
-\file
-\author Steven Ward
+* \file
+* \author Steven Ward
 */
 
 #pragma once

@@ -3,17 +3,17 @@
 
 /// Daniel Lemire's "nearly divisionless" algorithm
 /**
-\file
-\author Steven Ward
-"Fast Random Integer Generation in an Interval" by Daniel Lemire
-\sa https://arxiv.org/abs/1805.10941
-\sa https://lemire.me/blog/2016/06/30/fast-random-shuffling/
-\sa https://lemire.me/blog/2019/06/06/nearly-divisionless-random-integer-generation-on-various-systems/
-\sa https://github.com/lemire/FastShuffleExperiments/blob/master/cpp/rangedrand.h
-\sa https://github.com/lemire/Code-used-on-Daniel-Lemire-s-blog/blob/master/2019/06/06/rangedrand.h
-\sa https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libstdc%2B%2B-v3/include/bits/uniform_int_dist.h#l252
-\sa https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libstdc%2B%2B-v3/ChangeLog-2020;#l2655
-\sa https://github.com/abseil/abseil-cpp/blob/master/absl/random/uniform_int_distribution.h#L207
+* \file
+* \author Steven Ward
+* "Fast Random Integer Generation in an Interval" by Daniel Lemire
+* \sa https://arxiv.org/abs/1805.10941
+* \sa https://lemire.me/blog/2016/06/30/fast-random-shuffling/
+* \sa https://lemire.me/blog/2019/06/06/nearly-divisionless-random-integer-generation-on-various-systems/
+* \sa https://github.com/lemire/FastShuffleExperiments/blob/master/cpp/rangedrand.h
+* \sa https://github.com/lemire/Code-used-on-Daniel-Lemire-s-blog/blob/master/2019/06/06/rangedrand.h
+* \sa https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libstdc%2B%2B-v3/include/bits/uniform_int_dist.h#l252
+* \sa https://gcc.gnu.org/git/?p=gcc.git;a=blob;f=libstdc%2B%2B-v3/ChangeLog-2020;#l2655
+* \sa https://github.com/abseil/abseil-cpp/blob/master/absl/random/uniform_int_distribution.h#L207
 */
 
 #pragma once

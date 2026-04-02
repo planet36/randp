@@ -3,11 +3,11 @@
 
 /// AES-CTR-128 PRNG (This C++ implementation is used only for benchmarking.)
 /**
-\file
-\author Steven Ward
-
-The raison d'etre of this class is to test
-1. different values of \c AESCTR128_PRNG_NUM_KEYS and \c AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+* \file
+* \author Steven Ward
+*
+* The raison d'etre of this class is to test
+* 1. different values of \c AESCTR128_PRNG_NUM_KEYS and \c AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
 */
 
 #pragma once
