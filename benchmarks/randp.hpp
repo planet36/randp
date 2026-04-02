@@ -44,8 +44,6 @@ template <
 struct randp
 {
     static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
-    static_assert(std::has_single_bit(RANDP_RESEED_COUNTDOWN_MIN),
-                  "randp reseed countdown must be a power of 2 to prevent modulo bias");
 
     static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 
