@@ -202,7 +202,6 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state,
 }
 
 #include <algorithm>
-#include <cassert>
 #include <cstdlib>
 #include <string>
 #include <thread>

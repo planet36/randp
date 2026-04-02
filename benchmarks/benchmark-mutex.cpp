@@ -5,7 +5,6 @@
 
 #include <benchmark/benchmark.h> // https://github.com/google/benchmark
 #include <bit>
-#include <concepts>
 
 using func_t = void (&)(void*, size_t);
 
@@ -53,7 +52,6 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state,
 }
 
 #include <algorithm>
-#include <cassert>
 #include <cstdlib>
 #include <string>
 #include <thread>
