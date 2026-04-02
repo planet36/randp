@@ -84,6 +84,7 @@ rdseed64()
 #include <benchmark/benchmark.h> // https://github.com/google/benchmark
 #include <bit>
 #include <concepts>
+#include <unistd.h>
 
 template <std::unsigned_integral T>
 using func_T_void_t = T (&)();
