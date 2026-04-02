@@ -2,3 +2,4 @@ test-dump
 test-fork
 test-generate
 test-profile
+test-single
