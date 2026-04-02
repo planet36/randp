@@ -90,7 +90,7 @@ template <
     // }}}
 >
 void
-randp_bytes(void* buf, size_t n)
+randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 {
     using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
@@ -105,11 +105,14 @@ randp_bytes(void* buf, size_t n)
     static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
     if (this_ == nullptr)
+    {
 #ifdef __cplusplus
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
+        // TODO: deallocate this_ when thread exits
+    }
 
     uint8_t* dst = (uint8_t*)buf;
 
@@ -157,7 +160,7 @@ template <
     // }}}
 >
 void
-randp_bytes_MUTEX(void* buf, size_t n)
+randp_bytes_MUTEX(void* buf, size_t n) [[gnu::nonnull]]
 {
     using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
@@ -175,11 +178,14 @@ randp_bytes_MUTEX(void* buf, size_t n)
     (void)pthread_mutex_lock(&randp_mtx);
 
     if (this_ == nullptr)
+    {
 #ifdef __cplusplus
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
+        // TODO: deallocate this_ when thread exits
+    }
 
     uint8_t* dst = (uint8_t*)buf;
 
