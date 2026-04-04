@@ -62,7 +62,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     const bool is_child = (child_pid == 0);
 
-    const char* pid_category_label;
+    const char* pid_category_label = nullptr;
 
     if (is_child)
     {
