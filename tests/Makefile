@@ -76,6 +76,9 @@ $(OUTPUT_DIR):
 clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
+lint:
+	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
+
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
 .PHONY: all fork generate profile profile-kgui profile-qgui run-PractRand run-rngtest single clean
 
