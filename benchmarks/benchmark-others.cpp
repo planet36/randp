@@ -95,7 +95,7 @@ BM_rand_uint(benchmark::State& BM_state, const func_T_void_t<T>& fn)
 {
     // Perform setup here
 
-    for (auto _ : BM_state)
+    for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
         // This code gets timed
 
@@ -115,7 +115,7 @@ BM_rand_lt_one(benchmark::State& BM_state, const func_T_T_t<T>& fn)
     // a perfectly cromulent upper bound
     constexpr unsigned int upper_bound = 0xa5a5; // should not be power of 2
 
-    for (auto _ : BM_state)
+    for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
         // This code gets timed
 
@@ -137,7 +137,7 @@ BM_rand_lt_many(benchmark::State& BM_state, const func_T_T_t<T>& fn)
 
     T upper_bound = min_upper_bound;
 
-    for (auto _ : BM_state)
+    for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
         // This code gets timed
 
@@ -160,7 +160,7 @@ BM_rand_bytes(benchmark::State& BM_state,
 
     uint8_t* buf = new uint8_t[buf_size];
 
-    for (auto _ : BM_state)
+    for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
         // This code gets timed
 
@@ -190,7 +190,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state,
                   "getentropy will fail if more than 256 bytes are requested");
     static_assert(std::has_single_bit(sizeof(buf)), "buffer size must be a power of 2");
 
-    for (auto _ : BM_state)
+    for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
         // This code gets timed
 

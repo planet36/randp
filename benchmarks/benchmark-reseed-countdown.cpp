@@ -19,7 +19,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state,
                   "getentropy will fail if more than 256 bytes are requested");
     static_assert(std::has_single_bit(sizeof(buf)), "buffer size must be a power of 2");
 
-    for (auto _ : BM_state)
+    for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
         // This code gets timed
 
