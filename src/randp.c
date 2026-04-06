@@ -21,7 +21,7 @@
 #include <string.h>
 #include <sys/user.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -143,7 +143,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 
     if (this_ == nullptr)
     {
-#ifdef __cplusplus
+#if defined(__cplusplus)
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
         this_ = (typeof(this_))allocate(sizeof(*this_));
@@ -253,6 +253,6 @@ randp_lt_u64(uint64_t upper_bound)
 
 #undef MIN
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }
 #endif

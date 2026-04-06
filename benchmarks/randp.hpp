@@ -106,7 +106,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 
     if (this_ == nullptr)
     {
-#ifdef __cplusplus
+#if defined(__cplusplus)
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
         // Unreachable in C++.  Retained only to match randp.c.
@@ -180,7 +180,7 @@ randp_bytes_MUTEX(void* buf, size_t n) [[gnu::nonnull]]
 
     if (this_ == nullptr)
     {
-#ifdef __cplusplus
+#if defined(__cplusplus)
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
         // Unreachable in C++.  Retained only to match randp.c.

@@ -20,7 +20,7 @@
 
 #include <stdint.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -72,6 +72,6 @@ random_bounded_nearlydivisionless64(const uint64_t s, uint64_t (*prng)())
 }
 #endif
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }
 #endif

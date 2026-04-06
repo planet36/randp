@@ -15,7 +15,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -53,6 +53,6 @@ uint32_t randp_lt_u32(uint32_t upper_bound);
 
 uint64_t randp_lt_u64(uint64_t upper_bound);
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }
 #endif

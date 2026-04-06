@@ -13,7 +13,7 @@
 
 #include <immintrin.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -99,7 +99,7 @@ aes128_dec_davies_meyer(const __m128i H,
     return _mm_xor_si128(aes128_dec(H, keys, Nk, Nr), H);
 }
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 } // extern "C"
 #endif
 

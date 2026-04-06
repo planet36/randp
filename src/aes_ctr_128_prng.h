@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -128,6 +128,6 @@ aes_ctr_128_prng_dec_davies_meyer_next(aes_ctr_128_prng* this_)
     return dst;
 }
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }
 #endif

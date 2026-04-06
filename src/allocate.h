@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 extern "C" {
 #endif
 
@@ -44,6 +44,6 @@ allocate(const size_t len)
     return addr;
 }
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 }
 #endif
