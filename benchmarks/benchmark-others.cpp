@@ -251,7 +251,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     // {{{ speed
 
     std::string prefix;
-    size_t buf_size;
+    size_t buf_size = 0;
 
     if (num_threads == 1)
     {
