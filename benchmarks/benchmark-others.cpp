@@ -91,7 +91,7 @@ using func_T_void_t = T (&)();
 
 template <std::unsigned_integral T>
 void
-BM_rand_uint(benchmark::State& BM_state, const func_T_void_t<T>& fn)
+BM_rand_uint(benchmark::State& BM_state, func_T_void_t<T>& fn)
 {
     // Perform setup here
 
@@ -108,7 +108,7 @@ using func_T_T_t = T (&)(const T);
 
 template <std::unsigned_integral T>
 void
-BM_rand_lt_one(benchmark::State& BM_state, const func_T_T_t<T>& fn)
+BM_rand_lt_one(benchmark::State& BM_state, func_T_T_t<T>& fn)
 {
     // Perform setup here
 
@@ -125,7 +125,7 @@ BM_rand_lt_one(benchmark::State& BM_state, const func_T_T_t<T>& fn)
 
 template <std::unsigned_integral T>
 void
-BM_rand_lt_many(benchmark::State& BM_state, const func_T_T_t<T>& fn)
+BM_rand_lt_many(benchmark::State& BM_state, func_T_T_t<T>& fn)
 {
     // Perform setup here
 
@@ -153,7 +153,7 @@ using func_t = void (&)(void*, size_t);
 
 void
 BM_rand_bytes(benchmark::State& BM_state,
-              const func_t& fn,
+              func_t& fn,
               const size_t buf_size)
 {
     // Perform setup here
@@ -181,7 +181,7 @@ getentropy_wrapper(void* buf, size_t len)
 
 void
 BM_rand_bytes_4GiB(benchmark::State& BM_state,
-                   const func_t& fn)
+                   func_t& fn)
 {
     // Perform setup here
 

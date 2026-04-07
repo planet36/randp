@@ -10,7 +10,7 @@ using func_t = void (&)(void*, size_t);
 
 void
 BM_rand_bytes_4GiB(benchmark::State& BM_state,
-                   const func_t& fn)
+                   func_t& fn)
 {
     // Perform setup here
 
