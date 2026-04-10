@@ -73,4 +73,7 @@ lint:
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
 .PHONY: all mutex num-blocks others prng-params reseed-countdown clean
 
+# https://www.gnu.org/software/make/manual/html_node/Special-Targets.html#index-removing-targets-on-failure
+.DELETE_ON_ERROR:
+
 -include $(DEPS)
