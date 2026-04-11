@@ -19,6 +19,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/user.h>
 
 #if defined(__cplusplus)
@@ -158,7 +159,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
         const size_t m = MIN(n, this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
-        (void)memset_explicit(src, 0, m);
+        explicit_bzero(src, m);
 
         dst += m;
         this_->rand_bytes_remaining -= m;

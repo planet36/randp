@@ -92,6 +92,7 @@ As bytes are retrieved from the pool, they are zeroized.  After a certain number
   * clang and clang++ are not supported
 * [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
   * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
+  * [`explicit_bzero`](https://man7.org/linux/man-pages/man3/explicit_bzero.3.html) was added in glibc 2.25.
 
 [^getentropy_1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
 
