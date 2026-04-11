@@ -55,6 +55,13 @@ random_bounded_nearlydivisionless32(const uint32_t s, uint32_t (*prng)())
 }
 
 #if defined(__SIZEOF_INT128__)
+/// Return a uniform random integer in the interval <code>[0, s)</code> using Lemire's "nearly divisionless" algorithm.
+/**
+* \param s the exclusive upper bound
+* \param prng a function returning a uniformly distributed random \c uint64_t
+* \return an integer in the interval <code>[0, s)</code>
+* \pre \a s must be at least \c 1.
+*/
 [[maybe_unused]] static uint64_t
 random_bounded_nearlydivisionless64(const uint64_t s, uint64_t (*prng)())
 {
