@@ -163,13 +163,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
         const size_t m = MIN(n, this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
-#if defined(memset_explicit)
         (void)memset_explicit(src, 0, m);
-#elif defined(explicit_bzero)
-        explicit_bzero(src, m);
-#else
-        (void)memset(src, 0, m);
-#endif
 
         dst += m;
         this_->rand_bytes_remaining -= m;
