@@ -22,6 +22,8 @@ extern "C" {
 #endif
 
 /**
+* \param len the number of bytes to allocate
+* \return a pointer to the allocated memory
 * \note This function terminates the calling process upon catastrophic error.
 */
 static void*

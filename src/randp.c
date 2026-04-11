@@ -35,10 +35,6 @@ extern "C" {
 #define RANDP_PRNG_USE_DAVIES_MEYER DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER
 #endif
 
-/// How many blocks compose the pool of random bytes
-/**
-* The size of each block is \c sizeof(__m128i) (i.e. \c 16).
-*/
 #if !defined(RANDP_NUM_BLOCKS)
 #define RANDP_NUM_BLOCKS DEFAULT_RANDP_NUM_BLOCKS
 #endif
@@ -47,7 +43,6 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
 #define RANDP_NUM_BYTES (RANDP_NUM_BLOCKS * sizeof(__m128i))
 
-/// How many times the pool is regenerated before the PRNG is reseeded
 #if !defined(RANDP_RESEED_COUNTDOWN_MIN)
 #define RANDP_RESEED_COUNTDOWN_MIN DEFAULT_RANDP_RESEED_COUNTDOWN_MIN
 #endif
