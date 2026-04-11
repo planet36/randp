@@ -105,8 +105,8 @@ aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
     // most significant elem first
     const __m128i inc = _mm_set_epi32(0x4a535aab, 0x55952d55, 0x6accb295, 0xad659529); // NOLINT(cppcoreguidelines-narrowing-conversions)
 
-    const __m128i dst = aes128_enc_davies_meyer(
-        this_->ctr, this_->keys, AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
+    const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
+            AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
 
     this_->ctr = _mm_add_epi32(this_->ctr, inc);
 
@@ -120,8 +120,8 @@ aes_ctr_128_prng_dec_davies_meyer_next(aes_ctr_128_prng* this_)
     // most significant elem first
     const __m128i inc = _mm_set_epi32(0x4a535aab, 0x55952d55, 0x6accb295, 0xad659529); // NOLINT(cppcoreguidelines-narrowing-conversions)
 
-    const __m128i dst = aes128_dec_davies_meyer(
-        this_->ctr, this_->keys, AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
+    const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
+            AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
 
     this_->ctr = _mm_add_epi32(this_->ctr, inc);
 
