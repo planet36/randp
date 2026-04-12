@@ -21,7 +21,6 @@
 #include "../src/randp-defaults.h"
 #include "aes_ctr_128_prng.hpp"
 
-#include <bit>
 #include <immintrin.h>
 #include <stddef.h>
 #include <stdint.h>
