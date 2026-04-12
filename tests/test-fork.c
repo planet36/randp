@@ -19,6 +19,10 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+/**
+* \c mrand48 returns a signed long integer uniformly distributed in the interval <code>[-2^31, 2^31)</code>.
+* This wrapper exists because we need it to a \c uint32_t.
+*/
 uint32_t
 mrand48_wrapper()
 {
