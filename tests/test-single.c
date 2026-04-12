@@ -38,5 +38,10 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         [[maybe_unused]] volatile uint32_t result = randp_lt_u32(upper_bound);
     }
 
+    {
+        const uint64_t upper_bound = 6;
+        [[maybe_unused]] volatile uint64_t result = randp_lt_u64(upper_bound);
+    }
+
     return 0;
 }
