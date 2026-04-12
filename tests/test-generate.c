@@ -64,5 +64,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     }
     (void)putchar('\n');
 
+    free(buf);
+
     return 0;
 }

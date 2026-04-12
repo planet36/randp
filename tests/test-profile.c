@@ -31,5 +31,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     CALLGRIND_STOP_INSTRUMENTATION;
 
+    free(buf);
+
     return 0;
 }
