@@ -32,6 +32,14 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 /// A pool of random bytes
+/**
+* \tparam RANDP_NUM_BLOCKS the number of blocks in the pool
+* \tparam RANDP_RESEED_COUNTDOWN_MIN the minimum number of pool regenerations before reseeding
+* \tparam enc if \c true, use AES encryption; if \c false, use AES decryption
+* \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
+* \tparam Nk the number of independent AES keys
+* \tparam Nr the number of AES enc/dec rounds applied per key
+*/
 template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
@@ -49,8 +57,8 @@ struct randp
     static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
-    size_t reseed_countdown;     // The PRNG is reseeded when this is 0.
-    size_t rand_bytes_remaining; // The pool is regenerated when this is 0.
+    size_t reseed_countdown;     ///< The PRNG is reseeded when this is 0.
+    size_t rand_bytes_remaining; ///< The pool is regenerated when this is 0.
     uint8_t pool[RANDP_NUM_BYTES];
 
     void regen()
@@ -80,6 +88,13 @@ struct randp
     }
 };
 
+/// Fill a buffer with random bytes using a \c thread_local pool.
+/**
+* \param buf the destination buffer
+* \param n the number of bytes to fill
+* \pre \a buf is not null
+* \pre \a buf is at least \a n bytes in size
+*/
 template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
@@ -145,6 +160,13 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 #pragma GCC diagnostic pop
 
+/// Fill a buffer with random bytes using a pool shared across all threads, protected by a mutex.
+/**
+* \param buf the destination buffer
+* \param n the number of bytes to fill
+* \pre \a buf is not null
+* \pre \a buf is at least \a n bytes in size
+*/
 template <
     unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
     unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
@@ -181,7 +203,9 @@ randp_bytes_MUTEX(void* buf, size_t n) [[gnu::nonnull]]
         // Unreachable in C++.  Retained only to match randp.c.
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
-        // TODO: deallocate this_ when thread exits
+        // Do not deallocate this_ when the thread exits.
+        // It's not thread_local, unlike the randp_bytes function, so there's only 1 instance
+        // per template instantiation, shared across all threads.
     }
 
     uint8_t* dst = (uint8_t*)buf;

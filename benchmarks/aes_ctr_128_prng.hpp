@@ -20,6 +20,12 @@
 #include <unistd.h>
 
 /// A PRNG that uses AES instructions
+/**
+* \tparam enc if \c true, use AES encryption; if \c false, use AES decryption
+* \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
+* \tparam AESCTR128_PRNG_NUM_KEYS the number of independent AES keys
+* \tparam AESCTR128_PRNG_NUM_ROUNDS_PER_KEY the number of AES enc/dec rounds applied per key
+*/
 template <bool enc,
           bool dm,
           size_t AESCTR128_PRNG_NUM_KEYS,
