@@ -22,6 +22,9 @@ all: $(BINS)
 
 $(BINS): ../$(SONAME_0)
 
+../$(SONAME_0):
+	$(MAKE) -C ..
+
 # The built-in recipe for the implicit rule uses $^ instead of $<
 %: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)

@@ -31,6 +31,9 @@ all: $(BINS)
 
 $(BINS): ../$(ANAME)
 
+../$(ANAME):
+	$(MAKE) -C ..
+
 # The built-in recipe for the implicit rule uses $^ instead of $<
 %: %.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
