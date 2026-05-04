@@ -152,9 +152,7 @@ BM_rand_lt_many(benchmark::State& BM_state, func_T_T_t<T>& fn)
 using func_t = void (&)(void*, size_t);
 
 void
-BM_rand_bytes(benchmark::State& BM_state,
-              func_t& fn,
-              const size_t buf_size)
+BM_rand_bytes(benchmark::State& BM_state, func_t& fn, const size_t buf_size)
 {
     // Perform setup here
 
@@ -169,7 +167,8 @@ BM_rand_bytes(benchmark::State& BM_state,
 
     delete[] buf;
 
-    BM_state.SetBytesProcessed(BM_state.iterations() * buf_size / static_cast<double>(BM_state.threads()));
+    BM_state.SetBytesProcessed(BM_state.iterations() * buf_size /
+                               static_cast<double>(BM_state.threads()));
 }
 
 // This is needed because getentropy returns int, but our interface returns nothing.
@@ -180,8 +179,7 @@ getentropy_wrapper(void* buf, size_t len)
 }
 
 void
-BM_rand_bytes_4GiB(benchmark::State& BM_state,
-                   func_t& fn)
+BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 {
     // Perform setup here
 
@@ -219,7 +217,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     // {{{ determine num_threads
 
     constexpr int min_threads = 1;
-    const auto max_threads = std::max(min_threads, static_cast<int>(std::thread::hardware_concurrency()));
+    const auto max_threads =
+        std::max(min_threads, static_cast<int>(std::thread::hardware_concurrency()));
     // https://en.wikipedia.org/wiki/Elvis_operator
     //const auto max_threads = static_cast<int>(std::thread::hardware_concurrency()) ?: min_threads;
 
