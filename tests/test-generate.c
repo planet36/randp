@@ -15,7 +15,7 @@
 #include <unistd.h>
 
 // XXX: n must be a multiple of sizeof(uint32_t)
-void
+static void
 mrand48_wrapper(void* buf, size_t n)
 {
     const size_t num_elems = n / sizeof(uint32_t);
