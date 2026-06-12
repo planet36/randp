@@ -70,6 +70,10 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
 */
 
 /// Get the next PRNG output via AES encryption.
+/**
+* \param this_ the PRNG state
+* \return the next PRNG output
+*/
 static inline __m128i
 aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
 {
@@ -85,6 +89,10 @@ aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
 }
 
 /// Get the next PRNG output via AES decryption.
+/**
+* \param this_ the PRNG state
+* \return the next PRNG output
+*/
 static inline __m128i
 aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
 {
@@ -100,6 +108,10 @@ aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
 }
 
 /// Get the next PRNG output via AES encryption and Davies-Meyer single-block-length compression function.
+/**
+* \param this_ the PRNG state
+* \return the next PRNG output
+*/
 static inline __m128i
 aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
 {
@@ -115,6 +127,10 @@ aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
 }
 
 /// Get the next PRNG output via AES decryption and Davies-Meyer single-block-length compression function.
+/**
+* \param this_ the PRNG state
+* \return the next PRNG output
+*/
 static inline __m128i
 aes_ctr_128_prng_dec_davies_meyer_next(aes_ctr_128_prng* this_)
 {

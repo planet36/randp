@@ -25,6 +25,7 @@ extern "C" {
 * \param keys the keys
 * \param Nk the number of \a keys
 * \param Nr the number of rounds of encryption to perform for each key
+* \return the encrypted result
 */
 static inline __m128i
 aes128_enc(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned int Nr)
@@ -47,6 +48,7 @@ aes128_enc(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned
 * \param keys the keys
 * \param Nk the number of \a keys
 * \param Nr the number of rounds of decryption to perform for each key
+* \return the decrypted result
 */
 static inline __m128i
 aes128_dec(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned int Nr)
@@ -70,6 +72,7 @@ aes128_dec(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned
 * \param keys the keys
 * \param Nk the number of \a keys
 * \param Nr the number of rounds of encryption to perform for each key
+* \return the compressed result
 */
 static inline __m128i
 aes128_enc_davies_meyer(const __m128i H,
@@ -89,6 +92,7 @@ aes128_enc_davies_meyer(const __m128i H,
 * \param keys the keys
 * \param Nk the number of \a keys
 * \param Nr the number of rounds of decryption to perform for each key
+* \return the compressed result
 */
 static inline __m128i
 aes128_dec_davies_meyer(const __m128i H,

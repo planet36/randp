@@ -70,6 +70,10 @@ static_assert(offsetof(randp, pool) % sizeof(__m128i) == 0,
 
 static_assert(sizeof(randp) <= PAGE_SIZE, "randp must fit in one page");
 
+/// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero.
+/**
+* \param this_ the randp state
+*/
 static void
 randp_regen(randp* this_)
 {

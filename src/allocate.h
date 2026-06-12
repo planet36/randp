@@ -21,6 +21,7 @@
 extern "C" {
 #endif
 
+/// Allocate \a len bytes of private, anonymous, secure memory via \c mmap.
 /**
 * \param len the number of bytes to allocate
 * \return a pointer to the allocated memory
