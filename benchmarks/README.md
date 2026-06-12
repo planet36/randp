@@ -80,7 +80,7 @@ Note: `rdrand32` and `rdseed32` are wrappers for `_rdrand32_step` and `_rdseed32
 
 | Function | Median time per call | |
 |---|---:|---|
-| `randp_lt_u32`       | 6.32  ns | 3.2&times; more |
+| `randp_lt_u32`       | 6.32  ns | 3.2&times; faster |
 | `arc4random_uniform` | 20.3  ns | |
 
 ### 2025-10-09

@@ -2,7 +2,7 @@
 
 randp is fork-safe, just like arc4random.
 
-randp passes PractRand tests through 512 GiB with these exhaustive options: <q>-tf 2</q>, <q>-te 1</q>.  And it scores a similar number of FIPS 140-2 successes and failures as arc4random and openssl-rand.
+randp passes PractRand tests through 512 GiB with these exhaustive options: <q>-tf 2</q>, <q>-te 0</q>.  And it scores a similar number of FIPS 140-2 successes and failures as arc4random and openssl-rand.
 
 It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or [diehard](https://en.wikipedia.org/wiki/Diehard_tests).
 
@@ -34,7 +34,7 @@ It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or 
 * `make profile-kgui` or `make profile-qgui`
   * Use a profiler on randp, and then run a visualizer.
 * `make run-rngtest`
-  * Test randomness using `rng-test`.
+  * Test randomness using `rngtest`.
   * Takes about 5 minutes
 * `make run-PractRand`
   * Test randomness using `RNG_test` (from PractRand).
