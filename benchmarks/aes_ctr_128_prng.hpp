@@ -42,6 +42,10 @@ private:
     __m128i ctr; ///< The state/counter
 
 public:
+    /// Construct a PRNG seeded via \c getentropy.
+    /**
+    * \note This function terminates the calling process upon catastrophic error.
+    */
     aes_ctr_128_prng()
     {
         static_assert(sizeof(*this) <= 256,
@@ -50,14 +54,20 @@ public:
     }
 
     /// Assign random bytes to the data members via \c getentropy.
-    void reseed()
+    /**
+    * \note This function terminates the calling process upon catastrophic error.
+    */
+    void reseed() noexcept
     {
         if (getentropy(this, sizeof(*this)) < 0)
             err(EXIT_FAILURE, "getentropy");
     }
 
     /// Get the next PRNG output via AES encryption or decryption.
-    __m128i next()
+    /**
+    * \return the next PRNG output
+    */
+    __m128i next() noexcept
     {
         /*
         * Criteria for integers of \c inc:

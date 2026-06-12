@@ -60,6 +60,7 @@ struct randp
     size_t rand_bytes_remaining; ///< The pool is regenerated when this is 0.
     uint8_t pool[RANDP_NUM_BYTES];
 
+    /// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero.
     void regen()
     {
         if (this->reseed_countdown == 0)
@@ -105,7 +106,7 @@ template <
     // }}}
 >
 void
-randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
+randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
     using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
@@ -177,7 +178,7 @@ template <
     // }}}
 >
 void
-randp_bytes_MUTEX(void* buf, size_t n) [[gnu::nonnull]]
+randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
     using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
 
