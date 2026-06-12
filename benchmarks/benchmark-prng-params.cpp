@@ -29,6 +29,8 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
     }
 }
 
+#include "get_env.hpp"
+
 #include <algorithm>
 #include <cstdlib>
 #include <string>
@@ -56,7 +58,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     try
     {
-        num_threads = std::stoi(std::getenv("NUM_THREADS"));
+        num_threads = std::stoi(get_env("NUM_THREADS").value_or("0"));
     }
     catch (...)
     {
