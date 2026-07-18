@@ -11,10 +11,10 @@ CFLAGS += -fPIC -ffreestanding -g
 all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
 
 $(ANAME): $(OBJS)
-	$(AR) $(ARFLAGS) $@ $<
+	$(AR) $(ARFLAGS) $@ $^
 
 $(SONAME_2): $(OBJS)
-	$(CC) -o $@ -shared -nostdlib -Wl,-soname,$(SONAME_1) $(LDFLAGS) $<
+	$(CC) -o $@ -shared -nostdlib -Wl,-soname,$(SONAME_1) $(LDFLAGS) $^
 
 $(SONAME_1): $(SONAME_2)
 	@ln -s -f --verbose -- $< $@
