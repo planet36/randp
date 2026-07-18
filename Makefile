@@ -3,12 +3,17 @@
 
 include config.mk
 
+SUBDIRS = benchmarks tests
+
 SRCS = src/$(LIBNAME).c
 HDRS = $(wildcard src/*.h) # Used for dependencies of the header-only target
 
 CFLAGS += -fPIC -ffreestanding -g
 
-all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
+all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(SUBDIRS)
+
+$(SUBDIRS): $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+	$(MAKE) -C $@
 
 $(ANAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
@@ -49,12 +54,14 @@ uninstall:
 
 clean:
 	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
+	for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
+	-for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all clean lint install uninstall
+.PHONY: all clean lint install uninstall $(SUBDIRS)
 
 # https://www.gnu.org/software/make/manual/html_node/Special-Targets.html#index-removing-targets-on-failure
 .DELETE_ON_ERROR:
