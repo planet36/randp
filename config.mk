@@ -5,7 +5,7 @@ export LC_ALL = C
 
 VERSION := $(shell git describe --tags --abbrev=0 2> /dev/null)
 ifeq ($(VERSION),)
-VERSION := X.Y
+    $(error Cannot determine VERSION: not a git checkout with tags, or "git describe" failed. Pass VERSION=X.Y explicitly, e.g., `make VERSION=1.0 install`)
 endif
 VERSION_SPLIT := $(subst ., , $(VERSION))
 VERSION_MAJOR := $(word 1, $(VERSION_SPLIT))
