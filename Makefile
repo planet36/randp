@@ -46,7 +46,6 @@ $(PCFILE): $(PCFILE).in
 		-e 's|@VERSION@|$(VERSION)|g' \
 		-- $< > $@
 
-# TODO: test this
 install: $(ARTIFACTS)
 	@install -D -v -m644 -- $(LIBNAME).h $(DESTDIR)$(INCDIR)/$(LIBNAME).h
 	@install -D -v -m644 -- $(SINGLE_HEADER) $(DESTDIR)$(INCDIR)/$(SINGLE_HEADER)
@@ -57,7 +56,6 @@ install: $(ARTIFACTS)
 	@install -D -v -m644 -- $(PCFILE) $(DESTDIR)$(PKGCONFIGDIR)/$(PCFILE)
 	$(if $(DESTDIR),,@ldconfig --verbose -- $(LIBDIR))
 
-# TODO: test this
 uninstall:
 	@$(RM) --verbose -- $(DESTDIR)$(INCDIR)/$(LIBNAME).h
 	@$(RM) --verbose -- $(DESTDIR)$(INCDIR)/$(SINGLE_HEADER)
