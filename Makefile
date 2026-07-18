@@ -8,11 +8,15 @@ SUBDIRS = benchmarks tests
 SRCS = src/$(LIBNAME).c
 HDRS = $(wildcard src/*.h) # Used for dependencies of the header-only target
 
+LIB_ARTIFACTS = $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+
+ARTIFACTS = $(LIB_ARTIFACTS) $(SINGLE_HEADER) $(PCFILE)
+
 CFLAGS += -fPIC -ffreestanding -g
 
-all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(PCFILE) $(SUBDIRS)
+all: $(ARTIFACTS) $(SUBDIRS)
 
-$(SUBDIRS): $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+$(SUBDIRS): $(LIB_ARTIFACTS)
 	$(MAKE) -C $@
 
 $(ANAME): $(OBJS)
@@ -43,7 +47,7 @@ $(PCFILE): $(PCFILE).in
 		-- $< > $@
 
 # TODO: test this
-install: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(PCFILE)
+install: $(ARTIFACTS)
 	@install -D -v -m644 -- $(LIBNAME).h $(DESTDIR)$(INCDIR)/$(LIBNAME).h
 	@install -D -v -m644 -- $(ANAME) $(DESTDIR)$(LIBDIR)/$(ANAME)
 	@install -D -v -m755 -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_2)
@@ -63,14 +67,14 @@ uninstall:
 	$(if $(DESTDIR),,@ldconfig --verbose)
 
 clean:
-	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(PCFILE)
+	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ARTIFACTS)
 	for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
 	-for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
-test: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+test: $(LIB_ARTIFACTS)
 	$(MAKE) -C tests
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
