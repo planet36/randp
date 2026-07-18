@@ -90,13 +90,18 @@ As bytes are retrieved from the pool, they are zeroized.  When the pool is deple
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
   * [C23](https://en.cppreference.com/w/c/23) support was added in GCC 14.  randp uses the [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local) keyword.
   * clang and clang++ are not supported
-* [Glibc 2.25](https://www.phoronix.com/news/glibc-2.25-Released) or newer
+* [Glibc 2.34](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.34) or newer
   * [`getentropy`](https://man7.org/linux/man-pages/man3/getentropy.3.html) was added in glibc 2.25. [^getentropy_1] [^getentropy_2]
   * [`explicit_bzero`](https://man7.org/linux/man-pages/man3/explicit_bzero.3.html) was added in glibc 2.25.
+  * [C11 threads](https://en.cppreference.com/w/c/thread) (`tss_create`, `tss_set`, `call_once`) were implemented in glibc 2.28, but lived only in `libpthread`. [^threads_1] randp doesn't link with `-lpthread`, so it needs glibc 2.34, where `libpthread` was merged into `libc`. [^threads_2]
 
 [^getentropy_1]: https://sourceware.org/legacy-ml/libc-alpha/2017-02/msg00079.html
 
 [^getentropy_2]: https://sourceware.org/bugzilla/show_bug.cgi?id=17252#c7
+
+[^threads_1]: https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html
+
+[^threads_2]: https://developers.redhat.com/articles/2021/12/17/why-glibc-234-removed-libpthread
 
 ## Header-Only
 

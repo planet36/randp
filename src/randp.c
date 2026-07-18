@@ -21,6 +21,7 @@
 #include <string.h>
 #include <strings.h>
 #include <sys/user.h>
+#include <threads.h>
 
 #if defined(__cplusplus)
 extern "C" {
@@ -113,6 +114,26 @@ randp_regen(randp* this_)
     --this_->reseed_countdown;
 }
 
+/// Deallocate a thread's \c randp pool when the thread exits.
+/**
+* \param p the randp pool, as passed to \c tss_set
+*/
+static void
+randp_destroy(void* p)
+{
+    deallocate(p, sizeof(randp));
+}
+
+static tss_t randp_tss_key;
+static once_flag randp_tss_once = ONCE_FLAG_INIT;
+
+static void
+randp_tss_key_init(void)
+{
+    if (tss_create(&randp_tss_key, randp_destroy) != thrd_success)
+        errx(EXIT_FAILURE, "tss_create failed");
+}
+
 /// Public API
 /**
 * <code>void randp_bytes(void* buf, size_t n)</code>
@@ -148,7 +169,9 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 #else
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
-        // TODO: deallocate this_ when thread exits
+        call_once(&randp_tss_once, randp_tss_key_init);
+        if (tss_set(randp_tss_key, this_) != thrd_success)
+            errx(EXIT_FAILURE, "tss_set failed");
     }
 
     uint8_t* dst = (uint8_t*)buf;

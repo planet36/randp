@@ -47,6 +47,19 @@ allocate(const size_t len)
     return addr;
 }
 
+/// Deallocate memory previously allocated by \c allocate.
+/**
+* \param addr the pointer returned by \c allocate
+* \param len the same \a len passed to \c allocate
+* \note This function terminates the calling process upon catastrophic error.
+*/
+static void
+deallocate(void* addr, const size_t len)
+{
+    if (munmap(addr, len) < 0)
+        err(EXIT_FAILURE, "munmap");
+}
+
 #if defined(__cplusplus)
 }
 #endif

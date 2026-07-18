@@ -28,7 +28,7 @@ make install
 make uninstall
 ```
 
-**Requirements:** GCC 14+ (clang not supported), C23 (`-std=c23`), `-maes` flag (AES-NI instructions required), Linux 4.14+, Glibc 2.25+ (`explicit_bzero` required).
+**Requirements:** GCC 14+ (clang not supported), C23 (`-std=c23`), `-maes` flag (AES-NI instructions required), Linux 4.14+, Glibc 2.34+ (`explicit_bzero` and C11 threads `tss_create`/`tss_set`/`call_once` required; the project links no `-lpthread`, so it needs glibc 2.34+, where `libpthread` was merged into `libc`, not merely 2.28+ where `<threads.h>` was first implemented).
 
 ## Tests
 
