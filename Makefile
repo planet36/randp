@@ -10,7 +10,7 @@ HDRS = $(wildcard src/*.h) # Used for dependencies of the header-only target
 
 CFLAGS += -fPIC -ffreestanding -g
 
-all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(SUBDIRS)
+all: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(PCFILE) $(SUBDIRS)
 
 $(SUBDIRS): $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
 	$(MAKE) -C $@
@@ -34,6 +34,14 @@ $(SINGLE_HEADER): $(HDRS) $(SRCS)
 	@printf '#define RANDP_SINGLE_HEADER\n\n' > $@
 	python3 amalgamate.py $(SRCS) >> $@
 
+$(PCFILE): $(PCFILE).in
+	@sed \
+		-e 's|@PREFIX@|$(PREFIX)|g' \
+		-e 's|@LIBDIR@|$(LIBDIR)|g' \
+		-e 's|@INCDIR@|$(INCDIR)|g' \
+		-e 's|@VERSION@|$(VERSION)|g' \
+		-- $< > $@
+
 # TODO: test this
 install: all
 	@install -D -v -m644 -- $(LIBNAME).h $(DESTDIR)$(INCDIR)/$(LIBNAME).h
@@ -41,6 +49,7 @@ install: all
 	@install -D -v -m755 -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_2)
 	@ln -s -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_1)
 	@ln -s -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_0)
+	@install -D -v -m644 -- $(PCFILE) $(DESTDIR)$(PKGCONFIGDIR)/$(PCFILE)
 	$(if $(DESTDIR),,@ldconfig --verbose -- $(LIBDIR))
 
 # TODO: test this
@@ -50,10 +59,11 @@ uninstall:
 	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_2)
 	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_1)
 	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_0)
+	@$(RM) --verbose -- $(DESTDIR)$(PKGCONFIGDIR)/$(PCFILE)
 	$(if $(DESTDIR),,@ldconfig --verbose)
 
 clean:
-	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
+	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(PCFILE)
 	for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 lint:

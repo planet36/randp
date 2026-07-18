@@ -20,6 +20,7 @@ SONAME_1 := $(SONAME_0).$(VERSION_MAJOR)
 # "realname"
 SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
 SINGLE_HEADER := $(LIBNAME)-single.h
+PCFILE := $(LIBNAME).pc
 
 # paths
 PREFIX ?= /usr/local
@@ -27,6 +28,7 @@ BINDIR ?= $(PREFIX)/bin
 INCDIR ?= $(PREFIX)/include
 LIBDIR ?= $(PREFIX)/lib
 MANDIR ?= $(PREFIX)/share/man
+PKGCONFIGDIR ?= $(LIBDIR)/pkgconfig
 
 DEPS = $(addsuffix .d,$(basename $(SRCS)))
 OBJS = $(addsuffix .o,$(basename $(SRCS)))

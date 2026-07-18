@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+exec_prefix=${prefix}
+libdir=@LIBDIR@
+includedir=@INCDIR@
+
+Name: randp
+Description: Fast, fork-safe, cryptographically secure PRNG library using AES-CTR (arc4random-compatible)
+URL: https://github.com/planet36/randp
+Version: @VERSION@
+Libs: -L${libdir} -lrandp
+Cflags: -I${includedir}
