@@ -31,23 +31,23 @@ $(SINGLE_HEADER): $(HDRS) $(SRCS)
 
 # TODO: test this
 install: all
-	@mkdir -p --verbose -- $(INCDIR)
-	@mkdir -p --verbose -- $(LIBDIR)
-	@cp -f --verbose -- $(LIBNAME).h $(INCDIR)
-	@cp -f --verbose -- $(ANAME) $(LIBDIR)
-	@cp -f --verbose -- $(SONAME_2) $(LIBDIR)
-	@cp -f --verbose -- $(SONAME_1) $(LIBDIR)
-	@cp -f --verbose -- $(SONAME_0) $(LIBDIR)
-	@ldconfig --verbose -- $(LIBDIR)
+	@mkdir -p --verbose -- $(DESTDIR)$(INCDIR)
+	@mkdir -p --verbose -- $(DESTDIR)$(LIBDIR)
+	@cp -f --verbose -- $(LIBNAME).h $(DESTDIR)$(INCDIR)
+	@cp -f --verbose -- $(ANAME) $(DESTDIR)$(LIBDIR)
+	@cp -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)
+	@cp -f --verbose -- $(SONAME_1) $(DESTDIR)$(LIBDIR)
+	@cp -f --verbose -- $(SONAME_0) $(DESTDIR)$(LIBDIR)
+	$(if $(DESTDIR),,@ldconfig --verbose -- $(LIBDIR))
 
 # TODO: test this
 uninstall:
-	@$(RM) --verbose -- $(INCDIR)/$(LIBNAME).h
-	@$(RM) --verbose -- $(LIBDIR)/$(ANAME)
-	@$(RM) --verbose -- $(LIBDIR)/$(SONAME_2)
-	@$(RM) --verbose -- $(LIBDIR)/$(SONAME_1)
-	@$(RM) --verbose -- $(LIBDIR)/$(SONAME_0)
-	@ldconfig --verbose
+	@$(RM) --verbose -- $(DESTDIR)$(INCDIR)/$(LIBNAME).h
+	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(ANAME)
+	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_2)
+	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_1)
+	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_0)
+	$(if $(DESTDIR),,@ldconfig --verbose)
 
 clean:
 	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER)
