@@ -83,7 +83,7 @@ lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all fork generate profile profile-kgui profile-qgui run-PractRand run-rngtest single clean
+.PHONY: all fork generate profile profile-kgui profile-qgui run-PractRand run-rngtest single clean lint
 
 # https://www.gnu.org/software/make/manual/html_node/Special-Targets.html#index-removing-targets-on-failure
 .DELETE_ON_ERROR:
