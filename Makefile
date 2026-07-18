@@ -60,8 +60,11 @@ lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
 	-for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
+test: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0)
+	$(MAKE) -C tests
+
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all clean lint install uninstall $(SUBDIRS)
+.PHONY: all clean lint install uninstall test $(SUBDIRS)
 
 # https://www.gnu.org/software/make/manual/html_node/Special-Targets.html#index-removing-targets-on-failure
 .DELETE_ON_ERROR:
