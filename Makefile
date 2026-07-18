@@ -43,7 +43,7 @@ $(PCFILE): $(PCFILE).in
 		-- $< > $@
 
 # TODO: test this
-install: all
+install: $(ANAME) $(SONAME_2) $(SONAME_1) $(SONAME_0) $(SINGLE_HEADER) $(PCFILE)
 	@install -D -v -m644 -- $(LIBNAME).h $(DESTDIR)$(INCDIR)/$(LIBNAME).h
 	@install -D -v -m644 -- $(ANAME) $(DESTDIR)$(LIBDIR)/$(ANAME)
 	@install -D -v -m755 -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_2)
