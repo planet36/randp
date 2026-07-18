@@ -31,13 +31,11 @@ $(SINGLE_HEADER): $(HDRS) $(SRCS)
 
 # TODO: test this
 install: all
-	@mkdir -p --verbose -- $(DESTDIR)$(INCDIR)
-	@mkdir -p --verbose -- $(DESTDIR)$(LIBDIR)
-	@cp -f --verbose -- $(LIBNAME).h $(DESTDIR)$(INCDIR)
-	@cp -f --verbose -- $(ANAME) $(DESTDIR)$(LIBDIR)
-	@cp -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)
-	@cp -f --verbose -- $(SONAME_1) $(DESTDIR)$(LIBDIR)
-	@cp -f --verbose -- $(SONAME_0) $(DESTDIR)$(LIBDIR)
+	@install -D -v -m644 -- $(LIBNAME).h $(DESTDIR)$(INCDIR)/$(LIBNAME).h
+	@install -D -v -m644 -- $(ANAME) $(DESTDIR)$(LIBDIR)/$(ANAME)
+	@install -D -v -m755 -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_2)
+	@ln -s -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_1)
+	@ln -s -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_0)
 	$(if $(DESTDIR),,@ldconfig --verbose -- $(LIBDIR))
 
 # TODO: test this
