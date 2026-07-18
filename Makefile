@@ -49,6 +49,7 @@ $(PCFILE): $(PCFILE).in
 # TODO: test this
 install: $(ARTIFACTS)
 	@install -D -v -m644 -- $(LIBNAME).h $(DESTDIR)$(INCDIR)/$(LIBNAME).h
+	@install -D -v -m644 -- $(SINGLE_HEADER) $(DESTDIR)$(INCDIR)/$(SINGLE_HEADER)
 	@install -D -v -m644 -- $(ANAME) $(DESTDIR)$(LIBDIR)/$(ANAME)
 	@install -D -v -m755 -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_2)
 	@ln -s -f --verbose -- $(SONAME_2) $(DESTDIR)$(LIBDIR)/$(SONAME_1)
@@ -59,6 +60,7 @@ install: $(ARTIFACTS)
 # TODO: test this
 uninstall:
 	@$(RM) --verbose -- $(DESTDIR)$(INCDIR)/$(LIBNAME).h
+	@$(RM) --verbose -- $(DESTDIR)$(INCDIR)/$(SINGLE_HEADER)
 	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(ANAME)
 	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_2)
 	@$(RM) --verbose -- $(DESTDIR)$(LIBDIR)/$(SONAME_1)
