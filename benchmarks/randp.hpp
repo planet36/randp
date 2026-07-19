@@ -27,6 +27,7 @@
 #include <string.h>
 #include <strings.h>
 #include <sys/user.h>
+#include <threads.h>
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
@@ -86,6 +87,26 @@ struct randp
         this->rand_bytes_remaining = RANDP_NUM_BYTES;
         --this->reseed_countdown;
     }
+
+    /// Deallocate a thread's \c randp pool when the thread exits.
+    /**
+    * \param p the randp pool, as passed to \c tss_set
+    */
+    static void
+    destroy(void* p) noexcept
+    {
+        deallocate(p, sizeof(randp));
+    }
+
+    static inline tss_t tss_key;
+    static inline once_flag tss_once = ONCE_FLAG_INIT;
+
+    static void
+    tss_key_init() noexcept
+    {
+        if (tss_create(&tss_key, destroy) != thrd_success)
+            errx(EXIT_FAILURE, "tss_create failed");
+    }
 };
 
 /// Fill a buffer with random bytes using a \c thread_local pool.
@@ -128,7 +149,9 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
         // Unreachable in C++.  Retained only to match randp.c.
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
-        // TODO: deallocate this_ when thread exits
+        call_once(&randp_t::tss_once, randp_t::tss_key_init);
+        if (tss_set(randp_t::tss_key, this_) != thrd_success)
+            errx(EXIT_FAILURE, "tss_set failed");
     }
 
     uint8_t* dst = (uint8_t*)buf;
