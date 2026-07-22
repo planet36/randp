@@ -171,8 +171,8 @@ else:
         selection = np.array(primes_32)[
                 np.round(np.linspace(start=0, stop=len(primes_32)-1, num=num, endpoint=True)).astype(int)]
 
-        for i in selection:
+        for val in selection:
+            i = int(val)
             s = f'{i:0{bits}b}'
-            i = int(i)
             print(f'{i=}  {hex(i)=}  0b{s}')
         print()
