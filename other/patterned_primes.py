@@ -16,12 +16,10 @@ md5sum /tmp/patterned_primes*.txt
 
 """
 
-# pylint: disable=invalid-name
-
 import numpy as np
 import sympy
 
-# pylint: disable=redefined-outer-name
+
 def rotl(x: int, shift: int, width: int) -> int:
     """
     Rotate-left within `width` bits.
@@ -79,84 +77,88 @@ def has_forbidden_bit_sequence(s: str) -> bool:
     return any(pat in s for pat in _FORBIDDEN)
 
 
-primes_32 = []
+# pylint: disable=too-many-locals,too-many-branches
+def main() -> None:
+    '''Search for patterned primes and print a linspace selection of the 32-bit ones.'''
 
-for bits in (8, 16, 32):
+    primes_32 = []
 
-    print(f'# {bits=}')
-    bits_half = bits // 2
+    for bits in (8, 16, 32):
 
-    #bits_mask = (2**bits) - 1
-    #bits_half_mask = bits_mask >> bits_half
+        print(f'# {bits=}')
+        bits_half = bits // 2
 
-    #start = ((2**bits) >> 2) | 1 # odd
-    start = (0b01 << (bits-2)) | 1 # odd
+        #bits_mask = (2**bits) - 1
+        #bits_half_mask = bits_mask >> bits_half
 
-    #end = 2**bits - (start - 1)
-    end = 0b11 << (bits-2)
+        #start = ((2**bits) >> 2) | 1 # odd
+        start = (0b01 << (bits-2)) | 1 # odd
 
-    print(f'# start = {start}  {hex(start)}  0b{start:0{bits}b}')
-    print(f'# end   = {end}  {hex(end)}  0b{end:0{bits}b} (exclusive)')
+        #end = 2**bits - (start - 1)
+        end = 0b11 << (bits-2)
 
-    num_bytes = bits // 8
+        print(f'# start = {start}  {hex(start)}  0b{start:0{bits}b}')
+        print(f'# end   = {end}  {hex(end)}  0b{end:0{bits}b} (exclusive)')
 
-    num_found_primes = 0
+        num_bytes = bits // 8
 
-    #for i in range(0, 2**bits):
-    #for i in range(2**(bits-1), 2**bits):
-    #for i in range(2**(bits-1), 2**bits - (2**bits >> 2)):
-    for i in range(start, end, 2):
+        num_found_primes = 0
 
-        if i.bit_count() != bits_half:
-            continue
+        #for i in range(0, 2**bits):
+        #for i in range(2**(bits-1), 2**bits):
+        #for i in range(2**(bits-1), 2**bits - (2**bits >> 2)):
+        for i in range(start, end, 2):
 
-        if not sympy.isprime(i):
-            continue
+            if i.bit_count() != bits_half:
+                continue
 
-        skip = False
+            if not sympy.isprime(i):
+                continue
 
-        # Rotate the value to find forbidden bit patterns.
-        for shift in range(0, 8):
-            i2 = rotl(i, shift, bits)
-            bit_count_per_byte = tuple(
-                    b.bit_count() for b in i2.to_bytes(num_bytes, byteorder='big', signed=False))
+            skip = False
 
-            # Detect too few or too many set bits in each byte.
-            if any(n < 4-1 or n > 4+1 for n in bit_count_per_byte):
-                skip = True
-                break
+            # Rotate the value to find forbidden bit patterns.
+            for shift in range(0, 8):
+                i2 = rotl(i, shift, bits)
+                bit_count_per_byte = tuple(
+                        b.bit_count() for b in i2.to_bytes(num_bytes, byteorder='big'))
 
-            if num_bytes > 2:
-                # At least one of the bytes must have popcount = 4.
-                if all(n != 4 for n in bit_count_per_byte):
+                # Detect too few or too many set bits in each byte.
+                if any(n < 4-1 or n > 4+1 for n in bit_count_per_byte):
                     skip = True
                     break
 
-            s = f'{i2:0{bits}b}'
+                if num_bytes > 2:
+                    # At least one of the bytes must have popcount = 4.
+                    if all(n != 4 for n in bit_count_per_byte):
+                        skip = True
+                        break
 
-            if has_forbidden_bit_sequence(s):
-                skip = True
-                break
+                s = f'{i2:0{bits}b}'
 
-        if skip:
-            continue
+                if has_forbidden_bit_sequence(s):
+                    skip = True
+                    break
 
-        s = f'{i:0{bits}b}'
+            if skip:
+                continue
 
-        if bits == 32:
-            primes_32.append(i)
+            s = f'{i:0{bits}b}'
 
-        print(f'{i=}  {hex(i)=}  0b{s}')
-        num_found_primes += 1
+            if bits == 32:
+                primes_32.append(i)
 
-    print(f'# {num_found_primes=}')
-    print()
+            print(f'{i=}  {hex(i)=}  0b{s}')
+            num_found_primes += 1
 
+        print(f'# {num_found_primes=}')
+        print()
 
-bits = 32
-if not primes_32:
-    print("# no 32-bit primes found; skipping selection")
-else:
+    bits = 32
+    if not primes_32:
+        print("# no 32-bit primes found; skipping selection")
+        return
+
     for num in (4, 8, 16, 32):
 
         print(f'# select {num} using numpy linspace')
@@ -170,3 +172,7 @@ else:
             s = f'{i:0{bits}b}'
             print(f'{i=}  {hex(i)=}  0b{s}')
         print()
+
+
+if __name__ == "__main__":
+    main()
