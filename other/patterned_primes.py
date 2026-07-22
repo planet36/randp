@@ -86,7 +86,7 @@ def has_forbidden_bit_sequence(s: str) -> bool:
     return False
 
 
-l = []
+primes_32 = []
 
 for bits in (8, 16, 32):
 
@@ -151,7 +151,7 @@ for bits in (8, 16, 32):
         s = f'{i:0{bits}b}'
 
         if bits == 32:
-            l.append(i)
+            primes_32.append(i)
 
         print(f'{i=}  {hex(i)=}  0b{s}')
         num_found_primes += 1
@@ -165,8 +165,8 @@ for num in (4, 8, 16, 32):
 
     print(f'# select {num} using numpy linspace')
 
-    selection = np.array(l)[
-            np.round(np.linspace(start=0, stop=len(l)-1, num=num, endpoint=True)).astype(int)]
+    selection = np.array(primes_32)[
+            np.round(np.linspace(start=0, stop=len(primes_32)-1, num=num, endpoint=True)).astype(int)]
 
     for i in selection:
         s = f'{i:0{bits}b}'
