@@ -14,6 +14,8 @@ import re
 import sys
 from pathlib import Path
 
+# Note: include detection is line-oriented and comment/string unaware; it
+#       assumes #include directives never appear commented-out or quoted.
 # Note: using re.match anchors at the start of the string,
 #       so an explicit '^' anchor is not required.
 # Regex to match C include directives of the form #include "header.h".
