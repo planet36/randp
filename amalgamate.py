@@ -26,9 +26,6 @@ from pathlib import Path
 # "([^"]+)"   : capture file name inside double quotes
 INCLUDE_FILE_PATTERN = re.compile(r'\s*#\s*include\s*"([^"]+)"')
 
-paths_seen: set[Path] = set()
-include_order: list[Path] = []
-
 
 def find_file(name: str, search_paths: list[Path]) -> Path:
     """
@@ -51,28 +48,34 @@ def find_file(name: str, search_paths: list[Path]) -> Path:
     raise FileNotFoundError(f'{name} not found in {search_paths}')
 
 
-def dfs(path: Path, search_paths: list[Path]) -> None:
+def include_order_for(root: Path, search_paths: list[Path]) -> list[Path]:
     """
-    Recursively traverse and record include dependencies in topological order.
-
-    This function visits the given file, finds all included headers, and
-    appends files to the global 'include_order' list after processing
-    dependencies.
+    Return root and its included headers in topological (dependency-first)
+    order, each file appearing exactly once.
 
     Args:
-        path (Path): The source or header file to process.
+        root (Path): The source file to start traversal from.
         search_paths (List[Path]): Directories to search for included headers.
+
+    Returns:
+        List[Path]: Files in the order they should be emitted.
     """
-    if path in paths_seen:
-        return
-    paths_seen.add(path)
-    with path.open('r', encoding='utf-8') as f:
-        for line in f:
-            m = INCLUDE_FILE_PATTERN.match(line)
-            if m:
-                included = find_file(m.group(1), search_paths)
-                dfs(included, search_paths)
-    include_order.append(path)
+    seen: set[Path] = set()
+    order: list[Path] = []
+
+    def visit(path: Path) -> None:
+        if path in seen:
+            return
+        seen.add(path)
+        with path.open('r', encoding='utf-8') as f:
+            for line in f:
+                m = INCLUDE_FILE_PATTERN.match(line)
+                if m:
+                    visit(find_file(m.group(1), search_paths))
+        order.append(path)
+
+    visit(root)
+    return order
 
 
 def emit(path: Path) -> None:
@@ -91,19 +94,22 @@ def emit(path: Path) -> None:
 
 
 # pylint: disable=missing-function-docstring
-def main():
+def main() -> None:
     script_name = Path(__file__).name
 
     if len(sys.argv) < 2:
-        print(f'Usage: {script_name} <root.c> [search-path...]')
+        print(f'Usage: {script_name} <root.c> [search-path...]',
+              file=sys.stderr)
         sys.exit(1)
 
     root = Path(sys.argv[1]).resolve()
-    search_paths = [Path(p)
-                    for p in (sys.argv[2:] or [root.parent, Path('.')])]
+    if len(sys.argv) > 2:
+        search_paths = [Path(p) for p in sys.argv[2:]]
+    else:
+        search_paths = [root.parent, Path('.')]
 
     # 1) build the include-order
-    dfs(root, search_paths)
+    include_order = include_order_for(root, search_paths)
 
     fold_marker_begin = '{{{'
     fold_marker_end = '}}}'
