@@ -24,11 +24,11 @@ from pathlib import Path
 # "([^"]+)"   : capture file name inside double quotes
 INCLUDE_FILE_PATTERN = re.compile(r'\s*#\s*include\s*"([^"]+)"')
 
-paths_seen = set()
-include_order = []
+paths_seen: set[Path] = set()
+include_order: list[Path] = []
 
 
-def find_file(name, search_paths):
+def find_file(name: str, search_paths: list[Path]) -> Path:
     """
     Locate a file with the specified name within given search paths.
 
@@ -49,7 +49,7 @@ def find_file(name, search_paths):
     raise FileNotFoundError(f'{name} not found in {search_paths}')
 
 
-def dfs(path, search_paths):
+def dfs(path: Path, search_paths: list[Path]) -> None:
     """
     Recursively traverse and record include dependencies in topological order.
 
@@ -73,7 +73,7 @@ def dfs(path, search_paths):
     include_order.append(path)
 
 
-def emit(path):
+def emit(path: Path) -> None:
     """
     Emit the contents of a file to standard output,
     excluding #include directives.
