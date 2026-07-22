@@ -161,8 +161,9 @@ else:
 
         print(f'# select {num} using numpy linspace')
 
-        selection = np.array(primes_32)[
-                np.round(np.linspace(start=0, stop=len(primes_32)-1, num=num, endpoint=True)).astype(int)]
+        idx = np.round(
+                np.linspace(start=0, stop=len(primes_32)-1, num=num, endpoint=True)).astype(int)
+        selection = np.array(primes_32)[idx]
 
         for val in selection:
             i = int(val)
