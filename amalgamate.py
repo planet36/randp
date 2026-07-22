@@ -113,6 +113,7 @@ def main():
         print()
         print(f'// {fold_marker_begin} {path.name}')
         emit(path)
+        print()  # ensure the fold-end marker starts on its own line
         print(f'// {fold_marker_end}')
 
 
