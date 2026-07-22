@@ -161,15 +161,18 @@ for bits in (8, 16, 32):
 
 
 bits = 32
-for num in (4, 8, 16, 32):
+if not primes_32:
+    print("# no 32-bit primes found; skipping selection")
+else:
+    for num in (4, 8, 16, 32):
 
-    print(f'# select {num} using numpy linspace')
+        print(f'# select {num} using numpy linspace')
 
-    selection = np.array(primes_32)[
-            np.round(np.linspace(start=0, stop=len(primes_32)-1, num=num, endpoint=True)).astype(int)]
+        selection = np.array(primes_32)[
+                np.round(np.linspace(start=0, stop=len(primes_32)-1, num=num, endpoint=True)).astype(int)]
 
-    for i in selection:
-        s = f'{i:0{bits}b}'
-        i = int(i)
-        print(f'{i=}  {hex(i)=}  0b{s}')
-    print()
+        for i in selection:
+            s = f'{i:0{bits}b}'
+            i = int(i)
+            print(f'{i=}  {hex(i)=}  0b{s}')
+        print()
