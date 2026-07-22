@@ -54,25 +54,15 @@ def rotl(x: int, shift: int, width: int) -> int:
     return ((x << shift) | (x >> (width - shift))) & mask
 
 
-_FORBIDDEN = ('000', '111', '00100', '11011')
+_FORBIDDEN = ('000', '111', '00100', '11011',
+              #'001100',
+              #'110011',
+              #'1100',
+              #'0011',
+              )
 
 def has_forbidden_bit_sequence(s: str) -> bool:
     '''Determine if s has a forbidden bit sequence.'''
-
-    #if s.startswith('00'):
-    #    return True
-    #if s.startswith('11'):
-    #    return True
-    #if s.endswith('11'):
-    #    return True
-    #if '001100' in s:
-    #    return True
-    #if '110011' in s:
-    #    return True
-    #if '1100' in s:
-    #    return True
-    #if '0011' in s:
-    #    return True
 
     return any(pat in s for pat in _FORBIDDEN)
 
