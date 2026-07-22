@@ -56,6 +56,8 @@ def rotl(x: int, shift: int, width: int) -> int:
     return ((x << shift) | (x >> (width - shift))) & mask
 
 
+_FORBIDDEN = ('000', '111', '00100', '11011')
+
 def has_forbidden_bit_sequence(s: str) -> bool:
     '''Determine if s has a forbidden bit sequence.'''
 
@@ -65,15 +67,6 @@ def has_forbidden_bit_sequence(s: str) -> bool:
     #    return True
     #if s.endswith('11'):
     #    return True
-    if '000' in s:
-        return True
-    if '111' in s:
-        return True
-
-    if '00100' in s:
-        return True
-    if '11011' in s:
-        return True
     #if '001100' in s:
     #    return True
     #if '110011' in s:
@@ -83,7 +76,7 @@ def has_forbidden_bit_sequence(s: str) -> bool:
     #if '0011' in s:
     #    return True
 
-    return False
+    return any(pat in s for pat in _FORBIDDEN)
 
 
 primes_32 = []
