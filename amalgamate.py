@@ -43,7 +43,7 @@ def find_file(name: str, search_paths: list[Path]) -> Path:
         FileNotFoundError: If the file is not found in any of the search paths.
     """
     for d in search_paths:
-        candidate = d / name
+        candidate = (d / name).resolve()
         if candidate.is_file():
             return candidate
     raise FileNotFoundError(f'{name} not found in {search_paths}')
@@ -96,7 +96,7 @@ def main():
         print(f'Usage: {script_name} <root.c> [search-path...]')
         sys.exit(1)
 
-    root = Path(sys.argv[1])
+    root = Path(sys.argv[1]).resolve()
     search_paths = [Path(p)
                     for p in (sys.argv[2:] or [root.parent, Path('.')])]
 
