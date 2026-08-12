@@ -53,3 +53,5 @@ dkms.conf
 
 randp-single.h
 randp.pc
+
+.claude/
