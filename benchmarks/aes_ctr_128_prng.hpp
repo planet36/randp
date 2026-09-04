@@ -67,18 +67,16 @@ public:
     /// Get the next PRNG output via AES encryption or decryption.
     /**
     * \return the next PRNG output
+    *
+    * The counter increment \c inc used below forms a Weyl sequence.
+    * Criteria for its 64-bit lane values:
+    *   1) Must be odd
+    *   2) Must be unique across lanes
+    *
+    * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
     */
     __m128i next() noexcept
     {
-        /*
-        * The counter increment \c inc used below forms a Weyl sequence.
-        * Criteria for its 64-bit lane values:
-        *   1) Must be odd
-        *   2) Must be unique across lanes
-        *
-        * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
-        */
-
         // most significant elem first
         const __m128i inc = _mm_set_epi64x(SHA_512_H0_1 | 1U, SHA_512_H0_0 | 1U); // NOLINT(cppcoreguidelines-narrowing-conversions)
 

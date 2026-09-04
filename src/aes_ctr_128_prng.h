@@ -58,19 +58,17 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
         err(EXIT_FAILURE, "getentropy");
 }
 
-/*
+/// Get the next PRNG output via AES encryption.
+/**
+* \param this_ the PRNG state
+* \return the next PRNG output
+*
 * The counter increment \c inc used below forms a Weyl sequence.
 * Criteria for its 64-bit lane values:
 *   1) Must be odd
 *   2) Must be unique across lanes
 *
 * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
-*/
-
-/// Get the next PRNG output via AES encryption.
-/**
-* \param this_ the PRNG state
-* \return the next PRNG output
 */
 static inline __m128i
 aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
