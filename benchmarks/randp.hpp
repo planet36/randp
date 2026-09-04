@@ -35,7 +35,7 @@
 /**
 * \tparam RANDP_NUM_BLOCKS the number of blocks in the pool
 * \tparam RANDP_RESEED_COUNTDOWN_MIN the minimum number of pool regenerations before reseeding
-* \tparam enc if \c true, use AES encryption; if \c false, use AES decryption
+* \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
 * \tparam Nk the number of independent AES keys
 * \tparam Nr the number of AES enc/dec rounds applied per key

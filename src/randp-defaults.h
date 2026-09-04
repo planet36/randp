@@ -9,7 +9,7 @@
 
 #pragma once
 
-/// If \c true, use AES encryption; if \c false, use AES decryption.
+/// If \c true, use AES encryption, otherwise AES decryption.
 #define DEFAULT_RANDP_PRNG_USE_ENC true
 
 /// If \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output.
