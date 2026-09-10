@@ -15,6 +15,9 @@
 
 /// Wrapper for \c std::getenv
 /**
+* \param name the name of the environment variable to look up
+* \return the value of the environment variable, or \c std::nullopt if not set
+*
 * Examples:
 * \code{.cpp}
 const char* name = "FOO";
