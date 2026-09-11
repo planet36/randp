@@ -49,10 +49,13 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
     }
 }
 
-#include "get_env.hpp"
+#include "parse_int.hpp"
 
 #include <algorithm>
+#include <cstdio>
 #include <cstdlib>
+#include <err.h>
+#include <stdexcept>
 #include <string>
 #include <thread>
 
@@ -69,23 +72,24 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     // {{{ determine num_threads
 
     constexpr int min_threads = 1;
-    const auto max_threads =
-        std::max(min_threads, static_cast<int>(std::thread::hardware_concurrency()));
-    // https://en.wikipedia.org/wiki/Elvis_operator
-    //const auto max_threads = static_cast<int>(std::thread::hardware_concurrency()) ?: min_threads;
+    const auto hw_threads = static_cast<int>(std::thread::hardware_concurrency());
+    const auto max_threads = std::max(min_threads, hw_threads);
 
-    auto num_threads = min_threads;
+    // NUM_THREADS=0 means max_threads
+    int num_threads = min_threads;
 
     try
     {
-        num_threads = std::stoi(get_env("NUM_THREADS").value_or("0"));
+        num_threads = parse_env_int("NUM_THREADS", 0, max_threads, min_threads);
     }
-    catch (...)
+    catch (const std::exception& ex)
     {
-        num_threads = min_threads;
+        (void)std::fflush(stdout);
+        errx(EXIT_FAILURE, "%s", ex.what());
     }
 
-    num_threads = std::clamp(num_threads, min_threads, max_threads);
+    if (num_threads == 0)
+        num_threads = max_threads;
 
     /*
     if (num_threads > min_threads)
