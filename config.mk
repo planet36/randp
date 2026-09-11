@@ -48,7 +48,7 @@ CFLAGS += -O3 -flto=auto
 CFLAGS += -maes
 CFLAGS += -Wno-unused-function
 
-CXXFLAGS = -std=c++20
+CXXFLAGS = -std=c++23
 CXXFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
 CXXFLAGS += -O3 -flto=auto
 CXXFLAGS += -maes
