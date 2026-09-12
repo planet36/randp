@@ -22,7 +22,7 @@
 #include <string_view>
 #include <system_error>
 
-/// Parse all of \a s as an integer of type \c T in <code>[min, max]</code>.
+/// Parse all of \a s as an integer of type \c T in <code>[min, max]</code>
 /**
 * \tparam T the integer type of the result
 * \param s the string to parse
@@ -83,7 +83,7 @@ parse_int(std::string_view s,
     return value;
 }
 
-/// Parse \a optarg as an int in <code>[min, max]</code>.
+/// Parse \a optarg as an int in <code>[min, max]</code>
 /**
 * \param optarg the option argument to parse
 * \param min the minimum allowed value (inclusive)
@@ -115,7 +115,7 @@ parse_option_int(const char* optarg, const int min, const int max, const char* o
     return *value;
 }
 
-/// Parse \a optarg as an int.
+/// Parse \a optarg as an int
 /**
 * \param optarg the option argument to parse
 * \param option_name the option name, named by the exception message
@@ -132,7 +132,7 @@ parse_option_int(const char* optarg, const char* option_name)
                             std::numeric_limits<int>::max(), option_name);
 }
 
-/// Parse the environment variable \a name as an int in <code>[min, max]</code>.
+/// Parse the environment variable \a name as an int in <code>[min, max]</code>
 /**
 * \param name the name of the environment variable
 * \param min the minimum allowed value (inclusive)
