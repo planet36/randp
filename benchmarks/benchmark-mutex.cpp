@@ -24,8 +24,10 @@ BM_rand_bytes(benchmark::State& BM_state, func_t& fn, const size_t buf_size)
 
     delete[] buf;
 
-    BM_state.SetBytesProcessed(BM_state.iterations() * buf_size /
-                               static_cast<double>(BM_state.threads()));
+    // Counters are summed across threads.  kAvgThreads makes this the per-thread rate.
+    BM_state.counters["bytes_per_second"] =
+        benchmark::Counter(static_cast<double>(BM_state.iterations()) * buf_size,
+                           benchmark::Counter::kAvgThreadsRate, benchmark::Counter::kIs1024);
 }
 
 void
