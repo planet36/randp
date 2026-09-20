@@ -21,7 +21,7 @@
 */
 #define DEFAULT_RANDP_NUM_BLOCKS 16
 
-/// The minimum number of pool regenerations before reseeding
+/// The number of pool regenerations before reseeding
 /**
 * # [NIST Special Publication 800-90A Revision 1](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final)
 *
@@ -33,4 +33,4 @@
 * |----------------------------------------------------------------|---------|
 * | Maximum number of requests between reseeds (*reseed_interval*) |    2^48 |
 */
-#define DEFAULT_RANDP_RESEED_COUNTDOWN_MIN (1 << 10)
+#define DEFAULT_RANDP_RESEED_COUNTDOWN (1 << 10)

@@ -10,7 +10,7 @@
 * \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 *
 * The raisons d'etre of this class are to test
-* 1. different values of \c RANDP_NUM_BLOCKS and \c RANDP_RESEED_COUNTDOWN_MIN
+* 1. different values of \c RANDP_NUM_BLOCKS and \c RANDP_RESEED_COUNTDOWN
 * 2. using a mutex for the static randp data instead of a \c thread_local instance
 */
 
@@ -34,7 +34,7 @@
 /// A pool of random bytes
 /**
 * \tparam RANDP_NUM_BLOCKS the number of blocks in the pool
-* \tparam RANDP_RESEED_COUNTDOWN_MIN the minimum number of pool regenerations before reseeding
+* \tparam RANDP_RESEED_COUNTDOWN the number of pool regenerations before reseeding
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
 * \tparam Nk the number of independent AES keys
@@ -42,7 +42,7 @@
 */
 template <
     int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
-    int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
+    int RANDP_RESEED_COUNTDOWN = DEFAULT_RANDP_RESEED_COUNTDOWN,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
@@ -67,7 +67,7 @@ struct randp
         if (this->reseed_countdown == 0)
         {
             prng.reseed();
-            this->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
+            this->reseed_countdown = RANDP_RESEED_COUNTDOWN;
         }
 
         __m128i* blocks = (__m128i*)(&this->pool[0]);
@@ -111,7 +111,7 @@ struct randp
 */
 template <
     int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
-    int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
+    int RANDP_RESEED_COUNTDOWN = DEFAULT_RANDP_RESEED_COUNTDOWN,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
@@ -122,7 +122,7 @@ template <
 void
 randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN, enc, dm, Nk, Nr>;
 
     static thread_local randp_t* this_ = nullptr;
 
@@ -185,7 +185,7 @@ static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 */
 template <
     int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
-    int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
+    int RANDP_RESEED_COUNTDOWN = DEFAULT_RANDP_RESEED_COUNTDOWN,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
@@ -196,7 +196,7 @@ template <
 void
 randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN_MIN, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_NUM_BLOCKS, RANDP_RESEED_COUNTDOWN, enc, dm, Nk, Nr>;
 
     // Intentionally not thread_local
     static randp_t* this_ = nullptr;
