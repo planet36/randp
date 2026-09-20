@@ -77,10 +77,10 @@ public:
             const __m128i key_mask = _mm_set_epi64x(SHA_512_H0_1, SHA_512_H0_0); // NOLINT(cppcoreguidelines-narrowing-conversions)
 
             const __m128i swapped = _mm_shuffle_epi32(this->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
-            // is_equal is all ones if the lanes are equal, all zeros otherwise.
-            const __m128i is_equal = _mm_cmpeq_epi64(this->keys[i], swapped);
+            // all ones if the lanes are equal, all zeros otherwise
+            const __m128i equal_mask = _mm_cmpeq_epi64(this->keys[i], swapped);
 
-            this->keys[i] = _mm_xor_si128(this->keys[i], _mm_and_si128(is_equal, key_mask));
+            this->keys[i] = _mm_xor_si128(this->keys[i], _mm_and_si128(equal_mask, key_mask));
         }
 #endif
     }
