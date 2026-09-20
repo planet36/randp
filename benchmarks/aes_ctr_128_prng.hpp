@@ -14,6 +14,7 @@
 
 #include "../src/aes128-utils.h"
 #include "../src/sha2_iv.h"
+#include "../src/wyprimes.h"
 
 #include <err.h>
 #include <immintrin.h>
@@ -77,8 +78,7 @@ public:
     */
     __m128i next() noexcept
     {
-        // most significant elem first
-        const __m128i inc = _mm_set_epi64x(SHA_512_H0_1 | 1, SHA_512_H0_0 | 1); // NOLINT(cppcoreguidelines-narrowing-conversions)
+        const __m128i inc = wyprimes_vec128_01();
 
         __m128i dst;
 

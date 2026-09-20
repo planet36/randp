@@ -12,6 +12,7 @@
 #include "aes128-utils.h"
 #include "aes_ctr_128_prng-defaults.h"
 #include "sha2_iv.h"
+#include "wyprimes.h"
 
 #include <err.h>
 #include <immintrin.h>
@@ -73,8 +74,7 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
 static inline __m128i
 aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
 {
-    // most significant elem first
-    const __m128i inc = _mm_set_epi64x(SHA_512_H0_1 | 1, SHA_512_H0_0 | 1); // NOLINT(cppcoreguidelines-narrowing-conversions)
+    const __m128i inc = wyprimes_vec128_01();
 
     const __m128i dst = aes128_enc(this_->ctr, this_->keys, AESCTR128_PRNG_NUM_KEYS,
                                    AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
@@ -92,8 +92,7 @@ aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
 static inline __m128i
 aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
 {
-    // most significant elem first
-    const __m128i inc = _mm_set_epi64x(SHA_512_H0_1 | 1, SHA_512_H0_0 | 1); // NOLINT(cppcoreguidelines-narrowing-conversions)
+    const __m128i inc = wyprimes_vec128_01();
 
     const __m128i dst = aes128_dec(this_->ctr, this_->keys, AESCTR128_PRNG_NUM_KEYS,
                                    AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
@@ -111,8 +110,7 @@ aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
 static inline __m128i
 aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
 {
-    // most significant elem first
-    const __m128i inc = _mm_set_epi64x(SHA_512_H0_1 | 1, SHA_512_H0_0 | 1); // NOLINT(cppcoreguidelines-narrowing-conversions)
+    const __m128i inc = wyprimes_vec128_01();
 
     const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
             AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
@@ -130,8 +128,7 @@ aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
 static inline __m128i
 aes_ctr_128_prng_dec_davies_meyer_next(aes_ctr_128_prng* this_)
 {
-    // most significant elem first
-    const __m128i inc = _mm_set_epi64x(SHA_512_H0_1 | 1, SHA_512_H0_0 | 1); // NOLINT(cppcoreguidelines-narrowing-conversions)
+    const __m128i inc = wyprimes_vec128_01();
 
     const __m128i dst = aes128_dec_davies_meyer(this_->ctr, this_->keys,
             AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
