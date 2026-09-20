@@ -113,7 +113,7 @@ BM_rand_lt_one(benchmark::State& BM_state, func_T_T_t<T>& fn)
     // Perform setup here
 
     // a perfectly cromulent upper bound
-    constexpr unsigned int upper_bound = 0xa5a5; // should not be power of 2
+    constexpr uint32_t upper_bound = 0xa5a5; // should not be power of 2
 
     for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
