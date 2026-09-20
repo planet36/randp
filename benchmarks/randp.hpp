@@ -41,8 +41,8 @@
 * \tparam Nr the number of AES enc/dec rounds applied per key
 */
 template <
-    unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
-    unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
+    int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
+    int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
@@ -117,8 +117,8 @@ struct randp
 * \pre \a buf is at least \a n bytes in size
 */
 template <
-    unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
-    unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
+    int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
+    int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
@@ -191,8 +191,8 @@ static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 * \pre \a buf is at least \a n bytes in size
 */
 template <
-    unsigned int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
-    unsigned int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
+    int RANDP_NUM_BLOCKS = DEFAULT_RANDP_NUM_BLOCKS,
+    int RANDP_RESEED_COUNTDOWN_MIN = DEFAULT_RANDP_RESEED_COUNTDOWN_MIN,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,

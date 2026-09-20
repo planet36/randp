@@ -28,11 +28,11 @@ extern "C" {
 * \return the encrypted result
 */
 static inline __m128i
-aes128_enc(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned int Nr)
+aes128_enc(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 {
-    for (unsigned int k = 0; k < Nk; ++k)
+    for (int k = 0; k < Nk; ++k)
     {
-        for (unsigned int r = 0; r < Nr; ++r)
+        for (int r = 0; r < Nr; ++r)
         {
             a = _mm_aesenc_si128(a, keys[k]);
         }
@@ -51,11 +51,11 @@ aes128_enc(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned
 * \return the decrypted result
 */
 static inline __m128i
-aes128_dec(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned int Nr)
+aes128_dec(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 {
-    for (unsigned int k = 0; k < Nk; ++k)
+    for (int k = 0; k < Nk; ++k)
     {
-        for (unsigned int r = 0; r < Nr; ++r)
+        for (int r = 0; r < Nr; ++r)
         {
             a = _mm_aesdec_si128(a, keys[k]);
         }
@@ -77,8 +77,8 @@ aes128_dec(__m128i a, const __m128i* keys, const unsigned int Nk, const unsigned
 static inline __m128i
 aes128_enc_davies_meyer(const __m128i H,
                         const __m128i* keys,
-                        const unsigned int Nk,
-                        const unsigned int Nr)
+                        const int Nk,
+                        const int Nr)
 {
     return _mm_xor_si128(aes128_enc(H, keys, Nk, Nr), H);
 }
@@ -97,8 +97,8 @@ aes128_enc_davies_meyer(const __m128i H,
 static inline __m128i
 aes128_dec_davies_meyer(const __m128i H,
                         const __m128i* keys,
-                        const unsigned int Nk,
-                        const unsigned int Nr)
+                        const int Nk,
+                        const int Nr)
 {
     return _mm_xor_si128(aes128_dec(H, keys, Nk, Nr), H);
 }
