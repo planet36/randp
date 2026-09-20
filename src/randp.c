@@ -49,10 +49,6 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 #define RANDP_RESEED_COUNTDOWN_MIN DEFAULT_RANDP_RESEED_COUNTDOWN_MIN
 #endif
 
-#if !defined(RANDP_RESEED_COUNTDOWN_ADD_JITTER)
-#define RANDP_RESEED_COUNTDOWN_ADD_JITTER DEFAULT_RANDP_RESEED_COUNTDOWN_ADD_JITTER
-#endif
-
 /// A pool of random bytes
 struct randp
 {
@@ -82,12 +78,6 @@ randp_regen(randp* this_)
     {
         aes_ctr_128_prng_reseed(&this_->prng);
         this_->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
-
-        if (RANDP_RESEED_COUNTDOWN_ADD_JITTER)
-        {
-            const int jitter = __builtin_ia32_rdtsc() % 4096;
-            this_->reseed_countdown += jitter;
-        }
     }
 
     __m128i* blocks = (__m128i*)(&this_->pool[0]);

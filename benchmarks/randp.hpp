@@ -68,13 +68,6 @@ struct randp
         {
             prng.reseed();
             this->reseed_countdown = RANDP_RESEED_COUNTDOWN_MIN;
-
-            // eliminate variations
-            if constexpr (false)
-            {
-                const int jitter = __builtin_ia32_rdtsc() % 4096;
-                this->reseed_countdown += jitter;
-            }
         }
 
         __m128i* blocks = (__m128i*)(&this->pool[0]);

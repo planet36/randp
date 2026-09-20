@@ -34,6 +34,3 @@
 * | Maximum number of requests between reseeds (*reseed_interval*) |    2^48 |
 */
 #define DEFAULT_RANDP_RESEED_COUNTDOWN_MIN (1 << 10)
-
-/// If \c true, add a small \c rdtsc-based jitter to the reseed countdown on each reseed.
-#define DEFAULT_RANDP_RESEED_COUNTDOWN_ADD_JITTER false
