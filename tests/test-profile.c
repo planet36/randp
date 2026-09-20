@@ -16,7 +16,7 @@
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
-    constexpr size_t buf_size = 256;
+    constexpr int buf_size = 256;
 
     uint8_t* buf = (uint8_t*)calloc(buf_size, sizeof(uint8_t));
     assert(buf != nullptr);

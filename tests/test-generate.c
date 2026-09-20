@@ -50,7 +50,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         }
     }
 
-    constexpr size_t buf_size = 60;
+    constexpr int buf_size = 60;
     assert(buf_size % sizeof(uint32_t) == 0);
 
     uint8_t* buf = (uint8_t*)calloc(buf_size, sizeof(uint8_t));
@@ -58,7 +58,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     func_ptr(buf, buf_size);
 
-    for (size_t i = 0; i < buf_size; ++i)
+    for (int i = 0; i < buf_size; ++i)
     {
         printf("%02X", buf[i]);
     }

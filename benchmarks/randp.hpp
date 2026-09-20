@@ -46,20 +46,20 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    size_t Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
-    size_t Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
+    int Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
 struct randp
 {
     static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
-    static constexpr size_t RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
+    static constexpr int RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
-    size_t reseed_countdown;     ///< The PRNG is reseeded when this is 0.
-    size_t rand_bytes_remaining; ///< The pool is regenerated when this is 0.
-    uint8_t pool[RANDP_NUM_BYTES];
+    alignas(__m128i) uint8_t pool[RANDP_NUM_BYTES];
+    int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
+    int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
 
     /// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero.
     void regen()
@@ -72,14 +72,14 @@ struct randp
             // eliminate variations
             if constexpr (false)
             {
-                const size_t jitter = __builtin_ia32_rdtsc() % 4096U;
+                const int jitter = __builtin_ia32_rdtsc() % 4096;
                 this->reseed_countdown += jitter;
             }
         }
 
         __m128i* blocks = (__m128i*)(&this->pool[0]);
 
-        for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
+        for (int i = 0; i < RANDP_NUM_BLOCKS; ++i)
         {
             blocks[i] = prng.next();
         }
@@ -122,8 +122,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    size_t Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
-    size_t Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
+    int Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
 void
@@ -163,7 +163,7 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
         uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-        const size_t m = MIN(n, this_->rand_bytes_remaining);
+        const size_t m = MIN(n, (size_t)this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
         explicit_bzero(src, m);
@@ -196,8 +196,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    size_t Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
-    size_t Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
+    int Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
 void
@@ -240,7 +240,7 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
         uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-        const size_t m = MIN(n, this_->rand_bytes_remaining);
+        const size_t m = MIN(n, (size_t)this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
         explicit_bzero(src, m);

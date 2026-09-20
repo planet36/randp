@@ -112,7 +112,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     if (num_threads == 1)
     {
-        for (size_t i = 1; i <= 256; i *= 2)
+        for (int i = 1; i <= 256; i *= 2)
         {
             buf_size = i;
             prefix = "rand_bytes:" + std::to_string(i) + "B:";
@@ -120,8 +120,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes, randp_bytes_MUTEX, buf_size);
         }
 
-        //for (size_t i = 1; i <= 8; ++i)
-        for (size_t i = 1; i <= 1; ++i)
+        //for (int i = 1; i <= 8; ++i)
+        for (int i = 1; i <= 1; ++i)
         {
             buf_size = 4096 * i;
             prefix = "rand_bytes:" + std::to_string(i) + "pg:";
@@ -135,7 +135,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     }
     else
     {
-        for (size_t i = 1; i <= 256; i *= 2)
+        for (int i = 1; i <= 256; i *= 2)
         {
             buf_size = i;
             prefix = "rand_bytes:" + std::to_string(i) + "B:";
@@ -143,8 +143,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes, randp_bytes_MUTEX, buf_size)->Threads(num_threads);
         }
 
-        //for (size_t i = 1; i <= 8; ++i)
-        for (size_t i = 1; i <= 1; ++i)
+        //for (int i = 1; i <= 8; ++i)
+        for (int i = 1; i <= 1; ++i)
         {
             buf_size = 4096 * i;
             prefix = "rand_bytes:" + std::to_string(i) + "pg:";

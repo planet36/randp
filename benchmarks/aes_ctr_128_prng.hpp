@@ -29,8 +29,8 @@
 */
 template <bool enc,
           bool dm,
-          size_t AESCTR128_PRNG_NUM_KEYS,
-          size_t AESCTR128_PRNG_NUM_ROUNDS_PER_KEY>
+          int AESCTR128_PRNG_NUM_KEYS,
+          int AESCTR128_PRNG_NUM_ROUNDS_PER_KEY>
 struct aes_ctr_128_prng
 {
     static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);

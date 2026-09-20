@@ -57,9 +57,9 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 struct randp
 {
     aes_ctr_128_prng prng;
-    size_t reseed_countdown;     ///< The PRNG is reseeded when this is 0.
-    size_t rand_bytes_remaining; ///< The pool is regenerated when this is 0.
-    uint8_t pool[RANDP_NUM_BYTES];
+    alignas(__m128i) uint8_t pool[RANDP_NUM_BYTES];
+    int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
+    int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
 };
 
 typedef struct randp randp;
@@ -85,14 +85,14 @@ randp_regen(randp* this_)
 
         if (RANDP_RESEED_COUNTDOWN_ADD_JITTER)
         {
-            const size_t jitter = __builtin_ia32_rdtsc() % 4096U;
+            const int jitter = __builtin_ia32_rdtsc() % 4096;
             this_->reseed_countdown += jitter;
         }
     }
 
     __m128i* blocks = (__m128i*)(&this_->pool[0]);
 
-    for (size_t i = 0; i < RANDP_NUM_BLOCKS; ++i)
+    for (int i = 0; i < RANDP_NUM_BLOCKS; ++i)
     {
         if (RANDP_PRNG_USE_ENC)
         {
@@ -183,7 +183,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
 
         uint8_t* src = &this_->pool[RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-        const size_t m = MIN(n, this_->rand_bytes_remaining);
+        const size_t m = MIN(n, (size_t)this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
         explicit_bzero(src, m);

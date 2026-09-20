@@ -301,8 +301,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_many<uint32_t>, arc4random_uniform);
         benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_many<uint32_t>, randp_lt_u32);
 
-        //for (size_t i = 16; i <= 256; i *= 2)
-        for (size_t i = 1; i <= 256; i *= 2)
+        //for (int i = 16; i <= 256; i *= 2)
+        for (int i = 1; i <= 256; i *= 2)
         {
             buf_size = i;
             prefix = "rand_bytes:" + std::to_string(i) + "B:";
@@ -311,8 +311,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size);
         }
 
-        //for (size_t i = 1; i <= 8; ++i)
-        for (size_t i = 1; i <= 1; ++i)
+        //for (int i = 1; i <= 8; ++i)
+        for (int i = 1; i <= 1; ++i)
         {
             buf_size = 4096 * i;
             prefix = "rand_bytes:" + std::to_string(i) + "pg:";
@@ -366,8 +366,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_many<uint32_t>, arc4random_uniform)->Threads(num_threads);
         benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_many<uint32_t>, randp_lt_u32)->Threads(num_threads);
 
-        //for (size_t i = 16; i <= 256; i *= 2)
-        for (size_t i = 1; i <= 256; i *= 2)
+        //for (int i = 16; i <= 256; i *= 2)
+        for (int i = 1; i <= 256; i *= 2)
         {
             buf_size = i;
             prefix = "rand_bytes:" + std::to_string(i) + "B:";
@@ -376,8 +376,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
             benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
         }
 
-        //for (size_t i = 1; i <= 8; ++i)
-        for (size_t i = 1; i <= 1; ++i)
+        //for (int i = 1; i <= 8; ++i)
+        for (int i = 1; i <= 1; ++i)
         {
             buf_size = 4096 * i;
             prefix = "rand_bytes:" + std::to_string(i) + "pg:";
