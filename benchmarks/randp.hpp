@@ -56,6 +56,8 @@ struct randp
 
     static constexpr int RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
 
+    static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
+
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
     alignas(__m128i) uint8_t pool[RANDP_NUM_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
