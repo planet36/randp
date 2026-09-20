@@ -54,7 +54,7 @@ struct randp
 {
     static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
-    static constexpr int RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * sizeof(__m128i);
+    static constexpr int RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * (int)sizeof(__m128i);
 
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 

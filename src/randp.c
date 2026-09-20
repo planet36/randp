@@ -43,7 +43,7 @@ extern "C" {
 
 static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
-#define RANDP_NUM_BYTES (RANDP_NUM_BLOCKS * sizeof(__m128i))
+#define RANDP_NUM_BYTES (RANDP_NUM_BLOCKS * (int)sizeof(__m128i))
 
 #if !defined(RANDP_RESEED_INTERVAL)
 #define RANDP_RESEED_INTERVAL DEFAULT_RANDP_RESEED_INTERVAL
