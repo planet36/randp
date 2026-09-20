@@ -15,6 +15,10 @@
 #endif
 #include <stdint.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 static constexpr uint64_t WYPRIME0 = UINT64_C(0x2d358dccaa6c78a5); // prime (popcount = 32)
 static constexpr uint64_t WYPRIME1 = UINT64_C(0x8bb84b93962eacc9); // prime (popcount = 32)
 static constexpr uint64_t WYPRIME2 = UINT64_C(0x4b33a62ed433d4a3); // prime (popcount = 32)
@@ -53,5 +57,9 @@ wyprimes_vec256(void)
     // most significant elem first
     return _mm256_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2,
                              (int64_t)WYPRIME1, (int64_t)WYPRIME0);
+}
+#endif
+
+#if defined(__cplusplus)
 }
 #endif
