@@ -30,7 +30,7 @@
 Run these targets in the following order to refine the parameters of randp.
 
 1. `make num-blocks`: find optimal `DEFAULT_RANDP_NUM_BLOCKS`
-2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_COUNTDOWN`
+2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_INTERVAL`
 3. `make prng-params`: find optimal `DEFAULT_AESCTR128_PRNG_NUM_KEYS`, `DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY`, `DEFAULT_RANDP_PRNG_USE_ENC`, and `DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER`
 4. _repeat_
 

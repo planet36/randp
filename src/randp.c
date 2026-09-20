@@ -45,11 +45,11 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
 #define RANDP_NUM_BYTES (RANDP_NUM_BLOCKS * sizeof(__m128i))
 
-#if !defined(RANDP_RESEED_COUNTDOWN)
-#define RANDP_RESEED_COUNTDOWN DEFAULT_RANDP_RESEED_COUNTDOWN
+#if !defined(RANDP_RESEED_INTERVAL)
+#define RANDP_RESEED_INTERVAL DEFAULT_RANDP_RESEED_INTERVAL
 #endif
 
-static_assert(RANDP_RESEED_COUNTDOWN >= 1, "randp reseed countdown must be positive");
+static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
 /// A pool of random bytes
 struct randp
@@ -79,7 +79,7 @@ randp_regen(randp* this_)
     if (this_->reseed_countdown == 0)
     {
         aes_ctr_128_prng_reseed(&this_->prng);
-        this_->reseed_countdown = RANDP_RESEED_COUNTDOWN;
+        this_->reseed_countdown = RANDP_RESEED_INTERVAL;
     }
 
     __m128i* blocks = (__m128i*)(&this_->pool[0]);
