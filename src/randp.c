@@ -49,6 +49,8 @@ static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 #define RANDP_RESEED_COUNTDOWN DEFAULT_RANDP_RESEED_COUNTDOWN
 #endif
 
+static_assert(RANDP_RESEED_COUNTDOWN >= 1, "randp reseed countdown must be positive");
+
 /// A pool of random bytes
 struct randp
 {
