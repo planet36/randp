@@ -45,13 +45,19 @@ CPPFLAGS += -D_DEFAULT_SOURCE
 CFLAGS = -std=c23
 CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
 CFLAGS += -O3 -flto=auto
+#CFLAGS += -march=native
+CFLAGS += -march=x86-64-v2
 CFLAGS += -maes
+#CFLAGS += -mvaes
 CFLAGS += -Wno-unused-function
 
 CXXFLAGS = -std=c++23
 CXXFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
 CXXFLAGS += -O3 -flto=auto
+#CXXFLAGS += -march=native
+CXXFLAGS += -march=x86-64-v2
 CXXFLAGS += -maes
+#CXXFLAGS += -mvaes
 CXXFLAGS += -Wno-unused-function
 
 #LDFLAGS +=
