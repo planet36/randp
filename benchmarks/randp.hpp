@@ -156,7 +156,7 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
         uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-        const size_t m = MIN(n, (size_t)this_->rand_bytes_remaining);
+        const int m = (int)MIN(n, (size_t)this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
         explicit_bzero(src, m);
@@ -233,7 +233,7 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
         uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
 
-        const size_t m = MIN(n, (size_t)this_->rand_bytes_remaining);
+        const int m = (int)MIN(n, (size_t)this_->rand_bytes_remaining);
 
         (void)memcpy(dst, src, m);
         explicit_bzero(src, m);
