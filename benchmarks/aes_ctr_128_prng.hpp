@@ -82,6 +82,8 @@ public:
 
             this->keys[i] = _mm_xor_si128(this->keys[i], _mm_and_si128(equal_mask, key_mask));
         }
+#else
+#error "Architecture not supported"
 #endif
     }
 

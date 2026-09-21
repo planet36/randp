@@ -76,6 +76,8 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
 
         this_->keys[i] = _mm_xor_si128(this_->keys[i], _mm_and_si128(equal_mask, key_mask));
     }
+#else
+#error "Architecture not supported"
 #endif
 }
 
