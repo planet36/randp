@@ -28,7 +28,7 @@ extern "C" {
 * \return the encrypted result
 */
 static inline __m128i
-aes128_enc(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+aes_enc_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 {
     for (int k = 0; k < Nk; ++k)
     {
@@ -80,7 +80,7 @@ aes_enc_davies_meyer_128(const __m128i H,
                         const int Nk,
                         const int Nr)
 {
-    return _mm_xor_si128(aes128_enc(H, keys, Nk, Nr), H);
+    return _mm_xor_si128(aes_enc_128(H, keys, Nk, Nr), H);
 }
 
 /// Davies-Meyer single-block-length compression function that uses AES as the block cipher
