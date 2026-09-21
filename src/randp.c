@@ -55,7 +55,7 @@ static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positiv
 struct randp
 {
     aes_ctr_128_prng prng;
-    alignas(__m128i) uint8_t pool[RANDP_NUM_BYTES];
+    uint8_t pool[RANDP_NUM_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
 };
