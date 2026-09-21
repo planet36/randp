@@ -61,5 +61,5 @@ wyprimes_vec256()
 #endif
 
 #if defined(__cplusplus)
-}
+} // extern "C"
 #endif
