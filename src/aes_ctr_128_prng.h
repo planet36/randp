@@ -132,7 +132,7 @@ aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
 {
     const __m128i inc = wyprimes_vec128_01();
 
-    const __m128i dst = aes128_enc_davies_meyer(this_->ctr, this_->keys,
+    const __m128i dst = aes_enc_davies_meyer_128(this_->ctr, this_->keys,
             AESCTR128_PRNG_NUM_KEYS, AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
 
     this_->ctr = _mm_add_epi64(this_->ctr, inc);
