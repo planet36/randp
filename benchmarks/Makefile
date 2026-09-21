@@ -52,11 +52,11 @@ endef
 mutex: benchmark-mutex | $(OUTPUT_DIR)
 	$(benchmark-recipe)
 
-num-blocks: benchmark-num-blocks | $(OUTPUT_DIR)
-	$(benchmark-recipe)
-
 others: benchmark-others | $(OUTPUT_DIR)
 	NUM_THREADS=1 $(benchmark-recipe)
+
+pool-num-blocks: benchmark-pool-num-blocks | $(OUTPUT_DIR)
+	$(benchmark-recipe)
 
 prng-params: benchmark-prng-params | $(OUTPUT_DIR)
 	$(benchmark-recipe)
@@ -74,7 +74,7 @@ lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CXXFLAGS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all mutex num-blocks others prng-params reseed-countdown clean lint
+.PHONY: all mutex others pool-num-blocks prng-params reseed-countdown clean lint
 
 # https://www.gnu.org/software/make/manual/html_node/Special-Targets.html#index-removing-targets-on-failure
 .DELETE_ON_ERROR:

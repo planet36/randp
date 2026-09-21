@@ -1,5 +1,5 @@
 benchmark-mutex
-benchmark-num-blocks
 benchmark-others
+benchmark-pool-num-blocks
 benchmark-prng-params
 benchmark-reseed-countdown

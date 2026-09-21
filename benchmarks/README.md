@@ -15,21 +15,21 @@
 
 ## Example commands
 
-`make mutex num-blocks others prng-params reseed-countdown`
+`make mutex others pool-num-blocks prng-params reseed-countdown`
   - The `mutex` benchmark compares the use of `pthread_mutex_t` and `thread_local`.
   - The `others` benchmark compares randp to these PRNGs:
     - `RDRAND`
     - `RDSEED`
     - `getentropy`
     - `arc4random`
-  - The `num-blocks`, `prng-params`, and `reseed-countdown` benchmarks compare varying parameters of randp and its internal PRNG.
+  - The `pool-num-blocks`, `prng-params`, and `reseed-countdown` benchmarks compare varying parameters of randp and its internal PRNG.
   - All the benchmarks take about 10 minutes.
 
 ## Refine the randp parameters
 
 Run these targets in the following order to refine the parameters of randp (which are set in [randp-defaults.h](../src/randp-defaults.h) and [aes_ctr_128_prng-defaults.h](../src/aes_ctr_128_prng-defaults.h)).
 
-1. `make num-blocks`: find optimal `DEFAULT_RANDP_POOL_NUM_BLOCKS`
+1. `make pool-num-blocks`: find optimal `DEFAULT_RANDP_POOL_NUM_BLOCKS`
 2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_INTERVAL`
 3. `make prng-params`: find optimal `DEFAULT_AES_CTR_128_PRNG_NUM_KEYS`, `DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY`, `DEFAULT_RANDP_PRNG_USE_ENC`, and `DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER`
 4. _repeat_
