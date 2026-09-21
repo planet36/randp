@@ -23,7 +23,7 @@
     - `getentropy`
     - `arc4random`
   - The `pool-num-blocks`, `prng-params`, and `reseed-countdown` benchmarks compare varying parameters of randp and its internal PRNG.
-  - All the benchmarks take about 10 minutes.
+  - All the benchmarks take about 7 minutes.
 
 ## Refine the randp parameters
 
