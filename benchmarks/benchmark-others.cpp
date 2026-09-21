@@ -260,138 +260,69 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     // {{{ speed
 
     std::string prefix;
-    size_t buf_size = 0;
 
-    if (num_threads == 1)
+    prefix = "rand_uint:8b:";
+    benchmark::RegisterBenchmark(prefix + "randp_u8", BM_rand_uint<uint8_t>, randp_u8)->Threads(num_threads);
+
+    prefix = "rand_uint:16b:";
+#if defined(__RDRND__)
+    benchmark::RegisterBenchmark(prefix + "rdrand16", BM_rand_uint<uint16_t>, rdrand16)->Threads(num_threads);
+#endif
+#if defined(__RDSEED__)
+    benchmark::RegisterBenchmark(prefix + "rdseed16", BM_rand_uint<uint16_t>, rdseed16)->Threads(num_threads);
+#endif
+    benchmark::RegisterBenchmark(prefix + "randp_u16", BM_rand_uint<uint16_t>, randp_u16)->Threads(num_threads);
+
+    prefix = "rand_uint:32b:";
+    benchmark::RegisterBenchmark(prefix + "arc4random", BM_rand_uint<uint32_t>, arc4random)->Threads(num_threads);
+#if defined(__RDRND__)
+    benchmark::RegisterBenchmark(prefix + "rdrand32", BM_rand_uint<uint32_t>, rdrand32)->Threads(num_threads);
+#endif
+#if defined(__RDSEED__)
+    benchmark::RegisterBenchmark(prefix + "rdseed32", BM_rand_uint<uint32_t>, rdseed32)->Threads(num_threads);
+#endif
+    benchmark::RegisterBenchmark(prefix + "randp_u32", BM_rand_uint<uint32_t>, randp_u32)->Threads(num_threads);
+
+    prefix = "rand_uint:64b:";
+#if defined(__RDRND__)
+    benchmark::RegisterBenchmark(prefix + "rdrand64", BM_rand_uint<uint64_t>, rdrand64)->Threads(num_threads);
+#endif
+#if defined(__RDSEED__)
+    benchmark::RegisterBenchmark(prefix + "rdseed64", BM_rand_uint<uint64_t>, rdseed64)->Threads(num_threads);
+#endif
+    benchmark::RegisterBenchmark(prefix + "randp_u64", BM_rand_uint<uint64_t>, randp_u64)->Threads(num_threads);
+
+    prefix = "rand_lt-one:32b:";
+    benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_one<uint32_t>, arc4random_uniform)->Threads(num_threads);
+    benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_one<uint32_t>, randp_lt_u32)->Threads(num_threads);
+
+    prefix = "rand_lt-many:32b:";
+    benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_many<uint32_t>, arc4random_uniform)->Threads(num_threads);
+    benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_many<uint32_t>, randp_lt_u32)->Threads(num_threads);
+
+    //for (int i = 16; i <= 256; i *= 2)
+    for (int i = 1; i <= 256; i *= 2)
     {
-        prefix = "rand_uint:8b:";
-        benchmark::RegisterBenchmark(prefix + "randp_u8", BM_rand_uint<uint8_t>, randp_u8);
-
-        prefix = "rand_uint:16b:";
-#if defined(__RDRND__)
-        benchmark::RegisterBenchmark(prefix + "rdrand16", BM_rand_uint<uint16_t>, rdrand16);
-#endif
-#if defined(__RDSEED__)
-        benchmark::RegisterBenchmark(prefix + "rdseed16", BM_rand_uint<uint16_t>, rdseed16);
-#endif
-        benchmark::RegisterBenchmark(prefix + "randp_u16", BM_rand_uint<uint16_t>, randp_u16);
-
-        prefix = "rand_uint:32b:";
-        benchmark::RegisterBenchmark(prefix + "arc4random", BM_rand_uint<uint32_t>, arc4random);
-#if defined(__RDRND__)
-        benchmark::RegisterBenchmark(prefix + "rdrand32", BM_rand_uint<uint32_t>, rdrand32);
-#endif
-#if defined(__RDSEED__)
-        benchmark::RegisterBenchmark(prefix + "rdseed32", BM_rand_uint<uint32_t>, rdseed32);
-#endif
-        benchmark::RegisterBenchmark(prefix + "randp_u32", BM_rand_uint<uint32_t>, randp_u32);
-
-        prefix = "rand_uint:64b:";
-#if defined(__RDRND__)
-        benchmark::RegisterBenchmark(prefix + "rdrand64", BM_rand_uint<uint64_t>, rdrand64);
-#endif
-#if defined(__RDSEED__)
-        benchmark::RegisterBenchmark(prefix + "rdseed64", BM_rand_uint<uint64_t>, rdseed64);
-#endif
-        benchmark::RegisterBenchmark(prefix + "randp_u64", BM_rand_uint<uint64_t>, randp_u64);
-
-        prefix = "rand_lt-one:32b:";
-        benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_one<uint32_t>, arc4random_uniform);
-        benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_one<uint32_t>, randp_lt_u32);
-
-        prefix = "rand_lt-many:32b:";
-        benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_many<uint32_t>, arc4random_uniform);
-        benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_many<uint32_t>, randp_lt_u32);
-
-        //for (int i = 16; i <= 256; i *= 2)
-        for (int i = 1; i <= 256; i *= 2)
-        {
-            buf_size = i;
-            prefix = "rand_bytes:" + std::to_string(i) + "B:";
-            benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy_wrapper, buf_size);
-            benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size);
-            benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size);
-        }
-
-        //for (int i = 1; i <= 8; ++i)
-        for (int i = 1; i <= 1; ++i)
-        {
-            buf_size = 4096 * i;
-            prefix = "rand_bytes:" + std::to_string(i) + "pg:";
-            benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size);
-            benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size);
-        }
-
-        prefix = "rand_bytes_4GiB:";
-        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy_wrapper)->Unit(benchmark::kMillisecond);
-        benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Unit(benchmark::kMillisecond);
-        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Unit(benchmark::kMillisecond);
+        const size_t buf_size = i;
+        prefix = "rand_bytes:" + std::to_string(i) + "B:";
+        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy_wrapper, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
     }
-    else
+
+    //for (int i = 1; i <= 8; ++i)
+    for (int i = 1; i <= 1; ++i)
     {
-        prefix = "rand_uint:8b:";
-        benchmark::RegisterBenchmark(prefix + "randp_u8", BM_rand_uint<uint8_t>, randp_u8)->Threads(num_threads);
-
-        prefix = "rand_uint:16b:";
-#if defined(__RDRND__)
-        benchmark::RegisterBenchmark(prefix + "rdrand16", BM_rand_uint<uint16_t>, rdrand16)->Threads(num_threads);
-#endif
-#if defined(__RDSEED__)
-        benchmark::RegisterBenchmark(prefix + "rdseed16", BM_rand_uint<uint16_t>, rdseed16)->Threads(num_threads);
-#endif
-        benchmark::RegisterBenchmark(prefix + "randp_u16", BM_rand_uint<uint16_t>, randp_u16)->Threads(num_threads);
-
-        prefix = "rand_uint:32b:";
-        benchmark::RegisterBenchmark(prefix + "arc4random", BM_rand_uint<uint32_t>, arc4random)->Threads(num_threads);
-#if defined(__RDRND__)
-        benchmark::RegisterBenchmark(prefix + "rdrand32", BM_rand_uint<uint32_t>, rdrand32)->Threads(num_threads);
-#endif
-#if defined(__RDSEED__)
-        benchmark::RegisterBenchmark(prefix + "rdseed32", BM_rand_uint<uint32_t>, rdseed32)->Threads(num_threads);
-#endif
-        benchmark::RegisterBenchmark(prefix + "randp_u32", BM_rand_uint<uint32_t>, randp_u32)->Threads(num_threads);
-
-        prefix = "rand_uint:64b:";
-#if defined(__RDRND__)
-        benchmark::RegisterBenchmark(prefix + "rdrand64", BM_rand_uint<uint64_t>, rdrand64)->Threads(num_threads);
-#endif
-#if defined(__RDSEED__)
-        benchmark::RegisterBenchmark(prefix + "rdseed64", BM_rand_uint<uint64_t>, rdseed64)->Threads(num_threads);
-#endif
-        benchmark::RegisterBenchmark(prefix + "randp_u64", BM_rand_uint<uint64_t>, randp_u64)->Threads(num_threads);
-
-        prefix = "rand_lt-one:32b:";
-        benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_one<uint32_t>, arc4random_uniform)->Threads(num_threads);
-        benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_one<uint32_t>, randp_lt_u32)->Threads(num_threads);
-
-        prefix = "rand_lt-many:32b:";
-        benchmark::RegisterBenchmark(prefix + "arc4random_uniform", BM_rand_lt_many<uint32_t>, arc4random_uniform)->Threads(num_threads);
-        benchmark::RegisterBenchmark(prefix + "randp_lt_u32", BM_rand_lt_many<uint32_t>, randp_lt_u32)->Threads(num_threads);
-
-        //for (int i = 16; i <= 256; i *= 2)
-        for (int i = 1; i <= 256; i *= 2)
-        {
-            buf_size = i;
-            prefix = "rand_bytes:" + std::to_string(i) + "B:";
-            benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes, getentropy_wrapper, buf_size)->Threads(num_threads);
-            benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
-            benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
-        }
-
-        //for (int i = 1; i <= 8; ++i)
-        for (int i = 1; i <= 1; ++i)
-        {
-            buf_size = 4096 * i;
-            prefix = "rand_bytes:" + std::to_string(i) + "pg:";
-            benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
-            benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
-        }
-
-        prefix = "rand_bytes_4GiB:";
-        benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy_wrapper)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-        benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+        const size_t buf_size = 4096 * i;
+        prefix = "rand_bytes:" + std::to_string(i) + "pg:";
+        benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes, arc4random_buf, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
     }
+
+    prefix = "rand_bytes_4GiB:";
+    benchmark::RegisterBenchmark(prefix + "getentropy", BM_rand_bytes_4GiB, getentropy_wrapper)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+    benchmark::RegisterBenchmark(prefix + "arc4random_buf", BM_rand_bytes_4GiB, arc4random_buf)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+    benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 
     benchmark::RunSpecifiedBenchmarks();
     benchmark::Shutdown();
