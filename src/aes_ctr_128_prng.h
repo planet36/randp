@@ -114,7 +114,7 @@ aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
 {
     const __m128i inc = wyprimes_vec128_01();
 
-    const __m128i dst = aes128_dec(this_->ctr, this_->keys, AESCTR128_PRNG_NUM_KEYS,
+    const __m128i dst = aes_dec_128(this_->ctr, this_->keys, AESCTR128_PRNG_NUM_KEYS,
                                    AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
 
     this_->ctr = _mm_add_epi64(this_->ctr, inc);

@@ -117,7 +117,7 @@ public:
                 dst = aes_dec_davies_meyer_128(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
                                               AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
             else
-                dst = aes128_dec(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
+                dst = aes_dec_128(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
                                  AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
         }
 

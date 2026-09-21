@@ -51,7 +51,7 @@ aes_enc_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 * \return the decrypted result
 */
 static inline __m128i
-aes128_dec(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+aes_dec_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 {
     for (int k = 0; k < Nk; ++k)
     {
@@ -100,7 +100,7 @@ aes_dec_davies_meyer_128(const __m128i H,
                         const int Nk,
                         const int Nr)
 {
-    return _mm_xor_si128(aes128_dec(H, keys, Nk, Nr), H);
+    return _mm_xor_si128(aes_dec_128(H, keys, Nk, Nr), H);
 }
 
 #if defined(__cplusplus)
