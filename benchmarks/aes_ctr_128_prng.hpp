@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "../src/aes128-utils.h"
+#include "../src/aes-128-utils.h"
 #include "../src/sha2_iv.h"
 #include "../src/wyprimes.h"
 
