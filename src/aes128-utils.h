@@ -95,7 +95,7 @@ aes_enc_davies_meyer_128(const __m128i H,
 * \return the compressed result
 */
 static inline __m128i
-aes128_dec_davies_meyer(const __m128i H,
+aes_dec_davies_meyer_128(const __m128i H,
                         const __m128i* keys,
                         const int Nk,
                         const int Nr)
