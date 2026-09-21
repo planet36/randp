@@ -27,7 +27,7 @@ extern "C" {
 * \return a pointer to the allocated memory
 * \note This function terminates the calling process upon catastrophic error.
 */
-static void*
+[[nodiscard]] static void*
 allocate(const size_t len)
 {
     constexpr int prot = PROT_READ | PROT_WRITE;

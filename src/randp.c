@@ -186,6 +186,7 @@ randp_bytes(void* buf, size_t n) [[gnu::nonnull]]
     }
 }
 
+[[nodiscard]]
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
@@ -197,6 +198,7 @@ randp_u8()
     return result;
 }
 
+[[nodiscard]]
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
@@ -208,6 +210,7 @@ randp_u16()
     return result;
 }
 
+[[nodiscard]]
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
@@ -219,6 +222,7 @@ randp_u32()
     return result;
 }
 
+[[nodiscard]]
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
@@ -234,6 +238,7 @@ randp_u64()
 * \retval 0 If \a upper_bound ≤ 1.  This is similar to the behavior of
 * \c arc4random_uniform.
 */
+[[nodiscard]]
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif
@@ -249,6 +254,7 @@ randp_lt_u32(uint32_t upper_bound)
 * \retval 0 If \a upper_bound ≤ 1.  This is similar to the behavior of
 * \c arc4random_uniform.
 */
+[[nodiscard]]
 #if defined(RANDP_SINGLE_HEADER)
 static
 #endif

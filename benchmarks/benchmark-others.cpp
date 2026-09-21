@@ -10,7 +10,7 @@
 // _rd{rand,seed}{16,32,64}_step returns 0 if a random value was NOT generated
 
 #if defined(__RDRND__)
-static uint16_t
+[[nodiscard]] static uint16_t
 rdrand16()
 {
     unsigned short ret = 0;
@@ -20,7 +20,7 @@ rdrand16()
     return ret;
 }
 
-static uint32_t
+[[nodiscard]] static uint32_t
 rdrand32()
 {
     unsigned int ret = 0;
@@ -30,7 +30,7 @@ rdrand32()
     return ret;
 }
 
-static uint64_t
+[[nodiscard]] static uint64_t
 rdrand64()
 {
     unsigned long long ret = 0;
@@ -44,7 +44,7 @@ rdrand64()
 #endif
 
 #if defined(__RDSEED__)
-static uint16_t
+[[nodiscard]] static uint16_t
 rdseed16()
 {
     unsigned short ret = 0;
@@ -54,7 +54,7 @@ rdseed16()
     return ret;
 }
 
-static uint32_t
+[[nodiscard]] static uint32_t
 rdseed32()
 {
     unsigned int ret = 0;
@@ -64,7 +64,7 @@ rdseed32()
     return ret;
 }
 
-static uint64_t
+[[nodiscard]] static uint64_t
 rdseed64()
 {
     unsigned long long ret = 0;

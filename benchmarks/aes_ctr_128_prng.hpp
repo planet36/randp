@@ -96,7 +96,7 @@ public:
     *
     * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
     */
-    __m128i next() noexcept
+    [[nodiscard]] __m128i next() noexcept
     {
         const __m128i inc = wyprimes_vec128_01();
 

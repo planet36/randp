@@ -31,7 +31,7 @@ extern "C" {
 * \return an integer in the interval <code>[0, s)</code>
 * \pre \a s must be at least \c 1.
 */
-static uint32_t
+[[nodiscard]] static uint32_t
 random_bounded_nearlydivisionless32(const uint32_t s, uint32_t (*prng)())
 {
     typedef uint32_t T;
@@ -62,7 +62,7 @@ random_bounded_nearlydivisionless32(const uint32_t s, uint32_t (*prng)())
 * \return an integer in the interval <code>[0, s)</code>
 * \pre \a s must be at least \c 1.
 */
-[[maybe_unused]] static uint64_t
+[[maybe_unused]] [[nodiscard]] static uint64_t
 random_bounded_nearlydivisionless64(const uint64_t s, uint64_t (*prng)())
 {
     typedef uint64_t T;
