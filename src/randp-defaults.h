@@ -19,7 +19,7 @@ constexpr bool DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER = false;
 /**
 * The size of each block is \c sizeof(__m128i) (i.e. \c 16).
 */
-constexpr int DEFAULT_RANDP_NUM_BLOCKS = 16;
+constexpr int DEFAULT_RANDP_POOL_NUM_BLOCKS = 16;
 
 /// The number of pool regenerations between reseeds
 /**

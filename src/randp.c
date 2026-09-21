@@ -37,13 +37,13 @@ extern "C" {
 #define RANDP_PRNG_USE_DAVIES_MEYER DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER
 #endif
 
-#if !defined(RANDP_NUM_BLOCKS)
-#define RANDP_NUM_BLOCKS DEFAULT_RANDP_NUM_BLOCKS
+#if !defined(RANDP_POOL_NUM_BLOCKS)
+#define RANDP_POOL_NUM_BLOCKS DEFAULT_RANDP_POOL_NUM_BLOCKS
 #endif
 
-static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
+static_assert(RANDP_POOL_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
-#define RANDP_POOL_NUM_BYTES (RANDP_NUM_BLOCKS * (int)sizeof(__m128i))
+#define RANDP_POOL_NUM_BYTES (RANDP_POOL_NUM_BLOCKS * (int)sizeof(__m128i))
 
 #if !defined(RANDP_RESEED_INTERVAL)
 #define RANDP_RESEED_INTERVAL DEFAULT_RANDP_RESEED_INTERVAL
@@ -84,7 +84,7 @@ randp_regen(randp* this_)
 
     __m128i* blocks = (__m128i*)(&this_->pool[0]);
 
-    for (int i = 0; i < RANDP_NUM_BLOCKS; ++i)
+    for (int i = 0; i < RANDP_POOL_NUM_BLOCKS; ++i)
     {
         if (RANDP_PRNG_USE_ENC)
         {
