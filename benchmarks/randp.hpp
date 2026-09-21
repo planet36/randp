@@ -54,12 +54,12 @@ struct randp
 {
     static_assert(RANDP_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
-    static constexpr int RANDP_NUM_BYTES = RANDP_NUM_BLOCKS * (int)sizeof(__m128i);
+    static constexpr int RANDP_POOL_NUM_BYTES = RANDP_NUM_BLOCKS * (int)sizeof(__m128i);
 
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
-    alignas(__m128i) uint8_t pool[RANDP_NUM_BYTES];
+    alignas(__m128i) uint8_t pool[RANDP_POOL_NUM_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
 
@@ -79,7 +79,7 @@ struct randp
             blocks[i] = prng.next();
         }
 
-        this->rand_bytes_remaining = RANDP_NUM_BYTES;
+        this->rand_bytes_remaining = RANDP_POOL_NUM_BYTES;
         --this->reseed_countdown;
     }
 
@@ -156,7 +156,7 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
         if (this_->rand_bytes_remaining == 0)
             this_->regen();
 
-        uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src = &this_->pool[this_->RANDP_POOL_NUM_BYTES - this_->rand_bytes_remaining];
 
         const int m = (int)MIN(n, (size_t)this_->rand_bytes_remaining);
 
@@ -233,7 +233,7 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
         if (this_->rand_bytes_remaining == 0)
             this_->regen();
 
-        uint8_t* src = &this_->pool[this_->RANDP_NUM_BYTES - this_->rand_bytes_remaining];
+        uint8_t* src = &this_->pool[this_->RANDP_POOL_NUM_BYTES - this_->rand_bytes_remaining];
 
         const int m = (int)MIN(n, (size_t)this_->rand_bytes_remaining);
 
