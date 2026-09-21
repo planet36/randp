@@ -36,14 +36,14 @@ static_assert(__builtin_popcountll(WYPRIME3) == 32, "popcount must be 32");
 
 #if defined(__x86_64__) && defined(__SSE2__)
 [[nodiscard]] static inline __m128i
-wyprimes_vec128_01(void)
+wyprimes_vec128_01()
 {
     // most significant elem first
     return _mm_set_epi64x((int64_t)WYPRIME1, (int64_t)WYPRIME0);
 }
 
 [[nodiscard]] static inline __m128i
-wyprimes_vec128_23(void)
+wyprimes_vec128_23()
 {
     // most significant elem first
     return _mm_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2);
@@ -52,7 +52,7 @@ wyprimes_vec128_23(void)
 
 #if defined(__x86_64__) && defined(__AVX__)
 [[nodiscard]] static inline __m256i
-wyprimes_vec256(void)
+wyprimes_vec256()
 {
     // most significant elem first
     return _mm256_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2,
