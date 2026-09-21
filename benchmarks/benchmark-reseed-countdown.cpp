@@ -96,7 +96,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);
-    }(std::integer_sequence<int, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>{});
+    }(std::integer_sequence<int, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>{});
 
     benchmark::RunSpecifiedBenchmarks();
     benchmark::Shutdown();
