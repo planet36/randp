@@ -37,6 +37,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 #include <cstdio>
 #include <cstdlib>
 #include <err.h>
+#include <format>
 #include <stdexcept>
 #include <thread>
 
@@ -86,21 +87,16 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     // {{{ speed
 
-    //benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_1>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  1>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    //benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_2>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  2>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    //benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_3>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  3>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_4>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  4>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_5>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  5>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_6>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  6>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_7>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  7>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_8>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  8>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<_9>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 <<  9>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<10>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << 10>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<11>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << 11>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<12>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << 12>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<13>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << 13>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<14>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << 14>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark("rand_bytes_4GiB:randp_bytes<def,1<<15>", BM_rand_bytes_4GiB, randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << 15>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+    [num_threads]<int... SHIFT>(std::integer_sequence<int, SHIFT...>)
+    {
+        (benchmark::RegisterBenchmark(
+             std::format("rand_bytes_4GiB:randp_bytes<def,1<<{:_>2}>", SHIFT),
+             BM_rand_bytes_4GiB,
+             randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << SHIFT>)
+             ->Threads(num_threads)
+             ->Unit(benchmark::kMillisecond),
+         ...);
+    }(std::integer_sequence<int, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>{});
 
     benchmark::RunSpecifiedBenchmarks();
     benchmark::Shutdown();
