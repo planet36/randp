@@ -5,20 +5,14 @@
 /**
 * \file
 * \author Steven Ward
+*
+* The product of the number of keys and the number of rounds per key must be at least 3.
 */
 
 #pragma once
 
 /// The number of independent AES keys
-/**
-* The product of \c AES_CTR_128_PRNG_NUM_KEYS and \c AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
-* must be at least \c 3.
-*/
 constexpr int DEFAULT_AES_CTR_128_PRNG_NUM_KEYS = 3;
 
 /// The number of AES enc/dec rounds applied per key
-/**
-* The product of \c AES_CTR_128_PRNG_NUM_KEYS and \c AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
-* must be at least \c 3.
-*/
 constexpr int DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY = 1;
