@@ -45,6 +45,9 @@ static_assert(RANDP_POOL_NUM_BLOCKS >= 1, "randp must have at least 1 block");
 
 #define RANDP_POOL_NUM_BYTES (RANDP_POOL_NUM_BLOCKS * (int)sizeof(__m128i))
 
+static_assert(RANDP_POOL_NUM_BYTES > 0, "randp pool byte size must be positive");
+static_assert((RANDP_POOL_NUM_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
+
 #if !defined(RANDP_RESEED_INTERVAL)
 #define RANDP_RESEED_INTERVAL DEFAULT_RANDP_RESEED_INTERVAL
 #endif
