@@ -13,7 +13,7 @@ BM_rand_bytes(benchmark::State& BM_state, func_t& fn, const size_t buf_size)
 {
     // Perform setup here
 
-    uint8_t* buf = new uint8_t[buf_size];
+    auto* buf = new uint8_t[buf_size];
 
     for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
