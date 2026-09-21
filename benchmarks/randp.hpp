@@ -46,8 +46,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
-    int Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS,
+    int Nr = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
 struct randp
@@ -117,8 +117,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
-    int Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS,
+    int Nr = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
 void
@@ -191,8 +191,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = DEFAULT_AESCTR128_PRNG_NUM_KEYS,
-    int Nr = DEFAULT_AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS,
+    int Nr = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
     // }}}
 >
 void

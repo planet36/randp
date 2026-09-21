@@ -7,7 +7,7 @@
 * \author Steven Ward
 *
 * The raison d'etre of this class is to test
-* 1. different values of \c AESCTR128_PRNG_NUM_KEYS and \c AESCTR128_PRNG_NUM_ROUNDS_PER_KEY
+* 1. different values of \c AES_CTR_128_PRNG_NUM_KEYS and \c AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
 */
 
 #pragma once
@@ -25,22 +25,22 @@
 /**
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
-* \tparam AESCTR128_PRNG_NUM_KEYS the number of independent AES keys
-* \tparam AESCTR128_PRNG_NUM_ROUNDS_PER_KEY the number of AES enc/dec rounds applied per key
+* \tparam AES_CTR_128_PRNG_NUM_KEYS the number of independent AES keys
+* \tparam AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY the number of AES enc/dec rounds applied per key
 */
 template <bool enc,
           bool dm,
-          int AESCTR128_PRNG_NUM_KEYS,
-          int AESCTR128_PRNG_NUM_ROUNDS_PER_KEY>
+          int AES_CTR_128_PRNG_NUM_KEYS,
+          int AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY>
 struct aes_ctr_128_prng
 {
-    static_assert(AESCTR128_PRNG_NUM_KEYS >= 1);
-    static_assert(AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-    static_assert(AESCTR128_PRNG_NUM_KEYS * AESCTR128_PRNG_NUM_ROUNDS_PER_KEY >= 3,
+    static_assert(AES_CTR_128_PRNG_NUM_KEYS >= 1);
+    static_assert(AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY >= 1);
+    static_assert(AES_CTR_128_PRNG_NUM_KEYS * AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY >= 3,
                   "must do at least 3 rounds of AES enc/dec");
 
 private:
-    __m128i keys[AESCTR128_PRNG_NUM_KEYS];
+    __m128i keys[AES_CTR_128_PRNG_NUM_KEYS];
     __m128i ctr; ///< The state/counter
 
 public:
@@ -67,7 +67,7 @@ public:
             err(EXIT_FAILURE, "getentropy");
 
 #if defined(__x86_64__) && defined(__SSE4_1__)
-        for (int i = 0; i < AESCTR128_PRNG_NUM_KEYS; ++i)
+        for (int i = 0; i < AES_CTR_128_PRNG_NUM_KEYS; ++i)
         {
             // The 64-bit lanes of the key must differ.
             // With a key of (K, K), if the counter
@@ -105,20 +105,20 @@ public:
         if constexpr (enc)
         {
             if constexpr (dm)
-                dst = aes_enc_davies_meyer_128(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
-                                              AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_enc_davies_meyer_128(this->ctr, this->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                                              AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
             else
-                dst = aes_enc_128(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
-                                 AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_enc_128(this->ctr, this->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                                 AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
         }
         else
         {
             if constexpr (dm)
-                dst = aes_dec_davies_meyer_128(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
-                                              AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_dec_davies_meyer_128(this->ctr, this->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                                              AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
             else
-                dst = aes_dec_128(this->ctr, this->keys, AESCTR128_PRNG_NUM_KEYS,
-                                 AESCTR128_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_dec_128(this->ctr, this->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                                 AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
         }
 
         this->ctr = _mm_add_epi64(this->ctr, inc);
