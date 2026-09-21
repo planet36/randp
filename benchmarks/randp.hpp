@@ -56,6 +56,9 @@ struct randp
 
     static constexpr int RANDP_POOL_NUM_BYTES = RANDP_POOL_NUM_BLOCKS * (int)sizeof(__m128i);
 
+    static_assert(RANDP_POOL_NUM_BYTES > 0, "randp pool byte size must be positive");
+    static_assert((RANDP_POOL_NUM_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
+
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
     aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
