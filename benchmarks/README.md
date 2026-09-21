@@ -27,7 +27,7 @@
 
 ## Refine the randp parameters
 
-Run these targets in the following order to refine the parameters of randp.
+Run these targets in the following order to refine the parameters of randp (which are set in [randp-defaults.h](../src/randp-defaults.h) and [aes_ctr_128_prng-defaults.h](../src/aes_ctr_128_prng-defaults.h)).
 
 1. `make num-blocks`: find optimal `DEFAULT_RANDP_NUM_BLOCKS`
 2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_INTERVAL`
