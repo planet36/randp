@@ -30,6 +30,7 @@ add_epu64(__m128i a, __m128i b)
 
 #if defined(__x86_64__) && defined(__SSE4_1__)
 
+/// Adjust \a key so that its 64-bit lanes differ
 /**
 * The 64-bit lanes of the key must differ.
 * With a key of (K, K), if the counter
@@ -89,7 +90,7 @@ public:
 
     /// Assign random bytes to the data members via \c getentropy.
     /**
-    * Each key is then adjusted, if necessary, so that its 64-bit lanes differ.
+    * Each key is then adjusted, if necessary.
     *
     * \note This function terminates the calling process upon catastrophic error.
     */

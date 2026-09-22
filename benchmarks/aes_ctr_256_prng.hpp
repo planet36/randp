@@ -32,6 +32,7 @@ add_epu64(__m256i a, __m256i b)
 
 #if defined(__x86_64__) && defined(__AVX2__)
 
+/// Adjust \a key so that the two 64-bit lanes of each 128-bit half differ
 /**
 * The two 64-bit lanes of each 128-bit half of the key must differ.
 * With a key half of (K, K), if the counter half (A, B) gives the output (X, Y),
@@ -69,7 +70,6 @@ rectify_key(__m256i key)
 *
 * Each output is two 128-bit AES blocks, one in each 128-bit half of a \c __m256i.
 * VAES encrypts each half independently, with the matching half of each key as its round key.
-* The 256 in the name is the vector width, not the AES key size.
 */
 template <bool enc, bool dm, int Nk, int Nr>
 struct aes_ctr_256_prng
@@ -98,8 +98,7 @@ public:
 
     /// Assign random bytes to the data members via \c getentropy.
     /**
-    * Each key is then adjusted, if necessary, so that the two 64-bit lanes of each 128-bit
-    * half differ.
+    * Each key is then adjusted, if necessary.
     *
     * \note This function terminates the calling process upon catastrophic error.
     */
