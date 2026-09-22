@@ -51,22 +51,10 @@ COMMON_COMPILE_FLAGS += -march=x86-64-v3 -maes -mvaes # x86-64-v3 implies avx, a
 COMMON_COMPILE_FLAGS += -Wno-unused-function
 
 CFLAGS = -std=c23
-CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CFLAGS += -O3 -flto=auto
-#CFLAGS += -march=native
-CFLAGS += -march=x86-64-v2
-CFLAGS += -maes
-#CFLAGS += -mvaes
-CFLAGS += -Wno-unused-function
+CFLAGS += $(COMMON_COMPILE_FLAGS)
 
 CXXFLAGS = -std=c++23
-CXXFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
-CXXFLAGS += -O3 -flto=auto
-#CXXFLAGS += -march=native
-CXXFLAGS += -march=x86-64-v2
-CXXFLAGS += -maes
-#CXXFLAGS += -mvaes
-CXXFLAGS += -Wno-unused-function
+CXXFLAGS += $(COMMON_COMPILE_FLAGS)
 
 #LDFLAGS +=
 
