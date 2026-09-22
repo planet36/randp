@@ -54,10 +54,34 @@ static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a
 
 static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
+#if defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
+
+#define RANDP_BLOCK_TYPE __m128i
+#define RANDP_PRNG_TYPE aes_ctr_128_prng
+#define RANDP_PRNG_RESEED aes_ctr_128_prng_reseed
+
+#if RANDP_PRNG_USE_ENC
+#    if RANDP_PRNG_USE_DAVIES_MEYER
+#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_enc_davies_meyer_next(PRNG)
+#    else
+#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_enc_next(PRNG)
+#    endif
+#else
+#    if RANDP_PRNG_USE_DAVIES_MEYER
+#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_dec_davies_meyer_next(PRNG)
+#    else
+#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_dec_next(PRNG)
+#    endif
+#endif
+
+#else
+#error "Architecture not supported"
+#endif
+
 /// A pool of random bytes
 struct randp
 {
-    aes_ctr_128_prng prng;
+    RANDP_PRNG_TYPE prng;
     uint8_t pool[RANDP_POOL_SIZE_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
@@ -65,10 +89,10 @@ struct randp
 
 typedef struct randp randp;
 
-static_assert(alignof(randp) == sizeof(__m128i), "randp must have alignment of __m128i");
+static_assert(alignof(randp) == sizeof(RANDP_BLOCK_TYPE), "randp must have alignment of RANDP_BLOCK_TYPE");
 
-static_assert(offsetof(randp, pool) % sizeof(__m128i) == 0,
-              "randp pool must start on 16-byte boundary");
+static_assert(offsetof(randp, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
+              "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
 
 static_assert(sizeof(randp) <= PAGE_SIZE, "randp must fit in one page");
 
@@ -81,28 +105,15 @@ randp_regen(randp* this_)
 {
     if (this_->reseed_countdown == 0)
     {
-        aes_ctr_128_prng_reseed(&this_->prng);
+        RANDP_PRNG_RESEED(&this_->prng);
         this_->reseed_countdown = RANDP_RESEED_INTERVAL;
     }
 
-    __m128i* blocks = (__m128i*)(&this_->pool[0]);
+    RANDP_BLOCK_TYPE* blocks = (RANDP_BLOCK_TYPE*)(&this_->pool[0]);
 
     for (int i = 0; i < RANDP_POOL_SIZE_BLOCKS; ++i)
     {
-        if (RANDP_PRNG_USE_ENC)
-        {
-            if (RANDP_PRNG_USE_DAVIES_MEYER)
-                blocks[i] = aes_ctr_128_prng_enc_davies_meyer_next(&this_->prng);
-            else
-                blocks[i] = aes_ctr_128_prng_enc_next(&this_->prng);
-        }
-        else
-        {
-            if (RANDP_PRNG_USE_DAVIES_MEYER)
-                blocks[i] = aes_ctr_128_prng_dec_davies_meyer_next(&this_->prng);
-            else
-                blocks[i] = aes_ctr_128_prng_dec_next(&this_->prng);
-        }
+        blocks[i] = RANDP_NEXT(&this_->prng);
     }
 
     this_->rand_bytes_remaining = RANDP_POOL_SIZE_BYTES;
@@ -270,6 +281,10 @@ randp_lt_u64(uint64_t upper_bound)
 }
 
 #undef MIN
+#undef RANDP_BLOCK_TYPE
+#undef RANDP_PRNG_TYPE
+#undef RANDP_PRNG_RESEED
+#undef RANDP_NEXT
 
 #if defined(__cplusplus)
 }
