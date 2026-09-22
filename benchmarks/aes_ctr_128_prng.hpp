@@ -39,7 +39,7 @@ struct aes_ctr_128_prng
     using block_t = __m128i;
 
 private:
-    block_t keys[Nk];
+    block_t keys[Nk]; ///< The round keys
     block_t ctr; ///< The state/counter
 
 public:
