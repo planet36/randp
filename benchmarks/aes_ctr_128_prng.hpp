@@ -40,9 +40,11 @@ struct aes_ctr_128_prng
     static_assert(AES_CTR_128_PRNG_NUM_KEYS * AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY >= 3,
                   "must do at least 3 rounds of AES enc/dec");
 
+    using block_t = __m128i;
+
 private:
-    __m128i keys[AES_CTR_128_PRNG_NUM_KEYS];
-    __m128i ctr; ///< The state/counter
+    block_t keys[AES_CTR_128_PRNG_NUM_KEYS];
+    block_t ctr; ///< The state/counter
 
 public:
     /// Construct a PRNG seeded via \c getentropy.
@@ -75,11 +77,11 @@ public:
             // (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
 
             // most significant elem first
-            const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
+            const block_t key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
 
-            const __m128i swapped = _mm_shuffle_epi32(this->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
+            const block_t swapped = _mm_shuffle_epi32(this->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
             // all ones if the lanes are equal, all zeros otherwise
-            const __m128i equal_mask = _mm_cmpeq_epi64(this->keys[i], swapped);
+            const block_t equal_mask = _mm_cmpeq_epi64(this->keys[i], swapped);
 
             this->keys[i] = _mm_xor_si128(this->keys[i], _mm_and_si128(equal_mask, key_mask));
         }
@@ -99,11 +101,11 @@ public:
     *
     * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
     */
-    [[nodiscard]] __m128i next() noexcept
+    [[nodiscard]] block_t next() noexcept
     {
-        const __m128i inc = wyprimes_vec128_01();
+        const block_t inc = wyprimes_vec128_01();
 
-        __m128i dst;
+        block_t dst;
 
         if constexpr (enc)
         {
