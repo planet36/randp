@@ -29,16 +29,12 @@
 * \tparam Nk the number of independent AES keys
 * \tparam Nr the number of AES enc/dec rounds applied per key
 */
-template <bool enc,
-          bool dm,
-          int Nk,
-          int Nr>
+template <bool enc, bool dm, int Nk, int Nr>
 struct aes_ctr_128_prng
 {
     static_assert(Nk >= 1);
     static_assert(Nr >= 1);
-    static_assert(Nk * Nr >= 3,
-                  "must do at least 3 rounds of AES enc/dec");
+    static_assert(Nk * Nr >= 3, "must do at least 3 rounds of AES enc/dec");
 
     using block_t = __m128i;
 
@@ -110,20 +106,16 @@ public:
         if constexpr (enc)
         {
             if constexpr (dm)
-                dst = aes_enc_davies_meyer_128(this->ctr, this->keys, Nk,
-                                              Nr);
+                dst = aes_enc_davies_meyer_128(this->ctr, this->keys, Nk, Nr);
             else
-                dst = aes_enc_128(this->ctr, this->keys, Nk,
-                                 Nr);
+                dst = aes_enc_128(this->ctr, this->keys, Nk, Nr);
         }
         else
         {
             if constexpr (dm)
-                dst = aes_dec_davies_meyer_128(this->ctr, this->keys, Nk,
-                                              Nr);
+                dst = aes_dec_davies_meyer_128(this->ctr, this->keys, Nk, Nr);
             else
-                dst = aes_dec_128(this->ctr, this->keys, Nk,
-                                 Nr);
+                dst = aes_dec_128(this->ctr, this->keys, Nk, Nr);
         }
 
         this->ctr = _mm_add_epi64(this->ctr, inc);

@@ -35,16 +35,12 @@
 * VAES encrypts each half independently, with the matching half of each key as its round key.
 * The 256 in the name is the vector width, not the AES key size.
 */
-template <bool enc,
-          bool dm,
-          int Nk,
-          int Nr>
+template <bool enc, bool dm, int Nk, int Nr>
 struct aes_ctr_256_prng
 {
     static_assert(Nk >= 1);
     static_assert(Nr >= 1);
-    static_assert(Nk * Nr >= 3,
-                  "must do at least 3 rounds of AES enc/dec");
+    static_assert(Nk * Nr >= 3, "must do at least 3 rounds of AES enc/dec");
 
     using block_t = __m256i;
 
@@ -121,20 +117,16 @@ public:
         if constexpr (enc)
         {
             if constexpr (dm)
-                dst = aes_enc_davies_meyer_256(this->ctr, this->keys, Nk,
-                                              Nr);
+                dst = aes_enc_davies_meyer_256(this->ctr, this->keys, Nk, Nr);
             else
-                dst = aes_enc_256(this->ctr, this->keys, Nk,
-                                 Nr);
+                dst = aes_enc_256(this->ctr, this->keys, Nk, Nr);
         }
         else
         {
             if constexpr (dm)
-                dst = aes_dec_davies_meyer_256(this->ctr, this->keys, Nk,
-                                              Nr);
+                dst = aes_dec_davies_meyer_256(this->ctr, this->keys, Nk, Nr);
             else
-                dst = aes_dec_256(this->ctr, this->keys, Nk,
-                                 Nr);
+                dst = aes_dec_256(this->ctr, this->keys, Nk, Nr);
         }
 
         this->ctr = _mm256_add_epi64(this->ctr, inc);
