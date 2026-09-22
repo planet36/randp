@@ -28,6 +28,33 @@ add_epu64(__m128i a, __m128i b)
     return _mm_add_epi64(a, b);
 }
 
+#if defined(__x86_64__) && defined(__SSE4_1__)
+
+/**
+* The 64-bit lanes of the key must differ.
+* With a key of (K, K), if the counter
+* (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
+*/
+[[nodiscard]] static inline auto
+rectify_key(__m128i key)
+{
+    // most significant elem first
+    const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
+
+    const __m128i swapped = _mm_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
+
+    // all ones if the lanes are equal, all zeros otherwise
+    const __m128i equal_mask = _mm_cmpeq_epi64(key, swapped);
+
+    key = _mm_xor_si128(key, _mm_and_si128(equal_mask, key_mask));
+
+    return key;
+}
+
+#else
+#error "Architecture not supported"
+#endif
+
 /// A PRNG that uses AES instructions
 /**
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
@@ -71,25 +98,10 @@ public:
         if (getentropy(this, sizeof(*this)) < 0)
             err(EXIT_FAILURE, "getentropy");
 
-#if defined(__x86_64__) && defined(__SSE4_1__)
         for (int i = 0; i < Nk; ++i)
         {
-            // The 64-bit lanes of the key must differ.
-            // With a key of (K, K), if the counter
-            // (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
-
-            // most significant elem first
-            const block_t key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
-
-            const block_t swapped = _mm_shuffle_epi32(this->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
-            // all ones if the lanes are equal, all zeros otherwise
-            const block_t equal_mask = _mm_cmpeq_epi64(this->keys[i], swapped);
-
-            this->keys[i] = _mm_xor_si128(this->keys[i], _mm_and_si128(equal_mask, key_mask));
+            this->keys[i] = rectify_key(this->keys[i]);
         }
-#else
-#error "Architecture not supported"
-#endif
     }
 
     /// Get the next PRNG output via AES encryption or decryption.
