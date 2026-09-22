@@ -117,16 +117,16 @@ public:
         if constexpr (enc)
         {
             if constexpr (dm)
-                dst = aes_enc_davies_meyer_256(this->ctr, this->keys, Nk, Nr);
+                dst = aes_enc_davies_meyer(this->ctr, this->keys, Nk, Nr);
             else
-                dst = aes_enc_256(this->ctr, this->keys, Nk, Nr);
+                dst = aes_enc(this->ctr, this->keys, Nk, Nr);
         }
         else
         {
             if constexpr (dm)
-                dst = aes_dec_davies_meyer_256(this->ctr, this->keys, Nk, Nr);
+                dst = aes_dec_davies_meyer(this->ctr, this->keys, Nk, Nr);
             else
-                dst = aes_dec_256(this->ctr, this->keys, Nk, Nr);
+                dst = aes_dec(this->ctr, this->keys, Nk, Nr);
         }
 
         this->ctr = _mm256_add_epi64(this->ctr, inc);
