@@ -59,7 +59,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         (benchmark::RegisterBenchmark(
              std::format("rand_bytes_4GiB:randp_bytes<def,1<<{:_>2}>", SHIFT),
              BM_rand_bytes_4GiB,
-             randp_bytes<DEFAULT_RANDP_POOL_NUM_BLOCKS, 1 << SHIFT>)
+             randp_bytes<DEFAULT_RANDP_POOL_SIZE_BLOCKS, 1 << SHIFT>)
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);

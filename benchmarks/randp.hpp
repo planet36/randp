@@ -10,7 +10,7 @@
 * \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 *
 * The raisons d'etre of this class are to test
-* 1. different values of \c RANDP_POOL_NUM_BLOCKS and \c RANDP_RESEED_INTERVAL
+* 1. different values of \c RANDP_POOL_SIZE_BLOCKS and \c RANDP_RESEED_INTERVAL
 * 2. using a mutex for the static randp data instead of a \c thread_local instance
 */
 
@@ -33,7 +33,7 @@
 
 /// A pool of random bytes
 /**
-* \tparam RANDP_POOL_NUM_BLOCKS the number of blocks in the pool
+* \tparam RANDP_POOL_SIZE_BLOCKS the number of blocks in the pool
 * \tparam RANDP_RESEED_INTERVAL the number of pool regenerations between reseeds
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
@@ -41,7 +41,7 @@
 * \tparam Nr the number of AES enc/dec rounds applied per key
 */
 template <
-    int RANDP_POOL_NUM_BLOCKS = DEFAULT_RANDP_POOL_NUM_BLOCKS,
+    int RANDP_POOL_SIZE_BLOCKS = DEFAULT_RANDP_POOL_SIZE_BLOCKS,
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
@@ -52,9 +52,9 @@ template <
 >
 struct randp
 {
-    static_assert(RANDP_POOL_NUM_BLOCKS >= 1, "randp must have at least 1 block");
+    static_assert(RANDP_POOL_SIZE_BLOCKS >= 1, "randp must have at least 1 block");
 
-    static constexpr int RANDP_POOL_SIZE_BYTES = RANDP_POOL_NUM_BLOCKS * (int)sizeof(__m128i);
+    static constexpr int RANDP_POOL_SIZE_BYTES = RANDP_POOL_SIZE_BLOCKS * (int)sizeof(__m128i);
 
     static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
     static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
@@ -77,7 +77,7 @@ struct randp
 
         __m128i* blocks = (__m128i*)(&this->pool[0]);
 
-        for (int i = 0; i < RANDP_POOL_NUM_BLOCKS; ++i)
+        for (int i = 0; i < RANDP_POOL_SIZE_BLOCKS; ++i)
         {
             blocks[i] = prng.next();
         }
@@ -115,7 +115,7 @@ struct randp
 * \pre \a buf is at least \a n bytes in size
 */
 template <
-    int RANDP_POOL_NUM_BLOCKS = DEFAULT_RANDP_POOL_NUM_BLOCKS,
+    int RANDP_POOL_SIZE_BLOCKS = DEFAULT_RANDP_POOL_SIZE_BLOCKS,
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
@@ -127,7 +127,7 @@ template <
 void
 randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_POOL_NUM_BLOCKS, RANDP_RESEED_INTERVAL, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_POOL_SIZE_BLOCKS, RANDP_RESEED_INTERVAL, enc, dm, Nk, Nr>;
 
     static thread_local randp_t* this_ = nullptr;
 
@@ -189,7 +189,7 @@ static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 * \pre \a buf is at least \a n bytes in size
 */
 template <
-    int RANDP_POOL_NUM_BLOCKS = DEFAULT_RANDP_POOL_NUM_BLOCKS,
+    int RANDP_POOL_SIZE_BLOCKS = DEFAULT_RANDP_POOL_SIZE_BLOCKS,
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
@@ -201,7 +201,7 @@ template <
 void
 randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_POOL_NUM_BLOCKS, RANDP_RESEED_INTERVAL, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_POOL_SIZE_BLOCKS, RANDP_RESEED_INTERVAL, enc, dm, Nk, Nr>;
 
     // Intentionally not thread_local
     static randp_t* this_ = nullptr;
