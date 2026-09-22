@@ -31,6 +31,14 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
+#if defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
+
+#define RANDP_BLOCK_TYPE __m128i
+
+#else
+#error "Architecture not supported"
+#endif
+
 /// A pool of random bytes
 /**
 * \tparam RANDP_POOL_SIZE_BLOCKS the number of blocks in the pool
@@ -54,7 +62,7 @@ struct randp
 {
     static_assert(RANDP_POOL_SIZE_BLOCKS >= 1, "randp must have at least 1 block");
 
-    static constexpr int RANDP_POOL_SIZE_BYTES = RANDP_POOL_SIZE_BLOCKS * (int)sizeof(__m128i);
+    static constexpr int RANDP_POOL_SIZE_BYTES = RANDP_POOL_SIZE_BLOCKS * (int)sizeof(RANDP_BLOCK_TYPE);
 
     static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
     static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
@@ -75,7 +83,7 @@ struct randp
             this->reseed_countdown = RANDP_RESEED_INTERVAL;
         }
 
-        auto* blocks = (__m128i*)(&this->pool[0]);
+        auto* blocks = (RANDP_BLOCK_TYPE*)(&this->pool[0]);
 
         for (int i = 0; i < RANDP_POOL_SIZE_BLOCKS; ++i)
         {
@@ -131,11 +139,11 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
     static thread_local randp_t* this_ = nullptr;
 
-    static_assert(alignof(randp_t) == alignof(__m128i),
-                  "randp must have alignment of __m128i");
+    static_assert(alignof(randp_t) == alignof(RANDP_BLOCK_TYPE),
+                  "randp must have alignment of RANDP_BLOCK_TYPE");
 
-    static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
-                  "randp pool must start on 16-byte boundary");
+    static_assert(offsetof(randp_t, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
+                  "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
 
     static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
@@ -206,11 +214,11 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
     // Intentionally not thread_local
     static randp_t* this_ = nullptr;
 
-    static_assert(alignof(randp_t) == alignof(__m128i),
-                  "randp must have alignment of __m128i");
+    static_assert(alignof(randp_t) == alignof(RANDP_BLOCK_TYPE),
+                  "randp must have alignment of RANDP_BLOCK_TYPE");
 
-    static_assert(offsetof(randp_t, pool) % sizeof(__m128i) == 0,
-                  "randp pool must start on 16-byte boundary");
+    static_assert(offsetof(randp_t, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
+                  "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
 
     static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
