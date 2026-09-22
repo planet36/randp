@@ -9,7 +9,7 @@
 
 #pragma once
 
-#if defined(__x86_64__) && defined(__VAES__)
+#if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
 #include <immintrin.h>
 
@@ -107,4 +107,6 @@ aes_dec_davies_meyer_256(const __m256i H,
 } // extern "C"
 #endif
 
+#else
+#error "Architecture not supported"
 #endif
