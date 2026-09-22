@@ -31,7 +31,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
     }
 }
 
-#include "parse_int.hpp"
+#include "get_num_threads.hpp"
 
 #include <algorithm>
 #include <climits>
@@ -52,35 +52,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     if (benchmark::ReportUnrecognizedArguments(argc, argv))
         return 1;
 
-    // {{{ determine num_threads
-
-    constexpr int min_threads = 1;
-    const auto hw_threads = static_cast<int>(std::thread::hardware_concurrency());
-    const auto max_threads = std::max(min_threads, hw_threads);
-
-    // NUM_THREADS=0 means max_threads
-    int num_threads = min_threads;
-
-    try
-    {
-        num_threads = parse_env_int("NUM_THREADS", 0, max_threads, min_threads);
-    }
-    catch (const std::exception& ex)
-    {
-        (void)std::fflush(stdout);
-        errx(EXIT_FAILURE, "%s", ex.what());
-    }
-
-    if (num_threads == 0)
-        num_threads = max_threads;
-
-    /*
-    if (num_threads > min_threads)
-        // Don't use all the cores
-        --num_threads;
-    */
-
-    // }}}
+    const int num_threads = get_num_threads();
 
     // {{{ accuracy testing
 
