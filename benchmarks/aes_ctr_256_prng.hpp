@@ -45,7 +45,7 @@ rectify_key(__m256i key)
 {
     // most significant elem first
     const auto key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
-                                               (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
+                                            (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
 
     const auto swapped = _mm256_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
 
