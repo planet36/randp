@@ -9,7 +9,7 @@
 * The 256 in the name is the vector width (VAES), not the AES key size.
 *
 * The raison d'etre of this class is to test
-* 1. different values of \c AES_CTR_256_PRNG_NUM_KEYS and \c AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY
+* 1. different values of \c Nk and \c Nr
 */
 
 #pragma once
@@ -28,8 +28,8 @@
 /**
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
-* \tparam AES_CTR_256_PRNG_NUM_KEYS the number of independent AES keys
-* \tparam AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY the number of AES enc/dec rounds applied per key
+* \tparam Nk the number of independent AES keys
+* \tparam Nr the number of AES enc/dec rounds applied per key
 *
 * Each output is two 128-bit AES blocks, one in each 128-bit half of a \c __m256i.
 * VAES encrypts each half independently, with the matching half of each key as its round key.
@@ -37,19 +37,19 @@
 */
 template <bool enc,
           bool dm,
-          int AES_CTR_256_PRNG_NUM_KEYS,
-          int AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY>
+          int Nk,
+          int Nr>
 struct aes_ctr_256_prng
 {
-    static_assert(AES_CTR_256_PRNG_NUM_KEYS >= 1);
-    static_assert(AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-    static_assert(AES_CTR_256_PRNG_NUM_KEYS * AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY >= 3,
+    static_assert(Nk >= 1);
+    static_assert(Nr >= 1);
+    static_assert(Nk * Nr >= 3,
                   "must do at least 3 rounds of AES enc/dec");
 
     using block_t = __m256i;
 
 private:
-    block_t keys[AES_CTR_256_PRNG_NUM_KEYS];
+    block_t keys[Nk];
     block_t ctr; ///< The state/counter
 
 public:
@@ -77,7 +77,7 @@ public:
             err(EXIT_FAILURE, "getentropy");
 
 #if defined(__x86_64__) && defined(__AVX2__)
-        for (int i = 0; i < AES_CTR_256_PRNG_NUM_KEYS; ++i)
+        for (int i = 0; i < Nk; ++i)
         {
             // The two 64-bit lanes of each 128-bit half of the key must differ.
             // With a key half of (K, K), if the counter half (A, B) gives the output (X, Y),
@@ -121,20 +121,20 @@ public:
         if constexpr (enc)
         {
             if constexpr (dm)
-                dst = aes_enc_davies_meyer_256(this->ctr, this->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                                              AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_enc_davies_meyer_256(this->ctr, this->keys, Nk,
+                                              Nr);
             else
-                dst = aes_enc_256(this->ctr, this->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                                 AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_enc_256(this->ctr, this->keys, Nk,
+                                 Nr);
         }
         else
         {
             if constexpr (dm)
-                dst = aes_dec_davies_meyer_256(this->ctr, this->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                                              AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_dec_davies_meyer_256(this->ctr, this->keys, Nk,
+                                              Nr);
             else
-                dst = aes_dec_256(this->ctr, this->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                                 AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+                dst = aes_dec_256(this->ctr, this->keys, Nk,
+                                 Nr);
         }
 
         this->ctr = _mm256_add_epi64(this->ctr, inc);
