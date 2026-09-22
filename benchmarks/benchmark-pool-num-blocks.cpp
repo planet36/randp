@@ -33,14 +33,8 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 
 #include "get_num_threads.hpp"
 
-#include <algorithm>
 #include <climits>
-#include <cstdio>
-#include <cstdlib>
-#include <err.h>
 #include <format>
-#include <stdexcept>
-#include <thread>
 
 int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
