@@ -42,6 +42,14 @@ CPPFLAGS = -MMD -MP
 # _DEFAULT_SOURCE needed for getentropy, arc4random
 CPPFLAGS += -D_DEFAULT_SOURCE
 
+COMMON_COMPILE_FLAGS = -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
+COMMON_COMPILE_FLAGS += -O3 -flto=auto
+#COMMON_COMPILE_FLAGS += -march=native
+#COMMON_COMPILE_FLAGS += -march=x86-64-v2 -maes
+COMMON_COMPILE_FLAGS += -march=x86-64-v3 -maes -mvaes # x86-64-v3 implies avx, avx2
+#COMMON_COMPILE_FLAGS += -march=raptorlake
+COMMON_COMPILE_FLAGS += -Wno-unused-function
+
 CFLAGS = -std=c23
 CFLAGS += -pipe -Wall -Wextra -Wpedantic -Wfatal-errors
 CFLAGS += -O3 -flto=auto
