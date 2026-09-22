@@ -55,12 +55,12 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     // {{{ speed
 
-    [num_threads]<int... NUM_BLOCKS>(std::integer_sequence<int, NUM_BLOCKS...>)
+    [num_threads]<int... SIZE_BLOCKS>(std::integer_sequence<int, SIZE_BLOCKS...>)
     {
         (benchmark::RegisterBenchmark(
-             std::format("rand_bytes_4GiB:randp_bytes<{:_>2},MAX>", NUM_BLOCKS),
+             std::format("rand_bytes_4GiB:randp_bytes<{:_>2},MAX>", SIZE_BLOCKS),
              BM_rand_bytes_4GiB,
-             randp_bytes<NUM_BLOCKS, INT_MAX>)
+             randp_bytes<SIZE_BLOCKS, INT_MAX>)
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);
