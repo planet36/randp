@@ -5,6 +5,8 @@
 /**
 * \file
 * \author Steven Ward
+*
+* The 256 in the name is the vector width (VAES), not the AES key size.
 */
 
 #pragma once
