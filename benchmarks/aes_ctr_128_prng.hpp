@@ -22,6 +22,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+[[nodiscard]] static inline auto
+add_epu64(__m128i a, __m128i b)
+{
+    return _mm_add_epi64(a, b);
+}
+
 /// A PRNG that uses AES instructions
 /**
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
@@ -118,7 +124,7 @@ public:
                 dst = aes_dec(this->ctr, this->keys, Nk, Nr);
         }
 
-        this->ctr = _mm_add_epi64(this->ctr, inc);
+        this->ctr = add_epu64(this->ctr, inc);
 
         return dst;
     }
