@@ -109,6 +109,35 @@ aes_dec_davies_meyer_256(const __m256i H,
 } // extern "C"
 #endif
 
+#if defined(__cplusplus)
+// Function overloads for C++
+
+[[nodiscard]] static inline __m256i
+aes_enc(__m256i a, const __m256i* keys, const int Nk, const int Nr)
+{
+    return aes_enc_256(a, keys, Nk, Nr);
+}
+
+[[nodiscard]] static inline __m256i
+aes_dec(__m256i a, const __m256i* keys, const int Nk, const int Nr)
+{
+    return aes_dec_256(a, keys, Nk, Nr);
+}
+
+[[nodiscard]] static inline __m256i
+aes_enc_davies_meyer(const __m256i H, const __m256i* keys, const int Nk, const int Nr)
+{
+    return aes_enc_davies_meyer_256(H, keys, Nk, Nr);
+}
+
+[[nodiscard]] static inline __m256i
+aes_dec_davies_meyer(const __m256i H, const __m256i* keys, const int Nk, const int Nr)
+{
+    return aes_dec_davies_meyer_256(H, keys, Nk, Nr);
+}
+
+#endif
+
 #else
 #error "Architecture not supported"
 #endif

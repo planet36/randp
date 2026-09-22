@@ -107,6 +107,35 @@ aes_dec_davies_meyer_128(const __m128i H,
 } // extern "C"
 #endif
 
+#if defined(__cplusplus)
+// Function overloads for C++
+
+[[nodiscard]] static inline __m128i
+aes_enc(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+{
+    return aes_enc_128(a, keys, Nk, Nr);
+}
+
+[[nodiscard]] static inline __m128i
+aes_dec(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+{
+    return aes_dec_128(a, keys, Nk, Nr);
+}
+
+[[nodiscard]] static inline __m128i
+aes_enc_davies_meyer(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
+{
+    return aes_enc_davies_meyer_128(H, keys, Nk, Nr);
+}
+
+[[nodiscard]] static inline __m128i
+aes_dec_davies_meyer(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
+{
+    return aes_dec_davies_meyer_128(H, keys, Nk, Nr);
+}
+
+#endif
+
 #else
 #error "Architecture not supported"
 #endif
