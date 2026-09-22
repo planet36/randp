@@ -18,6 +18,7 @@
 
 #include <err.h>
 #include <immintrin.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -74,7 +75,7 @@ public:
             // (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
 
             // most significant elem first
-            const __m128i key_mask = _mm_set_epi64x(SHA_512_H0_1, SHA_512_H0_0); // NOLINT(cppcoreguidelines-narrowing-conversions)
+            const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
 
             const __m128i swapped = _mm_shuffle_epi32(this->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
             // all ones if the lanes are equal, all zeros otherwise
