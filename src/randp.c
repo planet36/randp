@@ -37,13 +37,9 @@ extern "C" {
 #define RANDP_PRNG_USE_DAVIES_MEYER DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER
 #endif
 
-#if !defined(RANDP_POOL_SIZE_BLOCKS)
-#define RANDP_POOL_SIZE_BLOCKS DEFAULT_RANDP_POOL_SIZE_BLOCKS
+#if !defined(RANDP_POOL_SIZE_BYTES)
+#define RANDP_POOL_SIZE_BYTES DEFAULT_RANDP_POOL_SIZE_BYTES
 #endif
-
-static_assert(RANDP_POOL_SIZE_BLOCKS >= 1, "randp must have at least 1 block");
-
-#define RANDP_POOL_SIZE_BYTES (RANDP_POOL_SIZE_BLOCKS * (int)sizeof(__m128i))
 
 static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
 static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
@@ -111,7 +107,9 @@ randp_regen(randp* this_)
 
     RANDP_BLOCK_TYPE* blocks = (RANDP_BLOCK_TYPE*)(&this_->pool[0]);
 
-    for (int i = 0; i < RANDP_POOL_SIZE_BLOCKS; ++i)
+    constexpr int num_blocks = RANDP_POOL_SIZE_BYTES / sizeof(RANDP_BLOCK_TYPE);
+
+    for (int i = 0; i < num_blocks; ++i)
     {
         blocks[i] = RANDP_NEXT(&this_->prng);
     }

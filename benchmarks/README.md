@@ -29,7 +29,7 @@
 
 Run these targets in the following order to refine the parameters of randp (which are set in [randp-defaults.h](../src/randp-defaults.h) and [aes_ctr_128_prng-defaults.h](../src/aes_ctr_128_prng-defaults.h)).
 
-1. `make pool-size`: find optimal `DEFAULT_RANDP_POOL_SIZE_BLOCKS`
+1. `make pool-size`: find optimal `DEFAULT_RANDP_POOL_SIZE_BYTES`
 2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_RESEED_INTERVAL`
 3. `make prng-params`: find optimal `DEFAULT_AES_CTR_128_PRNG_NUM_KEYS`, `DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY`, `DEFAULT_RANDP_PRNG_USE_ENC`, and `DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER`
 4. _repeat_

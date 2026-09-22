@@ -16,11 +16,11 @@ constexpr bool DEFAULT_RANDP_PRNG_USE_ENC = true;
 /// (in addition to AES encryption/decryption) to get the next PRNG output.
 constexpr bool DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER = false;
 
-/// The number of blocks in the pool
+/// The number of bytes in the pool
 /**
-* The size of each block is \c sizeof(__m128i) (i.e. \c 16).
+* This must be a positive multiple of 32.
 */
-constexpr int DEFAULT_RANDP_POOL_SIZE_BLOCKS = 16;
+constexpr int DEFAULT_RANDP_POOL_SIZE_BYTES = 256;
 
 /// The number of pool regenerations between reseeds
 /**

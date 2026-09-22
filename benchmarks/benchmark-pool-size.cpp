@@ -55,16 +55,16 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 
     // {{{ speed
 
-    [num_threads]<int... SIZE_BLOCKS>(std::integer_sequence<int, SIZE_BLOCKS...>)
+    [num_threads]<int... SIZE_BYTES>(std::integer_sequence<int, SIZE_BYTES...>)
     {
         (benchmark::RegisterBenchmark(
-             std::format("rand_bytes_4GiB:randp_bytes<{:_>2},MAX>", SIZE_BLOCKS),
+             std::format("rand_bytes_4GiB:randp_bytes<{:_>3},MAX>", SIZE_BYTES),
              BM_rand_bytes_4GiB,
-             randp_bytes<SIZE_BLOCKS, INT_MAX>)
+             randp_bytes<SIZE_BYTES, INT_MAX>)
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);
-    }(std::integer_sequence<int, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32>{});
+    }(std::integer_sequence<int, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512>{});
 
     benchmark::RunSpecifiedBenchmarks();
     benchmark::Shutdown();
