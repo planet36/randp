@@ -127,7 +127,8 @@ aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
     return dst;
 }
 
-/// Get the next PRNG output via AES encryption and Davies-Meyer single-block-length compression function.
+/// Get the next PRNG output via AES encryption and Davies-Meyer single-block-length
+/// compression function.
 /**
 * \param this_ the PRNG state
 * \return the next PRNG output
@@ -145,7 +146,8 @@ aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
     return dst;
 }
 
-/// Get the next PRNG output via AES decryption and Davies-Meyer single-block-length compression function.
+/// Get the next PRNG output via AES decryption and Davies-Meyer single-block-length
+/// compression function.
 /**
 * \param this_ the PRNG state
 * \return the next PRNG output
