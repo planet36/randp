@@ -16,6 +16,7 @@
 
 #include <err.h>
 #include <immintrin.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -39,7 +40,7 @@ struct aes_ctr_128_prng
     static_assert(AES_CTR_128_PRNG_NUM_KEYS * AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY >= 3,
                   "must do at least 3 rounds of AES enc/dec");
 
-    __m128i keys[AES_CTR_128_PRNG_NUM_KEYS];
+    __m128i keys[AES_CTR_128_PRNG_NUM_KEYS]; ///< The round keys
     __m128i ctr; ///< The state/counter
 };
 
@@ -50,6 +51,8 @@ static_assert(sizeof(aes_ctr_128_prng) <= 256,
 
 /// Assign random bytes to the data members via \c getentropy.
 /**
+* \param this_ the PRNG state
+*
 * Each key is then adjusted, if necessary, so that its 64-bit lanes differ.
 *
 * \note This function terminates the calling process upon catastrophic error.
@@ -68,7 +71,7 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
         // (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
 
         // most significant elem first
-        const __m128i key_mask = _mm_set_epi64x(SHA_512_H0_1, SHA_512_H0_0); // NOLINT(cppcoreguidelines-narrowing-conversions)
+        const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
 
         const __m128i swapped = _mm_shuffle_epi32(this_->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
         // all ones if the lanes are equal, all zeros otherwise
