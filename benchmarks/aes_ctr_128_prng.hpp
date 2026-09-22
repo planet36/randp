@@ -56,6 +56,17 @@ rectify_key(__m128i key)
 #error "Architecture not supported"
 #endif
 
+template <typename T>
+[[nodiscard]] inline auto
+get_inc();
+
+template <>
+[[nodiscard]] inline auto
+get_inc<__m128i>()
+{
+    return wyprimes_vec128_01();
+}
+
 /// A PRNG that uses AES instructions
 /**
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
@@ -118,7 +129,7 @@ public:
     */
     [[nodiscard]] block_t next() noexcept
     {
-        const block_t inc = wyprimes_vec128_01();
+        const auto inc = get_inc<block_t>();
 
         block_t dst;
 
