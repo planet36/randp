@@ -19,7 +19,7 @@
 #include "../src/aes_ctr_128_prng-defaults.h"
 #include "../src/allocate.h"
 #include "../src/randp-defaults.h"
-#include "aes_ctr_128_prng.hpp"
+#include "aes_ctr_prng.hpp"
 
 #include <immintrin.h>
 #include <stddef.h>
@@ -65,7 +65,7 @@ struct randp
 
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
-    aes_ctr_128_prng<enc, dm, Nk, Nr> prng;
+    aes_ctr_prng<RANDP_BLOCK_TYPE, enc, dm, Nk, Nr> prng;
     uint8_t pool[RANDP_POOL_SIZE_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
