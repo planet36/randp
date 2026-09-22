@@ -75,7 +75,7 @@ struct randp
             this->reseed_countdown = RANDP_RESEED_INTERVAL;
         }
 
-        __m128i* blocks = (__m128i*)(&this->pool[0]);
+        auto* blocks = (__m128i*)(&this->pool[0]);
 
         for (int i = 0; i < RANDP_POOL_SIZE_BLOCKS; ++i)
         {

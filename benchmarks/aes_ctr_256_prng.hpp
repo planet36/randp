@@ -44,13 +44,13 @@ add_epu64(__m256i a, __m256i b)
 rectify_key(__m256i key)
 {
     // most significant elem first
-    const __m256i key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
+    const auto key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
                                                (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
 
-    const __m256i swapped = _mm256_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
+    const auto swapped = _mm256_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
 
     // all ones if the lanes are equal, all zeros otherwise
-    const __m256i equal_mask = _mm256_cmpeq_epi64(key, swapped);
+    const auto equal_mask = _mm256_cmpeq_epi64(key, swapped);
 
     key = _mm256_xor_si256(key, _mm256_and_si256(equal_mask, key_mask));
 
