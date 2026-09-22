@@ -107,4 +107,6 @@ aes_dec_davies_meyer_128(const __m128i H,
 } // extern "C"
 #endif
 
+#else
+#error "Architecture not supported"
 #endif
