@@ -1,0 +1,50 @@
+Linux 7.2.6-arch2-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.44
+gcc (GCC) 16.2.1 20260810
+libbenchmark.so.1.9.5
+librandp.so.7.0
+
+# Median time per call
+
+# Median time per call
+
+# Median time per call
+
+# Median bytes per second copied to buffer (of size bytes)
+
+# Median bytes per second copied to buffer (of size pages)
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes<def,1<<13,m256i>   189  ms
+rand_bytes_4GiB:randp_bytes<def,1<<10,m256i>   190  ms
+rand_bytes_4GiB:randp_bytes<def,1<<12,m256i>   190  ms
+rand_bytes_4GiB:randp_bytes<def,1<<11,m256i>   193  ms
+rand_bytes_4GiB:randp_bytes<def,1<<14,m256i>   195  ms
+rand_bytes_4GiB:randp_bytes<def,1<<15,m256i>   196  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_9,m256i>   196  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_8,m256i>   205  ms
+rand_bytes_4GiB:randp_bytes<def,1<<11,m128i>   206  ms
+rand_bytes_4GiB:randp_bytes<def,1<<13,m128i>   207  ms
+rand_bytes_4GiB:randp_bytes<def,1<<14,m128i>   210  ms
+rand_bytes_4GiB:randp_bytes<def,1<<10,m128i>   212  ms
+rand_bytes_4GiB:randp_bytes<def,1<<12,m128i>   212  ms
+rand_bytes_4GiB:randp_bytes<def,1<<15,m128i>   213  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_9,m128i>   217  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_8,m128i>   227  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_7,m256i>   235  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_7,m128i>   251  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_6,m256i>   282  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_6,m128i>   285  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_5,m128i>   358  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_5,m256i>   384  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_4,m128i>   511  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_4,m256i>   593  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_3,m128i>   807  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_3,m256i>   973  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_2,m128i>  1396  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_2,m256i>  1765  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_1,m128i>  2545  ms
+rand_bytes_4GiB:randp_bytes<def,1<<_1,m256i>  3297  ms
+
