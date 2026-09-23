@@ -258,3 +258,6 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 }
 
 // }}}
+
+#undef MIN
+#undef RANDP_BLOCK_TYPE
