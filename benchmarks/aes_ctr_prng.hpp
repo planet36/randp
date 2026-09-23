@@ -25,9 +25,9 @@
 #include "../src/sha2_iv.h"
 #include "../src/wyprimes.h"
 
+#include <cstdint>
 #include <err.h>
 #include <immintrin.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 
