@@ -82,10 +82,18 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
     }
 }
 
-/// Get the next PRNG output via AES encryption.
+/// Fill \a dst with \a n PRNG outputs via AES encryption
 /**
 * \param this_ the PRNG state
-* \return the next PRNG output
+* \param dst the destination blocks
+* \param n the number of blocks to fill
+*
+* The counter is kept in a local variable, because the stores to \a dst could alias
+* \c this_->ctr.  Without it, the compiler reloads and stores the counter on every
+* iteration of a loop it does not fully unroll.
+*
+* The keys are read through \a this_ on purpose.  A local copy of them could be spilled
+* to the stack, where nothing wipes it.
 *
 * The counter increment \c inc used below forms a Weyl sequence.
 * Criteria for its 64-bit lane values:
@@ -94,73 +102,102 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
 *
 * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
 */
-[[nodiscard]] static inline __m128i
-aes_ctr_128_prng_enc_next(aes_ctr_128_prng* this_)
+static inline void
+aes_ctr_128_prng_enc_fill(aes_ctr_128_prng* this_, __m128i* dst, const int n)
 {
     const __m128i inc = wyprimes_vec128_01();
 
-    const __m128i dst = aes_enc_128(this_->ctr, this_->keys, AES_CTR_128_PRNG_NUM_KEYS,
-                                   AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
+    __m128i ctr = this_->ctr;
 
-    this_->ctr = _mm_add_epi64(this_->ctr, inc);
+    for (int i = 0; i < n; ++i)
+    {
+        dst[i] = aes_enc_128(ctr, this_->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                             AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
 
-    return dst;
+        ctr = _mm_add_epi64(ctr, inc);
+    }
+
+    this_->ctr = ctr;
 }
 
-/// Get the next PRNG output via AES decryption.
+/// Fill \a dst with \a n PRNG outputs via AES decryption
 /**
 * \param this_ the PRNG state
-* \return the next PRNG output
+* \param dst the destination blocks
+* \param n the number of blocks to fill
+*
+* Only the counter is kept in a local variable, as in \c aes_ctr_128_prng_enc_fill.
 */
-[[nodiscard]] static inline __m128i
-aes_ctr_128_prng_dec_next(aes_ctr_128_prng* this_)
+static inline void
+aes_ctr_128_prng_dec_fill(aes_ctr_128_prng* this_, __m128i* dst, const int n)
 {
     const __m128i inc = wyprimes_vec128_01();
 
-    const __m128i dst = aes_dec_128(this_->ctr, this_->keys, AES_CTR_128_PRNG_NUM_KEYS,
-                                   AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
+    __m128i ctr = this_->ctr;
 
-    this_->ctr = _mm_add_epi64(this_->ctr, inc);
+    for (int i = 0; i < n; ++i)
+    {
+        dst[i] = aes_dec_128(ctr, this_->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                             AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
 
-    return dst;
+        ctr = _mm_add_epi64(ctr, inc);
+    }
+
+    this_->ctr = ctr;
 }
 
-/// Get the next PRNG output via AES encryption and Davies-Meyer single-block-length
-/// compression function.
+/// Fill \a dst with \a n PRNG outputs via AES encryption and Davies-Meyer single-block-length
+/// compression function
 /**
 * \param this_ the PRNG state
-* \return the next PRNG output
+* \param dst the destination blocks
+* \param n the number of blocks to fill
+*
+* Only the counter is kept in a local variable, as in \c aes_ctr_128_prng_enc_fill.
 */
-[[nodiscard]] static inline __m128i
-aes_ctr_128_prng_enc_davies_meyer_next(aes_ctr_128_prng* this_)
+static inline void
+aes_ctr_128_prng_enc_davies_meyer_fill(aes_ctr_128_prng* this_, __m128i* dst, const int n)
 {
     const __m128i inc = wyprimes_vec128_01();
 
-    const __m128i dst = aes_enc_davies_meyer_128(this_->ctr, this_->keys,
-            AES_CTR_128_PRNG_NUM_KEYS, AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
+    __m128i ctr = this_->ctr;
 
-    this_->ctr = _mm_add_epi64(this_->ctr, inc);
+    for (int i = 0; i < n; ++i)
+    {
+        dst[i] = aes_enc_davies_meyer_128(ctr, this_->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                                          AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
 
-    return dst;
+        ctr = _mm_add_epi64(ctr, inc);
+    }
+
+    this_->ctr = ctr;
 }
 
-/// Get the next PRNG output via AES decryption and Davies-Meyer single-block-length
-/// compression function.
+/// Fill \a dst with \a n PRNG outputs via AES decryption and Davies-Meyer single-block-length
+/// compression function
 /**
 * \param this_ the PRNG state
-* \return the next PRNG output
+* \param dst the destination blocks
+* \param n the number of blocks to fill
+*
+* Only the counter is kept in a local variable, as in \c aes_ctr_128_prng_enc_fill.
 */
-[[nodiscard]] static inline __m128i
-aes_ctr_128_prng_dec_davies_meyer_next(aes_ctr_128_prng* this_)
+static inline void
+aes_ctr_128_prng_dec_davies_meyer_fill(aes_ctr_128_prng* this_, __m128i* dst, const int n)
 {
     const __m128i inc = wyprimes_vec128_01();
 
-    const __m128i dst = aes_dec_davies_meyer_128(this_->ctr, this_->keys,
-            AES_CTR_128_PRNG_NUM_KEYS, AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
+    __m128i ctr = this_->ctr;
 
-    this_->ctr = _mm_add_epi64(this_->ctr, inc);
+    for (int i = 0; i < n; ++i)
+    {
+        dst[i] = aes_dec_davies_meyer_128(ctr, this_->keys, AES_CTR_128_PRNG_NUM_KEYS,
+                                          AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY);
 
-    return dst;
+        ctr = _mm_add_epi64(ctr, inc);
+    }
+
+    this_->ctr = ctr;
 }
 
 #if defined(__cplusplus)

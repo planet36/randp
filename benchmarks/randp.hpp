@@ -88,10 +88,7 @@ struct randp
 
         constexpr int num_blocks = RANDP_POOL_SIZE_BYTES / sizeof(T);
 
-        for (int i = 0; i < num_blocks; ++i)
-        {
-            blocks[i] = prng.next();
-        }
+        prng.fill(blocks, num_blocks);
 
         this->rand_bytes_remaining = RANDP_POOL_SIZE_BYTES;
         --this->reseed_countdown;

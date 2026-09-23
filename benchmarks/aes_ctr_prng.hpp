@@ -193,9 +193,17 @@ public:
         }
     }
 
-    /// Get the next PRNG output via AES encryption or decryption.
+    /// Fill \a dst with \a n PRNG outputs via AES encryption or decryption
     /**
-    * \return the next PRNG output
+    * \param dst the destination blocks
+    * \param n the number of blocks to fill
+    *
+    * The counter is kept in a local variable, because the stores to \a dst could alias
+    * \c this->ctr.  Without it, the compiler reloads and stores the counter on every
+    * iteration of a loop it does not fully unroll.
+    *
+    * The keys are read through \c this on purpose.  A local copy of them could be spilled
+    * to the stack, where nothing wipes it.
     *
     * The counter increment \c inc used below forms a Weyl sequence.
     * Criteria for its 64-bit lane values:
@@ -204,29 +212,32 @@ public:
     *
     * \sa https://en.wikipedia.org/wiki/Weyl_sequence#In_computing
     */
-    [[nodiscard]] block_t next() noexcept
+    void fill(block_t* dst, const int n) noexcept
     {
         const auto inc = get_inc<block_t>();
 
-        block_t dst;
+        auto ctr = this->ctr;
 
-        if constexpr (enc)
+        for (int i = 0; i < n; ++i)
         {
-            if constexpr (dm)
-                dst = aes_enc_davies_meyer(this->ctr, this->keys, Nk, Nr);
+            if constexpr (enc)
+            {
+                if constexpr (dm)
+                    dst[i] = aes_enc_davies_meyer(ctr, this->keys, Nk, Nr);
+                else
+                    dst[i] = aes_enc(ctr, this->keys, Nk, Nr);
+            }
             else
-                dst = aes_enc(this->ctr, this->keys, Nk, Nr);
-        }
-        else
-        {
-            if constexpr (dm)
-                dst = aes_dec_davies_meyer(this->ctr, this->keys, Nk, Nr);
-            else
-                dst = aes_dec(this->ctr, this->keys, Nk, Nr);
+            {
+                if constexpr (dm)
+                    dst[i] = aes_dec_davies_meyer(ctr, this->keys, Nk, Nr);
+                else
+                    dst[i] = aes_dec(ctr, this->keys, Nk, Nr);
+            }
+
+            ctr = add_epu64(ctr, inc);
         }
 
-        this->ctr = add_epu64(this->ctr, inc);
-
-        return dst;
+        this->ctr = ctr;
     }
 };

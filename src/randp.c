@@ -57,14 +57,14 @@ static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positiv
 #define RANDP_PRNG_TYPE aes_ctr_256_prng
 #define RANDP_PRNG_RESEED aes_ctr_256_prng_reseed
 
-#define RANDP_NEXT(PRNG)                                                  \
+#define RANDP_FILL(PRNG, DST, N)                                          \
     (RANDP_PRNG_USE_ENC                                                   \
          ? (RANDP_PRNG_USE_DAVIES_MEYER                                   \
-                ? aes_ctr_256_prng_enc_davies_meyer_next(PRNG)            \
-                : aes_ctr_256_prng_enc_next(PRNG))                        \
+                ? aes_ctr_256_prng_enc_davies_meyer_fill(PRNG, DST, N)    \
+                : aes_ctr_256_prng_enc_fill(PRNG, DST, N))                \
          : (RANDP_PRNG_USE_DAVIES_MEYER                                   \
-                ? aes_ctr_256_prng_dec_davies_meyer_next(PRNG)            \
-                : aes_ctr_256_prng_dec_next(PRNG)))
+                ? aes_ctr_256_prng_dec_davies_meyer_fill(PRNG, DST, N)    \
+                : aes_ctr_256_prng_dec_fill(PRNG, DST, N)))
 
 #elif defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
@@ -72,14 +72,14 @@ static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positiv
 #define RANDP_PRNG_TYPE aes_ctr_128_prng
 #define RANDP_PRNG_RESEED aes_ctr_128_prng_reseed
 
-#define RANDP_NEXT(PRNG)                                                  \
+#define RANDP_FILL(PRNG, DST, N)                                          \
     (RANDP_PRNG_USE_ENC                                                   \
          ? (RANDP_PRNG_USE_DAVIES_MEYER                                   \
-                ? aes_ctr_128_prng_enc_davies_meyer_next(PRNG)            \
-                : aes_ctr_128_prng_enc_next(PRNG))                        \
+                ? aes_ctr_128_prng_enc_davies_meyer_fill(PRNG, DST, N)    \
+                : aes_ctr_128_prng_enc_fill(PRNG, DST, N))                \
          : (RANDP_PRNG_USE_DAVIES_MEYER                                   \
-                ? aes_ctr_128_prng_dec_davies_meyer_next(PRNG)            \
-                : aes_ctr_128_prng_dec_next(PRNG)))
+                ? aes_ctr_128_prng_dec_davies_meyer_fill(PRNG, DST, N)    \
+                : aes_ctr_128_prng_dec_fill(PRNG, DST, N)))
 
 #else
 #error "Architecture not supported"
@@ -121,10 +121,7 @@ randp_regen(randp* this_)
 
     constexpr int num_blocks = RANDP_POOL_SIZE_BYTES / sizeof(RANDP_BLOCK_TYPE);
 
-    for (int i = 0; i < num_blocks; ++i)
-    {
-        blocks[i] = RANDP_NEXT(&this_->prng);
-    }
+    RANDP_FILL(&this_->prng, blocks, num_blocks);
 
     this_->rand_bytes_remaining = RANDP_POOL_SIZE_BYTES;
     --this_->reseed_countdown;
@@ -294,7 +291,7 @@ randp_lt_u64(uint64_t upper_bound)
 #undef RANDP_BLOCK_TYPE
 #undef RANDP_PRNG_TYPE
 #undef RANDP_PRNG_RESEED
-#undef RANDP_NEXT
+#undef RANDP_FILL
 
 #if defined(__cplusplus)
 }
