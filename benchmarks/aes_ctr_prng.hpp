@@ -12,8 +12,9 @@
 
 #pragma once
 
-#if !(defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__) && defined(__VAES__) && \
-      defined(__AVX2__))
+#if !(defined(__x86_64__) && \
+      defined(__AES__) && defined(__SSE4_1__) && \
+      defined(__VAES__) && defined(__AVX2__))
 #error "Architecture not supported"
 #endif
 
