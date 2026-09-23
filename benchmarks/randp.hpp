@@ -17,6 +17,7 @@
 #pragma once
 
 #include "../src/aes_ctr_128_prng-defaults.h"
+#include "../src/aes_ctr_256_prng-defaults.h"
 #include "../src/allocate.h"
 #include "../src/randp-defaults.h"
 #include "aes_ctr_prng.hpp"
@@ -31,9 +32,17 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-#if defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
+#if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
+
+#define RANDP_BLOCK_TYPE __m256i
+#define RANDP_PRNG_DEFAULT_NUM_KEYS DEFAULT_AES_CTR_256_PRNG_NUM_KEYS
+#define RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY
+
+#elif defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
 #define RANDP_BLOCK_TYPE __m128i
+#define RANDP_PRNG_DEFAULT_NUM_KEYS DEFAULT_AES_CTR_128_PRNG_NUM_KEYS
+#define RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
 
 #else
 #error "Architecture not supported"
@@ -54,8 +63,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS,
-    int Nr = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = RANDP_PRNG_DEFAULT_NUM_KEYS,
+    int Nr = RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
     // }}}
 >
 struct randp
@@ -126,8 +135,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS,
-    int Nr = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = RANDP_PRNG_DEFAULT_NUM_KEYS,
+    int Nr = RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
     // }}}
 >
 void
@@ -200,8 +209,8 @@ template <
     // {{{ PRNG params
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS,
-    int Nr = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
+    int Nk = RANDP_PRNG_DEFAULT_NUM_KEYS,
+    int Nr = RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
     // }}}
 >
 void
@@ -261,3 +270,5 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
 #undef MIN
 #undef RANDP_BLOCK_TYPE
+#undef RANDP_PRNG_DEFAULT_NUM_KEYS
+#undef RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
