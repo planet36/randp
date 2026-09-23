@@ -23,7 +23,7 @@
     - `getentropy`
     - `arc4random`
   - The `pool-size`, `prng-params`, and `reseed-countdown` benchmarks compare varying parameters of randp and its internal PRNG, with both the AES (`__m128i`) and VAES (`__m256i`) PRNGs.
-  - All the benchmarks take about 7 minutes.
+  - All the benchmarks take about 8.5 minutes.
 
 ## Refine the randp parameters
 
