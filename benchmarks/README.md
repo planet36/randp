@@ -3,7 +3,7 @@
 ## Dependencies
 
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
-  * [C++20](https://en.cppreference.com/w/cpp/20.html)
+  * [C++23](https://en.cppreference.com/cpp/23)
   * clang and clang++ are not supported
 * [Google Benchmark](https://github.com/google/benchmark)
 * [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
