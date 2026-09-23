@@ -49,13 +49,13 @@ COMMON_COMPILE_FLAGS += -O3 -flto=auto
 COMMON_COMPILE_FLAGS += -march=x86-64-v3 -maes -mvaes # x86-64-v3 implies avx, avx2
 #COMMON_COMPILE_FLAGS += -march=raptorlake
 COMMON_COMPILE_FLAGS += -Wno-unused-function
-COMMON_COMPILE_FLAGS += -Wno-ignored-attributes
 
 CFLAGS = -std=c23
 CFLAGS += $(COMMON_COMPILE_FLAGS)
 
 CXXFLAGS = -std=c++23
 CXXFLAGS += $(COMMON_COMPILE_FLAGS)
+CXXFLAGS += -Wno-ignored-attributes
 
 #LDFLAGS +=
 
