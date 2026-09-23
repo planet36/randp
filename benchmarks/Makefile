@@ -10,6 +10,7 @@ include ../config.mk
 SRCS = $(wildcard benchmark-*.cpp)
 
 CXXFLAGS += -mrdrnd -mrdseed
+CXXFLAGS += -march=x86-64-v3 -maes -mvaes # x86-64-v3 implies avx, avx2
 
 #LDFLAGS += -L..
 
