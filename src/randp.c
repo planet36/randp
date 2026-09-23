@@ -56,19 +56,14 @@ static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positiv
 #define RANDP_PRNG_TYPE aes_ctr_128_prng
 #define RANDP_PRNG_RESEED aes_ctr_128_prng_reseed
 
-#if RANDP_PRNG_USE_ENC
-#    if RANDP_PRNG_USE_DAVIES_MEYER
-#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_enc_davies_meyer_next(PRNG)
-#    else
-#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_enc_next(PRNG)
-#    endif
-#else
-#    if RANDP_PRNG_USE_DAVIES_MEYER
-#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_dec_davies_meyer_next(PRNG)
-#    else
-#        define RANDP_NEXT(PRNG) aes_ctr_128_prng_dec_next(PRNG)
-#    endif
-#endif
+#define RANDP_NEXT(PRNG)                                                  \
+    (RANDP_PRNG_USE_ENC                                                   \
+         ? (RANDP_PRNG_USE_DAVIES_MEYER                                   \
+                ? aes_ctr_128_prng_enc_davies_meyer_next(PRNG)            \
+                : aes_ctr_128_prng_enc_next(PRNG))                        \
+         : (RANDP_PRNG_USE_DAVIES_MEYER                                   \
+                ? aes_ctr_128_prng_dec_davies_meyer_next(PRNG)            \
+                : aes_ctr_128_prng_dec_next(PRNG)))
 
 #else
 #error "Architecture not supported"
