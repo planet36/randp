@@ -16,8 +16,6 @@
 
 #pragma once
 
-#include "../src/aes_ctr_128_prng-defaults.h"
-#include "../src/aes_ctr_256_prng-defaults.h"
 #include "../src/allocate.h"
 #include "../src/randp-defaults.h"
 #include "aes_ctr_prng.hpp"
@@ -35,14 +33,10 @@
 #if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
 #define RANDP_BLOCK_TYPE __m256i
-#define RANDP_PRNG_DEFAULT_NUM_KEYS DEFAULT_AES_CTR_256_PRNG_NUM_KEYS
-#define RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY
 
 #elif defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
 #define RANDP_BLOCK_TYPE __m128i
-#define RANDP_PRNG_DEFAULT_NUM_KEYS DEFAULT_AES_CTR_128_PRNG_NUM_KEYS
-#define RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY
 
 #else
 #error "Architecture not supported"
@@ -52,6 +46,7 @@
 /**
 * \tparam RANDP_POOL_SIZE_BYTES the number of bytes in the pool
 * \tparam RANDP_RESEED_INTERVAL the number of pool regenerations between reseeds
+* \tparam T the block type: \c __m128i for AES, or \c __m256i for VAES
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
 * \tparam Nk the number of independent AES keys
@@ -61,10 +56,11 @@ template <
     int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
+    typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = RANDP_PRNG_DEFAULT_NUM_KEYS,
-    int Nr = RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
+    int Nk = get_default_num_keys<T>(),
+    int Nr = get_default_num_rounds_per_key<T>()
     // }}}
 >
 struct randp
@@ -74,7 +70,7 @@ struct randp
 
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
-    aes_ctr_prng<RANDP_BLOCK_TYPE, enc, dm, Nk, Nr> prng;
+    aes_ctr_prng<T, enc, dm, Nk, Nr> prng;
     uint8_t pool[RANDP_POOL_SIZE_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
     int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
@@ -88,9 +84,9 @@ struct randp
             this->reseed_countdown = RANDP_RESEED_INTERVAL;
         }
 
-        auto* blocks = (RANDP_BLOCK_TYPE*)(&this->pool[0]);
+        auto* blocks = (T*)(&this->pool[0]);
 
-        constexpr int num_blocks = RANDP_POOL_SIZE_BYTES / sizeof(RANDP_BLOCK_TYPE);
+        constexpr int num_blocks = RANDP_POOL_SIZE_BYTES / sizeof(T);
 
         for (int i = 0; i < num_blocks; ++i)
         {
@@ -133,24 +129,25 @@ template <
     int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
+    typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = RANDP_PRNG_DEFAULT_NUM_KEYS,
-    int Nr = RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
+    int Nk = get_default_num_keys<T>(),
+    int Nr = get_default_num_rounds_per_key<T>()
     // }}}
 >
 void
 randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, T, enc, dm, Nk, Nr>;
 
     static thread_local randp_t* this_ = nullptr;
 
-    static_assert(alignof(randp_t) == alignof(RANDP_BLOCK_TYPE),
-                  "randp must have alignment of RANDP_BLOCK_TYPE");
+    static_assert(alignof(randp_t) == alignof(T),
+                  "randp must have the alignment of its block type");
 
-    static_assert(offsetof(randp_t, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
-                  "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
+    static_assert(offsetof(randp_t, pool) % sizeof(T) == 0,
+                  "randp pool must start on a block boundary");
 
     static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
@@ -207,25 +204,26 @@ template <
     int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
+    typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = RANDP_PRNG_DEFAULT_NUM_KEYS,
-    int Nr = RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY
+    int Nk = get_default_num_keys<T>(),
+    int Nr = get_default_num_rounds_per_key<T>()
     // }}}
 >
 void
 randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, T, enc, dm, Nk, Nr>;
 
     // Intentionally not thread_local
     static randp_t* this_ = nullptr;
 
-    static_assert(alignof(randp_t) == alignof(RANDP_BLOCK_TYPE),
-                  "randp must have alignment of RANDP_BLOCK_TYPE");
+    static_assert(alignof(randp_t) == alignof(T),
+                  "randp must have the alignment of its block type");
 
-    static_assert(offsetof(randp_t, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
-                  "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
+    static_assert(offsetof(randp_t, pool) % sizeof(T) == 0,
+                  "randp pool must start on a block boundary");
 
     static_assert(sizeof(randp_t) <= PAGE_SIZE, "randp must fit in one page");
 
@@ -270,5 +268,3 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 
 #undef MIN
 #undef RANDP_BLOCK_TYPE
-#undef RANDP_PRNG_DEFAULT_NUM_KEYS
-#undef RANDP_PRNG_DEFAULT_NUM_ROUNDS_PER_KEY

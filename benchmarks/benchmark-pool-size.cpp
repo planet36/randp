@@ -58,9 +58,17 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     [num_threads]<int... SIZE_BYTES>(std::integer_sequence<int, SIZE_BYTES...>)
     {
         (benchmark::RegisterBenchmark(
-             std::format("rand_bytes_4GiB:randp_bytes<{:_>3},MAX>", SIZE_BYTES),
+             std::format("rand_bytes_4GiB:randp_bytes<{:_>3},MAX,m128i>", SIZE_BYTES),
              BM_rand_bytes_4GiB,
-             randp_bytes<SIZE_BYTES, INT_MAX>)
+             randp_bytes<SIZE_BYTES, INT_MAX, __m128i>)
+             ->Threads(num_threads)
+             ->Unit(benchmark::kMillisecond),
+         ...);
+
+        (benchmark::RegisterBenchmark(
+             std::format("rand_bytes_4GiB:randp_bytes<{:_>3},MAX,m256i>", SIZE_BYTES),
+             BM_rand_bytes_4GiB,
+             randp_bytes<SIZE_BYTES, INT_MAX, __m256i>)
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);

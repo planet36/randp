@@ -19,6 +19,8 @@
 
 #include "../src/aes-128-utils.h"
 #include "../src/aes-256-utils.h"
+#include "../src/aes_ctr_128_prng-defaults.h"
+#include "../src/aes_ctr_256_prng-defaults.h"
 #include "../src/sha2_iv.h"
 #include "../src/wyprimes.h"
 
@@ -103,6 +105,42 @@ template <>
 get_inc<__m256i>()
 {
     return wyprimes_vec256();
+}
+
+template <typename T>
+[[nodiscard]] consteval int
+get_default_num_keys();
+
+template <>
+[[nodiscard]] consteval int
+get_default_num_keys<__m128i>()
+{
+    return DEFAULT_AES_CTR_128_PRNG_NUM_KEYS;
+}
+
+template <>
+[[nodiscard]] consteval int
+get_default_num_keys<__m256i>()
+{
+    return DEFAULT_AES_CTR_256_PRNG_NUM_KEYS;
+}
+
+template <typename T>
+[[nodiscard]] consteval int
+get_default_num_rounds_per_key();
+
+template <>
+[[nodiscard]] consteval int
+get_default_num_rounds_per_key<__m128i>()
+{
+    return DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY;
+}
+
+template <>
+[[nodiscard]] consteval int
+get_default_num_rounds_per_key<__m256i>()
+{
+    return DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY;
 }
 
 /// A PRNG that uses AES or VAES instructions
