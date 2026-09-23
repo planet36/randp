@@ -12,6 +12,11 @@
 
 #pragma once
 
+#if !(defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__) && defined(__VAES__) && \
+      defined(__AVX2__))
+#error "Architecture not supported"
+#endif
+
 #include "../src/aes-128-utils.h"
 #include "../src/aes-256-utils.h"
 #include "../src/sha2_iv.h"
@@ -35,8 +40,6 @@ add_epu64(__m256i a, __m256i b)
     return _mm256_add_epi64(a, b);
 }
 
-#if defined(__x86_64__) && defined(__SSE4_1__)
-
 /// Adjust \a key so that its 64-bit lanes differ
 /**
 * The 64-bit lanes of the key must differ.
@@ -58,12 +61,6 @@ rectify_key(__m128i key)
 
     return key;
 }
-
-#else
-#error "Architecture not supported"
-#endif
-
-#if defined(__x86_64__) && defined(__AVX2__)
 
 /// Adjust \a key so that the two 64-bit lanes of each 128-bit half differ
 /**
@@ -89,10 +86,6 @@ rectify_key(__m256i key)
 
     return key;
 }
-
-#else
-#error "Architecture not supported"
-#endif
 
 template <typename T>
 [[nodiscard]] inline auto

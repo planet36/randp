@@ -136,6 +136,4 @@ aes_dec_davies_meyer(const __m128i H, const __m128i* keys, const int Nk, const i
 
 #endif
 
-#else
-#error "Architecture not supported"
 #endif

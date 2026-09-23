@@ -11,6 +11,8 @@
 
 #pragma once
 
+#if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
+
 #include "aes-256-utils.h"
 #include "aes_ctr_256_prng-defaults.h"
 #include "sha2_iv.h"
@@ -71,7 +73,6 @@ aes_ctr_256_prng_reseed(aes_ctr_256_prng* this_)
     if (getentropy(this_, sizeof(*this_)) < 0)
         err(EXIT_FAILURE, "getentropy");
 
-#if defined(__x86_64__) && defined(__AVX2__)
     for (int i = 0; i < AES_CTR_256_PRNG_NUM_KEYS; ++i)
     {
         // The two 64-bit lanes of each 128-bit half of the key must differ.
@@ -91,9 +92,6 @@ aes_ctr_256_prng_reseed(aes_ctr_256_prng* this_)
         this_->keys[i] = _mm256_xor_si256(this_->keys[i],
                                           _mm256_and_si256(equal_mask, key_mask));
     }
-#else
-#error "Architecture not supported"
-#endif
 }
 
 /// Get the next PRNG output via AES encryption.
@@ -179,4 +177,6 @@ aes_ctr_256_prng_dec_davies_meyer_next(aes_ctr_256_prng* this_)
 
 #if defined(__cplusplus)
 }
+#endif
+
 #endif

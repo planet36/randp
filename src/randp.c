@@ -11,6 +11,7 @@
 */
 
 #include "aes_ctr_128_prng.h"
+#include "aes_ctr_256_prng.h"
 #include "allocate.h"
 #include "nearlydivisionless.h"
 #include "randp-defaults.h"
@@ -50,7 +51,22 @@ static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a
 
 static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
-#if defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
+#if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
+
+#define RANDP_BLOCK_TYPE __m256i
+#define RANDP_PRNG_TYPE aes_ctr_256_prng
+#define RANDP_PRNG_RESEED aes_ctr_256_prng_reseed
+
+#define RANDP_NEXT(PRNG)                                                  \
+    (RANDP_PRNG_USE_ENC                                                   \
+         ? (RANDP_PRNG_USE_DAVIES_MEYER                                   \
+                ? aes_ctr_256_prng_enc_davies_meyer_next(PRNG)            \
+                : aes_ctr_256_prng_enc_next(PRNG))                        \
+         : (RANDP_PRNG_USE_DAVIES_MEYER                                   \
+                ? aes_ctr_256_prng_dec_davies_meyer_next(PRNG)            \
+                : aes_ctr_256_prng_dec_next(PRNG)))
+
+#elif defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
 #define RANDP_BLOCK_TYPE __m128i
 #define RANDP_PRNG_TYPE aes_ctr_128_prng
