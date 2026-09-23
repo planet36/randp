@@ -96,10 +96,11 @@ struct randp
 
 typedef struct randp randp;
 
-static_assert(alignof(randp) == alignof(RANDP_BLOCK_TYPE), "randp must have alignment of RANDP_BLOCK_TYPE");
+static_assert(alignof(randp) == alignof(RANDP_BLOCK_TYPE),
+              "randp must have the alignment of its block type");
 
 static_assert(offsetof(randp, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
-              "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
+              "randp pool must start on a block boundary");
 
 static_assert(sizeof(randp) <= PAGE_SIZE, "randp must fit in one page");
 
