@@ -80,7 +80,7 @@ struct randp
 
 typedef struct randp randp;
 
-static_assert(alignof(randp) == sizeof(RANDP_BLOCK_TYPE), "randp must have alignment of RANDP_BLOCK_TYPE");
+static_assert(alignof(randp) == alignof(RANDP_BLOCK_TYPE), "randp must have alignment of RANDP_BLOCK_TYPE");
 
 static_assert(offsetof(randp, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
               "randp pool must start on sizeof(RANDP_BLOCK_TYPE)-byte boundary");
