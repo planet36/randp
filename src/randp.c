@@ -30,24 +30,14 @@ extern "C" {
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-#if !defined(RANDP_PRNG_USE_ENC)
 #define RANDP_PRNG_USE_ENC DEFAULT_RANDP_PRNG_USE_ENC
-#endif
-
-#if !defined(RANDP_PRNG_USE_DAVIES_MEYER)
 #define RANDP_PRNG_USE_DAVIES_MEYER DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER
-#endif
-
-#if !defined(RANDP_POOL_SIZE_BYTES)
 #define RANDP_POOL_SIZE_BYTES DEFAULT_RANDP_POOL_SIZE_BYTES
-#endif
 
 static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
 static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
 
-#if !defined(RANDP_RESEED_INTERVAL)
 #define RANDP_RESEED_INTERVAL DEFAULT_RANDP_RESEED_INTERVAL
-#endif
 
 static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 

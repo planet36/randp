@@ -28,13 +28,8 @@
 extern "C" {
 #endif
 
-#if !defined(AES_CTR_256_PRNG_NUM_KEYS)
 #define AES_CTR_256_PRNG_NUM_KEYS DEFAULT_AES_CTR_256_PRNG_NUM_KEYS
-#endif
-
-#if !defined(AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY)
 #define AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY
-#endif
 
 /// A PRNG that uses VAES instructions
 /**
