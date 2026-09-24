@@ -43,7 +43,7 @@ static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positiv
 
 #if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
-#define RANDP_BLOCK_TYPE __m256i
+typedef __m256i RANDP_BLOCK_TYPE;
 #define RANDP_PRNG_TYPE aes_ctr_256_prng
 #define RANDP_PRNG_RESEED aes_ctr_256_prng_reseed
 
@@ -58,7 +58,7 @@ static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positiv
 
 #elif defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
-#define RANDP_BLOCK_TYPE __m128i
+typedef __m128i RANDP_BLOCK_TYPE;
 #define RANDP_PRNG_TYPE aes_ctr_128_prng
 #define RANDP_PRNG_RESEED aes_ctr_128_prng_reseed
 
