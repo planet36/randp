@@ -28,13 +28,14 @@ from pathlib import Path
 INCLUDE_FILE_PATTERN = re.compile(r'\s*#\s*include\s*"([^"]+)"')
 
 
-def find_file(name: str, search_paths: list[Path]) -> Path:
+def find_file(name: str, search_paths: list[Path], includer: Path) -> Path:
     """
     Locate a file with the specified name within given search paths.
 
     Args:
         name (str): The filename to locate.
         search_paths (List[Path]): Directories to search for the file.
+        includer (Path): The file whose #include names it, for the error.
 
     Returns:
         Path: The Path object of the found file.
@@ -46,7 +47,8 @@ def find_file(name: str, search_paths: list[Path]) -> Path:
         candidate = (d / name).resolve()
         if candidate.is_file():
             return candidate
-    raise FileNotFoundError(f'{name} not found in {search_paths}')
+    dirs = ', '.join(str(d) for d in search_paths)
+    raise FileNotFoundError(f'{includer}: {name} not found in {dirs}')
 
 
 def include_order_for(root: Path, search_paths: list[Path]) -> list[Path]:
@@ -75,7 +77,8 @@ def include_order_for(root: Path, search_paths: list[Path]) -> list[Path]:
             for line in f:
                 m = INCLUDE_FILE_PATTERN.match(line)
                 if m:
-                    visit(find_file(m.group(1), [path.parent, *search_paths]))
+                    visit(find_file(m.group(1), [path.parent, *search_paths],
+                                    path))
         order.append(path)
 
     visit(root)
@@ -118,7 +121,10 @@ def main() -> None:
         search_paths = [root.parent, Path('.')]
 
     # 1) build the include-order
-    include_order = include_order_for(root, search_paths)
+    try:
+        include_order = include_order_for(root, search_paths)
+    except FileNotFoundError as e:
+        sys.exit(f'{script_name}: {e}')
 
     fold_marker_begin = '{{{'
     fold_marker_end = '}}}'
