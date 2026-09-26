@@ -6,8 +6,6 @@
 '''
 Amalgamate a C source file and its quoted includes into one header.
 
-If no search-paths are given, defaults to the root file's directory
-then the current working directory.
 e.g. python3 amalgamate.py libfoo.c .
 '''
 
@@ -116,9 +114,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         prog=script_name, description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('root', metavar='root-source-file', type=Path)
-    parser.add_argument('search_paths', metavar='search-paths', type=Path,
-                        nargs='*')
+    parser.add_argument(
+        'root', metavar='root-source-file', type=Path,
+        help='the source file whose includes are inlined')
+    parser.add_argument(
+        'search_paths', metavar='search-paths', type=Path, nargs='*',
+        help="directories to search for a quoted include after the including "
+             "file's own directory (default: the root file's directory, then "
+             "the current working directory)")
     args = parser.parse_args()
 
     root: Path = args.root.resolve()
