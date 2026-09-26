@@ -4,12 +4,14 @@
 # SPDX-License-Identifier: MPL-2.0
 
 '''
-Usage: amalgamate.py <root-source-file> [search-paths...]
+Amalgamate a C source file and its quoted includes into one header.
+
 If no search-paths are given, defaults to the root file's directory
 then the current working directory.
 e.g. python3 amalgamate.py libfoo.c .
 '''
 
+import argparse
 import io
 import re
 import sys
@@ -111,16 +113,16 @@ def main() -> None:
     if isinstance(sys.stdout, io.TextIOWrapper):
         sys.stdout.reconfigure(encoding='utf-8')
 
-    if len(sys.argv) < 2:
-        print(f'Usage: {script_name} <root-source-file> [search-paths...]',
-              file=sys.stderr)
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        prog=script_name, description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('root', metavar='root-source-file', type=Path)
+    parser.add_argument('search_paths', metavar='search-paths', type=Path,
+                        nargs='*')
+    args = parser.parse_args()
 
-    root = Path(sys.argv[1]).resolve()
-    if len(sys.argv) > 2:
-        search_paths = [Path(p) for p in sys.argv[2:]]
-    else:
-        search_paths = [root.parent, Path('.')]
+    root: Path = args.root.resolve()
+    search_paths: list[Path] = args.search_paths or [root.parent, Path('.')]
 
     # 1) build the include-order
     try:
