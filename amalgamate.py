@@ -53,6 +53,9 @@ def include_order_for(root: Path, search_paths: list[Path]) -> list[Path]:
     Return root and its included headers in topological (dependency-first)
     order, each file appearing exactly once.
 
+    Each include is looked up in the including file's directory before the
+    search paths, as the C preprocessor does for a quoted include.
+
     Args:
         root (Path): The source file to start traversal from.
         search_paths (List[Path]): Directories to search for included headers.
@@ -71,7 +74,7 @@ def include_order_for(root: Path, search_paths: list[Path]) -> list[Path]:
             for line in f:
                 m = INCLUDE_FILE_PATTERN.match(line)
                 if m:
-                    visit(find_file(m.group(1), search_paths))
+                    visit(find_file(m.group(1), [path.parent, *search_paths]))
         order.append(path)
 
     visit(root)
