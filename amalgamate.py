@@ -16,7 +16,9 @@ import sys
 from pathlib import Path
 
 # Note: include detection is line-oriented and comment/string unaware.
-#       It assumes #include directives never appear commented-out or quoted.
+#       It assumes #include directives never appear commented-out, quoted, or
+#       inside a preprocessor conditional.  A conditional one would be inlined
+#       unconditionally, leaving its #if block empty.
 # Note: using re.match anchors at the start of the string,
 #       so an explicit '^' anchor is not required.
 # Regex to match C include directives of the form #include "header.h".
