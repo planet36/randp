@@ -34,7 +34,7 @@ def find_file(name: str, search_paths: list[Path], includer: Path) -> Path:
 
     Args:
         name (str): The filename to locate.
-        search_paths (List[Path]): Directories to search for the file.
+        search_paths (list[Path]): Directories to search for the file.
         includer (Path): The file whose #include names it, for the error.
 
     Returns:
@@ -61,10 +61,10 @@ def include_order_for(root: Path, search_paths: list[Path]) -> list[Path]:
 
     Args:
         root (Path): The source file to start traversal from.
-        search_paths (List[Path]): Directories to search for included headers.
+        search_paths (list[Path]): Directories to search for included headers.
 
     Returns:
-        List[Path]: Files in the order they should be emitted.
+        list[Path]: Files in the order they should be emitted.
     """
     seen: set[Path] = set()
     order: list[Path] = []
@@ -110,7 +110,7 @@ def main() -> None:
         sys.stdout.reconfigure(encoding='utf-8')
 
     if len(sys.argv) < 2:
-        print(f'Usage: {script_name} <root.c> [search-path...]',
+        print(f'Usage: {script_name} <root-source-file> [search-paths...]',
               file=sys.stderr)
         sys.exit(1)
 
