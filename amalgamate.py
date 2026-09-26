@@ -10,6 +10,7 @@ then the current working directory.
 e.g. python3 amalgamate.py libfoo.c .
 '''
 
+import io
 import re
 import sys
 from pathlib import Path
@@ -99,6 +100,11 @@ def emit(path: Path) -> None:
 # pylint: disable=missing-function-docstring
 def main() -> None:
     script_name = Path(__file__).name
+
+    # The sources are read as UTF-8, so write them back out the same way
+    # rather than in the locale's encoding.
+    if isinstance(sys.stdout, io.TextIOWrapper):
+        sys.stdout.reconfigure(encoding='utf-8')
 
     if len(sys.argv) < 2:
         print(f'Usage: {script_name} <root.c> [search-path...]',
