@@ -75,10 +75,7 @@ aes_dec_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 * \return the compressed result
 */
 [[nodiscard]] static inline __m128i
-aes_enc_davies_meyer_128(const __m128i H,
-                        const __m128i* keys,
-                        const int Nk,
-                        const int Nr)
+aes_enc_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
 {
     return _mm_xor_si128(aes_enc_128(H, keys, Nk, Nr), H);
 }
@@ -95,10 +92,7 @@ aes_enc_davies_meyer_128(const __m128i H,
 * \return the compressed result
 */
 [[nodiscard]] static inline __m128i
-aes_dec_davies_meyer_128(const __m128i H,
-                        const __m128i* keys,
-                        const int Nk,
-                        const int Nr)
+aes_dec_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
 {
     return _mm_xor_si128(aes_dec_128(H, keys, Nk, Nr), H);
 }

@@ -29,7 +29,8 @@ extern "C" {
 #endif
 
 constexpr auto AES_CTR_256_PRNG_NUM_KEYS = DEFAULT_AES_CTR_256_PRNG_NUM_KEYS;
-constexpr auto AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY = DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY;
+constexpr auto AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY =
+    DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY;
 
 /// A PRNG that uses VAES instructions
 /**
@@ -45,7 +46,7 @@ struct aes_ctr_256_prng
                   "must do at least 3 rounds of AES enc/dec");
 
     __m256i keys[AES_CTR_256_PRNG_NUM_KEYS]; ///< The round keys
-    __m256i ctr; ///< The state/counter
+    __m256i ctr;                             ///< The state/counter
 };
 
 typedef struct aes_ctr_256_prng aes_ctr_256_prng;
@@ -77,8 +78,9 @@ aes_ctr_256_prng_reseed(aes_ctr_256_prng* this_)
         // half on its own.
 
         // most significant elem first
-        const __m256i key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
-                (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
+        const __m256i key_mask =
+            _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
+                              (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
 
         const __m256i swapped = _mm256_shuffle_epi32(this_->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
         // all ones if the lanes are equal, all zeros otherwise

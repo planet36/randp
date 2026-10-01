@@ -8,8 +8,7 @@
 
 #include "../randp-single.h"
 
-[[gnu::optimize("O0")]]
-int
+[[gnu::optimize("O0")]] int
 main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
     {

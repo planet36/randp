@@ -66,7 +66,8 @@ template <
 struct randp
 {
     static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
-    static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
+    static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0,
+                  "randp pool byte size must be a multiple of 32");
 
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
@@ -98,17 +99,12 @@ struct randp
     /**
     * \param p the randp pool, as passed to \c tss_set
     */
-    static void
-    destroy(void* p) noexcept
-    {
-        deallocate(p, sizeof(randp));
-    }
+    static void destroy(void* p) noexcept { deallocate(p, sizeof(randp)); }
 
     static inline tss_t tss_key;
     static inline once_flag tss_once = ONCE_FLAG_INIT;
 
-    static void
-    tss_key_init() noexcept
+    static void tss_key_init() noexcept
     {
         if (tss_create(&tss_key, destroy) != thrd_success)
             errx(EXIT_FAILURE, "tss_create failed");

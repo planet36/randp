@@ -77,10 +77,7 @@ aes_dec_256(__m256i a, const __m256i* keys, const int Nk, const int Nr)
 * \return the compressed result
 */
 [[nodiscard]] static inline __m256i
-aes_enc_davies_meyer_256(const __m256i H,
-                        const __m256i* keys,
-                        const int Nk,
-                        const int Nr)
+aes_enc_davies_meyer_256(const __m256i H, const __m256i* keys, const int Nk, const int Nr)
 {
     return _mm256_xor_si256(aes_enc_256(H, keys, Nk, Nr), H);
 }
@@ -97,10 +94,7 @@ aes_enc_davies_meyer_256(const __m256i H,
 * \return the compressed result
 */
 [[nodiscard]] static inline __m256i
-aes_dec_davies_meyer_256(const __m256i H,
-                        const __m256i* keys,
-                        const int Nk,
-                        const int Nr)
+aes_dec_davies_meyer_256(const __m256i H, const __m256i* keys, const int Nk, const int Nr)
 {
     return _mm256_xor_si256(aes_dec_256(H, keys, Nk, Nr), H);
 }

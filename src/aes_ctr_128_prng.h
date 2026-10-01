@@ -27,7 +27,8 @@ extern "C" {
 #endif
 
 constexpr auto AES_CTR_128_PRNG_NUM_KEYS = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS;
-constexpr auto AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY = DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY;
+constexpr auto AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY =
+    DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY;
 
 /// A PRNG that uses AES instructions
 struct aes_ctr_128_prng
@@ -38,7 +39,7 @@ struct aes_ctr_128_prng
                   "must do at least 3 rounds of AES enc/dec");
 
     __m128i keys[AES_CTR_128_PRNG_NUM_KEYS]; ///< The round keys
-    __m128i ctr; ///< The state/counter
+    __m128i ctr;                             ///< The state/counter
 };
 
 typedef struct aes_ctr_128_prng aes_ctr_128_prng;

@@ -91,8 +91,7 @@ rectify_key(__m256i key)
 }
 
 template <typename T>
-[[nodiscard]] inline auto
-get_inc();
+[[nodiscard]] inline auto get_inc();
 
 template <>
 [[nodiscard]] inline auto
@@ -109,8 +108,7 @@ get_inc<__m256i>()
 }
 
 template <typename T>
-[[nodiscard]] consteval int
-get_default_num_keys();
+[[nodiscard]] consteval int get_default_num_keys();
 
 template <>
 [[nodiscard]] consteval int
@@ -127,8 +125,7 @@ get_default_num_keys<__m256i>()
 }
 
 template <typename T>
-[[nodiscard]] consteval int
-get_default_num_rounds_per_key();
+[[nodiscard]] consteval int get_default_num_rounds_per_key();
 
 template <>
 [[nodiscard]] consteval int
@@ -163,7 +160,7 @@ struct aes_ctr_prng
 
 private:
     block_t keys[Nk]; ///< The round keys
-    block_t ctr; ///< The state/counter
+    block_t ctr;      ///< The state/counter
 
 public:
     /// Construct a PRNG seeded via \c getentropy.

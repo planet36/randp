@@ -35,7 +35,8 @@ constexpr auto RANDP_PRNG_USE_DAVIES_MEYER = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER
 constexpr auto RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES;
 
 static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
-static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0, "randp pool byte size must be a multiple of 32");
+static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0,
+              "randp pool byte size must be a multiple of 32");
 
 constexpr auto RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL;
 
