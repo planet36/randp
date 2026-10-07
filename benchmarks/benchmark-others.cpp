@@ -198,7 +198,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 
         for (size_t i = 0; i < num_iterations; ++i)
         {
-            fn(buf, sizeof(buf));
+            fn(&buf[0], sizeof(buf));
         }
     }
 }
