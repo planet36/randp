@@ -36,7 +36,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 {
     // Perform setup here
 
-    std::array<uint8_t, 1 << 8> buf;
+    std::array<uint8_t, 1 << 8> buf{};
     static_assert(buf.size() <= 256,
                   "getentropy will fail if more than 256 bytes are requested");
     static_assert(std::has_single_bit(buf.size()), "buffer size must be a power of 2");
