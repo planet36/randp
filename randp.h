@@ -39,7 +39,7 @@ extern "C" {
 * If \a upper_bound is ≤ 1, \c 0 is returned.
 */
 
-void randp_bytes(void* buf, size_t n);
+[[gnu::nonnull]] void randp_bytes(void* buf, size_t n);
 
 uint8_t randp_u8();
 
