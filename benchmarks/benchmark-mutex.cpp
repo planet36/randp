@@ -81,8 +81,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     {
         const size_t buf_size = i;
         prefix = "rand_bytes:" + std::to_string(i) + "B:";
-        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
-        benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes, randp_bytes_MUTEX, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes<>, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes, randp_bytes_MUTEX<>, buf_size)->Threads(num_threads);
     }
 
     //for (int i = 1; i <= 8; ++i)
@@ -90,13 +90,13 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     {
         const size_t buf_size = 4096 * i;
         prefix = "rand_bytes:" + std::to_string(i) + "pg:";
-        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes, buf_size)->Threads(num_threads);
-        benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes, randp_bytes_MUTEX, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes, randp_bytes<>, buf_size)->Threads(num_threads);
+        benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes, randp_bytes_MUTEX<>, buf_size)->Threads(num_threads);
     }
 
     prefix = "rand_bytes_4GiB:";
-    benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes)->Threads(num_threads)->Unit(benchmark::kMillisecond);
-    benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes_4GiB, randp_bytes_MUTEX)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+    benchmark::RegisterBenchmark(prefix + "randp_bytes", BM_rand_bytes_4GiB, randp_bytes<>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
+    benchmark::RegisterBenchmark(prefix + "randp_bytes_MUTEX", BM_rand_bytes_4GiB, randp_bytes_MUTEX<>)->Threads(num_threads)->Unit(benchmark::kMillisecond);
 
     benchmark::RunSpecifiedBenchmarks();
     benchmark::Shutdown();
