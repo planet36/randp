@@ -30,8 +30,11 @@ $(BINS): ../$(SONAME_0)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
 # This executable does not link with librandp.
-test-single: test-single.c
+test-single: test-single.c ../$(SINGLE_HEADER)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
+
+../$(SINGLE_HEADER):
+	$(MAKE) -C .. $(SINGLE_HEADER)
 
 fork: test-fork
 	./$<
@@ -79,7 +82,7 @@ $(OUTPUT_DIR):
 clean:
 	@$(RM) --verbose -- $(DEPS) $(BINS)
 
-lint:
+lint: ../$(SINGLE_HEADER)
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets

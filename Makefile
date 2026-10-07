@@ -16,7 +16,7 @@ CFLAGS += -fPIC -ffreestanding -g
 
 all: $(ARTIFACTS) $(SUBDIRS)
 
-$(SUBDIRS): $(LIB_ARTIFACTS)
+$(SUBDIRS): $(LIB_ARTIFACTS) $(SINGLE_HEADER)
 	$(MAKE) -C $@
 
 $(ANAME): $(OBJS)
