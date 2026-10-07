@@ -132,7 +132,7 @@ static tss_t randp_tss_key;
 static once_flag randp_tss_once = ONCE_FLAG_INIT;
 
 static void
-randp_tss_key_init(void)
+randp_tss_key_init()
 {
     if (tss_create(&randp_tss_key, randp_destroy) != thrd_success)
         errx(EXIT_FAILURE, "tss_create failed");
