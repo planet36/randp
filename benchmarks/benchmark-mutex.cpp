@@ -3,6 +3,7 @@
 
 #include "randp.hpp"
 
+#include <array>
 #include <benchmark/benchmark.h> // https://github.com/google/benchmark
 #include <bit>
 
@@ -35,12 +36,12 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 {
     // Perform setup here
 
-    uint8_t buf[1 << 8];
-    static_assert(sizeof(buf) <= 256,
+    std::array<uint8_t, 1 << 8> buf;
+    static_assert(buf.size() <= 256,
                   "getentropy will fail if more than 256 bytes are requested");
-    static_assert(std::has_single_bit(sizeof(buf)), "buffer size must be a power of 2");
+    static_assert(std::has_single_bit(buf.size()), "buffer size must be a power of 2");
 
-    constexpr size_t num_iterations = (1UL << 32) / sizeof(buf); // 4 GiB
+    constexpr size_t num_iterations = (1UL << 32) / buf.size(); // 4 GiB
 
     for (auto _ : BM_state) // NOLINT(clang-analyzer-deadcode.DeadStores)
     {
@@ -48,7 +49,7 @@ BM_rand_bytes_4GiB(benchmark::State& BM_state, func_t& fn)
 
         for (size_t i = 0; i < num_iterations; ++i)
         {
-            fn(&buf[0], sizeof(buf));
+            fn(buf.data(), buf.size());
         }
     }
 }
