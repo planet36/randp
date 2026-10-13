@@ -25,20 +25,23 @@
 *
 * The program exits if \c NUM_THREADS is not an integer in the interval from 0 to the number
 * of hardware threads.
+*
+* When the number of hardware threads cannot be determined, the count is always 1, and
+* \c NUM_THREADS may only be 0 or 1.
+* \return the thread count, from 1 to the number of hardware threads
 */
 [[nodiscard]] inline int
-get_num_threads()
+get_num_threads() noexcept
 {
-    constexpr int min_threads = 1;
+    constexpr int default_threads = 1;
     const auto hw_threads = static_cast<int>(std::thread::hardware_concurrency());
-    const auto max_threads = std::max(min_threads, hw_threads);
+    const auto max_threads = std::max(default_threads, hw_threads);
 
-    int num_threads = min_threads;
+    int num_threads = default_threads;
 
     try
     {
-        // parse_env_int takes these args: name, min, max, default
-        num_threads = parse_env_int("NUM_THREADS", 0, max_threads, min_threads);
+        num_threads = parse_env_int("NUM_THREADS", 0, max_threads, default_threads);
     }
     catch (const std::exception& ex)
     {
