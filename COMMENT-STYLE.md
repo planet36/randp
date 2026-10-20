@@ -90,7 +90,7 @@ in one paragraph even when it runs long, and if it runs too long, cut it rather
 than split it.  A split changes paragraph breaks, not wording.
 
 **7. Put two spaces after a sentence-ending period.**  That holds in code
-comments, doc blocks, commit messages, and documentation files alike, markdown
+comments, doc blocks, commit messages, and documentation files alike, Markdown
 included.  An abbreviation such as "e.g." takes one space, since no sentence
 ends there.
 
@@ -99,7 +99,7 @@ modify comes back with two spaces.
 
 **7a. Keep a line to 96 columns.**  That is a ceiling for code and prose alike.
 Comment prose is usually wrapped narrower, and a paragraph you edit keeps the
-width it already had rather than being reflowed to the ceiling.  A markdown
+width it already had rather than being reflowed to the ceiling.  A Markdown
 file that puts each paragraph on one long line stays that way.
 
 Four more things are exempt, because wrapping them costs more than it returns.
