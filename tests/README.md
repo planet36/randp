@@ -11,7 +11,7 @@ It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or 
 * [GCC 14](https://gcc.gnu.org/gcc-14/changes.html) or newer
   * The `-std=c23` option was added in GCC 14.  randp uses [C23](https://en.cppreference.com/w/c/23) features such as `constexpr`, `nullptr`, `typeof`, and [`thread_local`](https://en.cppreference.com/w/c/keyword/thread_local).
   * clang and clang++ are not supported.
-* [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36)
+* [Glibc 2.36](https://www.phoronix.com/news/GNU-C-Library-Glibc-2.36) or newer
   * [arc4random](https://man7.org/linux/man-pages/man3/arc4random.3.html) functions were added in glibc 2.36, but the interface was <q>added as a basic loop wrapper around `getrandom()`</q>. [^arc4random_1] [^arc4random_2]
 * `RNG_test` from [PractRand](https://github.com/planet36/PractRand)
 * [Valgrind](https://valgrind.org/)
