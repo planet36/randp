@@ -2,7 +2,9 @@
 
 randp is fork-safe, just like arc4random.
 
-randp passes PractRand tests through 512 GiB with these exhaustive options: `-tf 2`, `-te 0`.  It also scores a similar number of FIPS 140-2 successes and failures as arc4random and openssl-rand.
+randp passes PractRand tests through 512 GiB with the options `-tf 2 -te 0`.
+
+In 1,000,000 blocks of the FIPS 140-2 tests in `rngtest`, randp has 821 failures, arc4random has 814, and openssl-rand has 782.  mrand48 scores about the same with 774, so `rngtest` only rules out gross defects.
 
 It has not been tested with [TestU01](https://en.wikipedia.org/wiki/TestU01) or [Diehard](https://en.wikipedia.org/wiki/Diehard_tests).
 
@@ -38,7 +40,7 @@ The `fork`, `generate`, `run-rngtest`, and `run-PractRand` targets also run mran
   * It takes about 5 minutes.
 * `make run-PractRand`
   * Test randomness using `RNG_test` (from PractRand).
-  * It takes about 70 minutes!
+  * It takes about 65 minutes!
   * To make this test more thorough (yet longer), change these options of `RNG_test`:
     * Change `-te` from `0` to `1`.
     * Increase `-tlmax`.
