@@ -256,6 +256,9 @@ and a mark added inside the quotes reads as part of it.
 **15. Use the serial comma.**  Put a comma before the final conjunction in a
 list of three or more.
 
+**15a. Follow "e.g." and "i.e." with a comma.**  Each one stands in for "for
+example" or "that is", which would take a comma in the same place.
+
 **16. Never write "load-bearing".**  Name the actual dependency instead.
 
 **17. Write numbers in one format.**  A number of four digits stands plain, and
