@@ -4,7 +4,7 @@
 '''
 Amalgamate a C source file and its quoted includes into one header.
 
-e.g. python3 amalgamate.py libfoo.c .
+e.g., python3 amalgamate.py libfoo.c .
 '''
 
 import argparse
