@@ -61,7 +61,7 @@ profile-qgui: profile
 	qcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
 
 run-PractRand: test-dump | $(OUTPUT_DIR)
-	@echo "WARNING: This target takes about 70 minutes on my fast (in AD 2024) computer"
+	@echo "WARNING: This target takes about 65 minutes on my fast (in AD 2024) computer"
 	./$<             | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.$(DATETIME).txt
 	./$< arc4random  | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
 	./$< mrand48     | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
