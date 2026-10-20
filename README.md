@@ -116,7 +116,7 @@ The version comes from the latest git tag, so a build outside a tagged git check
 
 Link with `-lrandp`, or get the flags from `pkg-config --cflags --libs randp`.
 
-## Header-Only
+## Header-only
 
 Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/wiki/Header-only) file of randp.  It defines every function as `static`, so each translation unit that includes it gets its own copy of the code and its own per-thread pool, seeded separately.
 
