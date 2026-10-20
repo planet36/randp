@@ -118,7 +118,7 @@ Link with `-lrandp`, or get the flags from `pkg-config --cflags --libs randp`.
 
 ## Header-Only
 
-Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/wiki/Header-only) file of randp.
+Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/wiki/Header-only) file of randp.  It defines every function as `static`, so each translation unit that includes it gets its own copy of the code and its own per-thread pool, seeded separately.
 
 ## [Benchmarks](benchmarks/README.md)
 
@@ -128,4 +128,4 @@ Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/w
 
 ### Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
 
-No claims are made that randp is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e. computationally infeasible to predict).  It is built on AES, and it is seeded and periodically reseeded by `getentropy`.  It lacks three things a CSPRNG claim needs: a formal security proof, independent review by third parties, and compliance with a standard such as [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final).
+No claims are made that randp is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e., computationally infeasible to predict).  It is built on AES, and it is seeded and periodically reseeded by `getentropy`.  It lacks three things a CSPRNG claim needs: a formal security proof, independent review by third parties, and compliance with a standard such as [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final).
