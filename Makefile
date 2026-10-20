@@ -68,11 +68,11 @@ uninstall:
 
 clean:
 	@$(RM) --verbose -- $(DEPS) $(OBJS) $(ARTIFACTS)
-	for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
+	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CFLAGS)
-	-for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
+	-@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 test: $(LIB_ARTIFACTS)
 	$(MAKE) -C tests
