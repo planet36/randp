@@ -91,7 +91,7 @@ than split it.  A split changes paragraph breaks, not wording.
 
 **7. Put two spaces after a sentence-ending period.**  That holds in code
 comments, doc blocks, commit messages, and documentation files alike, Markdown
-included.  An abbreviation such as "e.g." takes one space, since no sentence
+included.  An abbreviation such as "vs." takes one space, since no sentence
 ends there.
 
 Do not bulk-convert a file you are not otherwise editing.  Any line you do
