@@ -23,7 +23,7 @@ Usage: bash $SCRIPT_NAME BENCH_RESULTS_FILE
 EOT
 }
 
-for PROGRAM in grep sed awk sort column
+for PROGRAM in grep sed awk sort column git
 do
     if ! program_exists "$PROGRAM"
     then
@@ -55,7 +55,7 @@ grep '^model name' /proc/cpuinfo | sort -u | awk -F': ' '{print $2}'
 ldd --version | head -n 1
 gcc --version | head -n 1
 find /usr/lib -maxdepth 1 -type f -name 'libbenchmark.so*' -printf '%P\n'
-find .. -maxdepth 1 -type f -name 'librandp.so*' -printf '%P\n'
+printf 'randp %s\n' "$(git describe --tags --dirty)"
 echo
 # }}}
 
