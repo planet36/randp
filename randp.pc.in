@@ -4,7 +4,7 @@ libdir=@LIBDIR@
 includedir=@INCDIR@
 
 Name: randp
-Description: Fast, fork-safe, cryptographically secure PRNG library using AES-CTR (arc4random-compatible)
+Description: Fast, fork-safe PRNG library using AES-CTR (arc4random-compatible)
 URL: https://github.com/planet36/randp
 Version: @VERSION@
 Libs: -L${libdir} -lrandp
