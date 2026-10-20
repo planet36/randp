@@ -266,7 +266,8 @@ one of five or more digits takes a comma before each group of three, as in 6200
 and 14,400.  A percentage takes no space before its sign.  A number that is
 code, such as a command-line argument or a literal, stays as the code spells it.
 
-**18. Write a heading in sentence case.**  Capitalize its first word, proper
-nouns, and acronyms, and lowercase the rest, as in "Benchmark results".  A word
-that is code stays as the code spells it.  A heading that quotes a title, such
-as a section of a standard, keeps the title's own case.
+**18. Write a heading in sentence case.**  Capitalize its first word and
+lowercase the rest, as in "Benchmark results".  A name, an acronym, or a word
+that is code keeps its own spelling wherever it falls, so "glibc" stays
+lowercase even as the first word.  A heading that quotes a title, such as a
+section of a standard, keeps the title's own case.
