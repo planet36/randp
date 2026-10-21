@@ -8,7 +8,7 @@
 
 #include "../randp.h"
 
-#include <assert.h>
+#include <err.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -48,7 +48,8 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         if (strcmp(arg, "mrand48") == 0)
         {
             unsigned short seed16v[3];
-            assert(getentropy(seed16v, sizeof(seed16v)) == 0);
+            if (getentropy(seed16v, sizeof(seed16v)) != 0)
+                err(EXIT_FAILURE, "getentropy");
             (void)seed48(seed16v);
             func_ptr = mrand48_wrapper;
             break;
