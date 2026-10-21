@@ -62,10 +62,10 @@ profile-qgui: profile
 
 run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: This target takes about 65 minutes on my fast (in AD 2024) computer"
-	./$<             | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.$(DATETIME).txt
-	./$< arc4random  | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
-	./$< mrand48     | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
-	openssl rand max | RNG_test stdin -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
+	./$<             | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.$(DATETIME).txt
+	./$< arc4random  | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
+	./$< mrand48     | RNG_test stdin32 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
+	openssl rand max | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
 
 run-rngtest: test-dump | $(OUTPUT_DIR)
 	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.randp.$(DATETIME).txt
