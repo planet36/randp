@@ -2,7 +2,7 @@
 
 randp is fork-safe, just like arc4random.
 
-randp passes PractRand tests through 512 GiB with the options `-tf 2 -te 0`.
+randp passes PractRand tests through 512 GiB with the options `-tf 2 -te 0`, in both the default build and a VAES build.
 
 In 1,000,000 blocks of the FIPS 140-2 tests in `rngtest`, randp has 821 failures, arc4random has 814, and openssl-rand has 782.  mrand48 scores about the same with 774, so `rngtest` only rules out gross defects.
 
