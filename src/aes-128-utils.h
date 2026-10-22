@@ -11,11 +11,27 @@
 
 #if defined(__x86_64__) && defined(__AES__)
 
+#include "wyprimes.h"
+
 #include <immintrin.h>
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
+
+[[nodiscard]] static inline __m128i
+wyprimes_vec128_01()
+{
+    // most significant elem first
+    return _mm_set_epi64x((int64_t)WYPRIME1, (int64_t)WYPRIME0);
+}
+
+[[nodiscard]] static inline __m128i
+wyprimes_vec128_23()
+{
+    // most significant elem first
+    return _mm_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2);
+}
 
 /// Do \c _mm_aesenc_si128 on data \a a with \a Nk keys \a keys \a Nr times for each key
 /**

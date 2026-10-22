@@ -16,7 +16,6 @@
 #include "aes-256-utils.h"
 #include "aes_ctr_256_prng-defaults.h"
 #include "sha2_iv.h"
-#include "wyprimes.h"
 
 #include <err.h>
 #include <immintrin.h>

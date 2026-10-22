@@ -23,7 +23,6 @@
 #include "../src/aes_ctr_128_prng-defaults.h"
 #include "../src/aes_ctr_256_prng-defaults.h"
 #include "../src/sha2_iv.h"
-#include "../src/wyprimes.h"
 
 #include <cstdint>
 #include <err.h>

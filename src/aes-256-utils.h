@@ -13,11 +13,21 @@
 
 #if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
+#include "wyprimes.h"
+
 #include <immintrin.h>
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
+
+[[nodiscard]] static inline __m256i
+wyprimes_vec256()
+{
+    // most significant elem first
+    return _mm256_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2,
+                             (int64_t)WYPRIME1, (int64_t)WYPRIME0);
+}
 
 /// Do \c _mm256_aesenc_epi128 on data \a a with \a Nk keys \a keys \a Nr times for each key
 /**
