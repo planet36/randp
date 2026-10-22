@@ -13,7 +13,6 @@
 
 #include "aes-128-utils.h"
 #include "aes_ctr_128_prng-defaults.h"
-#include "sha2_iv.h"
 
 #include <err.h>
 #include <immintrin.h>
@@ -62,18 +61,7 @@ aes_ctr_128_prng_reseed(aes_ctr_128_prng* this_)
 
     for (int i = 0; i < AES_CTR_128_PRNG_NUM_KEYS; ++i)
     {
-        // The 64-bit lanes of the key must differ.
-        // With a key of (K, K), if the counter
-        // (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
-
-        // most significant elem first
-        const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
-
-        const __m128i swapped = _mm_shuffle_epi32(this_->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
-        // all ones if the lanes are equal, all zeros otherwise
-        const __m128i equal_mask = _mm_cmpeq_epi64(this_->keys[i], swapped);
-
-        this_->keys[i] = _mm_xor_si128(this_->keys[i], _mm_and_si128(equal_mask, key_mask));
+        this_->keys[i] = rectify_key_128(this_->keys[i]);
     }
 }
 

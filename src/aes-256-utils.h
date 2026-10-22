@@ -13,6 +13,7 @@
 
 #if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
+#include "sha2_iv.h"
 #include "wyprimes.h"
 
 #include <immintrin.h>
@@ -27,6 +28,33 @@ wyprimes_vec256()
     // most significant elem first
     return _mm256_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2,
                              (int64_t)WYPRIME1, (int64_t)WYPRIME0);
+}
+
+/// Adjust \a key so that the two 64-bit lanes of each 128-bit half differ
+/**
+* The two 64-bit lanes of each 128-bit half of the key must differ.
+* With a key half of (K, K), if the counter half (A, B) gives the output (X, Y),
+* then the counter half (B, A) gives the output (Y, X).
+* The shuffle and compare below work within each 128-bit half, so they check each
+* half on its own.
+* \param key the key
+* \return the adjusted key
+*/
+[[nodiscard]] static inline __m256i
+rectify_key_256(__m256i key)
+{
+    // most significant elem first
+    const __m256i key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
+                                               (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
+
+    const __m256i swapped = _mm256_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
+
+    // all ones if the lanes are equal, all zeros otherwise
+    const __m256i equal_mask = _mm256_cmpeq_epi64(key, swapped);
+
+    key = _mm256_xor_si256(key, _mm256_and_si256(equal_mask, key_mask));
+
+    return key;
 }
 
 /// Do \c _mm256_aesenc_epi128 on data \a a with \a Nk keys \a keys \a Nr times for each key

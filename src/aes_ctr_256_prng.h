@@ -15,7 +15,6 @@
 
 #include "aes-256-utils.h"
 #include "aes_ctr_256_prng-defaults.h"
-#include "sha2_iv.h"
 
 #include <err.h>
 #include <immintrin.h>
@@ -70,23 +69,7 @@ aes_ctr_256_prng_reseed(aes_ctr_256_prng* this_)
 
     for (int i = 0; i < AES_CTR_256_PRNG_NUM_KEYS; ++i)
     {
-        // The two 64-bit lanes of each 128-bit half of the key must differ.
-        // With a key half of (K, K), if the counter half (A, B) gives the output (X, Y),
-        // then the counter half (B, A) gives the output (Y, X).
-        // The shuffle and compare below work within each 128-bit half, so they check each
-        // half on its own.
-
-        // most significant elem first
-        const __m256i key_mask =
-            _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
-                              (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
-
-        const __m256i swapped = _mm256_shuffle_epi32(this_->keys[i], _MM_SHUFFLE(1, 0, 3, 2));
-        // all ones if the lanes are equal, all zeros otherwise
-        const __m256i equal_mask = _mm256_cmpeq_epi64(this_->keys[i], swapped);
-
-        this_->keys[i] = _mm256_xor_si256(this_->keys[i],
-                                          _mm256_and_si256(equal_mask, key_mask));
+        this_->keys[i] = rectify_key_256(this_->keys[i]);
     }
 }
 

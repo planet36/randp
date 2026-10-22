@@ -9,8 +9,9 @@
 
 #pragma once
 
-#if defined(__x86_64__) && defined(__AES__)
+#if defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
+#include "sha2_iv.h"
 #include "wyprimes.h"
 
 #include <immintrin.h>
@@ -31,6 +32,30 @@ wyprimes_vec128_23()
 {
     // most significant elem first
     return _mm_set_epi64x((int64_t)WYPRIME3, (int64_t)WYPRIME2);
+}
+
+/// Adjust \a key so that its 64-bit lanes differ
+/**
+* The 64-bit lanes of the key must differ.
+* With a key of (K, K), if the counter
+* (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
+* \param key the key
+* \return the adjusted key
+*/
+[[nodiscard]] static inline __m128i
+rectify_key_128(__m128i key)
+{
+    // most significant elem first
+    const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
+
+    const __m128i swapped = _mm_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
+
+    // all ones if the lanes are equal, all zeros otherwise
+    const __m128i equal_mask = _mm_cmpeq_epi64(key, swapped);
+
+    key = _mm_xor_si128(key, _mm_and_si128(equal_mask, key_mask));
+
+    return key;
 }
 
 /// Do \c _mm_aesenc_si128 on data \a a with \a Nk keys \a keys \a Nr times for each key

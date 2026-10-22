@@ -22,7 +22,6 @@
 #include "../src/aes-256-utils.h"
 #include "../src/aes_ctr_128_prng-defaults.h"
 #include "../src/aes_ctr_256_prng-defaults.h"
-#include "../src/sha2_iv.h"
 
 #include <cstdint>
 #include <err.h>
@@ -42,51 +41,16 @@ add_epu64(__m256i a, __m256i b)
     return _mm256_add_epi64(a, b);
 }
 
-/// Adjust \a key so that its 64-bit lanes differ
-/**
-* The 64-bit lanes of the key must differ.
-* With a key of (K, K), if the counter
-* (A, B) gives the output (X, Y), then the counter (B, A) gives the output (Y, X).
-*/
 [[nodiscard]] static inline auto
 rectify_key(__m128i key)
 {
-    // most significant elem first
-    const auto key_mask = _mm_set_epi64x((int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
-
-    const auto swapped = _mm_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
-
-    // all ones if the lanes are equal, all zeros otherwise
-    const auto equal_mask = _mm_cmpeq_epi64(key, swapped);
-
-    key = _mm_xor_si128(key, _mm_and_si128(equal_mask, key_mask));
-
-    return key;
+    return rectify_key_128(key);
 }
 
-/// Adjust \a key so that the two 64-bit lanes of each 128-bit half differ
-/**
-* The two 64-bit lanes of each 128-bit half of the key must differ.
-* With a key half of (K, K), if the counter half (A, B) gives the output (X, Y),
-* then the counter half (B, A) gives the output (Y, X).
-* The shuffle and compare below work within each 128-bit half, so they check each
-* half on its own.
-*/
 [[nodiscard]] static inline auto
 rectify_key(__m256i key)
 {
-    // most significant elem first
-    const auto key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0_3, (int64_t)SHA_512_H0_2,
-                                            (int64_t)SHA_512_H0_1, (int64_t)SHA_512_H0_0);
-
-    const auto swapped = _mm256_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
-
-    // all ones if the lanes are equal, all zeros otherwise
-    const auto equal_mask = _mm256_cmpeq_epi64(key, swapped);
-
-    key = _mm256_xor_si256(key, _mm256_and_si256(equal_mask, key_mask));
-
-    return key;
+    return rectify_key_256(key);
 }
 
 template <typename T>
