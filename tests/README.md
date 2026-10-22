@@ -35,9 +35,9 @@ The `fork`, `generate`, `run-rngtest`, and `run-PractRand` targets also run mran
   * Verify the header-only version of randp compiles.
 * `make profile-kgui` or `make profile-qgui`
   * Use a profiler on randp, and then run a visualizer.
-* `make run-rngtest`
+* `make -j 4 run-rngtest`
   * Test randomness using `rngtest`.
-  * It takes about 5 minutes.
+  * It takes about 1.5 minutes.
 * `make run-PractRand`
   * Test randomness using `RNG_test` (from PractRand).
   * It takes about 54 minutes!

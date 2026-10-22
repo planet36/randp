@@ -67,11 +67,20 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 	./$< mrand48     | RNG_test stdin32 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
 	openssl rand max | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
 
-run-rngtest: test-dump | $(OUTPUT_DIR)
-	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.randp.$(DATETIME).txt
-	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.arc4random.$(DATETIME).txt
-	./$< mrand48     | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.mrand48.$(DATETIME).txt
-	openssl rand max | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.openssl-rand.$(DATETIME).txt
+# time make -j 4 run-rngtest # Takes 1.5 mins
+run-rngtest: run-rngtest-randp run-rngtest-arc4random run-rngtest-mrand48 run-rngtest-openssl-rand
+
+run-rngtest-randp: test-dump | $(OUTPUT_DIR)
+	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+
+run-rngtest-arc4random: test-dump | $(OUTPUT_DIR)
+	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+
+run-rngtest-mrand48: test-dump | $(OUTPUT_DIR)
+	./$< mrand48     | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+
+run-rngtest-openssl-rand: | $(OUTPUT_DIR)
+	openssl rand max | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
 
 single: test-single
 	./$<
