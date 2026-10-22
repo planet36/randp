@@ -40,7 +40,7 @@ The `fork`, `generate`, `run-rngtest`, and `run-PractRand` targets also run mran
   * It takes about 5 minutes.
 * `make run-PractRand`
   * Test randomness using `RNG_test` (from PractRand).
-  * It takes about 65 minutes!
+  * It takes about 54 minutes!
   * To make this test more thorough (yet longer), change these options of `RNG_test`:
     * Change `-te` from `0` to `1`.
     * Increase `-tlmax`.
