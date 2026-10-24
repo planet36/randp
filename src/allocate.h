@@ -6,6 +6,7 @@
 * \file
 * \author Steven Ward
 * \sa https://man7.org/linux/man-pages/man2/mmap.2.html
+* \sa https://man7.org/linux/man-pages/man2/mlock.2.html
 * \sa https://man7.org/linux/man-pages/man2/madvise.2.html
 * \sa https://github.com/google/boringssl/blob/master/SANDBOXING.md
 * \sa https://github.com/aws/s2n-tls/blob/main/utils/s2n_fork_detection.c
@@ -37,6 +38,8 @@ allocate(const size_t len)
 
     if (addr == MAP_FAILED)
         err(EXIT_FAILURE, "mmap");
+
+    (void)mlock(addr, len);
 
     if (madvise(addr, len, MADV_DONTDUMP) < 0)
         err(EXIT_FAILURE, "madvise");
