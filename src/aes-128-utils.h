@@ -11,7 +11,6 @@
 
 #if defined(__x86_64__) && defined(__AES__) && defined(__SSE4_1__)
 
-#include "sha2.h"
 #include "wyprimes.h"
 
 #include <immintrin.h>
@@ -45,8 +44,10 @@ wyprimes_vec128_23()
 [[nodiscard]] static inline __m128i
 rectify_key_128(__m128i key)
 {
+    // SHA-512 H0[1] and H0[0] (FIPS 180-4, section 5.3.5)
     // most significant elem first
-    const __m128i key_mask = _mm_set_epi64x((int64_t)SHA_512_H0[1], (int64_t)SHA_512_H0[0]);
+    const __m128i key_mask = _mm_set_epi64x((int64_t)UINT64_C(0xbb67ae8584caa73b),
+                                            (int64_t)UINT64_C(0x6a09e667f3bcc908));
 
     const __m128i swapped = _mm_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
 

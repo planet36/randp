@@ -13,7 +13,6 @@
 
 #if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
-#include "sha2.h"
 #include "wyprimes.h"
 
 #include <immintrin.h>
@@ -43,9 +42,12 @@ wyprimes_vec256()
 [[nodiscard]] static inline __m256i
 rectify_key_256(__m256i key)
 {
+    // SHA-512 H0[3] through H0[0] (FIPS 180-4, section 5.3.5)
     // most significant elem first
-    const __m256i key_mask = _mm256_set_epi64x((int64_t)SHA_512_H0[3], (int64_t)SHA_512_H0[2],
-                                               (int64_t)SHA_512_H0[1], (int64_t)SHA_512_H0[0]);
+    const __m256i key_mask = _mm256_set_epi64x((int64_t)UINT64_C(0xa54ff53a5f1d36f1),
+                                               (int64_t)UINT64_C(0x3c6ef372fe94f82b),
+                                               (int64_t)UINT64_C(0xbb67ae8584caa73b),
+                                               (int64_t)UINT64_C(0x6a09e667f3bcc908));
 
     const __m256i swapped = _mm256_shuffle_epi32(key, _MM_SHUFFLE(1, 0, 3, 2));
 
