@@ -2,7 +2,7 @@
 
 randp is a C library providing an arc4random-compatible API over an AES-CTR PRNG.
 
-Follow COMMENT-STYLE.md when writing a comment, doc block, commit message, or documentation file.
+@COMMENT-STYLE.md
 
 - Overview, design, and dependency version rationale: README.md
 - Test targets and their runtimes: tests/README.md
