@@ -16,7 +16,7 @@ The API is designed to be compatible with the arc4random family of functions.
 
 The randp structure stores random bytes in a pool that can be retrieved later by the functions listed above.
 
-Each thread has its own randp structure, so the functions need no locking.  The structure is `mmap`d with flags `MAP_PRIVATE | MAP_ANONYMOUS` and then `madvise`d with `MADV_DONTDUMP` and `MADV_WIPEONFORK`, and a `static` `thread_local` pointer refers to it.  Its size is at most one page (4096 B), and it's not allocated until immediately before first use.  When a thread exits, a C11 thread-specific storage destructor `munmap`s its structure.  See [src/allocate.h](src/allocate.h) for details.
+Each thread has its own randp structure, so the functions need no locking.  The structure is `mmap`d with flags `MAP_PRIVATE | MAP_ANONYMOUS` and then `madvise`d with `MADV_DONTDUMP` and `MADV_WIPEONFORK`.  A `static` `thread_local` pointer refers to it.  Its size is at most one page (4096 B).  It's not allocated until immediately before first use.  When a thread exits, a C11 thread-specific storage destructor `munmap`s its structure.  See [src/allocate.h](src/allocate.h) for details.
 
 <details>
 
