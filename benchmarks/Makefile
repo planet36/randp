@@ -3,7 +3,8 @@
 
 include ../config.mk
 
-# librandp is statically linked with one of the executables in this folder.
+# librandp is statically linked with the executables in this folder, but only
+# benchmark-others uses it.  The others use the C++ implementation in randp.hpp.
 
 #export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):..
 
