@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 /**
+* \file
 * This program will dump random bytes to stdout (as long as stdout does not
 * refer to a terminal), which could be analyzed by PractRand.
 */

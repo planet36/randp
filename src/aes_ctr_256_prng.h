@@ -52,7 +52,7 @@ typedef struct aes_ctr_256_prng aes_ctr_256_prng;
 static_assert(sizeof(aes_ctr_256_prng) <= 256,
               "getentropy will fail if more than 256 bytes are requested");
 
-/// Assign random bytes to the data members via \c getentropy.
+/// Assign random bytes to the data members via \c getentropy
 /**
 * \param this_ the PRNG state
 *
@@ -87,7 +87,7 @@ aes_ctr_256_prng_reseed(aes_ctr_256_prng* this_)
 * to the stack, where nothing wipes it.
 *
 * The counter increment \c inc used below forms a Weyl sequence.
-* Criteria for its 64-bit lane values:
+* Its 64-bit lane values must meet these criteria:
 *   1) Must be odd
 *   2) Must be unique across lanes
 *

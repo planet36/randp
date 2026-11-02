@@ -5,7 +5,9 @@
 /**
 * \file
 * \author Steven Ward
-* "Fast Random Integer Generation in an Interval" by Daniel Lemire
+*
+* The algorithm comes from "Fast Random Integer Generation in an Interval" by Daniel Lemire.
+*
 * \sa https://arxiv.org/abs/1805.10941
 * \sa https://lemire.me/blog/2016/06/30/fast-random-shuffling/
 * \sa https://lemire.me/blog/2019/06/06/nearly-divisionless-random-integer-generation-on-various-systems/
@@ -24,7 +26,8 @@
 extern "C" {
 #endif
 
-/// Return a uniform random integer in the interval <code>[0, s)</code> using Lemire's "nearly divisionless" algorithm.
+/// Return a uniform random integer in the interval <code>[0, s)</code> using Lemire's
+/// "nearly divisionless" algorithm
 /**
 * \param s the exclusive upper bound
 * \param prng a function returning a uniformly distributed random \c uint32_t
@@ -55,7 +58,8 @@ random_bounded_nearlydivisionless32(const uint32_t s, uint32_t (*prng)())
 }
 
 #if defined(__SIZEOF_INT128__)
-/// Return a uniform random integer in the interval <code>[0, s)</code> using Lemire's "nearly divisionless" algorithm.
+/// Return a uniform random integer in the interval <code>[0, s)</code> using Lemire's
+/// "nearly divisionless" algorithm
 /**
 * \param s the exclusive upper bound
 * \param prng a function returning a uniformly distributed random \c uint64_t

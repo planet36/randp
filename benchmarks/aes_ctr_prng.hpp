@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: MPL-2.0
 
-/// AES-CTR PRNG class (This C++ implementation is used only for benchmarking.)
+/// AES-CTR PRNG class, a C++ implementation used only for benchmarking
 /**
 * \file
 * \author Steven Ward
 *
-* The raison d'etre of this class is to test
+* The raison d'etre of this class is to test the following:
 * 1. different values of \c Nk and \c Nr
 */
 
@@ -108,7 +108,8 @@ get_default_num_rounds_per_key<__m256i>()
 /**
 * \tparam T the block type
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
-* \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
+* \tparam dm if \c true, use the Davies-Meyer single-block-length compression function
+* (in addition to AES encryption/decryption) to get the next PRNG output
 * \tparam Nk the number of independent AES keys
 * \tparam Nr the number of AES enc/dec rounds applied per key
 */
@@ -126,7 +127,7 @@ private:
     block_t ctr;      ///< The state/counter
 
 public:
-    /// Construct a PRNG seeded via \c getentropy.
+    /// Construct a PRNG seeded via \c getentropy
     /**
     * \note This function terminates the calling process upon catastrophic error.
     */
@@ -137,7 +138,7 @@ public:
         reseed();
     }
 
-    /// Assign random bytes to the data members via \c getentropy.
+    /// Assign random bytes to the data members via \c getentropy
     /**
     * Each key is then adjusted, if necessary.
     *
@@ -167,7 +168,7 @@ public:
     * to the stack, where nothing wipes it.
     *
     * The counter increment \c inc used below forms a Weyl sequence.
-    * Criteria for its 64-bit lane values:
+    * Its 64-bit lane values must meet these criteria:
     *   1) Must be odd
     *   2) Must be unique across lanes
     *

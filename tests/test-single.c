@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 /**
+* \file
 * This program includes the single header file and verifies that the public API
 * can be called.
 */

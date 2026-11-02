@@ -34,12 +34,12 @@ DEPS = $(addsuffix .d,$(basename $(SRCS)))
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
 BINS = $(basename $(SRCS))
 
-# clang and clang++ not supported
+# clang and clang++ are not supported
 CC = gcc
 CXX = g++
 
 CPPFLAGS = -MMD -MP
-# _DEFAULT_SOURCE needed for getentropy, arc4random
+# _DEFAULT_SOURCE is needed for getentropy and arc4random
 CPPFLAGS += -D_DEFAULT_SOURCE
 
 COMMON_COMPILE_FLAGS = -pipe -Wall -Wextra -Wpedantic -Wfatal-errors -Wundef

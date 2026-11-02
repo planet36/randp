@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 /**
+* \file
 * This program calls \c randp_bytes repeatedly for the purpose of being profiled
 * by valgrind.
 */

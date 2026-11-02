@@ -5,7 +5,9 @@
 /**
 * \file
 * \author Steven Ward
-* Inspired by \c arc4random.
+*
+* randp was inspired by \c arc4random.
+*
 * \sa https://github.com/openbsd/src/blob/master/lib/libc/crypt/arc4random.c
 * \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 */
@@ -81,8 +83,8 @@ struct randp
 {
     RANDP_PRNG_TYPE prng;
     uint8_t pool[RANDP_POOL_SIZE_BYTES];
-    int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
-    int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
+    int reseed_countdown;     ///< The PRNG is reseeded when this is 0
+    int rand_bytes_remaining; ///< The pool is regenerated when this is 0
 };
 
 typedef struct randp randp;
@@ -95,7 +97,7 @@ static_assert(offsetof(randp, pool) % sizeof(RANDP_BLOCK_TYPE) == 0,
 
 static_assert(sizeof(randp) <= PAGE_SIZE, "randp must fit in one page");
 
-/// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero.
+/// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero
 /**
 * \param this_ the randp state
 */
@@ -118,7 +120,7 @@ randp_regen(randp* this_)
     --this_->reseed_countdown;
 }
 
-/// Deallocate a thread's \c randp pool when the thread exits.
+/// Deallocate a thread's \c randp pool when the thread exits
 /**
 * \param p the randp pool, as passed to \c tss_set
 */

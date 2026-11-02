@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 /**
+* \file
 * This program will fill a buffer with random bytes and print it (in
 * hexadecimal) to stdout.
 */

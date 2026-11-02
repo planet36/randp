@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 /**
+* \file
 * This program will initialize a pool of random bytes, then fork itself.
 * After the fork, the parent and child processes will print a random number.
 * The two numbers will be different, proving that the random number generator
@@ -21,7 +22,8 @@
 #include <unistd.h>
 
 /**
-* \c mrand48 returns a signed long integer uniformly distributed in the interval <code>[-2^31, 2^31)</code>.
+* \c mrand48 returns a signed long integer uniformly distributed in the interval
+* <code>[-2^31, 2^31)</code>.
 * This wrapper exists because we need it to return a \c uint32_t.
 */
 static uint32_t

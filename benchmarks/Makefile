@@ -21,7 +21,7 @@ LDLIBS += ../$(ANAME)
 # Use N-1 threads in most of the tests
 export NUM_THREADS := $(shell nproc --ignore 1)
 
-# Should be an odd number for simpler median
+# Should be an odd number for a simpler median
 BENCHMARK_REPS = 5
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')

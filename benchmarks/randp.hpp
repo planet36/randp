@@ -1,15 +1,17 @@
 // SPDX-FileCopyrightText: Steven Ward
 // SPDX-License-Identifier: MPL-2.0
 
-/// AES-CTR Random Pool (randp) (This C++ implementation is used only for benchmarking.)
+/// AES-CTR Random Pool (randp), a C++ implementation used only for benchmarking
 /**
 * \file
 * \author Steven Ward
-* Inspired by \c arc4random.
+*
+* randp was inspired by \c arc4random.
+*
 * \sa https://github.com/openbsd/src/blob/master/lib/libc/crypt/arc4random.c
 * \sa https://man7.org/linux/man-pages/man3/arc4random.3.html
 *
-* The raisons d'etre of this class are to test
+* The raisons d'etre of this class are to test the following:
 * 1. different values of \c RANDP_POOL_SIZE_BYTES and \c RANDP_RESEED_INTERVAL
 * 2. using a mutex for the static randp data instead of a \c thread_local instance
 */
@@ -46,9 +48,10 @@
 /**
 * \tparam RANDP_POOL_SIZE_BYTES the number of bytes in the pool
 * \tparam RANDP_RESEED_INTERVAL the number of pool regenerations between reseeds
-* \tparam T the block type: \c __m128i for AES, or \c __m256i for VAES
+* \tparam T the block type, which is \c __m128i for AES or \c __m256i for VAES
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
-* \tparam dm if \c true, use the Davies-Meyer single-block-length compression function (in addition to AES encryption/decryption) to get the next PRNG output
+* \tparam dm if \c true, use the Davies-Meyer single-block-length compression function
+* (in addition to AES encryption/decryption) to get the next PRNG output
 * \tparam Nk the number of independent AES keys
 * \tparam Nr the number of AES enc/dec rounds applied per key
 */
@@ -73,10 +76,10 @@ struct randp
 
     aes_ctr_prng<T, enc, dm, Nk, Nr> prng;
     uint8_t pool[RANDP_POOL_SIZE_BYTES];
-    int reseed_countdown;     ///< The PRNG is reseeded when this is 0.
-    int rand_bytes_remaining; ///< The pool is regenerated when this is 0.
+    int reseed_countdown;     ///< The PRNG is reseeded when this is 0
+    int rand_bytes_remaining; ///< The pool is regenerated when this is 0
 
-    /// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero.
+    /// Regenerate the pool, reseeding the PRNG first if the reseed countdown has reached zero
     void regen()
     {
         if (this->reseed_countdown == 0)
@@ -95,7 +98,7 @@ struct randp
         --this->reseed_countdown;
     }
 
-    /// Deallocate a thread's \c randp pool when the thread exits.
+    /// Deallocate a thread's \c randp pool when the thread exits
     /**
     * \param p the randp pool, as passed to \c tss_set
     */
@@ -111,12 +114,12 @@ struct randp
     }
 };
 
-/// Fill a buffer with random bytes using a \c thread_local pool.
+/// Fill a buffer with random bytes using a \c thread_local pool
 /**
 * \param buf the destination buffer
 * \param n the number of bytes to fill
-* \pre \a buf is not null
-* \pre \a buf is at least \a n bytes in size
+* \pre \a buf is not null.
+* \pre \a buf is at least \a n bytes in size.
 */
 template <
     int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
@@ -149,7 +152,7 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 #if defined(__cplusplus)
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
-        // Unreachable in C++.  Retained only to match randp.c.
+        // This branch is unreachable in C++.  It is retained only to match randp.c.
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
         call_once(&randp_t::tss_once, randp_t::tss_key_init);
@@ -177,7 +180,7 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
     }
 }
 
-// {{{ This uses a global mutex instead of thread_local keyword for the randp*.
+// {{{ This uses a global mutex instead of the thread_local keyword for the randp*.
 
 #include <pthread.h>
 
@@ -186,12 +189,12 @@ randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 #pragma GCC diagnostic pop
 
-/// Fill a buffer with random bytes using a pool shared across all threads, protected by a mutex.
+/// Fill a buffer with random bytes using a pool shared across all threads, protected by a mutex
 /**
 * \param buf the destination buffer
 * \param n the number of bytes to fill
-* \pre \a buf is not null
-* \pre \a buf is at least \a n bytes in size
+* \pre \a buf is not null.
+* \pre \a buf is at least \a n bytes in size.
 */
 template <
     int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
@@ -227,11 +230,11 @@ randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 #if defined(__cplusplus)
         this_ = (decltype(this_))allocate(sizeof(*this_));
 #else
-        // Unreachable in C++.  Retained only to match randp.c.
+        // This branch is unreachable in C++.  It is retained only to match randp.c.
         this_ = (typeof(this_))allocate(sizeof(*this_));
 #endif
         // Do not deallocate this_ when the thread exits.
-        // It's not thread_local, unlike the randp_bytes function, so there's only 1 instance
+        // It's not thread_local, unlike the randp_bytes function, so there's only one instance
         // per template instantiation, shared across all threads.
     }
 

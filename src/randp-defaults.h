@@ -9,11 +9,11 @@
 
 #pragma once
 
-/// If \c true, use AES encryption, otherwise AES decryption.
+/// If \c true, use AES encryption, otherwise AES decryption
 constexpr bool DEFAULT_RANDP_PRNG_USE_ENC = true;
 
 /// If \c true, use the Davies-Meyer single-block-length compression function
-/// (in addition to AES encryption/decryption) to get the next PRNG output.
+/// (in addition to AES encryption/decryption) to get the next PRNG output
 constexpr bool DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER = false;
 
 /// The number of bytes in the pool
