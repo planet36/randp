@@ -37,7 +37,7 @@ Run these targets in the following order to refine the parameters of randp (whic
 
 ## Benchmark results
 
-The tables below come from `make others`, which runs each benchmark on one thread, and are copied from `results/others.*.filtered.txt`.  The tables for _upper_bound_ use the `rand_lt-many` rows, which cycle _upper_bound_ from 1 to 0x100000, not the `rand_lt-one` rows, which hold it at 0xa5a5.  The runs since 2025-10-09 were in a VirtualBox guest with 8 vCPUs, so the System info lists the host's CPU.
+The tables below come from `make others`, which runs each benchmark on one thread, and are copied from `results/*/others.filtered.txt`.  The tables for _upper_bound_ use the `rand_lt-many` rows, which cycle _upper_bound_ from 1 to 0x100000, not the `rand_lt-one` rows, which hold it at 0xa5a5.  The runs since 2025-10-09 were in a VirtualBox guest with 8 vCPUs, so the System info lists the host's CPU.
 
 > [!NOTE]
 > The [glibc arc4random](https://sourceware.org/git/?p=glibc.git;a=blob;f=stdlib/arc4random.c;h=7818cb9cf66e0f3b428a974c90bee1f120668561;hb=HEAD) is completely different than the [OpenBSD arc4random](https://github.com/openbsd/src/blob/c920a736d2c1ec1bc99322d5576ae084602f0870/lib/libc/crypt/arc4random.c).

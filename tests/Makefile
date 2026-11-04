@@ -16,7 +16,7 @@ LDLIBS += -l$(LIBNAME)
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')
 
-OUTPUT_DIR = results
+OUTPUT_DIR = results/$(DATETIME)
 
 all: $(BINS)
 
@@ -52,35 +52,35 @@ generate: test-generate
 
 profile: test-profile | $(OUTPUT_DIR)
 	valgrind --tool=callgrind --enable-debuginfod=no \
-		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out.$(DATETIME) ./$<
+		--callgrind-out-file=$(OUTPUT_DIR)/callgrind.out ./$<
 
 profile-kgui: profile
-	kcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
+	kcachegrind $(OUTPUT_DIR)/callgrind.out
 
 profile-qgui: profile
-	qcachegrind $(OUTPUT_DIR)/callgrind.out.$(DATETIME)
+	qcachegrind $(OUTPUT_DIR)/callgrind.out
 
 run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: This target takes about 54 minutes on my fast (in AD 2024) computer"
-	./$<             | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.$(DATETIME).txt
-	./$< arc4random  | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.$(DATETIME).txt
-	./$< mrand48     | RNG_test stdin32 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.$(DATETIME).txt
-	openssl rand max | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.$(DATETIME).txt
+	./$<             | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.txt
+	./$< arc4random  | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.txt
+	./$< mrand48     | RNG_test stdin32 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.txt
+	openssl rand max | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.txt
 
 # time make -j 4 run-rngtest # Takes 1.5 mins
 run-rngtest: run-rngtest-randp run-rngtest-arc4random run-rngtest-mrand48 run-rngtest-openssl-rand
 
 run-rngtest-randp: test-dump | $(OUTPUT_DIR)
-	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
 
 run-rngtest-arc4random: test-dump | $(OUTPUT_DIR)
-	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
 
 run-rngtest-mrand48: test-dump | $(OUTPUT_DIR)
-	./$< mrand48     | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+	./$< mrand48     | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
 
 run-rngtest-openssl-rand: | $(OUTPUT_DIR)
-	openssl rand max | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).$(DATETIME).txt
+	openssl rand max | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
 
 single: test-single
 	./$<

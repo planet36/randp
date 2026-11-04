@@ -27,7 +27,7 @@ BENCHMARK_REPS = 5
 
 DATETIME := $(shell date -u +'%Y%m%dT%H%M%S')
 
-OUTPUT_DIR = results
+OUTPUT_DIR = results/$(DATETIME)
 
 all: $(BINS)
 
@@ -47,8 +47,8 @@ define benchmark-recipe =
 	--benchmark_repetitions=$(BENCHMARK_REPS) \
 	--benchmark_report_aggregates_only=true \
 	--benchmark_out_format=console \
-	--benchmark_out=$(OUTPUT_DIR)/$@.$(DATETIME).txt
-bash process-results.bash $(OUTPUT_DIR)/$@.$(DATETIME).txt | tee $(OUTPUT_DIR)/$@.$(DATETIME).filtered.txt
+	--benchmark_out=$(OUTPUT_DIR)/$@.txt
+bash process-results.bash $(OUTPUT_DIR)/$@.txt | tee $(OUTPUT_DIR)/$@.filtered.txt
 endef
 
 mutex: benchmark-mutex | $(OUTPUT_DIR)
