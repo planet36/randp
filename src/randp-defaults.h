@@ -28,7 +28,7 @@ constexpr int DEFAULT_RANDP_128_POOL_SIZE_BYTES = 256;
 */
 constexpr int DEFAULT_RANDP_256_POOL_SIZE_BYTES = 512;
 
-/// The number of pool regenerations between reseeds
+/// The number of pool regenerations between reseeds when the PRNG is AES-CTR-128
 /**
 * # [NIST Special Publication 800-90A Revision 1](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final)
 *
@@ -40,4 +40,17 @@ constexpr int DEFAULT_RANDP_256_POOL_SIZE_BYTES = 512;
 * |----------------------------------------------------------------|---------|
 * | Maximum number of requests between reseeds (*reseed_interval*) |    2^48 |
 */
-constexpr int DEFAULT_RANDP_RESEED_INTERVAL = (1 << 10);
+constexpr int DEFAULT_RANDP_128_RESEED_INTERVAL = (1 << 10);
+
+/// The number of pool regenerations between reseeds when the PRNG is AES-CTR-256 (VAES)
+/**
+* The interval counts refills, not bytes.  This one is derived from the AES-CTR-128
+* defaults so that both PRNGs generate the same number of bytes between reseeds.
+*/
+constexpr int DEFAULT_RANDP_256_RESEED_INTERVAL =
+    DEFAULT_RANDP_128_RESEED_INTERVAL * DEFAULT_RANDP_128_POOL_SIZE_BYTES /
+    DEFAULT_RANDP_256_POOL_SIZE_BYTES;
+
+static_assert(DEFAULT_RANDP_256_RESEED_INTERVAL * DEFAULT_RANDP_256_POOL_SIZE_BYTES ==
+              DEFAULT_RANDP_128_RESEED_INTERVAL * DEFAULT_RANDP_128_POOL_SIZE_BYTES,
+              "both PRNGs must generate the same number of bytes between reseeds");

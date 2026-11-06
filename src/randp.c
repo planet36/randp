@@ -34,14 +34,12 @@ extern "C" {
 
 constexpr auto RANDP_PRNG_USE_ENC = DEFAULT_RANDP_PRNG_USE_ENC;
 constexpr auto RANDP_PRNG_USE_DAVIES_MEYER = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER;
-constexpr auto RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL;
-
-static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
 #if defined(__x86_64__) && defined(__VAES__) && defined(__AVX2__)
 
 typedef __m256i RANDP_BLOCK_TYPE;
 constexpr auto RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_256_POOL_SIZE_BYTES;
+constexpr auto RANDP_RESEED_INTERVAL = DEFAULT_RANDP_256_RESEED_INTERVAL;
 #define RANDP_PRNG_TYPE aes_ctr_256_prng
 #define RANDP_PRNG_RESEED aes_ctr_256_prng_reseed
 
@@ -58,6 +56,7 @@ constexpr auto RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_256_POOL_SIZE_BYTES;
 
 typedef __m128i RANDP_BLOCK_TYPE;
 constexpr auto RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_128_POOL_SIZE_BYTES;
+constexpr auto RANDP_RESEED_INTERVAL = DEFAULT_RANDP_128_RESEED_INTERVAL;
 #define RANDP_PRNG_TYPE aes_ctr_128_prng
 #define RANDP_PRNG_RESEED aes_ctr_128_prng_reseed
 
@@ -77,6 +76,8 @@ constexpr auto RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_128_POOL_SIZE_BYTES;
 static_assert(RANDP_POOL_SIZE_BYTES > 0, "randp pool byte size must be positive");
 static_assert((RANDP_POOL_SIZE_BYTES % 32) == 0,
               "randp pool byte size must be a multiple of 32");
+
+static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
 /// A pool of random bytes
 struct randp

@@ -61,6 +61,23 @@ get_default_pool_size_bytes<__m256i>()
     return DEFAULT_RANDP_256_POOL_SIZE_BYTES;
 }
 
+template <typename T>
+[[nodiscard]] consteval int get_default_reseed_interval();
+
+template <>
+[[nodiscard]] consteval int
+get_default_reseed_interval<__m128i>()
+{
+    return DEFAULT_RANDP_128_RESEED_INTERVAL;
+}
+
+template <>
+[[nodiscard]] consteval int
+get_default_reseed_interval<__m256i>()
+{
+    return DEFAULT_RANDP_256_RESEED_INTERVAL;
+}
+
 /// A pool of random bytes
 /**
 * \tparam RANDP_POOL_SIZE_BYTES the number of bytes in the pool
@@ -74,7 +91,7 @@ get_default_pool_size_bytes<__m256i>()
 */
 template <
     int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
-    int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
+    int RANDP_RESEED_INTERVAL = get_default_reseed_interval<RANDP_BLOCK_TYPE>(),
     // {{{ PRNG params
     typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
@@ -140,7 +157,7 @@ struct randp
 */
 template <
     int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
-    int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
+    int RANDP_RESEED_INTERVAL = get_default_reseed_interval<RANDP_BLOCK_TYPE>(),
     // {{{ PRNG params
     typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
@@ -215,7 +232,7 @@ static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 */
 template <
     int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
-    int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
+    int RANDP_RESEED_INTERVAL = get_default_reseed_interval<RANDP_BLOCK_TYPE>(),
     // {{{ PRNG params
     typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
