@@ -145,6 +145,10 @@ The version comes from the latest git tag, so a build outside a tagged git check
 
 Link with `-lrandp`, or get the flags from `pkg-config --cflags --libs randp`.
 
+### VAES build
+
+The default build targets x86-64-v2 and uses [src/aes_ctr_128_prng.h](src/aes_ctr_128_prng.h), which works on 128-bit vectors.  A VAES build uses [src/aes_ctr_256_prng.h](src/aes_ctr_256_prng.h) instead, which works on 256-bit vectors so each instruction processes two AES blocks.  To make one, comment out the `-march=x86-64-v2 -maes` line in [config.mk](config.mk) and uncomment the `-march=x86-64-v3 -maes -mvaes` line below it.  The resulting library needs an x86-64-v3 processor with VAES.
+
 ## Header-only
 
 Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/wiki/Header-only) file of randp.  It defines every function as `static`, so each translation unit that includes it gets its own copy of the code and its own per-thread pool, seeded separately.
