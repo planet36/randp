@@ -27,6 +27,8 @@ The `fork`, `generate`, `run-rngtest`, and `run-PractRand` targets also run mran
 
 ## Example commands
 
+`make test` in the top folder only builds the test binaries.  Run the targets below in the tests folder to run them.
+
 * `make fork`
   * Verify randp is fork-safe.
 * `make generate`
