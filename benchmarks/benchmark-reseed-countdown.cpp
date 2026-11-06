@@ -60,7 +60,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         (benchmark::RegisterBenchmark(
              std::format("rand_bytes_4GiB:randp_bytes<def,1<<{:_>2},m128i>", SHIFT),
              BM_rand_bytes_4GiB,
-             randp_bytes<DEFAULT_RANDP_POOL_SIZE_BYTES, 1 << SHIFT, __m128i>)
+             randp_bytes<get_default_pool_size_bytes<__m128i>(), 1 << SHIFT, __m128i>)
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);
@@ -68,7 +68,7 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         (benchmark::RegisterBenchmark(
              std::format("rand_bytes_4GiB:randp_bytes<def,1<<{:_>2},m256i>", SHIFT),
              BM_rand_bytes_4GiB,
-             randp_bytes<DEFAULT_RANDP_POOL_SIZE_BYTES, 1 << SHIFT, __m256i>)
+             randp_bytes<get_default_pool_size_bytes<__m256i>(), 1 << SHIFT, __m256i>)
              ->Threads(num_threads)
              ->Unit(benchmark::kMillisecond),
          ...);

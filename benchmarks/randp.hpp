@@ -44,6 +44,23 @@
 #error "Architecture not supported"
 #endif
 
+template <typename T>
+[[nodiscard]] consteval int get_default_pool_size_bytes();
+
+template <>
+[[nodiscard]] consteval int
+get_default_pool_size_bytes<__m128i>()
+{
+    return DEFAULT_RANDP_128_POOL_SIZE_BYTES;
+}
+
+template <>
+[[nodiscard]] consteval int
+get_default_pool_size_bytes<__m256i>()
+{
+    return DEFAULT_RANDP_256_POOL_SIZE_BYTES;
+}
+
 /// A pool of random bytes
 /**
 * \tparam RANDP_POOL_SIZE_BYTES the number of bytes in the pool
@@ -56,7 +73,7 @@
 * \tparam Nr the number of AES enc/dec rounds applied per key
 */
 template <
-    int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
+    int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
     typename T = RANDP_BLOCK_TYPE,
@@ -122,7 +139,7 @@ struct randp
 * \pre \a buf is at least \a n bytes in size.
 */
 template <
-    int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
+    int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
     typename T = RANDP_BLOCK_TYPE,
@@ -197,7 +214,7 @@ static pthread_mutex_t randp_mtx = PTHREAD_MUTEX_INITIALIZER;
 * \pre \a buf is at least \a n bytes in size.
 */
 template <
-    int RANDP_POOL_SIZE_BYTES = DEFAULT_RANDP_POOL_SIZE_BYTES,
+    int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
     int RANDP_RESEED_INTERVAL = DEFAULT_RANDP_RESEED_INTERVAL,
     // {{{ PRNG params
     typename T = RANDP_BLOCK_TYPE,
