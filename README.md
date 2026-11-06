@@ -162,3 +162,7 @@ Run `make randp-single.h` to generate a [header-only](https://en.wikipedia.org/w
 ### Is randp a cryptographically secure pseudorandom number generator ([CSPRNG](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator))?
 
 No claims are made that randp is a CSPRNG, but the random numbers it produces are practically unpredictable (i.e., computationally infeasible to predict).  It is built on AES, and it is seeded and periodically reseeded by `getentropy`.  It lacks three things a CSPRNG claim needs: a formal security proof, independent review by third parties, and compliance with a standard such as [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final).
+
+## License
+
+randp is licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/) (`MPL-2.0`).
