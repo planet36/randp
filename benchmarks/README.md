@@ -16,7 +16,7 @@
 
 ## Example commands
 
-* `make mutex others pool-size prng-params reseed-countdown`
+* `make run-all`
   * The `mutex` benchmark compares the use of `pthread_mutex_t` and `thread_local`.
   * The `others` benchmark compares randp to these other sources of random numbers:
     * `RDRAND`

@@ -66,6 +66,8 @@ prng-params: benchmark-prng-params | $(OUTPUT_DIR)
 reseed-countdown: benchmark-reseed-countdown | $(OUTPUT_DIR)
 	$(benchmark-recipe)
 
+run-all: mutex others pool-size prng-params reseed-countdown
+
 $(OUTPUT_DIR):
 	mkdir --verbose --parents -- $@
 
@@ -76,7 +78,10 @@ lint:
 	-clang-tidy --quiet $(SRCS) -- $(CPPFLAGS) $(CXXFLAGS)
 
 # https://www.gnu.org/software/make/manual/make.html#Phony-Targets
-.PHONY: all mutex others pool-size prng-params reseed-countdown clean lint
+.PHONY: all mutex others pool-size prng-params reseed-countdown run-all clean lint
+
+# https://www.gnu.org/software/make/manual/html_node/Parallel-Disable.html
+.NOTPARALLEL: run-all
 
 # https://www.gnu.org/software/make/manual/html_node/Special-Targets.html#index-removing-targets-on-failure
 .DELETE_ON_ERROR:
