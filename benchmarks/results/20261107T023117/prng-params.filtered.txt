@@ -1,0 +1,52 @@
+Linux 7.2.14-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.44
+gcc (GCC) 16.2.1 20260810
+libbenchmark.so.1.10.0
+randp 11.3-2-gd0a8334
+
+# Median time per call
+
+# Median time per call
+
+# Median time per call
+
+# Median bytes per second copied to buffer (of size bytes)
+
+# Median bytes per second copied to buffer (of size pages)
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,1,3>  137  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,1,4>     140  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,1,3>     141  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,3,1>  141  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,2,2>  143  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,2,2>     144  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,1,4>  144  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,3,1>     146  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,2,3>  155  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,3,2>  155  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,2,3>     161  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,3,2>     161  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,3,1>  168  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,1,3>  169  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,2,4>  183  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,2,4>     184  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,no-dm,3,3>  196  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,3,1>     207  ms
+rand_bytes_4GiB:randp_bytes<def,def,m256i,enc,dm,3,3>     208  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,2,2>  209  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,1,3>     212  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,1,4>  212  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,1,4>     214  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,2,3>  216  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,2,2>     219  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,3,2>  229  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,2,3>     240  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,3,2>     247  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,2,4>  258  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,2,4>     285  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,no-dm,3,3>  292  ms
+rand_bytes_4GiB:randp_bytes<def,def,m128i,enc,dm,3,3>     315  ms
+
