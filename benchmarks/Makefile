@@ -19,8 +19,8 @@ LDLIBS += $(shell pkg-config --libs benchmark)
 #LDLIBS += -l$(LIBNAME)
 LDLIBS += ../$(ANAME)
 
-# Use N-1 threads in most of the tests.
-export NUM_THREADS := $(shell nproc --ignore 1)
+# Use 1 thread in all of the tests.
+export NUM_THREADS := 1
 
 # This should be an odd number for a simpler median.
 BENCHMARK_REPS = 5
@@ -55,7 +55,7 @@ mutex: benchmark-mutex | $(OUTPUT_DIR)
 	$(benchmark-recipe)
 
 others: benchmark-others | $(OUTPUT_DIR)
-	NUM_THREADS=1 $(benchmark-recipe)
+	$(benchmark-recipe)
 
 pool-size: benchmark-pool-size | $(OUTPUT_DIR)
 	$(benchmark-recipe)
