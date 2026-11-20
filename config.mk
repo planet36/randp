@@ -22,7 +22,6 @@ SONAME_2 := $(SONAME_1).$(VERSION_MINOR)
 SINGLE_HEADER := $(LIBNAME)-single.h
 PCFILE := $(LIBNAME).pc
 
-# paths
 PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
 INCDIR ?= $(PREFIX)/include
