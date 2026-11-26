@@ -66,6 +66,7 @@ prng-params: benchmark-prng-params | $(OUTPUT_DIR)
 reseed-countdown: benchmark-reseed-countdown | $(OUTPUT_DIR)
 	$(benchmark-recipe)
 
+# Takes about 11.3 minutes
 run-all: mutex others pool-size prng-params reseed-countdown
 
 $(OUTPUT_DIR):
