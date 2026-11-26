@@ -20,4 +20,4 @@
 * would make those rounds the same permutation, which is the self-similarity that slide
 * attacks exploit.
 */
-constexpr int DEFAULT_AES_CTR_256_PRNG_NUM_KEYS = 3;
+constexpr int DEFAULT_AES_CTR_256_PRNG_NUM_KEYS = 4;
