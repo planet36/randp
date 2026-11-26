@@ -1,0 +1,52 @@
+Linux 7.3.6-arch1-1 x86_64
+13th Gen Intel(R) Core(TM) i9-13980HX
+ldd (GNU libc) 2.44
+gcc (GCC) 16.2.1 20260810
+libbenchmark.so.1.10.0
+randp 11.3-5-g69cc68c-dirty
+
+# Median time per call
+
+# Median time per call
+
+# Median time per call
+
+# Median bytes per second copied to buffer (of size bytes)
+
+# Median bytes per second copied to buffer (of size pages)
+
+# Median time to generate 4 GiB
+
+rand_bytes_4GiB:randp_bytes<512,MAX,m256i>  150  ms
+rand_bytes_4GiB:randp_bytes<256,MAX,m256i>  160  ms
+rand_bytes_4GiB:randp_bytes<256,MAX,m128i>  162  ms
+rand_bytes_4GiB:randp_bytes<480,MAX,m256i>  174  ms
+rand_bytes_4GiB:randp_bytes<384,MAX,m256i>  187  ms
+rand_bytes_4GiB:randp_bytes<448,MAX,m256i>  187  ms
+rand_bytes_4GiB:randp_bytes<416,MAX,m256i>  188  ms
+rand_bytes_4GiB:randp_bytes<352,MAX,m256i>  198  ms
+rand_bytes_4GiB:randp_bytes<320,MAX,m256i>  203  ms
+rand_bytes_4GiB:randp_bytes<288,MAX,m256i>  213  ms
+rand_bytes_4GiB:randp_bytes<512,MAX,m128i>  226  ms
+rand_bytes_4GiB:randp_bytes<224,MAX,m256i>  230  ms
+rand_bytes_4GiB:randp_bytes<288,MAX,m128i>  235  ms
+rand_bytes_4GiB:randp_bytes<192,MAX,m256i>  244  ms
+rand_bytes_4GiB:randp_bytes<224,MAX,m128i>  251  ms
+rand_bytes_4GiB:randp_bytes<448,MAX,m128i>  251  ms
+rand_bytes_4GiB:randp_bytes<128,MAX,m256i>  257  ms
+rand_bytes_4GiB:randp_bytes<160,MAX,m256i>  261  ms
+rand_bytes_4GiB:randp_bytes<480,MAX,m128i>  261  ms
+rand_bytes_4GiB:randp_bytes<192,MAX,m128i>  266  ms
+rand_bytes_4GiB:randp_bytes<384,MAX,m128i>  266  ms
+rand_bytes_4GiB:randp_bytes<416,MAX,m128i>  267  ms
+rand_bytes_4GiB:randp_bytes<352,MAX,m128i>  272  ms
+rand_bytes_4GiB:randp_bytes<128,MAX,m128i>  274  ms
+rand_bytes_4GiB:randp_bytes<320,MAX,m128i>  278  ms
+rand_bytes_4GiB:randp_bytes<160,MAX,m128i>  288  ms
+rand_bytes_4GiB:randp_bytes<_96,MAX,m256i>  334  ms
+rand_bytes_4GiB:randp_bytes<_96,MAX,m128i>  362  ms
+rand_bytes_4GiB:randp_bytes<_64,MAX,m256i>  370  ms
+rand_bytes_4GiB:randp_bytes<_64,MAX,m128i>  414  ms
+rand_bytes_4GiB:randp_bytes<_32,MAX,m256i>  707  ms
+rand_bytes_4GiB:randp_bytes<_32,MAX,m128i>  761  ms
+
