@@ -7,7 +7,7 @@
 * \author Steven Ward
 *
 * The raison d'etre of this class is to test the following:
-* 1. different values of \c Nk and \c Nr
+* 1. different values of \c Nk
 */
 
 #pragma once
@@ -87,38 +87,18 @@ get_default_num_keys<__m256i>()
     return DEFAULT_AES_CTR_256_PRNG_NUM_KEYS;
 }
 
-template <typename T>
-[[nodiscard]] consteval int get_default_num_rounds_per_key();
-
-template <>
-[[nodiscard]] consteval int
-get_default_num_rounds_per_key<__m128i>()
-{
-    return DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY;
-}
-
-template <>
-[[nodiscard]] consteval int
-get_default_num_rounds_per_key<__m256i>()
-{
-    return DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY;
-}
-
 /// A PRNG that uses AES or VAES instructions
 /**
 * \tparam T the block type
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function
 * (in addition to AES encryption/decryption) to get the next PRNG output
-* \tparam Nk the number of independent AES keys
-* \tparam Nr the number of AES enc/dec rounds applied per key
+* \tparam Nk the number of independent AES keys, which is the number of AES enc/dec rounds
 */
-template <typename T, bool enc, bool dm, int Nk, int Nr>
+template <typename T, bool enc, bool dm, int Nk>
 struct aes_ctr_prng
 {
-    static_assert(Nk >= 1);
-    static_assert(Nr >= 1);
-    static_assert(Nk * Nr >= 3, "must do at least 3 rounds of AES enc/dec");
+    static_assert(Nk >= 3, "must do at least 3 rounds of AES enc/dec");
 
     using block_t = T;
 
@@ -185,16 +165,16 @@ public:
             if constexpr (enc)
             {
                 if constexpr (dm)
-                    dst[i] = aes_enc_davies_meyer(ctr, this->keys, Nk, Nr);
+                    dst[i] = aes_enc_davies_meyer(ctr, this->keys, Nk);
                 else
-                    dst[i] = aes_enc(ctr, this->keys, Nk, Nr);
+                    dst[i] = aes_enc(ctr, this->keys, Nk);
             }
             else
             {
                 if constexpr (dm)
-                    dst[i] = aes_dec_davies_meyer(ctr, this->keys, Nk, Nr);
+                    dst[i] = aes_dec_davies_meyer(ctr, this->keys, Nk);
                 else
-                    dst[i] = aes_dec(ctr, this->keys, Nk, Nr);
+                    dst[i] = aes_dec(ctr, this->keys, Nk);
             }
 
             ctr = add_epu64(ctr, inc);

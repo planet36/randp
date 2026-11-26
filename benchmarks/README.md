@@ -32,7 +32,7 @@ Run these targets in the following order to refine the parameters of randp (whic
 
 1. `make pool-size`: find optimal `DEFAULT_RANDP_128_POOL_SIZE_BYTES` and `DEFAULT_RANDP_256_POOL_SIZE_BYTES`
 2. `make reseed-countdown`: find optimal `DEFAULT_RANDP_128_RESEED_INTERVAL` (`DEFAULT_RANDP_256_RESEED_INTERVAL` is derived from it)
-3. `make prng-params`: find optimal `DEFAULT_AES_CTR_128_PRNG_NUM_KEYS`, `DEFAULT_AES_CTR_256_PRNG_NUM_KEYS`, `DEFAULT_AES_CTR_128_PRNG_NUM_ROUNDS_PER_KEY`, `DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY`, `DEFAULT_RANDP_PRNG_USE_ENC`, and `DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER`
+3. `make prng-params`: find optimal `DEFAULT_AES_CTR_128_PRNG_NUM_KEYS`, `DEFAULT_AES_CTR_256_PRNG_NUM_KEYS`, `DEFAULT_RANDP_PRNG_USE_ENC`, and `DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER`
 4. _repeat_
 
 ## Benchmark results

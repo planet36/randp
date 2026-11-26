@@ -8,13 +8,15 @@
 *
 * The 256 in the name is the vector width (VAES), not the AES key size.
 *
-* The product of the number of keys and the number of rounds per key must be at least 3.
+* The number of keys must be at least 3.
 */
 
 #pragma once
 
-/// The number of independent AES keys
+/// The number of independent AES keys, which is the number of AES enc/dec rounds
+/**
+* Each key is the round key of exactly one round.  Applying a key in more than one round
+* would make those rounds the same permutation, which is the self-similarity that slide
+* attacks exploit.
+*/
 constexpr int DEFAULT_AES_CTR_256_PRNG_NUM_KEYS = 3;
-
-/// The number of AES enc/dec rounds applied per key
-constexpr int DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY = 1;

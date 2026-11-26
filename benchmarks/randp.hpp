@@ -86,8 +86,7 @@ get_default_reseed_interval<__m256i>()
 * \tparam enc if \c true, use AES encryption, otherwise AES decryption
 * \tparam dm if \c true, use the Davies-Meyer single-block-length compression function
 * (in addition to AES encryption/decryption) to get the next PRNG output
-* \tparam Nk the number of independent AES keys
-* \tparam Nr the number of AES enc/dec rounds applied per key
+* \tparam Nk the number of independent AES keys, which is the number of AES enc/dec rounds
 */
 template <
     int RANDP_POOL_SIZE_BYTES = get_default_pool_size_bytes<RANDP_BLOCK_TYPE>(),
@@ -96,8 +95,7 @@ template <
     typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = get_default_num_keys<T>(),
-    int Nr = get_default_num_rounds_per_key<T>()
+    int Nk = get_default_num_keys<T>()
     // }}}
 >
 struct randp
@@ -108,7 +106,7 @@ struct randp
 
     static_assert(RANDP_RESEED_INTERVAL >= 1, "randp reseed interval must be positive");
 
-    aes_ctr_prng<T, enc, dm, Nk, Nr> prng;
+    aes_ctr_prng<T, enc, dm, Nk> prng;
     uint8_t pool[RANDP_POOL_SIZE_BYTES];
     int reseed_countdown;     ///< The PRNG is reseeded when this is 0
     int rand_bytes_remaining; ///< The pool is regenerated when this is 0
@@ -162,14 +160,13 @@ template <
     typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = get_default_num_keys<T>(),
-    int Nr = get_default_num_rounds_per_key<T>()
+    int Nk = get_default_num_keys<T>()
     // }}}
 >
 void
 randp_bytes(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, T, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, T, enc, dm, Nk>;
 
     static thread_local randp_t* this_ = nullptr;
 
@@ -237,14 +234,13 @@ template <
     typename T = RANDP_BLOCK_TYPE,
     bool enc = DEFAULT_RANDP_PRNG_USE_ENC,
     bool dm = DEFAULT_RANDP_PRNG_USE_DAVIES_MEYER,
-    int Nk = get_default_num_keys<T>(),
-    int Nr = get_default_num_rounds_per_key<T>()
+    int Nk = get_default_num_keys<T>()
     // }}}
 >
 void
 randp_bytes_MUTEX(void* buf, size_t n) noexcept [[gnu::nonnull]]
 {
-    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, T, enc, dm, Nk, Nr>;
+    using randp_t = randp<RANDP_POOL_SIZE_BYTES, RANDP_RESEED_INTERVAL, T, enc, dm, Nk>;
 
     // Intentionally not thread_local
     static randp_t* this_ = nullptr;

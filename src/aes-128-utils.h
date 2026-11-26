@@ -59,48 +59,38 @@ rectify_key_128(__m128i key)
     return key;
 }
 
-/// Do \c _mm_aesenc_si128 on data \a a with \a Nk keys \a keys \a Nr times for each key
+/// Do \c _mm_aesenc_si128 on data \a a once with each of the \a Nk keys \a keys
 /**
 * \pre \a Nk must be at least \c 1.
-* \pre \a Nr must be at least \c 1.
 * \param a the data
 * \param keys the keys
-* \param Nk the number of \a keys
-* \param Nr the number of rounds of encryption to perform for each key
+* \param Nk the number of \a keys, which is the number of rounds of encryption
 * \return the encrypted result
 */
 [[nodiscard]] static inline __m128i
-aes_enc_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+aes_enc_128(__m128i a, const __m128i* keys, const int Nk)
 {
     for (int k = 0; k < Nk; ++k)
     {
-        for (int r = 0; r < Nr; ++r)
-        {
-            a = _mm_aesenc_si128(a, keys[k]);
-        }
+        a = _mm_aesenc_si128(a, keys[k]);
     }
     return a;
 }
 
-/// Do \c _mm_aesdec_si128 on data \a a with \a Nk keys \a keys \a Nr times for each key
+/// Do \c _mm_aesdec_si128 on data \a a once with each of the \a Nk keys \a keys
 /**
 * \pre \a Nk must be at least \c 1.
-* \pre \a Nr must be at least \c 1.
 * \param a the data
 * \param keys the keys
-* \param Nk the number of \a keys
-* \param Nr the number of rounds of decryption to perform for each key
+* \param Nk the number of \a keys, which is the number of rounds of decryption
 * \return the decrypted result
 */
 [[nodiscard]] static inline __m128i
-aes_dec_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+aes_dec_128(__m128i a, const __m128i* keys, const int Nk)
 {
     for (int k = 0; k < Nk; ++k)
     {
-        for (int r = 0; r < Nr; ++r)
-        {
-            a = _mm_aesdec_si128(a, keys[k]);
-        }
+        a = _mm_aesdec_si128(a, keys[k]);
     }
     return a;
 }
@@ -109,34 +99,30 @@ aes_dec_128(__m128i a, const __m128i* keys, const int Nk, const int Nr)
 /**
 * \sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
 * \pre \a Nk must be at least \c 1.
-* \pre \a Nr must be at least \c 1.
 * \param H the previous hash value
 * \param keys the keys
-* \param Nk the number of \a keys
-* \param Nr the number of rounds of encryption to perform for each key
+* \param Nk the number of \a keys, which is the number of rounds of encryption
 * \return the compressed result
 */
 [[nodiscard]] static inline __m128i
-aes_enc_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
+aes_enc_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk)
 {
-    return _mm_xor_si128(aes_enc_128(H, keys, Nk, Nr), H);
+    return _mm_xor_si128(aes_enc_128(H, keys, Nk), H);
 }
 
 /// Davies-Meyer single-block-length compression function that uses AES as the block cipher
 /**
 * \sa https://en.wikipedia.org/wiki/One-way_compression_function#Davies%E2%80%93Meyer
 * \pre \a Nk must be at least \c 1.
-* \pre \a Nr must be at least \c 1.
 * \param H the previous hash value
 * \param keys the keys
-* \param Nk the number of \a keys
-* \param Nr the number of rounds of decryption to perform for each key
+* \param Nk the number of \a keys, which is the number of rounds of decryption
 * \return the compressed result
 */
 [[nodiscard]] static inline __m128i
-aes_dec_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
+aes_dec_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk)
 {
-    return _mm_xor_si128(aes_dec_128(H, keys, Nk, Nr), H);
+    return _mm_xor_si128(aes_dec_128(H, keys, Nk), H);
 }
 
 #if defined(__cplusplus)
@@ -147,27 +133,27 @@ aes_dec_davies_meyer_128(const __m128i H, const __m128i* keys, const int Nk, con
 // Function overloads for C++
 
 [[nodiscard]] static inline __m128i
-aes_enc(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+aes_enc(__m128i a, const __m128i* keys, const int Nk)
 {
-    return aes_enc_128(a, keys, Nk, Nr);
+    return aes_enc_128(a, keys, Nk);
 }
 
 [[nodiscard]] static inline __m128i
-aes_dec(__m128i a, const __m128i* keys, const int Nk, const int Nr)
+aes_dec(__m128i a, const __m128i* keys, const int Nk)
 {
-    return aes_dec_128(a, keys, Nk, Nr);
+    return aes_dec_128(a, keys, Nk);
 }
 
 [[nodiscard]] static inline __m128i
-aes_enc_davies_meyer(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
+aes_enc_davies_meyer(const __m128i H, const __m128i* keys, const int Nk)
 {
-    return aes_enc_davies_meyer_128(H, keys, Nk, Nr);
+    return aes_enc_davies_meyer_128(H, keys, Nk);
 }
 
 [[nodiscard]] static inline __m128i
-aes_dec_davies_meyer(const __m128i H, const __m128i* keys, const int Nk, const int Nr)
+aes_dec_davies_meyer(const __m128i H, const __m128i* keys, const int Nk)
 {
-    return aes_dec_davies_meyer_128(H, keys, Nk, Nr);
+    return aes_dec_davies_meyer_128(H, keys, Nk);
 }
 
 #endif

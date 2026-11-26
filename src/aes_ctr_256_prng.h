@@ -27,8 +27,6 @@ extern "C" {
 #endif
 
 constexpr auto AES_CTR_256_PRNG_NUM_KEYS = DEFAULT_AES_CTR_256_PRNG_NUM_KEYS;
-constexpr auto AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY =
-    DEFAULT_AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY;
 
 /// A PRNG that uses VAES instructions
 /**
@@ -38,10 +36,7 @@ constexpr auto AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY =
 */
 struct aes_ctr_256_prng
 {
-    static_assert(AES_CTR_256_PRNG_NUM_KEYS >= 1);
-    static_assert(AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY >= 1);
-    static_assert(AES_CTR_256_PRNG_NUM_KEYS * AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY >= 3,
-                  "must do at least 3 rounds of AES enc/dec");
+    static_assert(AES_CTR_256_PRNG_NUM_KEYS >= 3, "must do at least 3 rounds of AES enc/dec");
 
     __m256i keys[AES_CTR_256_PRNG_NUM_KEYS]; ///< The round keys
     __m256i ctr;                             ///< The state/counter
@@ -102,8 +97,7 @@ aes_ctr_256_prng_enc_fill(aes_ctr_256_prng* this_, __m256i* dst, const int n)
 
     for (int i = 0; i < n; ++i)
     {
-        dst[i] = aes_enc_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                             AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+        dst[i] = aes_enc_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS);
 
         ctr = _mm256_add_epi64(ctr, inc);
     }
@@ -128,8 +122,7 @@ aes_ctr_256_prng_dec_fill(aes_ctr_256_prng* this_, __m256i* dst, const int n)
 
     for (int i = 0; i < n; ++i)
     {
-        dst[i] = aes_dec_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                             AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+        dst[i] = aes_dec_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS);
 
         ctr = _mm256_add_epi64(ctr, inc);
     }
@@ -155,8 +148,7 @@ aes_ctr_256_prng_enc_davies_meyer_fill(aes_ctr_256_prng* this_, __m256i* dst, co
 
     for (int i = 0; i < n; ++i)
     {
-        dst[i] = aes_enc_davies_meyer_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                                          AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+        dst[i] = aes_enc_davies_meyer_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS);
 
         ctr = _mm256_add_epi64(ctr, inc);
     }
@@ -182,8 +174,7 @@ aes_ctr_256_prng_dec_davies_meyer_fill(aes_ctr_256_prng* this_, __m256i* dst, co
 
     for (int i = 0; i < n; ++i)
     {
-        dst[i] = aes_dec_davies_meyer_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS,
-                                          AES_CTR_256_PRNG_NUM_ROUNDS_PER_KEY);
+        dst[i] = aes_dec_davies_meyer_256(ctr, this_->keys, AES_CTR_256_PRNG_NUM_KEYS);
 
         ctr = _mm256_add_epi64(ctr, inc);
     }
