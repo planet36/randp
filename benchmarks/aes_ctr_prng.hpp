@@ -99,6 +99,7 @@ template <typename T, bool enc, bool dm, int Nk>
 struct aes_ctr_prng
 {
     static_assert(Nk >= 3, "must do at least 3 rounds of AES enc/dec");
+    static_assert(Nk <= 7, "must do at most 7 rounds of AES enc/dec");
 
     using block_t = T;
 

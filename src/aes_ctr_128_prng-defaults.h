@@ -6,7 +6,8 @@
 * \file
 * \author Steven Ward
 *
-* The number of keys must be at least 3.
+* The number of keys must be at least 3 and at most 7.  The maximum matches the AES-CTR-256
+* PRNG, whose state must fit in the 256 bytes that getentropy allows.
 */
 
 #pragma once

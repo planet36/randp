@@ -30,6 +30,7 @@ constexpr auto AES_CTR_128_PRNG_NUM_KEYS = DEFAULT_AES_CTR_128_PRNG_NUM_KEYS;
 struct aes_ctr_128_prng
 {
     static_assert(AES_CTR_128_PRNG_NUM_KEYS >= 3, "must do at least 3 rounds of AES enc/dec");
+    static_assert(AES_CTR_128_PRNG_NUM_KEYS <= 7, "must do at most 7 rounds of AES enc/dec");
 
     __m128i keys[AES_CTR_128_PRNG_NUM_KEYS]; ///< The round keys
     __m128i ctr;                             ///< The state/counter

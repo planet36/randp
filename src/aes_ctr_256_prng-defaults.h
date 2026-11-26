@@ -8,7 +8,8 @@
 *
 * The 256 in the name is the vector width (VAES), not the AES key size.
 *
-* The number of keys must be at least 3.
+* The number of keys must be at least 3 and at most 7.  The maximum keeps the state within the
+* 256 bytes that getentropy allows.
 */
 
 #pragma once
