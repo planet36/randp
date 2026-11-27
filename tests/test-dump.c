@@ -62,7 +62,13 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
         }
     }
 
-    uint8_t buf[4096] = {0};
+    // /proc/sys/fs/pipe-max-size = 1048576
+    // fcntl(STDOUT_FILENO, F_GETPIPE_SZ) = 65536
+    // BUFSIZ = 8192
+    // PractRand uses a buffer of size 32768 bytes for reading from stdin.
+    constexpr size_t buf_size_bytes = 32768;
+
+    uint8_t buf[buf_size_bytes] = {0};
     static_assert(sizeof(buf) % sizeof(uint32_t) == 0);
 
     do
