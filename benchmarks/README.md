@@ -16,7 +16,7 @@
 
 ## Example commands
 
-* `make run-all`
+* `make run-all` (takes about 10.8 minutes)
   * The `mutex` benchmark compares the use of `pthread_mutex_t` and `thread_local`.
   * The `others` benchmark compares randp to these other sources of random numbers:
     * `RDRAND`
@@ -24,7 +24,6 @@
     * `getentropy`
     * `arc4random`
   * The `pool-size`, `prng-params`, and `reseed-countdown` benchmarks compare varying parameters of randp and its internal PRNG, with both the AES (`__m128i`) and VAES (`__m256i`) PRNGs.
-  * All the benchmarks take about 11.3 minutes.
 
 ## Refine the randp parameters
 
