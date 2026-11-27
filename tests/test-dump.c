@@ -41,6 +41,11 @@ main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
     {
         const char* arg = argv[i];
 
+        if (strcmp(arg, "randp") == 0)
+        {
+            func_ptr = randp_bytes;
+            break;
+        }
         if (strcmp(arg, "arc4random") == 0)
         {
             func_ptr = arc4random_buf;
