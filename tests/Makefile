@@ -62,7 +62,7 @@ profile-qgui: profile
 
 run-PractRand: test-dump | $(OUTPUT_DIR)
 	@echo "WARNING: This target takes about 54 minutes on my fast (in AD 2024) computer"
-	./$<             | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.txt
+	./$< randp       | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.randp.txt
 	./$< arc4random  | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.arc4random.txt
 	./$< mrand48     | RNG_test stdin32 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.mrand48.txt
 	openssl rand max | RNG_test stdin64 -tf 2 -te 0 -tlmin 256MB -tlmax 512GB -multithreaded | tee $(OUTPUT_DIR)/RNG_test.openssl-rand.txt
@@ -71,7 +71,7 @@ run-PractRand: test-dump | $(OUTPUT_DIR)
 run-rngtest: run-rngtest-randp run-rngtest-arc4random run-rngtest-mrand48 run-rngtest-openssl-rand
 
 run-rngtest-randp: test-dump | $(OUTPUT_DIR)
-	./$<             | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
+	./$< randp       | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
 
 run-rngtest-arc4random: test-dump | $(OUTPUT_DIR)
 	./$< arc4random  | rngtest -c 1000000 |& tee $(OUTPUT_DIR)/rngtest.$(patsubst run-rngtest-%,%,$@).txt
