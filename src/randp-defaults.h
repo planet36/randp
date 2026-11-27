@@ -40,7 +40,7 @@ constexpr int DEFAULT_RANDP_256_POOL_SIZE_BYTES = 512;
 * |----------------------------------------------------------------|---------|
 * | Maximum number of requests between reseeds (*reseed_interval*) |    2^48 |
 */
-constexpr int DEFAULT_RANDP_128_RESEED_INTERVAL = (1 << 10);
+constexpr int DEFAULT_RANDP_128_RESEED_INTERVAL = (1 << 11);
 
 /// The number of pool regenerations between reseeds when the PRNG is AES-CTR-256 (VAES)
 /**
