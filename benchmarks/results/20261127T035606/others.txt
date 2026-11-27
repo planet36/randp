@@ -1,0 +1,200 @@
+2026-11-26T22:57:29-05:00
+Running ./benchmark-others
+Run on (8 X 2419.2 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x8)
+  L1 Instruction 64 KiB (x8)
+  L2 Unified 4096 KiB (x8)
+  L3 Unified 36864 KiB (x8)
+Load Average: 1.01, 7.02, 10.55
+-----------------------------------------------------------------------------------------------
+Benchmark                                                     Time             CPU   Iterations
+-----------------------------------------------------------------------------------------------
+rand_bytes_4GiB:getentropy/threads:1_mean                  7899 ms         7873 ms            5
+rand_bytes_4GiB:getentropy/threads:1_median                7872 ms         7845 ms            5
+rand_bytes_4GiB:getentropy/threads:1_stddev                62.6 ms         62.2 ms            5
+rand_bytes_4GiB:getentropy/threads:1_cv                    0.79 %          0.79 %             5
+rand_bytes:16B:getentropy/threads:1_mean                    149 ns          148 ns            5 bytes_per_second=103.203Mi/s
+rand_bytes:16B:getentropy/threads:1_median                  148 ns          147 ns            5 bytes_per_second=103.475Mi/s
+rand_bytes:16B:getentropy/threads:1_stddev                 6.02 ns         6.01 ns            5 bytes_per_second=4.16825Mi/s
+rand_bytes:16B:getentropy/threads:1_cv                     4.06 %          4.06 %             5 bytes_per_second=4.04%
+rand_bytes:64B:arc4random_buf/threads:1_mean                100 ns          100 ns            5 bytes_per_second=610.667Mi/s
+rand_bytes:64B:arc4random_buf/threads:1_median              100 ns        100.0 ns            5 bytes_per_second=610.589Mi/s
+rand_bytes:64B:arc4random_buf/threads:1_stddev             2.62 ns         2.61 ns            5 bytes_per_second=15.821Mi/s
+rand_bytes:64B:arc4random_buf/threads:1_cv                 2.61 %          2.61 %             5 bytes_per_second=2.59%
+rand_bytes:8B:arc4random_buf/threads:1_mean                18.2 ns         18.1 ns            5 bytes_per_second=421.203Mi/s
+rand_bytes:8B:arc4random_buf/threads:1_median              18.1 ns         18.0 ns            5 bytes_per_second=423.333Mi/s
+rand_bytes:8B:arc4random_buf/threads:1_stddev             0.444 ns        0.442 ns            5 bytes_per_second=10.0003Mi/s
+rand_bytes:8B:arc4random_buf/threads:1_cv                  2.44 %          2.44 %             5 bytes_per_second=2.37%
+rand_uint:32b:arc4random/threads:1_mean                    14.9 ns         14.8 ns            5
+rand_uint:32b:arc4random/threads:1_median                  15.0 ns         15.0 ns            5
+rand_uint:32b:arc4random/threads:1_stddev                 0.473 ns        0.474 ns            5
+rand_uint:32b:arc4random/threads:1_cv                      3.18 %          3.20 %             5
+rand_bytes:128B:arc4random_buf/threads:1_mean               186 ns          185 ns            5 bytes_per_second=660.14Mi/s
+rand_bytes:128B:arc4random_buf/threads:1_median             187 ns          186 ns            5 bytes_per_second=656.146Mi/s
+rand_bytes:128B:arc4random_buf/threads:1_stddev            3.15 ns         3.17 ns            5 bytes_per_second=11.4512Mi/s
+rand_bytes:128B:arc4random_buf/threads:1_cv                1.70 %          1.72 %             5 bytes_per_second=1.73%
+rand_bytes:128B:getentropy/threads:1_mean                   313 ns          312 ns            5 bytes_per_second=391.574Mi/s
+rand_bytes:128B:getentropy/threads:1_median                 316 ns          315 ns            5 bytes_per_second=387.984Mi/s
+rand_bytes:128B:getentropy/threads:1_stddev                11.8 ns         11.7 ns            5 bytes_per_second=14.6978Mi/s
+rand_bytes:128B:getentropy/threads:1_cv                    3.76 %          3.74 %             5 bytes_per_second=3.75%
+rand_bytes:64B:randp_bytes/threads:1_mean                  8.27 ns         8.24 ns            5 bytes_per_second=7.23662Gi/s
+rand_bytes:64B:randp_bytes/threads:1_median                8.24 ns         8.21 ns            5 bytes_per_second=7.26162Gi/s
+rand_bytes:64B:randp_bytes/threads:1_stddev               0.151 ns        0.150 ns            5 bytes_per_second=134.786Mi/s
+rand_bytes:64B:randp_bytes/threads:1_cv                    1.82 %          1.82 %             5 bytes_per_second=1.82%
+rand_bytes_4GiB:arc4random_buf/threads:1_mean              5467 ms         5450 ms            5
+rand_bytes_4GiB:arc4random_buf/threads:1_median            5471 ms         5453 ms            5
+rand_bytes_4GiB:arc4random_buf/threads:1_stddev            74.8 ms         74.7 ms            5
+rand_bytes_4GiB:arc4random_buf/threads:1_cv                1.37 %          1.37 %             5
+rand_bytes:4B:randp_bytes/threads:1_mean                   6.87 ns         6.85 ns            5 bytes_per_second=557.529Mi/s
+rand_bytes:4B:randp_bytes/threads:1_median                 6.90 ns         6.88 ns            5 bytes_per_second=554.81Mi/s
+rand_bytes:4B:randp_bytes/threads:1_stddev                0.217 ns        0.214 ns            5 bytes_per_second=17.3716Mi/s
+rand_bytes:4B:randp_bytes/threads:1_cv                     3.15 %          3.13 %             5 bytes_per_second=3.12%
+rand_bytes:128B:randp_bytes/threads:1_mean                 11.7 ns         11.6 ns            5 bytes_per_second=10.25Gi/s
+rand_bytes:128B:randp_bytes/threads:1_median               11.8 ns         11.7 ns            5 bytes_per_second=10.1689Gi/s
+rand_bytes:128B:randp_bytes/threads:1_stddev              0.396 ns        0.391 ns            5 bytes_per_second=366.304Mi/s
+rand_bytes:128B:randp_bytes/threads:1_cv                   3.38 %          3.36 %             5 bytes_per_second=3.49%
+rand_bytes:256B:arc4random_buf/threads:1_mean               338 ns          337 ns            5 bytes_per_second=725.972Mi/s
+rand_bytes:256B:arc4random_buf/threads:1_median             341 ns          339 ns            5 bytes_per_second=719.494Mi/s
+rand_bytes:256B:arc4random_buf/threads:1_stddev            12.5 ns         12.5 ns            5 bytes_per_second=27.7575Mi/s
+rand_bytes:256B:arc4random_buf/threads:1_cv                3.69 %          3.70 %             5 bytes_per_second=3.82%
+rand_lt-one:32b:arc4random_uniform/threads:1_mean          22.5 ns         22.4 ns            5
+rand_lt-one:32b:arc4random_uniform/threads:1_median        22.2 ns         22.1 ns            5
+rand_lt-one:32b:arc4random_uniform/threads:1_stddev        1.07 ns         1.07 ns            5
+rand_lt-one:32b:arc4random_uniform/threads:1_cv            4.78 %          4.77 %             5
+rand_lt-many:32b:arc4random_uniform/threads:1_mean         25.3 ns         25.2 ns            5
+rand_lt-many:32b:arc4random_uniform/threads:1_median       25.1 ns         25.0 ns            5
+rand_lt-many:32b:arc4random_uniform/threads:1_stddev      0.742 ns        0.736 ns            5
+rand_lt-many:32b:arc4random_uniform/threads:1_cv           2.93 %          2.92 %             5
+rand_bytes:32B:randp_bytes/threads:1_mean                  7.02 ns         6.99 ns            5 bytes_per_second=4.27005Gi/s
+rand_bytes:32B:randp_bytes/threads:1_median                7.05 ns         7.03 ns            5 bytes_per_second=4.23927Gi/s
+rand_bytes:32B:randp_bytes/threads:1_stddev               0.324 ns        0.323 ns            5 bytes_per_second=210.631Mi/s
+rand_bytes:32B:randp_bytes/threads:1_cv                    4.62 %          4.62 %             5 bytes_per_second=4.82%
+rand_uint:8b:randp_u8/threads:1_mean                       7.36 ns         7.32 ns            5
+rand_uint:8b:randp_u8/threads:1_median                     7.25 ns         7.17 ns            5
+rand_uint:8b:randp_u8/threads:1_stddev                    0.344 ns        0.350 ns            5
+rand_uint:8b:randp_u8/threads:1_cv                         4.68 %          4.79 %             5
+rand_uint:32b:rdrand32/threads:1_mean                       302 ns          301 ns            5
+rand_uint:32b:rdrand32/threads:1_median                     306 ns          305 ns            5
+rand_uint:32b:rdrand32/threads:1_stddev                    7.69 ns         7.68 ns            5
+rand_uint:32b:rdrand32/threads:1_cv                        2.55 %          2.55 %             5
+rand_bytes:1pg:arc4random_buf/threads:1_mean               4613 ns         4597 ns            5 bytes_per_second=851.378Mi/s
+rand_bytes:1pg:arc4random_buf/threads:1_median             4680 ns         4665 ns            5 bytes_per_second=837.301Mi/s
+rand_bytes:1pg:arc4random_buf/threads:1_stddev              225 ns          223 ns            5 bytes_per_second=41.6497Mi/s
+rand_bytes:1pg:arc4random_buf/threads:1_cv                 4.87 %          4.86 %             5 bytes_per_second=4.89%
+rand_bytes:2B:randp_bytes/threads:1_mean                   6.57 ns         6.55 ns            5 bytes_per_second=291.195Mi/s
+rand_bytes:2B:randp_bytes/threads:1_median                 6.58 ns         6.56 ns            5 bytes_per_second=290.737Mi/s
+rand_bytes:2B:randp_bytes/threads:1_stddev                0.180 ns        0.179 ns            5 bytes_per_second=8.0917Mi/s
+rand_bytes:2B:randp_bytes/threads:1_cv                     2.73 %          2.73 %             5 bytes_per_second=2.78%
+rand_bytes:8B:randp_bytes/threads:1_mean                   6.94 ns         6.91 ns            5 bytes_per_second=1.07866Gi/s
+rand_bytes:8B:randp_bytes/threads:1_median                 6.90 ns         6.88 ns            5 bytes_per_second=1.08298Gi/s
+rand_bytes:8B:randp_bytes/threads:1_stddev                0.225 ns        0.225 ns            5 bytes_per_second=35.8543Mi/s
+rand_bytes:8B:randp_bytes/threads:1_cv                     3.25 %          3.25 %             5 bytes_per_second=3.25%
+rand_uint:32b:randp_u32/threads:1_mean                     7.76 ns         7.73 ns            5
+rand_uint:32b:randp_u32/threads:1_median                   7.78 ns         7.76 ns            5
+rand_uint:32b:randp_u32/threads:1_stddev                  0.299 ns        0.297 ns            5
+rand_uint:32b:randp_u32/threads:1_cv                       3.85 %          3.85 %             5
+rand_bytes:1pg:randp_bytes/threads:1_mean                   201 ns          201 ns            5 bytes_per_second=19.0256Gi/s
+rand_bytes:1pg:randp_bytes/threads:1_median                 204 ns          203 ns            5 bytes_per_second=18.7633Gi/s
+rand_bytes:1pg:randp_bytes/threads:1_stddev                4.91 ns         4.89 ns            5 bytes_per_second=486.561Mi/s
+rand_bytes:1pg:randp_bytes/threads:1_cv                    2.44 %          2.44 %             5 bytes_per_second=2.50%
+rand_bytes:2B:getentropy/threads:1_mean                     149 ns          149 ns            5 bytes_per_second=12.837Mi/s
+rand_bytes:2B:getentropy/threads:1_median                   149 ns          148 ns            5 bytes_per_second=12.8835Mi/s
+rand_bytes:2B:getentropy/threads:1_stddev                  2.67 ns         2.66 ns            5 bytes_per_second=234.229Ki/s
+rand_bytes:2B:getentropy/threads:1_cv                      1.79 %          1.79 %             5 bytes_per_second=1.78%
+rand_bytes:4B:getentropy/threads:1_mean                     150 ns          150 ns            5 bytes_per_second=25.488Mi/s
+rand_bytes:4B:getentropy/threads:1_median                   149 ns          149 ns            5 bytes_per_second=25.6085Mi/s
+rand_bytes:4B:getentropy/threads:1_stddev                  4.03 ns         4.03 ns            5 bytes_per_second=690.385Ki/s
+rand_bytes:4B:getentropy/threads:1_cv                      2.68 %          2.69 %             5 bytes_per_second=2.65%
+rand_lt-many:32b:randp_lt_u32/threads:1_mean               7.92 ns         7.88 ns            5
+rand_lt-many:32b:randp_lt_u32/threads:1_median             7.92 ns         7.86 ns            5
+rand_lt-many:32b:randp_lt_u32/threads:1_stddev            0.379 ns        0.378 ns            5
+rand_lt-many:32b:randp_lt_u32/threads:1_cv                 4.79 %          4.80 %             5
+rand_bytes:1B:arc4random_buf/threads:1_mean                8.77 ns         8.74 ns            5 bytes_per_second=109.327Mi/s
+rand_bytes:1B:arc4random_buf/threads:1_median              8.62 ns         8.60 ns            5 bytes_per_second=110.945Mi/s
+rand_bytes:1B:arc4random_buf/threads:1_stddev             0.422 ns        0.419 ns            5 bytes_per_second=5.17038Mi/s
+rand_bytes:1B:arc4random_buf/threads:1_cv                  4.81 %          4.79 %             5 bytes_per_second=4.73%
+rand_bytes:8B:getentropy/threads:1_mean                     149 ns          149 ns            5 bytes_per_second=51.2844Mi/s
+rand_bytes:8B:getentropy/threads:1_median                   148 ns          148 ns            5 bytes_per_second=51.6401Mi/s
+rand_bytes:8B:getentropy/threads:1_stddev                  4.74 ns         4.73 ns            5 bytes_per_second=1.62304Mi/s
+rand_bytes:8B:getentropy/threads:1_cv                      3.17 %          3.17 %             5 bytes_per_second=3.16%
+rand_bytes:1B:getentropy/threads:1_mean                     149 ns          148 ns            5 bytes_per_second=6.42836Mi/s
+rand_bytes:1B:getentropy/threads:1_median                   149 ns          148 ns            5 bytes_per_second=6.42786Mi/s
+rand_bytes:1B:getentropy/threads:1_stddev                  2.27 ns         2.26 ns            5 bytes_per_second=100.084Ki/s
+rand_bytes:1B:getentropy/threads:1_cv                      1.52 %          1.53 %             5 bytes_per_second=1.52%
+rand_bytes:16B:arc4random_buf/threads:1_mean               29.4 ns         29.2 ns            5 bytes_per_second=523.154Mi/s
+rand_bytes:16B:arc4random_buf/threads:1_median             29.1 ns         29.0 ns            5 bytes_per_second=526.456Mi/s
+rand_bytes:16B:arc4random_buf/threads:1_stddev            0.603 ns        0.476 ns            5 bytes_per_second=8.4875Mi/s
+rand_bytes:16B:arc4random_buf/threads:1_cv                 2.05 %          1.63 %             5 bytes_per_second=1.62%
+rand_bytes:32B:getentropy/threads:1_mean                    146 ns          145 ns            5 bytes_per_second=210.114Mi/s
+rand_bytes:32B:getentropy/threads:1_median                  147 ns          147 ns            5 bytes_per_second=207.885Mi/s
+rand_bytes:32B:getentropy/threads:1_stddev                 2.76 ns         2.78 ns            5 bytes_per_second=4.04807Mi/s
+rand_bytes:32B:getentropy/threads:1_cv                     1.89 %          1.91 %             5 bytes_per_second=1.93%
+rand_bytes:256B:randp_bytes/threads:1_mean                 16.9 ns         16.8 ns            5 bytes_per_second=14.2073Gi/s
+rand_bytes:256B:randp_bytes/threads:1_median               16.8 ns         16.7 ns            5 bytes_per_second=14.2484Gi/s
+rand_bytes:256B:randp_bytes/threads:1_stddev              0.537 ns        0.537 ns            5 bytes_per_second=470.671Mi/s
+rand_bytes:256B:randp_bytes/threads:1_cv                   3.19 %          3.20 %             5 bytes_per_second=3.24%
+rand_bytes:4B:arc4random_buf/threads:1_mean                12.9 ns         12.9 ns            5 bytes_per_second=296.486Mi/s
+rand_bytes:4B:arc4random_buf/threads:1_median              13.0 ns         12.9 ns            5 bytes_per_second=295.152Mi/s
+rand_bytes:4B:arc4random_buf/threads:1_stddev             0.322 ns        0.322 ns            5 bytes_per_second=7.43272Mi/s
+rand_bytes:4B:arc4random_buf/threads:1_cv                  2.50 %          2.50 %             5 bytes_per_second=2.51%
+rand_uint:64b:rdrand64/threads:1_mean                       303 ns          302 ns            5
+rand_uint:64b:rdrand64/threads:1_median                     304 ns          303 ns            5
+rand_uint:64b:rdrand64/threads:1_stddev                    10.4 ns         10.3 ns            5
+rand_uint:64b:rdrand64/threads:1_cv                        3.42 %          3.41 %             5
+rand_uint:16b:rdseed16/threads:1_mean                      1879 ns         1873 ns            5
+rand_uint:16b:rdseed16/threads:1_median                    1893 ns         1888 ns            5
+rand_uint:16b:rdseed16/threads:1_stddev                    41.1 ns         40.9 ns            5
+rand_uint:16b:rdseed16/threads:1_cv                        2.19 %          2.18 %             5
+rand_bytes:1B:randp_bytes/threads:1_mean                   6.58 ns         6.56 ns            5 bytes_per_second=145.592Mi/s
+rand_bytes:1B:randp_bytes/threads:1_median                 6.57 ns         6.55 ns            5 bytes_per_second=145.552Mi/s
+rand_bytes:1B:randp_bytes/threads:1_stddev                0.231 ns        0.231 ns            5 bytes_per_second=5.08623Mi/s
+rand_bytes:1B:randp_bytes/threads:1_cv                     3.51 %          3.52 %             5 bytes_per_second=3.49%
+rand_bytes:256B:getentropy/threads:1_mean                   476 ns          474 ns            5 bytes_per_second=514.784Mi/s
+rand_bytes:256B:getentropy/threads:1_median                 474 ns          473 ns            5 bytes_per_second=516.269Mi/s
+rand_bytes:256B:getentropy/threads:1_stddev                10.1 ns         10.2 ns            5 bytes_per_second=10.9096Mi/s
+rand_bytes:256B:getentropy/threads:1_cv                    2.13 %          2.14 %             5 bytes_per_second=2.12%
+rand_bytes_4GiB:randp_bytes/threads:1_mean                  263 ms          262 ms            5
+rand_bytes_4GiB:randp_bytes/threads:1_median                277 ms          276 ms            5
+rand_bytes_4GiB:randp_bytes/threads:1_stddev               41.5 ms         41.2 ms            5
+rand_bytes_4GiB:randp_bytes/threads:1_cv                  15.76 %         15.74 %             5
+rand_lt-one:32b:randp_lt_u32/threads:1_mean                7.89 ns         7.86 ns            5
+rand_lt-one:32b:randp_lt_u32/threads:1_median              7.83 ns         7.80 ns            5
+rand_lt-one:32b:randp_lt_u32/threads:1_stddev             0.486 ns        0.489 ns            5
+rand_lt-one:32b:randp_lt_u32/threads:1_cv                  6.17 %          6.22 %             5
+rand_uint:32b:rdseed32/threads:1_mean                      1894 ns         1888 ns            5
+rand_uint:32b:rdseed32/threads:1_median                    1872 ns         1866 ns            5
+rand_uint:32b:rdseed32/threads:1_stddev                    74.0 ns         73.8 ns            5
+rand_uint:32b:rdseed32/threads:1_cv                        3.91 %          3.91 %             5
+rand_bytes:16B:randp_bytes/threads:1_mean                  7.46 ns         7.43 ns            5 bytes_per_second=2.00535Gi/s
+rand_bytes:16B:randp_bytes/threads:1_median                7.48 ns         7.46 ns            5 bytes_per_second=1.99772Gi/s
+rand_bytes:16B:randp_bytes/threads:1_stddev               0.196 ns        0.196 ns            5 bytes_per_second=54.3482Mi/s
+rand_bytes:16B:randp_bytes/threads:1_cv                    2.62 %          2.63 %             5 bytes_per_second=2.65%
+rand_uint:16b:randp_u16/threads:1_mean                     7.30 ns         7.28 ns            5
+rand_uint:16b:randp_u16/threads:1_median                   7.27 ns         7.25 ns            5
+rand_uint:16b:randp_u16/threads:1_stddev                  0.114 ns        0.114 ns            5
+rand_uint:16b:randp_u16/threads:1_cv                       1.56 %          1.57 %             5
+rand_bytes:2B:arc4random_buf/threads:1_mean                10.0 ns         10.0 ns            5 bytes_per_second=190.51Mi/s
+rand_bytes:2B:arc4random_buf/threads:1_median              10.1 ns         10.0 ns            5 bytes_per_second=190.068Mi/s
+rand_bytes:2B:arc4random_buf/threads:1_stddev             0.177 ns        0.176 ns            5 bytes_per_second=3.35414Mi/s
+rand_bytes:2B:arc4random_buf/threads:1_cv                  1.76 %          1.76 %             5 bytes_per_second=1.76%
+rand_bytes:32B:arc4random_buf/threads:1_mean               51.5 ns         51.3 ns            5 bytes_per_second=594.387Mi/s
+rand_bytes:32B:arc4random_buf/threads:1_median             51.7 ns         51.5 ns            5 bytes_per_second=592.022Mi/s
+rand_bytes:32B:arc4random_buf/threads:1_stddev            0.468 ns        0.460 ns            5 bytes_per_second=5.36866Mi/s
+rand_bytes:32B:arc4random_buf/threads:1_cv                 0.91 %          0.90 %             5 bytes_per_second=0.90%
+rand_uint:16b:rdrand16/threads:1_mean                       305 ns          304 ns            5
+rand_uint:16b:rdrand16/threads:1_median                     301 ns          301 ns            5
+rand_uint:16b:rdrand16/threads:1_stddev                    12.6 ns         12.5 ns            5
+rand_uint:16b:rdrand16/threads:1_cv                        4.12 %          4.10 %             5
+rand_uint:64b:rdseed64/threads:1_mean                      1918 ns         1913 ns            5
+rand_uint:64b:rdseed64/threads:1_median                    1926 ns         1920 ns            5
+rand_uint:64b:rdseed64/threads:1_stddev                    62.8 ns         62.6 ns            5
+rand_uint:64b:rdseed64/threads:1_cv                        3.27 %          3.28 %             5
+rand_bytes:64B:getentropy/threads:1_mean                    228 ns          227 ns            5 bytes_per_second=269.38Mi/s
+rand_bytes:64B:getentropy/threads:1_median                  225 ns          224 ns            5 bytes_per_second=272.321Mi/s
+rand_bytes:64B:getentropy/threads:1_stddev                 10.6 ns         10.6 ns            5 bytes_per_second=12.2599Mi/s
+rand_bytes:64B:getentropy/threads:1_cv                     4.68 %          4.69 %             5 bytes_per_second=4.55%
+rand_uint:64b:randp_u64/threads:1_mean                     7.67 ns         7.65 ns            5
+rand_uint:64b:randp_u64/threads:1_median                   7.59 ns         7.57 ns            5
+rand_uint:64b:randp_u64/threads:1_stddev                  0.208 ns        0.208 ns            5
+rand_uint:64b:randp_u64/threads:1_cv                       2.71 %          2.73 %             5
