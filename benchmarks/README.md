@@ -48,6 +48,43 @@ The tables below come from `make others`, which runs each benchmark on one threa
 
 [^getrandom_vdso_2]: https://lwn.net/Articles/983186/
 
+### 2026-11-27
+
+#### System info
+
+- Linux 7.3.6-arch1-1 x86_64
+- 13th Gen Intel(R) Core(TM) i9-13980HX
+- ldd (GNU libc) 2.44
+- gcc (GCC) 16.2.1 20260810
+- libbenchmark.so.1.10.0
+- randp 12.2
+
+#### Fill a buffer with random bytes
+
+| Function | Median time to generate 4 GiB | |
+|---|---:|---|
+| `randp_bytes`    |  252  ms | 20.6&times; faster |
+| `arc4random_buf` | 5183  ms | |
+| `getentropy`     | 7518  ms | |
+
+#### Get a uniform random `uint32_t`
+
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_u32`  | 7.07  ns | 2.0&times; faster |
+| `arc4random` | 14.3  ns | |
+| `rdrand32`   |  288  ns | |
+| `rdseed32`   | 1837  ns | |
+
+`rdrand32` and `rdseed32` wrap `_rdrand32_step` and `_rdseed32_step`, respectively.
+
+#### Get a uniform random `uint32_t` less than _upper_bound_ = [1 .. 0x100000]
+
+| Function | Median time per call | |
+|---|---:|---|
+| `randp_lt_u32`       | 7.12  ns | 3.4&times; faster |
+| `arc4random_uniform` | 23.9  ns | |
+
 ### 2026-11-26
 
 #### System info
